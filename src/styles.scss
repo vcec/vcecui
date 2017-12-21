@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face{
+ font-family:'digital-clock-font';
+ src: url(assets/fonts/oswald/Oswald-Regular.ttf);
+}
+
+@import 
+  '~bootstrap/scss/functions',
+  '../node_modules/pb-design-system/sass/variables',
+  '../node_modules/pb-design-system/sass/mixins'

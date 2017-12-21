@@ -1,0 +1,74 @@
+.landing{
+	position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../../assets/images/bg_gradientImg.png');
+ 	background-size: 100% 100%;
+ 	background-repeat: no-repeat;
+	.video-container{
+		position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    z-index:-1;
+	    video{
+	    	height: 100%;
+    		width: 100%;
+	    }
+	}
+	.content-container{
+		position: fixed;
+	    top: 0;
+	    left: 0;
+	    bottom:0;
+	    right:0;
+	    width: 100%;
+	    display:flex;
+	    justify-content:center;
+	    align-items:center;
+	    .content-box{
+    	   	background-image: url('../../../assets/images/middle_bgImage.png');
+			background-size: 100% 100%;
+ 			background-repeat: no-repeat;
+    	    width: 60%;
+    		height: 60%;
+    	    position:relative;
+	        box-shadow: 0 0 50px rgba(0,0,0,0.7);
+    	    .footer-section {
+			    position: absolute;
+			    width: 100%;
+			    bottom: 0;
+			    left: 0;
+			    padding: 40px;
+			    h1{
+	    	    	color:#fff;
+	    	    	text-align : center;
+	    	    	font-size:50px;
+	    	    	margin:20px 0;
+	    	    }
+	    	    a.blue-btn{
+	    	    	margin-top:-55px;
+	    	    }
+	    	    .clock span{
+	    	    	font-size:70px;
+	    	    	line-height:1;
+	    	    	font-family:digital-clock-font;
+	    	    }
+			}
+	    }
+	}
+}
+/*Global css*/
+a.blue-btn{
+    padding: 10px 40px;
+    display: inline-block;
+    background: #0072b8;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+a.blue-btn:hover{
+	background: #009bdf;
+}
