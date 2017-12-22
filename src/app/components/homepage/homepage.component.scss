@@ -1,0 +1,75 @@
+header{
+	background-image: url('../../../assets/images/homepage/herobg.png');
+    background-size: 100% 100%;
+    min-height:500px;
+	.pb-logo{
+		width:160px;
+		img{
+			width:100%
+		}
+	}
+	li.nav-item {
+	    position: relative;
+	}
+	li.nav-item:not(:last-child):after {
+	    content: "";
+	    position: absolute;
+	    background: #fff;
+	    right: 0;
+	    top: 30%;
+	    height: 50%;
+	    width: 1px;
+	}
+	.product-info{
+		h1{
+	    	margin-top: 100px;
+    		color: #fff;
+    		font-size: 40px
+		}
+		p{
+			color:#fff;
+			font-size:17px;
+		}
+		a.white-btn {
+		    display: inline-block;
+		    padding: 10px 30px;
+		    background: #fff;
+		    border-radius: 20px;
+		    color: black;
+		    text-decoration: none;
+		    margin-top:30px;
+		}
+	}
+	.mobile{
+		background-image:url('../../../assets/images/homepage/phonebg_transparent.png');
+	    background-repeat: no-repeat;
+	 	height: 580px;
+    	background-size: contain;
+    	background-position: center;
+    	position:relative;
+    	.innerImage{
+	     	width: 243px;
+		    position: absolute;
+		    top: 80px;
+		    left: 70px;
+    		img{
+    			width:100%;
+    		}
+
+
+    	}
+    	
+	}
+	.btns{
+		margin-bottom:20px;
+	    font-size: 22px;
+		color: #fff;
+		span{
+			font-size: 27px;
+		}
+		i{
+			cursor:pointer;
+		}
+	}
+	
+}

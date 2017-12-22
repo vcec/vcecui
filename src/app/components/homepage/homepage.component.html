@@ -1,3 +1,102 @@
-<p>
-  homepage works!
-</p>
+<header>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <div class="pb-logo">
+          <img src="assets/images/pb_logo.png" alt="">
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Solutions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Testimonials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Upcoming Features</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-8 col-sm-12">
+            <div class="carousel-container">
+              <owl-carousel #owlInfo [options]="{loop: true,
+                    margin: 0,
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 4000,
+                    smartSpeed: 1000,
+                    mouseDrag: true,
+                    touchDrag: false,
+                    center: true,
+                    items: 1}" 
+                    [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                <div class="item">
+                  <div class="product-info">
+                    <h1>EngageOne Video</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <a href="" class="white-btn">Learn More...</a>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="product-info">
+                    <h1>Location Intelligence for Marketing</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <a href="" class="white-btn">Learn More...</a>
+                  </div>
+                </div>
+              </owl-carousel>
+            </div>
+          </div>
+          <div class="col-xs-0 col-sm-0 col-md-4">
+            <div class="mobile">
+              <div class="innerImage">
+                <owl-carousel #owlMobile [options]="{loop: true,
+                      margin: 0,
+                      dots: false,
+                      autoplay: true,
+                      autoplayTimeout: 4000,
+                      smartSpeed: 1000,
+                      mouseDrag: true,
+                      touchDrag: false,
+                      center: true,
+                      items: 1}" 
+                      [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                  <div class="item">
+                    <img src="assets/images/homepage/engageone_video_screenshot.png" alt="">
+                  </div>
+                  <div class="item">
+                    <img src="assets/images/homepage/li4m_screenshot.png" alt="">
+                  </div>
+                </owl-carousel>
+              </div>
+            </div>
+            <div class="btns">
+              <i class="nc-icon-outline arrows-1_minimal-left" (click)="goPrev()"></i>
+              <span>/</span>
+              <i class="nc-icon-outline arrows-1_minimal-right" (click)="goNext()"></i>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</header>

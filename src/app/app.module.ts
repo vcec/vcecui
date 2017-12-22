@@ -5,6 +5,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { OwlModule } from 'ngx-owl-carousel';
+
 import {LandingComponent} from './components/landing/landing.component';
 import { HomepageComponent } from './components/homepage/homepage.component'
 
@@ -18,7 +20,8 @@ import { HomepageComponent } from './components/homepage/homepage.component'
   	NgbModule.forRoot(),
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    OwlModule
   ],
   providers: [],
   bootstrap: [AppComponent]
