@@ -34,6 +34,18 @@
     		height: 60%;
     	    position:relative;
 	        box-shadow: 0 0 50px rgba(0,0,0,0.7);
+	        .header-section{
+	        	display:flex;
+	        	justify-content:center;
+	        	align-items:center;
+	        	.pblogo{
+	        		width:300px;
+	        		margin:20px 0;
+	        		img{
+	        			width:100%;
+	        		}
+	        	}
+	        }
     	    .footer-section {
 			    position: absolute;
 			    width: 100%;
