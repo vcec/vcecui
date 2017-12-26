@@ -1,7 +1,9 @@
 header{
 	background-image: url('../../../assets/images/homepage/herobg.png');
     background-size: 100% 100%;
+    background-attachment: fixed;
     min-height:500px;
+    position:relative;
 	.pb-logo{
 		width:160px;
 		img{
@@ -72,4 +74,130 @@ header{
 		}
 	}
 	
+}
+
+section{
+	padding:100px 0;
+}
+section#products{
+	h1,p{
+		text-align:center;
+	}
+	p{
+    	margin-top: 1rem;
+	}
+	.products{
+	    margin-top: 20px;
+    	margin-bottom: 50px;
+		.productBox{
+			text-align:center;
+			cursor:pointer;
+			.icon{
+				width:100px;
+				margin: 15px auto;
+				img{
+					width:100%;
+					transition: 0.5s all;
+				}
+			}
+			h4{
+				color:#717171;
+			}
+		}
+	}
+	
+}
+section#solutions{
+	background-image: url('../../../assets/images/homepage/solutionnBg.png');
+	text-align:center;
+	padding-bottom:0;
+    background-attachment: fixed;
+	h1,p{
+		color:#fff;
+	}
+	p{
+	    margin-top: 1rem;
+	}
+	.solns{
+		margin:50px 0;
+	}
+	.solBox{
+		text-align:center;
+		.icon{
+		    width: 160px;
+    		margin: 0 auto;
+    		img{
+    			width:100%;
+    		}
+		}
+		h4{
+			margin: 15px 0;
+			color:#fff;
+		}
+	}
+	.footerImage{
+		img{
+			width:100%;
+		}
+	}
+}
+section#upcomingFeatures{
+	text-align:center;
+	h1{
+		color:#3e53a4;
+	}
+	.features{
+		margin-top:50px;
+	}
+	.featureBox{
+		.icon{
+			width: 150px;
+    		margin: 0 auto;
+    		img{
+    			width:100%;
+    		}
+		}
+		h4{
+			color:#717171;
+		}
+	}
+}
+section#watchVideos{
+	background:#009bdf;
+	h4{
+		margin:0;
+		color:#fff;
+	}
+	a.white-btn {
+	    display: inline-block;
+    	padding: 10px 50px;
+	    background: #fff;
+	    border-radius: 20px;
+	    text-decoration: none;
+	    color: #cf0989;
+	    font-size: 16px;
+	    font-weight: bold;
+	}
+}
+section#testimonials{
+	.carousel-section{
+		margin-top:50px;
+	}
+	
+	.testimonial-card{
+		.icon{
+			width:150px;
+			margin: 0 auto;
+			img{
+				width:100%;
+			}
+		}
+		h4{
+			margin-top:15px;
+
+		}
+		h5{
+			margin-top:30px;
+		}
+	}
 }

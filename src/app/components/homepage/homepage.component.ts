@@ -9,6 +9,35 @@ import {OwlCarousel} from 'ngx-owl-carousel';
 export class HomepageComponent implements OnInit {
 	@ViewChild('owlInfo') owlInfo: OwlCarousel;
 	@ViewChild('owlMobile') owlMobile: OwlCarousel;
+
+	products: any[] = [
+				    {
+				      "name": "Mailing & Shipping",
+				      "img": "mailingshipping.png",
+				      "hoverImg":"mailingshipping_hover.png"
+				    },
+				    {
+				      "name": "Location Intelligence",
+				      "img": "li.png",
+				      "hoverImg":"li_hover.png"
+				    },
+				    {
+				      "name": "Customer Information Management",
+				      "img": "cim.png",
+				      "hoverImg":"cim_hover.png"
+				    },
+				    {
+				      "name": "Global ECommerce",
+				      "img": "ecom.png",
+				      "hoverImg":"ecom_hover.png"
+				    },
+				    {
+				      "name": "Customer Engagement",
+				      "img": "ces.png",
+				      "hoverImg":"ces_hover.png"
+				    }
+				    
+  	];
   constructor() { }
 
   ngOnInit() {
@@ -22,4 +51,5 @@ export class HomepageComponent implements OnInit {
   	this.owlInfo.previous();
   	this.owlMobile.previous();
   }
+
 }
