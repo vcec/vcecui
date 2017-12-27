@@ -15,16 +15,16 @@
             <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Products</a>
+            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#products">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Solutions</a>
+            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#solutions">Solutions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Testimonials</a>
+            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#testimonials">Testimonials</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Upcoming Features</a>
+            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#upcomingFeatures">Upcoming Features</a>
           </li>
         </ul>
       </div>
@@ -106,9 +106,9 @@
     <div class="row">
       <div class="col-md-12">
           <h1>Products</h1>
-          <p>
+          <h5>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
+          </h5>
       </div>
     </div>
     <div class="row products">
@@ -120,39 +120,6 @@
               <h4>{{product.name}}</h4>
             </div>
         </div> 
-        <!-- <div class="col col-xs-12">
-            <div class="productBox">
-              <div class="icon">
-                <img src="assets/images/homepage/li.png" alt="">
-              </div>
-              <h4>Location Intelligence</h4>
-            </div>
-        </div>
-        <div class="col col-xs-12">
-            <div class="productBox">
-              <div class="icon">
-                <img src="assets/images/homepage/cim.png" alt="">
-              </div>
-              <h4>Customer Information Management</h4>
-            </div>
-        </div>
-        <div class="col col-xs-12">
-            <div class="productBox">
-              <div class="icon">
-                <img src="assets/images/homepage/ecom.png" alt="">
-              </div>
-              <h4>Global ECommerce</h4>
-            </div>
-        </div>
-        <div class="col col-xs-12">
-            <div class="productBox">
-              <div class="icon">
-                <img src="assets/images/homepage/ces.png" alt="">
-              </div>
-              <h4>Customer Engagement</h4>
-            </div>
-        </div> -->
-        
     </div>
   </div>
 </section>
@@ -161,9 +128,9 @@
     <div class="row">
       <div class="col-md-12">
           <h1>Solutions</h1>
-          <p>
+          <h5>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
+          </h5>
       </div>
     </div>
     <div class="row solns">
@@ -212,9 +179,9 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Upcoming Features</h1>
-            <p>
+            <h5>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
+            </h5>
         </div>
     </div>
     <div class="row features">
@@ -281,8 +248,8 @@
                       autoplay: true,
                       autoplayTimeout: 4000,
                       smartSpeed: 1000,
-                      mouseDrag: false,
-                      touchDrag: false,
+                      mouseDrag: true,
+                      touchDrag: true,
                       center: true,
                       items: 1}" 
                       [carouselClasses]="['owl-theme', 'row', 'sliding']">
@@ -343,3 +310,25 @@
     </div>
   </div>
 </section>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+          <div class="pb-icon">
+            <img src="assets/images/pb_logo.png" alt="">
+          </div>
+          <p>Copyright Pitney Bowes 2017, All rights reserved.</p>
+      </div>
+      <div class="col-md-4">
+          <div class="platforms">
+            <ul>
+              <li><a href=""><img src="assets/images/1-FB.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/2-gplus.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/3-Twitter.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/4-Linkdin.png" alt=""></a></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+</footer>

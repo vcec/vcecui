@@ -80,14 +80,15 @@ section{
 	padding:100px 0;
 }
 section#products{
-	h1,p{
+	h1,h5{
 		text-align:center;
 	}
-	p{
+	h5{
     	margin-top: 1rem;
+    	color:#9b9b9b;
 	}
 	.products{
-	    margin-top: 20px;
+	    margin-top: 30px;
     	margin-bottom: 50px;
 		.productBox{
 			text-align:center;
@@ -97,7 +98,6 @@ section#products{
 				margin: 15px auto;
 				img{
 					width:100%;
-					transition: 0.5s all;
 				}
 			}
 			h4{
@@ -112,10 +112,10 @@ section#solutions{
 	text-align:center;
 	padding-bottom:0;
     background-attachment: fixed;
-	h1,p{
+	h1,h5{
 		color:#fff;
 	}
-	p{
+	h5{
 	    margin-top: 1rem;
 	}
 	.solns{
@@ -145,6 +145,10 @@ section#upcomingFeatures{
 	text-align:center;
 	h1{
 		color:#3e53a4;
+	}
+	h5{
+    	margin-top: 1rem;
+    	color:#9b9b9b;
 	}
 	.features{
 		margin-top:50px;
@@ -199,5 +203,31 @@ section#testimonials{
 		h5{
 			margin-top:30px;
 		}
+	}
+}
+footer{
+	background:#000;
+	.pb-icon{
+		width:250px;
+		img{
+			width:100%;
+		}
+	}
+	p{
+		color:#9b9b9b;
+		font-size:15px;
+	}
+	.platforms ul{
+		padding: 0;
+    	list-style: none;
+    	display: flex;
+    	float:right;
+    	li{
+    		margin-left:10px;
+    		width:50px;
+    		img{
+    			width:100%;
+    		}
+    	}
 	}
 }
