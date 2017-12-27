@@ -1,10 +1,27 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import {OwlCarousel} from 'ngx-owl-carousel';
 
+import { trigger, state, animate, transition, style } from '@angular/animations';
+
+
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  styleUrls: ['./homepage.component.scss'],
+  animations: [trigger('fadeInAnimation', [
+ 
+        // route 'enter' transition
+        transition(':enter', [
+ 
+            // css styles at start of transition
+            style({ opacity: 0 }),
+ 
+            // animation and styles at end of transition
+            animate('0.7s', style({ opacity: 1 }))
+        ]),
+    ])]
+  
 })
 export class HomepageComponent implements OnInit {
 	@ViewChild('owlInfo') owlInfo: OwlCarousel;
