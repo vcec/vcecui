@@ -4,7 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 @Injectable()
 export class DataService {
 
-  static backendUrl = 'http://10.120.88.222:3000/';
+  static backendUrl = 'http://10.120.88.222:3001/';
 
   constructor(private httpClient: HttpClient) {
 
@@ -22,10 +22,7 @@ export class DataService {
       return this.httpClient.post(DataService.backendUrl + 'saveGroup', data);
     }
 
-    // create portfolio
-    savePortFolio(data) {
-      return this.httpClient.post(DataService.backendUrl + 'savePortfolio', data);
-    }
+
 
     // get portfolio by title
     getPortFolio(title) {
@@ -57,6 +54,10 @@ export class DataService {
     return this.httpClient.get(DataService.backendUrl + 'testimonial');
   }
 
+  // create portfolio
+  savePortFolio(data) {
+    return this.httpClient.post(DataService.backendUrl + 'portfolio', data);
+  }
 
   /*
 
