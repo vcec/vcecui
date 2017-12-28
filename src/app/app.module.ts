@@ -8,6 +8,7 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import {OwlModule} from 'ngx-owl-carousel';
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 
 import {LandingComponent} from './components/landing/landing.component';
 import {HomepageComponent} from './components/homepage/homepage.component';
@@ -28,7 +29,8 @@ import {DataService} from './services/dataService.service';
     OwlModule,
     Ng2PageScrollModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+     AnimateOnScrollModule.forRoot()
   ],
   providers: [HttpClientModule, DataService],
   bootstrap: [AppComponent]
