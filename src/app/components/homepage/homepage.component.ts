@@ -1,8 +1,7 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {OwlCarousel} from 'ngx-owl-carousel';
 import {slideInRight} from '../../_animations/index';
-
-
+import {DataService} from '../../services/dataService.service';
 
 
 @Component({
@@ -10,7 +9,7 @@ import {slideInRight} from '../../_animations/index';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
   animations: [slideInRight]
-  
+
 })
 export class HomepageComponent implements OnInit {
   @ViewChild('owlInfo') owlInfo: OwlCarousel;
