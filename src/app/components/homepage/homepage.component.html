@@ -1,43 +1,44 @@
 <div class="home" [@slideInRight]>
-<header>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <div class="pb-logo">
-          <img src="assets/images/pb_logo.png" alt="">
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <div class="pb-logo">
+            <img src="assets/images/pb_logo.png" alt="">
+          </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#products">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#solutions">Solutions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#testimonials">Testimonials</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#upcomingFeatures">Upcoming Features</a>
+            </li>
+          </ul>
         </div>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#products">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#solutions">Solutions</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#testimonials">Testimonials</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#upcomingFeatures">Upcoming Features</a>
-          </li>
-        </ul>
       </div>
-    </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-8 col-sm-12">
-            <div class="carousel-container">
-              <owl-carousel #owlInfo [options]="{loop: true,
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-8 col-sm-12">
+              <div class="carousel-container">
+                <owl-carousel #owlInfo [options]="{loop: true,
                     margin: 0,
                     nav: false,
                     dots: false,
@@ -277,7 +278,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 carousel-section" *ngIf="testimonials.length > 0">
+        <div class="col-md-12 carousel-section">
           <owl-carousel #owlMobile [options]="{loop: true,
                       margin: 0,
                       dots: true,
@@ -288,10 +289,11 @@
                       touchDrag: true,
                       center: true,
                       items: 1}"
-                        [carouselClasses]="['owl-theme', 'row', 'sliding']" [items]="testimonials">
+                        [carouselClasses]="['owl-theme', 'row', 'sliding']" [items]="testimonials"
+                        *ngIf="testimonials.length > 0">
             <div class="item testimonial-card text-center" *ngFor="let testimonial of testimonials">
               <div class="row justify-content-center">
-                
+
                 <div class="col-md-3">
                   <div class="icon">
                     <i class="nc-icon-outline users_single-05" *ngIf="!testimonial.userInfo.userImg"
@@ -309,7 +311,6 @@
                 </div>
               </div>
             </div>
-            
 
 
           </owl-carousel>

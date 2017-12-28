@@ -18,38 +18,6 @@ export class HomepageComponent implements OnInit {
 
   products: any[] = [];
   testimonials: any[] = [];
-
-  /*
-    products: any[] = [
-      {
-        'name': 'Mailing & Shipping',
-        'img': 'mailingshipping.png',
-        'hoverImg': 'mailingshipping_hover.png'
-      },
-      {
-        'name': 'Location Intelligence',
-        'img': 'li.png',
-        'hoverImg': 'li_hover.png'
-      },
-      {
-        'name': 'Customer Information Management',
-        'img': 'cim.png',
-        'hoverImg': 'cim_hover.png'
-      },
-      {
-        'name': 'Global ECommerce',
-        'img': 'ecom.png',
-        'hoverImg': 'ecom_hover.png'
-      },
-      {
-        'name': 'Customer Engagement',
-        'img': 'ces.png',
-        'hoverImg': 'ces_hover.png'
-      }
-
-    ];
-  */
-
   categories: any[] = [];
 
 
@@ -81,7 +49,9 @@ export class HomepageComponent implements OnInit {
 
     this.dataService.getAllTestimonials().subscribe((response) => {
       if (response['count'] > 0) {
-        this.testimonials = response['data'];
+        setTimeout(() => {
+          this.testimonials = response['data'];
+        }, 500);
       }
     }, (error) => {
       if (error.status === 0) {
