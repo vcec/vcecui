@@ -144,7 +144,7 @@
           <div class="productBox" (mouseover)="product.active = true" (mouseout)="product.active = false">
             <div class="icon">
               <img
-                src="{{product.active?product.hoverImg:product.img}}"
+                src="{{product.active?backendUrl + product.hoverImg:backendUrl + product.img}}"
                 alt="">
             </div>
             <h4>{{product.group_name}}</h4>
@@ -171,7 +171,7 @@
         <div class="col-md-3" *ngFor="let cat of categories">
           <div class="solBox">
             <div class="icon">
-              <img [src]="cat.img" alt="">
+              <img [src]="backendUrl + cat.img" alt="">
             </div>
             <h4>{{cat.category_name}}</h4>
           </div>

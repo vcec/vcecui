@@ -2,8 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {OwlCarousel} from 'ngx-owl-carousel';
 import {DataService} from '../../services/dataService.service';
 
-import { trigger, state, animate, transition, style } from '@angular/animations';
-
+import {trigger, state, animate, transition, style} from '@angular/animations';
 
 
 @Component({
@@ -11,22 +10,23 @@ import { trigger, state, animate, transition, style } from '@angular/animations'
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
   animations: [trigger('fadeInAnimation', [
- 
-        // route 'enter' transition
-        transition(':enter', [
- 
-            // css styles at start of transition
-            style({ opacity: 0 }),
- 
-            // animation and styles at end of transition
-            animate('0.7s', style({ opacity: 1 }))
-        ]),
-    ])]
-  
+
+    // route 'enter' transition
+    transition(':enter', [
+
+      // css styles at start of transition
+      style({opacity: 0}),
+
+      // animation and styles at end of transition
+      animate('0.7s', style({opacity: 1}))
+    ]),
+  ])]
+
 })
 export class HomepageComponent implements OnInit {
   @ViewChild('owlInfo') owlInfo: OwlCarousel;
   @ViewChild('owlMobile') owlMobile: OwlCarousel;
+  backendUrl = 'http://10.120.88.222:3000/';
 
   products: any[] = [];
 
