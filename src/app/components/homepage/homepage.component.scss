@@ -5,7 +5,7 @@ header{
     min-height:500px;
     position:relative;
 	.pb-logo{
-		width:160px;
+		width:180px;
 		img{
 			width:100%
 		}
@@ -50,10 +50,10 @@ header{
     	background-position: center;
     	position:relative;
     	.innerImage{
-	     	width: 243px;
-		    position: absolute;
-		    top: 80px;
-		    left: 70px;
+     	    width: 243px;
+    		position: absolute;
+    		top: 74px;
+    		left: 69px;
     		img{
     			width:100%;
     		}
@@ -94,15 +94,26 @@ section#products{
 			text-align:center;
 			cursor:pointer;
 			.icon{
-				width:100px;
+				width:80px;
 				margin: 15px auto;
+				transition : 0.2s all;
 				img{
 					width:100%;
 				}
 			}
+			
 			h4{
+				transition : 0.2s all;
 				color:#717171;
 			}
+		}
+		.productBox:hover{
+				.icon{
+					transform:scale(1.2);
+				}
+				h4{
+					color:#000;
+				}
 		}
 	}
 	
@@ -124,7 +135,7 @@ section#solutions{
 	.solBox{
 		text-align:center;
 		.icon{
-		    width: 160px;
+		    width: 100px;
     		margin: 0 auto;
     		img{
     			width:100%;
@@ -155,7 +166,7 @@ section#upcomingFeatures{
 	}
 	.featureBox{
 		.icon{
-			width: 150px;
+			width: 100px;
     		margin: 0 auto;
     		img{
     			width:100%;
@@ -201,21 +212,26 @@ section#testimonials{
 
 		}
 		h5{
-			margin-top:30px;
+		    margin-top: 30px;
+    		margin-left: 10px;
+    		text-align: left;
+    		line-height: 1.3;
 		}
 	}
 }
 footer{
 	background:#000;
 	.pb-icon{
-		width:250px;
+		width: 140px;
+    	margin-top: 50px;
+    	margin-bottom: 10px;
 		img{
 			width:100%;
 		}
 	}
 	p{
 		color:#9b9b9b;
-		font-size:15px;
+		font-size:14px;
 	}
 	.platforms ul{
 		padding: 0;

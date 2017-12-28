@@ -1,43 +1,44 @@
-<header>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <div class="pb-logo">
-          <img src="assets/images/pb_logo.png" alt="">
+<div class="home" [@fadeInAnimation]>
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <div class="pb-logo">
+            <img src="assets/images/pb_logo.png" alt="">
+          </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#products">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#solutions">Solutions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#testimonials">Testimonials</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#upcomingFeatures">Upcoming Features</a>
+            </li>
+          </ul>
         </div>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#products">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#solutions">Solutions</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#testimonials">Testimonials</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#upcomingFeatures">Upcoming Features</a>
-          </li>
-        </ul>
       </div>
-    </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-8 col-sm-12">
-            <div class="carousel-container">
-              <owl-carousel #owlInfo [options]="{loop: true,
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-8 col-sm-12">
+              <div class="carousel-container">
+                <owl-carousel #owlInfo [options]="{loop: true,
                     margin: 0,
                     nav: false,
                     dots: false,
@@ -48,34 +49,48 @@
                     touchDrag: false,
                     center: true,
                     items: 1}"
-                            [carouselClasses]="['owl-theme', 'row', 'sliding']">
-                <div class="item">
-                  <div class="product-info">
-                    <h1>EngageOne Video</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <a href="" class="white-btn">Learn More...</a>
+                              [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                  <div class="item">
+                    <div class="product-info">
+                      <h1>EngageOne Video</h1>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris
+                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                        velit
+                        esse cillum dolore eu fugiat nulla pariatur.</p>
+                      <a href="" class="white-btn">Learn More...</a>
+                    </div>
                   </div>
-                </div>
-                <div class="item">
-                  <div class="product-info">
-                    <h1>Location Intelligence for Marketing</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <a href="" class="white-btn">Learn More...</a>
+                  <div class="item">
+                    <div class="product-info">
+                      <h1>Location Intelligence for Marketing</h1>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris
+                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                        velit
+                        esse cillum dolore eu fugiat nulla pariatur.</p>
+                      <a href="" class="white-btn">Learn More...</a>
+                    </div>
                   </div>
-                </div>
-              </owl-carousel>
+                  <div class="item">
+                    <div class="product-info">
+                      <h1>SMB Apps</h1>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                      <a href="" class="white-btn">Learn More...</a>
+                    </div>
+                  </div>
+                </owl-carousel>
+              </div>
             </div>
-          </div>
-          <div class="col-xs-0 col-sm-0 col-md-4">
-            <div class="mobile">
-              <div class="innerImage">
-                <owl-carousel #owlMobile [options]="{loop: true,
+            <div class="col-xs-0 col-sm-0 col-md-4">
+              <div class="mobile">
+                <div class="innerImage">
+                  <owl-carousel #owlMobile [options]="{loop: true,
                       margin: 0,
                       dots: false,
                       autoplay: true,
@@ -85,178 +100,186 @@
                       touchDrag: false,
                       center: true,
                       items: 1}"
-                              [carouselClasses]="['owl-theme', 'row', 'sliding']">
-                  <div class="item">
-                    <img src="assets/images/homepage/engageone_video_screenshot.png" alt="">
-                  </div>
-                  <div class="item">
-                    <img src="assets/images/homepage/li4m_screenshot.png" alt="">
-                  </div>
-                </owl-carousel>
+                                [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                    <div class="item">
+                      <img src="assets/images/homepage/engageone_video_screenshot.png" alt="">
+                    </div>
+                    <div class="item">
+                      <img src="assets/images/homepage/li4m_screenshot.png" alt="">
+                    </div>
+                    <div class="item">
+                      <img src="assets/images/homepage/smbappsbg.png" alt="">
+                    </div>
+                  </owl-carousel>
+                </div>
+              </div>
+              <div class="btns">
+                <i class="nc-icon-outline arrows-1_minimal-left" (click)="goPrev()"></i>
+                <span>/</span>
+                <i class="nc-icon-outline arrows-1_minimal-right" (click)="goNext()"></i>
+
               </div>
             </div>
-            <div class="btns">
-              <i class="nc-icon-outline arrows-1_minimal-left" (click)="goPrev()"></i>
-              <span>/</span>
-              <i class="nc-icon-outline arrows-1_minimal-right" (click)="goNext()"></i>
-
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section id="products">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Products</h1>
+          <h5>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo
+            consequat.
+          </h5>
+        </div>
+      </div>
+      <div class="row products">
+        <div class="col col-xs-12" *ngFor="let product of products">
+          <div class="productBox" (mouseover)="product.active = true" (mouseout)="product.active = false">
+            <div class="icon">
+              <img
+                src="{{product.active?product.hoverImg:product.img}}"
+                alt="">
             </div>
+            <h4>{{product.group_name}}</h4>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</header>
-<section id="products">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Products</h1>
-        <h5>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.
-        </h5>
-      </div>
-    </div>
-    <div class="row products">
-      <div class="col col-xs-12" *ngFor="let product of products">
-        <div class="productBox" (mouseover)="product.active = true" (mouseout)="product.active = false">
-          <div class="icon">
-            <img
-              src="{{product.active?product.hoverImg:product.img}}"
-              alt="">
-          </div>
-          <h4>{{product.group_name}}</h4>
+  </section>
+  <section id="solutions">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Solutions</h1>
+          <h5>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo
+            consequat.
+          </h5>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<section id="solutions">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Solutions</h1>
-        <h5>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.
-        </h5>
-      </div>
-    </div>
-    <div class="row solns">
-      <div class="col-md-3" *ngFor="let cat of categories">
-        <div class="solBox">
-          <div class="icon">
-            <img [src]="cat.img" alt="">
+      <div class="row solns">
+        <div class="col-md-3" *ngFor="let cat of categories">
+          <div class="solBox">
+            <div class="icon">
+              <img [src]="cat.img" alt="">
+            </div>
+            <h4>{{cat.category_name}}</h4>
           </div>
-          <h4>{{cat.category_name}}</h4>
         </div>
-      </div>
-      <!-- <div class="col-md-3">
-         <div class="solBox">
-           <div class="icon">
-             <img src="assets/images/homepage/bizfunction.png" alt="">
+        <!-- <div class="col-md-3">
+           <div class="solBox">
+             <div class="icon">
+               <img src="assets/images/homepage/bizfunction.png" alt="">
+             </div>
+             <h4>By Business Function</h4>
            </div>
-           <h4>By Business Function</h4>
          </div>
-       </div>
-       <div class="col-md-3">
-         <div class="solBox">
-           <div class="icon">
-             <img src="assets/images/homepage/featuredSolution.png" alt="">
+         <div class="col-md-3">
+           <div class="solBox">
+             <div class="icon">
+               <img src="assets/images/homepage/featuredSolution.png" alt="">
+             </div>
+             <h4>Featured Solutions</h4>
            </div>
-           <h4>Featured Solutions</h4>
          </div>
-       </div>
-       <div class="col-md-3">
-         <div class="solBox">
-           <div class="icon">
-             <img src="assets/images/homepage/pblabs.png" alt="">
+         <div class="col-md-3">
+           <div class="solBox">
+             <div class="icon">
+               <img src="assets/images/homepage/pblabs.png" alt="">
+             </div>
+             <h4>PB Labs</h4>
            </div>
-           <h4>PB Labs</h4>
-         </div>
-       </div>-->
-    </div>
-    <div class="footerImage">
-      <div class="img-wrapper">
-        <img src="assets/images/homepage/mob_desk_laptop.png" alt="">
+         </div>-->
+      </div>
+      <div class="footerImage">
+        <div class="img-wrapper">
+          <img src="assets/images/homepage/mob_desk_laptop.png" alt="">
+        </div>
       </div>
     </div>
-  </div>
-</section>
-<section id="upcomingFeatures">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Upcoming Features</h1>
-        <h5>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.
-        </h5>
+  </section>
+  <section id="upcomingFeatures">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Upcoming Features</h1>
+          <h5>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo
+            consequat.
+          </h5>
+        </div>
       </div>
-    </div>
-    <div class="row features">
-      <div class="col-md-3">
-        <div class="featureBox">
-          <div class="icon">
-            <img src="assets/images/homepage/hackathon.png" alt="">
+      <div class="row features">
+        <div class="col-md-3">
+          <div class="featureBox">
+            <div class="icon">
+              <img src="assets/images/homepage/hackathon.png" alt="">
+            </div>
+            <h4>Hackathons</h4>
           </div>
-          <h4>Hackathons</h4>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="featureBox">
-          <div class="icon">
-            <img src="assets/images/homepage/leadgen.png" alt="">
+        <div class="col-md-3">
+          <div class="featureBox">
+            <div class="icon">
+              <img src="assets/images/homepage/leadgen.png" alt="">
+            </div>
+            <h4>Lead Generation</h4>
           </div>
-          <h4>Lead Generation</h4>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="featureBox">
-          <div class="icon">
-            <img src="assets/images/homepage/webanalytics.png" alt="">
+        <div class="col-md-3">
+          <div class="featureBox">
+            <div class="icon">
+              <img src="assets/images/homepage/webanalytics.png" alt="">
+            </div>
+            <h4>Webinar & Live Demos</h4>
           </div>
-          <h4>Webinar & Live Demos</h4>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="featureBox">
-          <div class="icon">
-            <img src="assets/images/homepage/confwebinar.png" alt="">
+        <div class="col-md-3">
+          <div class="featureBox">
+            <div class="icon">
+              <img src="assets/images/homepage/confwebinar.png" alt="">
+            </div>
+            <h4>Web Analytics to gather Audience Insights</h4>
           </div>
-          <h4>Web Analytics to gather Audience Insights</h4>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<section id="watchVideos">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="d-flex justify-content-between">
-          <h4>View our recently launched hackathons for SMB</h4>
-          <a href="" class="white-btn">Watch Video</a>
+  </section>
+  <section id="watchVideos">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4>View our recently launched hackathons for SMB</h4>
+            <a href="" class="white-btn">Watch Video</a>
+          </div>
         </div>
-
       </div>
     </div>
-  </div>
-</section>
-<section id="testimonials">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1 class="text-center">Testimonials</h1>
+  </section>
+  <section id="testimonials">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Testimonials</h1>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 carousel-section">
-        <owl-carousel #owlMobile [options]="{loop: true,
+      <div class="row">
+        <div class="col-md-12 carousel-section">
+          <owl-carousel #owlMobile [options]="{loop: true,
                       margin: 0,
                       dots: true,
                       autoplay: true,
@@ -266,89 +289,93 @@
                       touchDrag: true,
                       center: true,
                       items: 1}"
-                      [carouselClasses]="['owl-theme', 'row', 'sliding']">
-          <div class="item testimonial-card text-center">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="icon">
-                  <img src="assets/images/homepage/testimonypic.png" alt="">
+                        [carouselClasses]="['owl-theme', 'row', 'sliding']">
+            <div class="item testimonial-card text-center">
+              <div class="row justify-content-center">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                  <div class="icon">
+                    <img src="assets/images/homepage/testimonypic.png" alt="">
+                  </div>
+                  <h4>Alexa William</h4>
+                  <p>Google Inc.</p>
                 </div>
-                <h4>Alexa William</h4>
-                <p>Google Inc.</p>
-              </div>
-              <div class="col-md-8">
-                <h5>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.
-                </h5>
+                <div class="col-md-7">
+                  <h5>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.
+                  </h5>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="item testimonial-card text-center">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="icon">
-                  <img src="assets/images/homepage/testimonypic.png" alt="">
+            <div class="item testimonial-card text-center">
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                  <div class="icon">
+                    <img src="assets/images/homepage/testimonypic.png" alt="">
+                  </div>
+                  <h4>Alexa William</h4>
+                  <p>Google Inc.</p>
                 </div>
-                <h4>Alexa William</h4>
-                <p>Google Inc.</p>
-              </div>
-              <div class="col-md-8">
-                <h5>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.
-                </h5>
+                <div class="col-md-7">
+                  <h5>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.
+                  </h5>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="item testimonial-card text-center">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="icon">
-                  <img src="assets/images/homepage/testimonypic.png" alt="">
+            <div class="item testimonial-card text-center">
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                  <div class="icon">
+                    <img src="assets/images/homepage/testimonypic.png" alt="">
+                  </div>
+                  <h4>Alexa William</h4>
+                  <p>Google Inc.</p>
                 </div>
-                <h4>Alexa William</h4>
-                <p>Google Inc.</p>
-              </div>
-              <div class="col-md-8">
-                <h5>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat.
-                </h5>
+                <div class="col-md-7">
+                  <h5>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.
+                  </h5>
+                </div>
               </div>
             </div>
-          </div>
 
 
-        </owl-carousel>
-      </div>
-    </div>
-  </div>
-</section>
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="pb-icon">
-          <img src="assets/images/pb_logo.png" alt="">
-        </div>
-        <p>Copyright Pitney Bowes 2017, All rights reserved.</p>
-      </div>
-      <div class="col-md-4">
-        <div class="platforms">
-          <ul>
-            <li><a href=""><img src="assets/images/1-FB.png" alt=""></a></li>
-            <li><a href=""><img src="assets/images/2-gplus.png" alt=""></a></li>
-            <li><a href=""><img src="assets/images/3-Twitter.png" alt=""></a></li>
-            <li><a href=""><img src="assets/images/4-Linkdin.png" alt=""></a></li>
-          </ul>
+          </owl-carousel>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </section>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="pb-icon">
+            <img src="assets/images/pb_logo.png" alt="">
+          </div>
+          <p>Copyright Pitney Bowes 2017, All rights reserved.</p>
+        </div>
+        <div class="col-md-4">
+          <div class="platforms">
+            <ul>
+              <li><a href=""><img src="assets/images/1-FB.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/2-gplus.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/3-Twitter.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/4-Linkdin.png" alt=""></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
