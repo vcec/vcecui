@@ -278,7 +278,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 carousel-section">
+        <div class="col-md-12 carousel-section" *ngIf="testimonials.length > 0">
           <owl-carousel #owlMobile [options]="{loop: true,
                       margin: 0,
                       dots: true,
@@ -289,66 +289,65 @@
                       touchDrag: true,
                       center: true,
                       items: 1}"
-                        [carouselClasses]="['owl-theme', 'row', 'sliding']">
-            <div class="item testimonial-card text-center">
+                        [carouselClasses]="['owl-theme', 'row', 'sliding']" [items]="testimonials">
+            <div class="item testimonial-card text-center" *ngFor="let testimonial of testimonials">
               <div class="row justify-content-center">
                 <div class="col-md-1"></div>
                 <div class="col-md-4">
                   <div class="icon">
-                    <img src="assets/images/homepage/testimonypic.png" alt="">
+                    <i class="nc-icon-outline users_single-05" *ngIf="!testimonial.userInfo.userImg"
+                       style="font-size:70px;-webkit-border-radius: 150px;-moz-border-radius: 150px;border-radius: 150px;"></i>
+                    <img [src]="backendUrl + testimonial.userInfo.userImg" alt="" *ngIf="testimonial.userInfo.userImg">
                   </div>
-                  <h4>Alexa William</h4>
-                  <p>Google Inc.</p>
+                  <h4>{{testimonial.userInfo.userName}}</h4>
+                  <p>{{testimonial.userInfo.userCompany}}</p>
                 </div>
                 <div class="col-md-7">
                   <h5>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat.
+                    {{testimonial.mainText}}
                   </h5>
                 </div>
               </div>
             </div>
+            <!--            <div class="item testimonial-card text-center">
+                          <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                              <div class="icon">
+                                <img src="assets/images/homepage/testimonypic.png" alt="">
+                              </div>
+                              <h4>Alexa William</h4>
+                              <p>Google Inc.</p>
+                            </div>
+                            <div class="col-md-7">
+                              <h5>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea commodo consequat.
+                              </h5>
+                            </div>
+                          </div>
+                        </div>
 
-            <div class="item testimonial-card text-center">
-              <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-4">
-                  <div class="icon">
-                    <img src="assets/images/homepage/testimonypic.png" alt="">
-                  </div>
-                  <h4>Alexa William</h4>
-                  <p>Google Inc.</p>
-                </div>
-                <div class="col-md-7">
-                  <h5>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat.
-                  </h5>
-                </div>
-              </div>
-            </div>
-
-            <div class="item testimonial-card text-center">
-              <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-4">
-                  <div class="icon">
-                    <img src="assets/images/homepage/testimonypic.png" alt="">
-                  </div>
-                  <h4>Alexa William</h4>
-                  <p>Google Inc.</p>
-                </div>
-                <div class="col-md-7">
-                  <h5>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat.
-                  </h5>
-                </div>
-              </div>
-            </div>
+                        <div class="item testimonial-card text-center">
+                          <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                              <div class="icon">
+                                <img src="assets/images/homepage/testimonypic.png" alt="">
+                              </div>
+                              <h4>Alexa William</h4>
+                              <p>Google Inc.</p>
+                            </div>
+                            <div class="col-md-7">
+                              <h5>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea commodo consequat.
+                              </h5>
+                            </div>
+                          </div>
+                        </div>-->
 
 
           </owl-carousel>

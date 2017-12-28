@@ -29,6 +29,7 @@ export class HomepageComponent implements OnInit {
   backendUrl = 'http://10.120.88.222:3000/';
 
   products: any[] = [];
+  testimonials: any[] = [];
 
   /*
     products: any[] = [
@@ -89,7 +90,18 @@ export class HomepageComponent implements OnInit {
         console.log('*****Server is down*****');
       }
     });
+
+    this.dataService.getAllTestimonials().subscribe((response) => {
+      if (response['count'] > 0) {
+        this.testimonials = response['data'];
+      }
+    }, (error) => {
+      if (error.status === 0) {
+        console.log('*****Server is down*****');
+      }
+    });
   }
+
 
   goNext() {
     this.owlInfo.next();

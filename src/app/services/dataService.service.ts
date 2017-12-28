@@ -53,6 +53,10 @@ export class DataService {
     return this.httpClient.get(DataService.backendUrl + 'category');
   }
 
+  getAllTestimonials() {
+    return this.httpClient.get(DataService.backendUrl + 'testimonial');
+  }
+
 
   /*
 
