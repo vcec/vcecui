@@ -1,5 +1,6 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {OwlCarousel} from 'ngx-owl-carousel';
+import {DataService} from '../../services/dataService.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,49 +8,80 @@ import {OwlCarousel} from 'ngx-owl-carousel';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-	@ViewChild('owlInfo') owlInfo: OwlCarousel;
-	@ViewChild('owlMobile') owlMobile: OwlCarousel;
+  @ViewChild('owlInfo') owlInfo: OwlCarousel;
+  @ViewChild('owlMobile') owlMobile: OwlCarousel;
 
-	products: any[] = [
-				    {
-				      "name": "Mailing & Shipping",
-				      "img": "mailingshipping.png",
-				      "hoverImg":"mailingshipping_hover.png"
-				    },
-				    {
-				      "name": "Location Intelligence",
-				      "img": "li.png",
-				      "hoverImg":"li_hover.png"
-				    },
-				    {
-				      "name": "Customer Information Management",
-				      "img": "cim.png",
-				      "hoverImg":"cim_hover.png"
-				    },
-				    {
-				      "name": "Global ECommerce",
-				      "img": "ecom.png",
-				      "hoverImg":"ecom_hover.png"
-				    },
-				    {
-				      "name": "Customer Engagement",
-				      "img": "ces.png",
-				      "hoverImg":"ces_hover.png"
-				    }
-				    
-  	];
-  constructor() { }
+  products: any[] = [];
+
+  /*
+    products: any[] = [
+      {
+        'name': 'Mailing & Shipping',
+        'img': 'mailingshipping.png',
+        'hoverImg': 'mailingshipping_hover.png'
+      },
+      {
+        'name': 'Location Intelligence',
+        'img': 'li.png',
+        'hoverImg': 'li_hover.png'
+      },
+      {
+        'name': 'Customer Information Management',
+        'img': 'cim.png',
+        'hoverImg': 'cim_hover.png'
+      },
+      {
+        'name': 'Global ECommerce',
+        'img': 'ecom.png',
+        'hoverImg': 'ecom_hover.png'
+      },
+      {
+        'name': 'Customer Engagement',
+        'img': 'ces.png',
+        'hoverImg': 'ces_hover.png'
+      }
+
+    ];
+  */
+
+  categories: any[] = [];
+
+
+  constructor(private dataService: DataService) {
+
+  }
 
   ngOnInit() {
+    // get all product groupsø
+    this.dataService.getAllGroups().subscribe((response) => {
+      if (response['count'] > 0) {
+        this.products = response['data'];
+      }
+    }, (error) => {
+      if (error.status === 0) {
+        console.log('*****Server is down*****');
+      }
+    });
+
+    this.dataService.getAllCategories().subscribe((response) => {
+      if (response['count'] > 0) {
+        this.categories = response['data'];
+      }
+    }, (error) => {
+      if (error.status === 0) {
+        console.log('*****Server is down*****');
+      }
+    });
   }
 
-  goNext(){
-  	this.owlInfo.next();
-  	this.owlMobile.next();
+  goNext() {
+    this.owlInfo.next();
+    this.owlMobile.next();
   }
-  goPrev(){
-  	this.owlInfo.previous();
-  	this.owlMobile.previous();
+
+  goPrev() {
+    this.owlInfo.previous();
+    this.owlMobile.previous();
   }
 
 }
