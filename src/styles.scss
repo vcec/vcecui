@@ -5,10 +5,10 @@
  src: url(assets/fonts/oswald/Oswald-Regular.ttf);
 }
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 0.8em;
 }
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }
