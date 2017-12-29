@@ -97,6 +97,10 @@ section#products{
 		.productBox{
 			text-align:center;
 			cursor:pointer;
+			padding-top: 15px;
+    		padding-bottom: 15px;
+    		transition: 0.5s all;
+    		border-radius:4px;
 			.icon{
 				width:80px;
 				margin: 15px auto;
@@ -109,6 +113,10 @@ section#products{
 			h4{
 				color:#717171;
 			}
+		}
+		.productBox:hover{
+			box-shadow: 0 0 20px rgba(0,0,0,0.2);
+			transform: translateY(-10px)
 		}
 		
 	}
@@ -232,6 +240,20 @@ section#testimonials{
 			    left: -7px;
 			    top: 25px;
     		}
+		}
+		.noUserImage{
+		    width: 130px;
+		    background: #e1e1e1;
+		    margin: 0 auto;
+		    height: 130px;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    padding: 5px;
+		    border-radius: 100%;
+		    i{
+	    	    font-size: 80px;
+		    }
 		}
 	}
 }

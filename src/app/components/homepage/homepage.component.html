@@ -140,8 +140,8 @@
         </div>
       </div>
       <div class="row products" >
-        <div class="col col-xs-12" *ngFor="let product of products; let i = index">
-          <div class="productBox hoverScaleUp hide-on-init animation-delay-{{i+1}}" (mouseover)="product.active = true" (mouseout)="product.active = false" animateOnScroll animationName="animated fadeInUp">
+        <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index">
+          <div class="hoverScaleUp hide-on-init animation-delay-{{i+1}}" (mouseover)="product.active = true" (mouseout)="product.active = false" animateOnScroll animationName="animated fadeInUp">
             <div class="icon scaleUpItem">
               <img
                 src="{{product.active?backendUrl + product.hoverImg:backendUrl + product.img}}"
@@ -295,10 +295,11 @@
               <div class="row justify-content-center">
 
                 <div class="col-md-3">
-                  <div class="icon">
-                    <i class="nc-icon-outline users_single-05" *ngIf="!testimonial.userInfo.userImg"
-                       style="font-size:70px;-webkit-border-radius: 150px;-moz-border-radius: 150px;border-radius: 150px;"></i>
-                    <img [src]="backendUrl + testimonial.userInfo.userImg" alt="" *ngIf="testimonial.userInfo.userImg">
+                  <div class="noUserImage" *ngIf="!testimonial.userInfo.userImg">
+                    <i class="nc-icon-mini users_single-01"></i>
+                  </div>
+                  <div class="icon" *ngIf="testimonial.userInfo.userImg" >
+                      <img [src]="backendUrl + testimonial.userInfo.userImg" alt="" />
                   </div>
                   <h4>{{testimonial.userInfo.userName}}</h4>
                   <p>{{testimonial.userInfo.userCompany}}</p>
