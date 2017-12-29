@@ -4,7 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 @Injectable()
 export class DataService {
 
-  static backendUrl = 'http://10.120.88.222:3001/';
+  static backendUrl = 'http://10.120.89.47:3000/';
 
   constructor(private httpClient: HttpClient) {
 

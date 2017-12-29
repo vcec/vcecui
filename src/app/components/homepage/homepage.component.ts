@@ -14,7 +14,7 @@ import {DataService} from '../../services/dataService.service';
 export class HomepageComponent implements OnInit {
   @ViewChild('owlInfo') owlInfo: OwlCarousel;
   @ViewChild('owlMobile') owlMobile: OwlCarousel;
-  backendUrl = 'http://10.120.88.222:3001/';
+  backendUrl = 'http://10.120.89.47:3000/';
 
   products: any[] = [];
   testimonials: any[] = [];
