@@ -127,7 +127,7 @@
   </header>
   <section id="products">
     <div class="container">
-      <div class="row">
+      <div class="row hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="col-md-12">
           <h1>Products</h1>
           <p>
@@ -139,7 +139,7 @@
           </p>
         </div>
       </div>
-      <div class="row products">
+      <div class="row products hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="col col-xs-12" *ngFor="let product of products">
           <div class="productBox hoverScaleUp" (mouseover)="product.active = true" (mouseout)="product.active = false">
             <div class="icon scaleUpItem">
@@ -157,7 +157,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1>Solutions</h1>
+          <h1 class="hide-on-init" animateOnScroll animationName="animated fadeInUp">Solutions</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore
@@ -167,7 +167,7 @@
           </p>
         </div>
       </div>
-      <div class="row solns">
+      <div class="row solns hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="col-md-3" *ngFor="let cat of categories">
           <div class="solBox hoverScaleUp">
             <div class="icon scaleUpItem">
@@ -201,7 +201,7 @@
            </div>
          </div>-->
       </div>
-      <div class="footerImage">
+      <div class="footerImage hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="img-wrapper">
           <img src="assets/images/homepage/mob_desk_laptop.png" alt="">
         </div>
@@ -211,7 +211,7 @@
   <section id="upcomingFeatures">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 hide-on-init" animateOnScroll animationName="animated fadeInUp">
           <h1>Upcoming Features</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -222,7 +222,7 @@
           </p>
         </div>
       </div>
-      <div class="row features">
+      <div class="row features hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="col-md-3">
           <div class="featureBox hoverScaleUp">
             <div class="icon scaleUpItem">
@@ -258,7 +258,7 @@
       </div>
     </div>
   </section>
-  <section id="watchVideos">
+  <section id="watchVideos" animateOnScroll animationName="animated bounceInDown">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -277,7 +277,7 @@
           <h1 class="text-center">Testimonials</h1>
         </div>
       </div>
-      <div class="row">
+      <div class="row hide-on-init" animateOnScroll animationName="animated slideInUp">
         <div class="col-md-12 carousel-section">
           <owl-carousel #owlMobile [options]="{loop: true,
                       margin: 0,
