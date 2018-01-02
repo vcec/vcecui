@@ -3,6 +3,7 @@ import {OwlCarousel} from 'ngx-owl-carousel';
 import {fadeInAnimation} from '../../_animations/index';
 import {DataService} from '../../services/dataService.service';
 
+declare var $: any;
 
 @Component({
   selector: 'app-homepage',
