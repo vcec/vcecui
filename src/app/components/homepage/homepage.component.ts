@@ -76,14 +76,15 @@ export class HomepageComponent implements OnInit {
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    if(window.pageYOffset>=150){
+    let pageoffset = window.pageYOffset;
+    if(pageoffset>=150){
       $('.return-to-top').fadeIn(200);
       
     }else{
       $('.return-to-top').fadeOut(200);
     }
 
-    if((window.pageYOffset > this.lastScroll)||window.pageYOffset==0){
+    if(pageoffset > this.lastScroll ||pageoffset==0){
       this.fixedNavbar = false;
       
     }else{
@@ -91,6 +92,6 @@ export class HomepageComponent implements OnInit {
       
     }
 
-     this.lastScroll = window.pageYOffset;
+     this.lastScroll = pageoffset;
   }
 }
