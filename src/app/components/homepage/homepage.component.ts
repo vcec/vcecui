@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, HostListener} from '@angular/core';
 import {OwlCarousel} from 'ngx-owl-carousel';
-import {slideInRight} from '../../_animations/index';
+import {fadeInAnimation} from '../../_animations/index';
 import {DataService} from '../../services/dataService.service';
 
 
@@ -8,13 +8,15 @@ import {DataService} from '../../services/dataService.service';
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
-  animations: [slideInRight]
+  animations: [fadeInAnimation]
 
 })
 export class HomepageComponent implements OnInit {
   @ViewChild('owlInfo') owlInfo: OwlCarousel;
   @ViewChild('owlMobile') owlMobile: OwlCarousel;
   backendUrl = 'http://10.120.89.47:3000/';
+  fixedNavbar = false;
+  lastScroll = 0;
 
   products: any[] = [];
   testimonials: any[] = [];
@@ -71,4 +73,23 @@ export class HomepageComponent implements OnInit {
     this.owlMobile.previous();
   }
 
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    if(window.pageYOffset>=150){
+      $('.return-to-top').fadeIn(200);
+      
+    }else{
+      $('.return-to-top').fadeOut(200);
+    }
+
+    if((window.pageYOffset > this.lastScroll)||window.pageYOffset==0){
+      this.fixedNavbar = false;
+      
+    }else{
+      this.fixedNavbar = true;
+      
+    }
+
+     this.lastScroll = window.pageYOffset;
+  }
 }

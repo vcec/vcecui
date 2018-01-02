@@ -1,6 +1,33 @@
 .home{
 	overflow-x: hidden;
 }
+.return-to-top{
+	position: fixed;
+    bottom: 50px;
+    right: 50px;
+    font-size: 50px;
+    color: #9b9b9b;
+    background: #fff;
+    border-radius: 100%;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    display: block;
+    z-index: 9999;
+    display:none;
+}
+.navbar{
+	transition: 1s all;
+}
+.fixed-navbar{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	z-index:9999;
+	background:rgba(0,0,0,0.9);
+	
+}
 header{
 	background-image: url('../../../assets/images/homepage/herobg.png');
     background-size: 100% 100%;

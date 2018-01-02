@@ -1,6 +1,9 @@
-<div class="home" [@slideInRight]>
+<div class="home" [@fadeInAnimation] id="home">
+  <a pageScroll pageScrollSpeed="3000" href="#home" class="return-to-top">
+    <i class="nc-icon-mini arrows-3_circle-simple-up"></i>
+  </a>
   <header>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-navbar':fixedNavbar}">
       <div class="container">
         <a class="navbar-brand" href="#">
           <div class="pb-logo">
@@ -129,8 +132,8 @@
     <div class="container">
       <div>
         <div class="col-md-12">
-          <h1 class="hide-on-init" animateOnScroll animationName="animated fadeInUp">Products</h1>
-          <p class="hide-on-init animation-delay-1" animateOnScroll animationName="animated fadeInUp">
+          <h1>Products</h1>
+          <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore
             magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -141,10 +144,10 @@
       </div>
       <div class="row products" >
         <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index">
-          <div class="hoverScaleUp hide-on-init animation-delay-{{i+1}}" (mouseover)="product.active = true" (mouseout)="product.active = false" animateOnScroll animationName="animated fadeInUp">
-            <div class="icon scaleUpItem">
+          <div class="hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img
-                src="{{product.active?backendUrl + product.hoverImg:backendUrl + product.img}}"
+                [src]="backendUrl + product.img"
                 alt="">
             </div>
             <h4>{{product.group_name}}</h4>
@@ -224,32 +227,32 @@
       </div>
       <div class="row features">
         <div class="col-md-3">
-          <div class="featureBox hoverScaleUp hide-on-init animation-delay-1" animateOnScroll animationName="animated fadeInUp">
-            <div class="icon scaleUpItem">
+          <div class="featureBox hide-on-init animation-delay-1" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img src="assets/images/homepage/hackathon.png" alt="">
             </div>
             <h4>Hackathons</h4>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="featureBox hoverScaleUp hide-on-init animation-delay-2" animateOnScroll animationName="animated fadeInUp">
-            <div class="icon scaleUpItem">
+          <div class="featureBox hide-on-init animation-delay-2" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img src="assets/images/homepage/leadgen.png" alt="">
             </div>
             <h4>Lead Generation</h4>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="featureBox hoverScaleUp hide-on-init animation-delay-3" animateOnScroll animationName="animated fadeInUp">
-            <div class="icon scaleUpItem">
+          <div class="featureBox hide-on-init animation-delay-3" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img src="assets/images/homepage/webanalytics.png" alt="">
             </div>
             <h4>Webinar & Live Demos</h4>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="featureBox hoverScaleUp hide-on-init animation-delay-4" animateOnScroll animationName="animated fadeInUp">
-            <div class="icon scaleUpItem">
+          <div class="featureBox hide-on-init animation-delay-4" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img src="assets/images/homepage/confwebinar.png" alt="">
             </div>
             <h4>Web Analytics to gather Audience Insights</h4>
@@ -258,7 +261,7 @@
       </div>
     </div>
   </section>
-  <section id="watchVideos" class="animation-delay-3 hide-on-init" animateOnScroll animationName="animated fadeInDownBig">
+  <section id="watchVideos" class="hide-on-init" animateOnScroll animationName="animated fadeIn">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -326,7 +329,7 @@
           <div class="pb-icon">
             <img src="assets/images/pb_logo.png" alt="">
           </div>
-          <p>Copyright Pitney Bowes 2017, All rights reserved.</p>
+          <p>&copy; Copyright Pitney Bowes 2018, All rights reserved.</p>
         </div>
         <div class="col-md-4">
           <div class="platforms">
