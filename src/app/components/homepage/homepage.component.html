@@ -1,6 +1,6 @@
 <div class="home" [@fadeInAnimation] id="home">
   <a pageScroll pageScrollSpeed="3000" href="#home" class="return-to-top">
-    <i class="nc-icon-mini arrows-3_circle-simple-up"></i>
+    <i class="nc-icon-mini arrows-3_small-up"></i>
   </a>
   <header>
     <nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-navbar':fixedNavbar}">
@@ -146,7 +146,8 @@
         <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index">
           <div class="hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
             <div class="icon">
-              <img src="{{product.active?config.serverUrl + product.hoverImg:config.serverUrl + product.img}}"
+              <img
+                [src]="config.serverUrl + product.img"
                 alt="">
             </div>
             <h4>{{product.group_name}}</h4>
@@ -314,6 +315,8 @@
                 </div>
               </div>
             </div>
+
+
           </owl-carousel>
         </div>
       </div>
