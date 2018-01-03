@@ -1,20 +1,63 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h3>List of product groups</h3>
-      <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small>3 days ago</small>
+      <h3>List of Categories
+        <button class="btn btn-primary" (click)="addCatState=true;editCatState=false">Add New Category</button>
+      </h3>
+      <div class="list-group" *ngFor="let category of categories">
+        <div class="card" style="width: 20rem;text-align: center">
+          <div style="position: absolute;right: 0;top: 5px;">
+            <button class="btn btn-sm btn-primary" (click)="editCat(category)">Edit</button>
+            <button class="btn btn-sm btn-primary" (click)="deleteCat(category)">Delete</button>
           </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-          <small>Donec id elit non mi porta.</small>
-        </a>
+          <img class="card-img-top" [src]="this.config.serverUrl+category.img" alt="Card image cap"
+               style="width: 25%; height: 25%;margin: auto">
+          <div class="card-body">
+            <p class="card-text">{{category.category_name}}</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
+      <div *ngIf="editCatState">
+        <h3>Edit Category:</h3>
+        <form (ngSubmit)="onUpdate()" #f="ngForm">
+          <div class="form-group">
+            <label>Category Name</label>
+            <input type="text" class="form-control" [(ngModel)]="category_name" name="category_name">
+          </div>
+          <div class="form-group">
+            <label>Existing Image</label>
+            <img [src]="this.config.serverUrl + catToEdit.img">
+          </div>
+          <div class="form-group">
+            <label>Replace Group Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                      (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Update Group</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="addCatState">
+        <form (ngSubmit)="onCreate()" #f="ngForm">
+          <div class="form-group">
+            <label>Category Name</label>
+            <input type="text" class="form-control" [(ngModel)]="category_name" name="category_name">
+          </div>
+          <div class="form-group">
+            <label>Category Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                      (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Add New Category</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

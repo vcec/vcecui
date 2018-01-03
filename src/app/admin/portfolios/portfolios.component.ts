@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../../services/dataService.service';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {Config} from "../../services/config.service";
+import {main} from "@angular/compiler-cli/src/main";
 
 declare var $: any;
 
@@ -10,9 +12,8 @@ declare var $: any;
   templateUrl: './portfolios.component.html',
   styleUrls: ['./portfolios.component.scss']
 })
-export class PortfoliosComponent implements OnInit {
 
-  serverUrl = 'http://localhost:3001/';
+export class PortfoliosComponent implements OnInit {
   images: string[] = [];
   videos: string[] = [];
   caseStudies: string[] = [];
@@ -20,33 +21,33 @@ export class PortfoliosComponent implements OnInit {
   @ViewChild('f') portfolioForm: NgForm;
   productGroups: any[] = [];
   solutions: any[] = [];
+  subSolutions: any[] = [];
   isFeaturedProduct = false;
   featuredProductImage = '';
 
 
-  constructor(private dataService: DataService, private router: Router) {
+  constructor(private dataService: DataService, private router: Router, private config: Config) {
 
   }
 
-
   imageUploadConfig = {
-    url: this.serverUrl + 'upload/uploadImage',
+    url: this.config.serverUrl + 'upload/uploadImage',
     acceptedFiles: 'image/*'
   };
 
   videoUploadConfig = {
-    url: this.serverUrl + 'upload/uploadVideo',
+    url: this.config.serverUrl + 'upload/uploadVideo',
     acceptedFiles: 'video/*'
   };
 
   pdfUploadConfig = {
-    url: this.serverUrl + 'upload/uploadPdf',
+    url: this.config.serverUrl + 'upload/uploadPdf',
     acceptedFiles: 'application/pdf'
   };
 
 
   ngOnInit() {
-    // get all product groupsø
+    // get all product groups
     this.dataService.getAllGroups().subscribe((response) => {
       if (response['count'] > 0) {
         this.productGroups = response['data'].map((v, i) => {
@@ -62,7 +63,21 @@ export class PortfoliosComponent implements OnInit {
     this.dataService.getAllCategories().subscribe((response) => {
       if (response['count'] > 0) {
         this.solutions = response['data'].map((v, i) => {
-          return {'name': v.category_name, 'checked': false};
+          return {'name': v.category_name, 'checked': false, '_id': v._id};
+        });
+      }
+    }, (error) => {
+      if (error.status === 0) {
+        console.log('*****Server is down*****');
+      }
+    });
+
+
+    this.dataService.getAllSubcategories().subscribe((response) => {
+      if (response['count'] > 0) {
+        console.log('*****' + response['count']);
+        this.subSolutions = response['data'].map((v, i) => {
+          return {'name': v.name, 'checked': false, 'mainCategory': v.mainCategory};
         });
       }
     }, (error) => {
@@ -77,7 +92,9 @@ export class PortfoliosComponent implements OnInit {
   }
 
   onFeatureImageUploadSuccess(event) {
-    this.featuredProductImage = this.serverUrl + event[1].data.urlPath;
+    if (event[1].data.urlPath) {
+      this.featuredProductImage = this.config.serverUrl + event[1].data.urlPath;
+    }
   }
 
   onImageUploadError(event) {
@@ -91,8 +108,8 @@ export class PortfoliosComponent implements OnInit {
   }
 
   onImageUploadSuccess(event) {
-    if (event[1].status === 200) {
-      this.images.push(this.serverUrl + event[1].data.urlPath);
+    if (event[1].data.urlPath) {
+      this.images.push(this.config.serverUrl + event[1].data.urlPath);
     }
   }
 
@@ -101,8 +118,8 @@ export class PortfoliosComponent implements OnInit {
   }
 
   onVideoUploadSuccess(event) {
-    if (event[1].status === 200) {
-      this.videos.push(this.serverUrl + event[1].data.urlPath);
+    if (event[1].data.urlPath) {
+      this.videos.push(this.config.serverUrl + event[1].data.urlPath);
     }
   }
 
@@ -111,8 +128,8 @@ export class PortfoliosComponent implements OnInit {
   }
 
   onPdf1UploadSuccess(event) {
-    if (event[1].status === 200) {
-      this.caseStudies.push(this.serverUrl + event[1].data.urlPath);
+    if (event[1].data.urlPath) {
+      this.caseStudies.push(this.config.serverUrl + event[1].data.urlPath);
     }
   }
 
@@ -122,7 +139,7 @@ export class PortfoliosComponent implements OnInit {
 
   onPdf2UploadSuccess(event) {
     if (event[1].status === 200) {
-      this.whitePapers.push(this.serverUrl + event[1].data.urlPath + event[0].name);
+      this.whitePapers.push(this.config.serverUrl + event[1].data.urlPath + event[0].name);
     }
   }
 
@@ -154,4 +171,14 @@ export class PortfoliosComponent implements OnInit {
        console.log(result);
      });*/
   }
+
+  /* getSubcategoriesOfMainCat(mainCatId) {
+     this.dataService.getSubcategoriesOfMainCat(mainCatId).subscribe((res) => {
+       if (res['count'].length > 0) {
+
+       }
+     }, (err) => {
+
+     });
+   }*/
 }

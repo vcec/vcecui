@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {OwlCarousel} from 'ngx-owl-carousel';
 import {slideInRight} from '../../_animations/index';
 import {DataService} from '../../services/dataService.service';
+import {Config} from "../../services/config.service";
 
 
 @Component({
@@ -14,14 +15,13 @@ import {DataService} from '../../services/dataService.service';
 export class HomepageComponent implements OnInit {
   @ViewChild('owlInfo') owlInfo: OwlCarousel;
   @ViewChild('owlMobile') owlMobile: OwlCarousel;
-  backendUrl = 'http://10.120.88.222:3001/';
 
   products: any[] = [];
   testimonials: any[] = [];
   categories: any[] = [];
 
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private config: Config) {
 
   }
 

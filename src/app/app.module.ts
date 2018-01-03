@@ -15,6 +15,7 @@ import {LandingComponent} from './components/landing/landing.component';
 import {HomepageComponent} from './components/homepage/homepage.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DataService} from './services/dataService.service';
+import {Config} from './services/config.service';
 import {AdminComponent} from './admin/admin.component';
 import {GroupsComponent} from './admin/groups/groups.component';
 import {CategoriesComponent} from './admin/categories/categories.component';
@@ -55,7 +56,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     AnimateOnScrollModule.forRoot()
   ],
   providers: [HttpClientModule,
-    DataService,
+    DataService, Config,
     {
       provide: DROPZONE_CONFIG,
       useValue: DEFAULT_DROPZONE_CONFIG

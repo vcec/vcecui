@@ -1,91 +1,115 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {Config} from "./config.service";
 
 @Injectable()
 export class DataService {
 
-  static backendUrl = 'http://10.120.88.222:3001/';
+  constructor(private httpClient: HttpClient, private config: Config) {
 
-  constructor(private httpClient: HttpClient) {
-
-  }
-
-  /*
-
-    // create category(solution)
-    saveSolution(data) {
-      return this.httpClient.post(DataService.backendUrl + 'saveSolution', data);
-    }
-
-    // create group
-    saveGroup(data) {
-      return this.httpClient.post(DataService.backendUrl + 'saveGroup', data);
-    }
-
-
-
-    // get portfolio by title
-    getPortFolio(title) {
-      return this.httpClient.get(DataService.backendUrl + 'getPortfolio', {params: new HttpParams().set('title', title)});
-    }
-
-    // UPDATE POSRTFOLIO
-    updatePortFolio(data) {
-      return this.httpClient.post(DataService.backendUrl + 'updatePortfolio', data);
-    }
-
-    // get all portfolios
-    getAllPortFolios() {
-      return this.httpClient.get(DataService.backendUrl + 'portfolio');
-    }
-  */
-
-  // get all groups
-  getAllGroups() {
-    return this.httpClient.get(DataService.backendUrl + 'group');
-  }
-
-  // get all solutions/category
-  getAllCategories() {
-    return this.httpClient.get(DataService.backendUrl + 'category');
-  }
-
-  getAllTestimonials() {
-    return this.httpClient.get(DataService.backendUrl + 'testimonial');
   }
 
   // create portfolio
   savePortFolio(data) {
-    return this.httpClient.post(DataService.backendUrl + 'portfolio', data);
+    return this.httpClient.post(this.config.serverUrl + 'portfolio', data);
   }
 
-  /*
+  // update portfolio
+  updatePortFolio(id, data) {
+    return this.httpClient.patch(this.config.serverUrl + 'portfolio/' + id, data);
+  }
+
+  // get all portfolios
+  getAllPortFolios() {
+    return this.httpClient.get(this.config.serverUrl + 'portfolio');
+  }
+
+  // get portfolio by id
+  getPortFolio(id) {
+    return this.httpClient.get(this.config.serverUrl + 'portfolio/' + id);
+  }
+
+  // delete portfolio
+  deletePortFolio(id) {
+    return this.httpClient.get(this.config.serverUrl + 'portfolio/' + id);
+  }
 
 
-    // update solution
-    updateSolutions(data) {
-      return this.httpClient.post(DataService.backendUrl + 'updateSolution', data);
-    }
+  // get all groups
+  getAllGroups() {
+    return this.httpClient.get(this.config.serverUrl + 'group');
+  }
 
-    // update group
-    updateGroup(data) {
-      return this.httpClient.post(DataService.backendUrl + 'updateGroup', data);
-    }
+  // update group
+  updateGroup(id, data) {
+    return this.httpClient.patch(this.config.serverUrl + 'group/' + id, data);
+  }
 
-    // delete portfolio
-    deletePortfolio(data) {
-      return this.httpClient.post(DataService.backendUrl + 'deletePortfolio', data);
-    }
+  // create group
+  saveGroup(data) {
+    return this.httpClient.post(this.config.serverUrl + 'group', data);
+  }
 
-    // delete portfolio
-    deleteGroup(data) {
-      return this.httpClient.post(DataService.backendUrl + 'deleteGroup', data);
-    }
+  // delete group
+  deleteGroup(id) {
+    return this.httpClient.delete(this.config.serverUrl + 'group/' + id);
+  }
 
-    // delete portfolio
-    deleteCategory(data) {
-      return this.httpClient.post(DataService.backendUrl + 'deleteCategory', data);
-    }
-  */
+  //get group by id
+  getGroupById(id) {
+    return this.httpClient.get(this.config.serverUrl + 'group/' + id);
+  }
 
+
+  // get all solutions/category
+  getAllCategories() {
+    return this.httpClient.get(this.config.serverUrl + 'category');
+  }
+
+  getCategoryById(id) {
+    return this.httpClient.get(this.config.serverUrl + 'category/' + id);
+  }
+
+  // create category(solution)
+  saveSolution(data) {
+    return this.httpClient.post(this.config.serverUrl + 'category', data);
+  }
+
+  // update solution
+  updateSolutions(id, data) {
+    return this.httpClient.patch(this.config.serverUrl + 'category/' + id, data);
+  }
+
+  // delete solution
+  deleteSolution(id) {
+    return this.httpClient.delete(this.config.serverUrl + 'category/' + id);
+  }
+
+  getAllTestimonials() {
+    return this.httpClient.get(this.config.serverUrl + 'testimonial');
+  }
+
+  getTestimonialById(id) {
+    return this.httpClient.get(this.config.serverUrl + 'testimonial/' + id);
+  }
+
+  deleteTestimonial(id) {
+    return this.httpClient.delete(this.config.serverUrl + 'testimonial/' + id);
+  }
+
+  saveTestimonial(data) {
+    return this.httpClient.post(this.config.serverUrl + 'testimonial', data);
+  }
+
+  updateTestimonial(id, data) {
+    return this.httpClient.patch(this.config.serverUrl + 'testimonial/' + id, data);
+  }
+
+  getSubcategoriesOfMainCat(mainCatId) {
+    return this.httpClient.get(this.config.serverUrl + 'categories/mainCategory/' + mainCatId);
+  }
+
+  getAllSubcategories() {
+    return this.httpClient.get(this.config.serverUrl + 'subCategory');
+  }
 }

@@ -27,15 +27,23 @@
             </label>
           </form>
         </div>
-        <label>Select category for product</label>
-        <div class="controls-inline">
-          <form class="form-inline">
-            <label class="control checkbox" *ngFor="let solution of solutions">
-              <input type="checkbox" [(ngModel)]="solution.checked" name="soltn"
-                     (change)="solution.name=='Featured Solutions'? isFeaturedProduct =solution.checked:''">
-              <span class="control-indicator"></span>{{solution.name}}
-            </label>
-          </form>
+        <label>Select category and subCategory for product</label>
+        <div class="controls-stacked">
+          <label class="control checkbox" *ngFor="let solution of solutions">
+            <input type="checkbox" [(ngModel)]="solution.checked" name="soltn"
+                   (change)="solution.name=='Featured Solutions'? isFeaturedProduct =solution.checked:''">
+            <span class="control-indicator"></span>{{solution.name}}
+            <br>
+            <div class="controls-stacked">
+              <div *ngFor="let subSolution of subSolutions">
+                <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
+                  <input name="radio" type="radio" [value]="subSolution.name" ngModel>
+                  <span class="control-indicator"></span>
+                  {{subSolution.name}}
+                </label>
+              </div>
+            </div>
+          </label>
         </div>
         <div *ngIf="isFeaturedProduct" class="form-group">
           <label>Featured product Image</label>

@@ -1,10 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h3>List of product groups</h3>
+      <h3>List of product groups
+        <button class="btn btn-primary" (click)="addGroupState=true;editGroupState=false">Add New Group</button>
+      </h3>
       <div class="list-group" *ngFor="let group of groups">
-        <div class="card" style="width: 20rem;">
-          <img class="card-img-top" [src]="backendUrl+group.img" alt="Card image cap" style="width: 50%; height: 50%;">
+        <div class="card" style="width: 20rem;text-align: center">
+          <div style="position: absolute;right: 0;top: 5px;">
+            <button class="btn btn-sm btn-primary" (click)="editGroup(group)">Edit</button>
+            <button class="btn btn-sm btn-primary" (click)="deleteGroup(group)">Delete</button>
+          </div>
+          <img class="card-img-top" [src]="this.config.serverUrl+group.img" alt="Card image cap"
+               style="width: 25%; height: 25%;margin: auto">
           <div class="card-body">
             <p class="card-text">{{group.group_name}}</p>
           </div>
@@ -12,7 +19,61 @@
       </div>
     </div>
     <div class="col-md-6">
-
+      <div *ngIf="editGroupState">
+        <h3>Edit Group:</h3>
+        <form (ngSubmit)="onUpdate()" #f="ngForm">
+          <div class="form-group">
+            <label>Group Name</label>
+            <input type="text" class="form-control" [(ngModel)]="groupToEdit.group_name" name="groupToEdit.group_name">
+          </div>
+          <div class="form-group">
+            <label>Existing Image</label>
+            <img [src]="this.config.serverUrl + groupToEdit.img">
+          </div>
+          <div class="form-group">
+            <label>Replace Group Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                      (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+          </div>
+          <div class="form-group">
+            <label>Existing Hover Image</label>
+            <img [src]="this.config.serverUrl + groupToEdit.hoverImg">
+          </div>
+          <div class="form-group">
+            <label>Replace Group Hover Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onHoverImageUploadError($event)" (removedFile)="onRemoved($event)"
+                      (success)="onHoverImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Update Group</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="addGroupState">
+        <form (ngSubmit)="onCreate()" #f="ngForm">
+          <div class="form-group">
+            <label>Group Name</label>
+            <input type="text" class="form-control" [(ngModel)]="group_name" name="group_name">
+          </div>
+          <div class="form-group">
+            <label>Group Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                      (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+          </div>
+          <div class="form-group">
+            <label>Group Hover Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onHoverImageUploadError($event)" (removedFile)="onRemoved($event)"
+                      (success)="onHoverImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Add New Group</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
