@@ -4,7 +4,7 @@ import {Config} from "./config.service";
 
 @Injectable()
 export class DataService {
-
+  
   constructor(private httpClient: HttpClient, private config: Config) {
 
   }

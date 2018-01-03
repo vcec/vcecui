@@ -1,6 +1,9 @@
-<div class="home" [@slideInRight]>
+<div class="home" [@fadeInAnimation] id="home">
+  <a pageScroll pageScrollSpeed="3000" href="#home" class="return-to-top">
+    <i class="nc-icon-mini arrows-3_circle-simple-up"></i>
+  </a>
   <header>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-navbar':fixedNavbar}">
       <div class="container">
         <a class="navbar-brand" href="#">
           <div class="pb-logo">
@@ -127,7 +130,7 @@
   </header>
   <section id="products">
     <div class="container">
-      <div class="row hide-on-init" animateOnScroll animationName="animated fadeInUp">
+      <div>
         <div class="col-md-12">
           <h1>Products</h1>
           <p>
@@ -139,12 +142,11 @@
           </p>
         </div>
       </div>
-      <div class="row products hide-on-init" animateOnScroll animationName="animated fadeInUp">
-        <div class="col col-xs-12" *ngFor="let product of products">
-          <div class="productBox hoverScaleUp" (mouseover)="product.active = true" (mouseout)="product.active = false">
-            <div class="icon scaleUpItem">
-              <img
-                src="{{product.active?config.serverUrl + product.hoverImg:config.serverUrl + product.img}}"
+      <div class="row products" >
+        <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index">
+          <div class="hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
+              <img src="{{product.active?config.serverUrl + product.hoverImg:config.serverUrl + product.img}}"
                 alt="">
             </div>
             <h4>{{product.group_name}}</h4>
@@ -158,7 +160,7 @@
       <div class="row">
         <div class="col-md-12">
           <h1 class="hide-on-init" animateOnScroll animationName="animated fadeInUp">Solutions</h1>
-          <p>
+          <p class="hide-on-init animation-delay-1" animateOnScroll animationName="animated fadeInUp">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore
             magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -167,9 +169,9 @@
           </p>
         </div>
       </div>
-      <div class="row solns hide-on-init" animateOnScroll animationName="animated fadeInUp">
-        <div class="col-md-3" *ngFor="let cat of categories">
-          <div class="solBox hoverScaleUp">
+      <div class="row solns">
+        <div class="col-md-3" *ngFor="let cat of categories; let i = index">
+          <div class="solBox hoverScaleUp hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
             <div class="icon scaleUpItem">
               <img [src]="config.serverUrl + cat.img" alt="">
             </div>
@@ -222,34 +224,34 @@
           </p>
         </div>
       </div>
-      <div class="row features hide-on-init" animateOnScroll animationName="animated fadeInUp">
+      <div class="row features">
         <div class="col-md-3">
-          <div class="featureBox hoverScaleUp">
-            <div class="icon scaleUpItem">
+          <div class="featureBox hide-on-init animation-delay-1" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img src="assets/images/homepage/hackathon.png" alt="">
             </div>
             <h4>Hackathons</h4>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="featureBox hoverScaleUp">
-            <div class="icon scaleUpItem">
+          <div class="featureBox hide-on-init animation-delay-2" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img src="assets/images/homepage/leadgen.png" alt="">
             </div>
             <h4>Lead Generation</h4>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="featureBox hoverScaleUp">
-            <div class="icon scaleUpItem">
+          <div class="featureBox hide-on-init animation-delay-3" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img src="assets/images/homepage/webanalytics.png" alt="">
             </div>
             <h4>Webinar & Live Demos</h4>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="featureBox hoverScaleUp">
-            <div class="icon scaleUpItem">
+          <div class="featureBox hide-on-init animation-delay-4" animateOnScroll animationName="animated fadeInUp">
+            <div class="icon">
               <img src="assets/images/homepage/confwebinar.png" alt="">
             </div>
             <h4>Web Analytics to gather Audience Insights</h4>
@@ -258,7 +260,7 @@
       </div>
     </div>
   </section>
-  <section id="watchVideos" animateOnScroll animationName="animated bounceInDown">
+  <section id="watchVideos" class="hide-on-init" animateOnScroll animationName="animated fadeIn">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -274,11 +276,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="text-center">Testimonials</h1>
+          <h1 class="text-center hide-on-init"  animateOnScroll animationName="animated slideInUp">Testimonials</h1>
         </div>
       </div>
-      <div class="row hide-on-init" animateOnScroll animationName="animated slideInUp">
-        <div class="col-md-12 carousel-section">
+      <div class="row">
+        <div class="col-md-12 carousel-section hide-on-init animation-delay-2" animateOnScroll animationName="animated slideInUp">
           <owl-carousel #owlMobile [options]="{loop: true,
                       margin: 0,
                       dots: true,
@@ -295,10 +297,11 @@
               <div class="row justify-content-center">
 
                 <div class="col-md-3">
-                  <div class="icon">
-                    <i class="nc-icon-outline users_single-05" *ngIf="!testimonial.userInfo.userImg"
-                       style="font-size:70px;-webkit-border-radius: 150px;-moz-border-radius: 150px;border-radius: 150px;"></i>
-                    <img [src]="config.serverUrl + testimonial.userInfo.userImg" alt="" *ngIf="testimonial.userInfo.userImg">
+                  <div class="noUserImage" *ngIf="!testimonial.userInfo.userImg">
+                    <i class="nc-icon-mini users_single-01"></i>
+                  </div>
+                  <div class="icon" *ngIf="testimonial.userInfo.userImg" >
+                      <img [src]="backendUrl + testimonial.userInfo.userImg" alt="" />
                   </div>
                   <h4>{{testimonial.userInfo.userName}}</h4>
                   <p>{{testimonial.userInfo.userCompany}}</p>
@@ -311,8 +314,6 @@
                 </div>
               </div>
             </div>
-
-
           </owl-carousel>
         </div>
       </div>
@@ -325,7 +326,7 @@
           <div class="pb-icon">
             <img src="assets/images/pb_logo.png" alt="">
           </div>
-          <p>Copyright Pitney Bowes 2017, All rights reserved.</p>
+          <p>&copy; Copyright Pitney Bowes 2018, All rights reserved.</p>
         </div>
         <div class="col-md-4">
           <div class="platforms">
