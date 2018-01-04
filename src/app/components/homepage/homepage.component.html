@@ -300,8 +300,8 @@
                   <div class="noUserImage" *ngIf="!testimonial.userInfo.userImg">
                     <i class="nc-icon-mini users_single-01"></i>
                   </div>
-                  <div class="icon" *ngIf="testimonial.userInfo.userImg">
-                    <img [src]="backendUrl + testimonial.userInfo.userImg" alt=""/>
+                  <div class="icon" *ngIf="testimonial.userInfo.userImg" >
+                      <img [src]="config.serverUrl + testimonial.userInfo.userImg" alt="" />
                   </div>
                   <h4>{{testimonial.userInfo.userName}}</h4>
                   <p>{{testimonial.userInfo.userCompany}}</p>
