@@ -12,4 +12,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
+  getAnimationDelay(i,col){
+  	return {'animation-delay': ((i+1)%(col+1))*2/10 + 's'};
+  }
 }

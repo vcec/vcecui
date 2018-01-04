@@ -11,26 +11,205 @@
 	    </nav>
 	    <div class="container">
 	    	<div class="videoWrapper">
-	    		<!-- <iframe 
-	    						src="https://www.youtube.com/embed/BDhvHrqrdww?autoplay=1">
-	    						</iframe> -->
+	    		<iframe src="https://www.youtube.com/embed/BDhvHrqrdww?autoplay=1">
+	    		</iframe>
 	    	</div>
 	    	
 	    </div>
 	</header>
 	<section id="profileInfo">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="profile-title">
-						<h1>Location Intelligence APIs</h1>
-						<p>Transform location and business data into powerful insight</p>
+						<h1 class="hide-on-init" animateOnScroll animationName="animated fadeInUp">Location Intelligence APIs</h1>
+						<p class="hide-on-init" animateOnScroll animationName="animated fadeInUp">Transform location and business data into powerful insight</p>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					
 					<div>
-						
+						<div class="circle-icon">
+							<div class="icon">
+								<img src="assets/images/profile/li_prod_icon.png" alt="">
+							</div>
+						</div>
+					</div>
+
+					<div class="profileDesc hide-on-init" animateOnScroll animationName="animated fadeInUp">
+						<p>
+							The Location Intelligence APIs offer the simplest location-based information & communications services designed to enrich your applications, services, business processes and workflows.
+						</p>
+						<p>
+							The application areas include Mobile Marketing Automation, Automotive Automation, Mobile Workforce Automation & Home, Industrial and Infrastructure Automation.   
+						</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<section id="videos">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					
+						<div class="circle-icon">
+							<div class="icon">
+								<img src="assets/images/profile/videoIcon.png" alt="">
+							</div>
+						</div>
+
+						<h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Videos</h1>
+						
+						<div class="row videos-container">
+							<div class="col-md-4 hide-on-init" 
+								*ngFor="let k of [1,2,3];let i = index"
+								[ngStyle]="getAnimationDelay(i,3)"
+								animateOnScroll animationName="animated fadeInUp">
+								<div class="videoBox well-hover">
+									<img src="{{'assets/images/profile/videoCover'+ (i+1) + '.png'}}" alt="">
+									<div class="video-overlay">
+										<div class="icon">
+											<i class="nc-icon-mini arrows-1_triangle-right-17"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="liveDemos">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					
+						<div class="circle-icon">
+							<div class="icon">
+								<img src="assets/images/profile/demo.png" alt="">
+							</div>
+						</div>
+
+						<h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Live Demos</h1>
+						
+						<div class="row demos-container">
+							<div class="col-md-4 hide-on-init" 
+								*ngFor="let k of [1,2,3,4,5,6];let i = index" 
+								animateOnScroll animationName="animated fadeInUp"
+								[ngStyle]="getAnimationDelay(i,3)">
+								<div class="demo-card well-hover "
+									>
+									<div class="icon">
+										<img src="assets/images/profile/location_grayIcon.png" alt="">
+									</div>
+									<h2>Geo Search</h2>
+									<p>
+										Pitney Bowes Geo Search API helps to find user location based on latitude and longitude.
+									</p>
+								</div>
+							</div>
+							
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="caseStudies">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					
+						<div class="circle-icon">
+							<div class="icon">
+								<img src="assets/images/profile/pdfIcon.png" alt="">
+							</div>
+						</div>
+
+						<h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Case Studies & White Papers</h1>
+						
+						<div class="row cs-container">
+							<div class="col-md-6 hide-on-init" 
+								*ngFor="let k of [1,2,3,4];let i = index"
+								[ngStyle]="getAnimationDelay(i,2)"
+								animateOnScroll animationName="animated fadeInUp">
+								<div class="csBox well-hover">
+									<a href="" class="cs-link">
+										<div class="icon">
+											<img src="assets/images/profile/pdfIcon.png" alt="">
+										</div>
+										<label>Precision Matters Geodata APIs are Not All Equal</label>
+									</a>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="articles">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					
+						<div class="circle-icon">
+							<div class="icon">
+								<img src="assets/images/profile/pdfIcon.png" alt="">
+							</div>
+						</div>
+
+						<h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Articles & Others</h1>
+						
+						<div class="row articles">
+							<div class="col-md-4 hide-on-init" 
+								*ngFor="let k of [1,2,3];let i = index"
+								[ngStyle]="getAnimationDelay(i,3)"
+								animateOnScroll animationName="animated fadeInUp">
+								<div class="articleBox well-hover">
+									<div class="icon">
+										<img src="{{'assets/images/profile/article_img'+ (i+1) + '.png'}}" alt="">
+									</div>
+									<div class="article-body">
+										<h3>Precision Matters: Geodata APIs are Not All Equal</h3>
+
+										<p>
+											The application areas include Mobile Marketing Automation, Automotive Automation, Mobile Workforce Automation & Home, Industrial and Infrastructure Automation.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+	    <div class="container">
+	      <div class="row">
+	        <div class="col-md-8">
+	          <div class="pb-icon">
+	            <img src="assets/images/pb_logo.png" alt="">
+	          </div>
+	          <p>&copy; Copyright Pitney Bowes 2018, All rights reserved.</p>
+	        </div>
+	        <div class="col-md-4">
+	          <div class="platforms">
+	            <ul>
+	              <li><a href=""><img src="assets/images/1-FB.png" alt=""></a></li>
+	              <li><a href=""><img src="assets/images/2-gplus.png" alt=""></a></li>
+	              <li><a href=""><img src="assets/images/3-Twitter.png" alt=""></a></li>
+	              <li><a href=""><img src="assets/images/4-Linkdin.png" alt=""></a></li>
+	            </ul>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </footer>
 </div>
