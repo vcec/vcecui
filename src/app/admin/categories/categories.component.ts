@@ -64,7 +64,7 @@ export class CategoriesComponent implements OnInit {
     this.dataService.updateSolutions(this.catToEdit['_id'], data).subscribe((res) => {
       console.log(res);
       this.image = "";
-      this.catToEdit = "";
+      this.catToEdit = {};
       this.editCatState = false;
     }, (err) => {
       console.log(err);
@@ -86,7 +86,7 @@ export class CategoriesComponent implements OnInit {
     this.dataService.saveSolution(data).subscribe((res) => {
       console.log(res);
       this.image = "";
-      this.newCat = "";
+      this.newCat = {};
       this.addCatState = false;
     }, (err) => {
       console.log(err);

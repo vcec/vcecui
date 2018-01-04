@@ -2,5 +2,5 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class Config {
-  serverUrl = 'http://192.168.0.2:3001/';
+  serverUrl = 'http://10.120.89.47:3001/';
 }

@@ -24,7 +24,8 @@ import {TestimonialsComponent} from './admin/testimonials/testimonials.component
 import {DropzoneModule} from 'ngx-dropzone-wrapper';
 import {DROPZONE_CONFIG} from 'ngx-dropzone-wrapper';
 import {DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
-import { ProfileComponent } from './components/profile/profile.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {EditPortfolioComponent} from "./admin/portfolios/editPortfolio/editPortfolio.component";
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:3001/uploadImage',
@@ -43,7 +44,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     CategoriesComponent,
     PortfoliosComponent,
     TestimonialsComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditPortfolioComponent
   ],
   imports: [
     NgbModule.forRoot(),

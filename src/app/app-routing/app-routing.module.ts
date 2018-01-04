@@ -9,6 +9,7 @@ import {GroupsComponent} from '../admin/groups/groups.component';
 import {PortfoliosComponent} from '../admin/portfolios/portfolios.component';
 import {CategoriesComponent} from '../admin/categories/categories.component';
 import {TestimonialsComponent} from '../admin/testimonials/testimonials.component';
+import {EditPortfolioComponent} from "../admin/portfolios/editPortfolio/editPortfolio.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
     children: [
       {path: 'groups', component: GroupsComponent},
       {path: 'categories', component: CategoriesComponent},
+      {
+        path: 'portfolios/:id/edit',
+        component: EditPortfolioComponent
+      },
       {path: 'portfolios', component: PortfoliosComponent},
       {path: 'testimonials', component: TestimonialsComponent}
     ]

@@ -24,6 +24,8 @@ export class PortfoliosComponent implements OnInit {
   subSolutions: any[] = [];
   isFeaturedProduct = false;
   featuredProductImage = '';
+  portfolios: any[] = [];
+  selectedSubSolutions = [];
 
 
   constructor(private dataService: DataService, private router: Router, private config: Config) {
@@ -47,6 +49,17 @@ export class PortfoliosComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.dataService.getAllPortFolios().subscribe((response) => {
+      if (response['count'] > 0) {
+        this.portfolios = response['data'];
+      }
+    }, (error) => {
+      if (error.status === 0) {
+        console.log('*****Server is down*****');
+      }
+    });
+
     // get all product groups
     this.dataService.getAllGroups().subscribe((response) => {
       if (response['count'] > 0) {
@@ -75,7 +88,6 @@ export class PortfoliosComponent implements OnInit {
 
     this.dataService.getAllSubcategories().subscribe((response) => {
       if (response['count'] > 0) {
-        console.log('*****' + response['count']);
         this.subSolutions = response['data'].map((v, i) => {
           return {'name': v.name, 'checked': false, 'mainCategory': v.mainCategory};
         });
@@ -143,6 +155,19 @@ export class PortfoliosComponent implements OnInit {
     }
   }
 
+  changeSubCatSelection(name) {
+    if (this.selectedSubSolutions.indexOf(name) == -1) {
+      this.selectedSubSolutions.push(name);
+    }
+  }
+
+  checkIsItSelected(name) {
+    if (this.selectedSubSolutions.indexOf(name) == -1) {
+      return false;
+    }
+    return true;
+  }
+
   onSubmit() {
     let selectedSolutions = [];
     this.solutions.forEach((v, i) => {
@@ -157,6 +182,7 @@ export class PortfoliosComponent implements OnInit {
     let obj = $.extend(this.portfolioForm.value, {
       productGroups: selectedGroups,
       solutions: selectedSolutions,
+      subSolutions: this.selectedSubSolutions,
       isItFeaturedProduct: this.isFeaturedProduct,
       imgIfFeaturedProduct: this.featuredProductImage,
       images: this.images,
@@ -165,20 +191,19 @@ export class PortfoliosComponent implements OnInit {
       whitePapers: this.whitePapers
     });
 
-    console.log(obj);
-
-    /* this.dataService.savePortFolio(obj).subscribe((result) => {
-       console.log(result);
-     });*/
+    this.dataService.savePortFolio(obj).subscribe((result) => {
+      console.log(result);
+    });
   }
 
   /* getSubcategoriesOfMainCat(mainCatId) {
      this.dataService.getSubcategoriesOfMainCat(mainCatId).subscribe((res) => {
        if (res['count'].length > 0) {
-
+this.selectedSubSolutions = [];
        }
      }, (err) => {
 
      });
+
    }*/
 }

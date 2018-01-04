@@ -15,7 +15,6 @@ export class TestimonialsComponent implements OnInit {
   addTestimonialState = false;
   editTestimonialState = false;
   testimonialToEdit = {};
-  newTestimonial = {};
   testimonials: any[] = [];
   image: "";
 
@@ -58,8 +57,16 @@ export class TestimonialsComponent implements OnInit {
   }
 
   onUpdate() {
-    let data = $.extend(this.groupForm.value, {img: this.image});
-    this.dataService.updateTestimonial(this.testimonialToEdit['_id'], data).subscribe((res) => {
+    console.log(this.groupForm);
+    let testimonial = {
+      userInfo: {
+        userName: this.groupForm.controls['testimonialToEdit.userInfo.userName'].value,
+        userCompany: this.groupForm.controls['testimonialToEdit.userInfo.userCompany'].value,
+        userImg: this.image
+      },
+      mainText: this.groupForm.controls['testimonialToEdit.mainText'].value
+    }
+    this.dataService.updateTestimonial(this.testimonialToEdit['_id'], testimonial).subscribe((res) => {
       console.log(res);
       this.image = "";
       this.testimonialToEdit = "";
@@ -76,15 +83,22 @@ export class TestimonialsComponent implements OnInit {
     });
     this.testimonialToEdit = $.extend(this.testimonialToEdit[0]);
     this.image = this.testimonialToEdit['img'];
+    console.log(this.testimonialToEdit);
     this.editTestimonialState = true;
   }
 
   onCreate() {
-    let data = $.extend(this.groupForm.value, {img: this.image});
-    this.dataService.saveTestimonial(data).subscribe((res) => {
+    let testimonial = {
+      userInfo: {
+        userName: this.groupForm.value.userName,
+        userCompany: this.groupForm.value.userCompany,
+        userImg: this.image
+      },
+      mainText: this.groupForm.value.mainText
+    };
+    this.dataService.saveTestimonial(testimonial).subscribe((res) => {
       console.log(res);
       this.image = "";
-      this.newTestimonial = "";
       this.addTestimonialState = false;
     }, (err) => {
       console.log(err);
@@ -98,6 +112,4 @@ export class TestimonialsComponent implements OnInit {
       console.log(err);
     });
   }
-
-
 }

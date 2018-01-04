@@ -71,7 +71,7 @@ export class GroupsComponent implements OnInit {
       console.log(res);
       this.hoverImage = "";
       this.image = "";
-      this.groupToEdit = "";
+      this.groupToEdit = {};
       this.editGroupState = false;
     }, (err) => {
       console.log(err);
@@ -95,7 +95,7 @@ export class GroupsComponent implements OnInit {
       console.log(res);
       this.hoverImage = "";
       this.image = "";
-      this.newGroup = "";
+      this.newGroup = {};
       this.addGroupState = false;
     }, (err) => {
       console.log(err);
