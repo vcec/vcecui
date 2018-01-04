@@ -52,41 +52,38 @@
                     touchDrag: false,
                     center: true,
                     items: 1}"
-                              [carouselClasses]="['owl-theme', 'row', 'sliding']">
-                  <div class="item">
+                              [carouselClasses]="['owl-theme', 'row', 'sliding']"
+                              [items]="portfolios"
+                              *ngIf="portfolios.length > 0">
+                  <div class="item" *ngFor="let portfolio of portfolios">
                     <div class="product-info">
-                      <h1>EngageOne Video</h1>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris
-                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit
-                        esse cillum dolore eu fugiat nulla pariatur.</p>
-                      <a href="" class="white-btn">Learn More...</a>
+                      <h1>{{portfolio.title}}</h1>
+                      <p>{{portfolio.desc}}</p>
+                      <a [href]="portfolio.detailInfoUrlIfFeaturedProduct" target="_blank" class="white-btn">Learn More...</a>
                     </div>
                   </div>
-                  <div class="item">
-                    <div class="product-info">
-                      <h1>Location Intelligence for Marketing</h1>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris
-                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit
-                        esse cillum dolore eu fugiat nulla pariatur.</p>
-                      <a href="" class="white-btn">Learn More...</a>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="product-info">
-                      <h1>SMB Apps</h1>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                      <a href="" class="white-btn">Learn More...</a>
-                    </div>
-                  </div>
+                  <!--   <div class="item">
+                       <div class="product-info">
+                         <h1>Location Intelligence for Marketing</h1>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                           laboris
+                           nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                           velit
+                           esse cillum dolore eu fugiat nulla pariatur.</p>
+                         <a href="" class="white-btn">Learn More...</a>
+                       </div>
+                     </div>
+                     <div class="item">
+                       <div class="product-info">
+                         <h1>SMB Apps</h1>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                           laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                           voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                         <a href="" class="white-btn">Learn More...</a>
+                       </div>
+                     </div>-->
                 </owl-carousel>
               </div>
             </div>
@@ -142,7 +139,7 @@
           </p>
         </div>
       </div>
-      <div class="row products" >
+      <div class="row products">
         <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index">
           <div class="hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
             <div class="icon">
@@ -172,7 +169,8 @@
       </div>
       <div class="row solns">
         <div class="col-md-3" *ngFor="let cat of categories; let i = index">
-          <div class="solBox hoverScaleUp hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
+          <div class="solBox hoverScaleUp hide-on-init animation-delay-{{i+1}}" animateOnScroll
+               animationName="animated fadeInUp">
             <div class="icon scaleUpItem">
               <img [src]="config.serverUrl + cat.img" alt="">
             </div>
@@ -277,11 +275,12 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="text-center hide-on-init"  animateOnScroll animationName="animated slideInUp">Testimonials</h1>
+          <h1 class="text-center hide-on-init" animateOnScroll animationName="animated slideInUp">Testimonials</h1>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 carousel-section hide-on-init animation-delay-2" animateOnScroll animationName="animated slideInUp">
+        <div class="col-md-12 carousel-section hide-on-init animation-delay-2" animateOnScroll
+             animationName="animated slideInUp">
           <owl-carousel #owlMobile [options]="{loop: true,
                       margin: 0,
                       dots: true,
@@ -301,8 +300,8 @@
                   <div class="noUserImage" *ngIf="!testimonial.userInfo.userImg">
                     <i class="nc-icon-mini users_single-01"></i>
                   </div>
-                  <div class="icon" *ngIf="testimonial.userInfo.userImg" >
-                      <img [src]="backendUrl + testimonial.userInfo.userImg" alt="" />
+                  <div class="icon" *ngIf="testimonial.userInfo.userImg">
+                    <img [src]="backendUrl + testimonial.userInfo.userImg" alt=""/>
                   </div>
                   <h4>{{testimonial.userInfo.userName}}</h4>
                   <p>{{testimonial.userInfo.userCompany}}</p>

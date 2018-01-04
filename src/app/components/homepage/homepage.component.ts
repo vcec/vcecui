@@ -21,13 +21,24 @@ export class HomepageComponent implements OnInit {
   products: any[] = [];
   testimonials: any[] = [];
   categories: any[] = [];
-
+  portfolios: any[] = [];
 
   constructor(private dataService: DataService, private config: Config) {
 
   }
 
   ngOnInit() {
+
+    this.dataService.getAllPortFolios().subscribe((response) => {
+      if (response['count'] > 0) {
+        this.portfolios = response['data'];
+      }
+    }, (error) => {
+      if (error.status === 0) {
+        console.log('*****Server is down*****');
+      }
+    });
+
     // get all product groupsø
     this.dataService.getAllGroups().subscribe((response) => {
       if (response['count'] > 0) {
@@ -76,21 +87,21 @@ export class HomepageComponent implements OnInit {
   @HostListener("window:scroll", [])
   onWindowScroll() {
     let pageoffset = window.pageYOffset;
-    if(pageoffset>=150){
+    if (pageoffset >= 150) {
       $('.return-to-top').fadeIn(200);
 
-    }else{
+    } else {
       $('.return-to-top').fadeOut(200);
     }
 
-    if(pageoffset > this.lastScroll ||pageoffset==0){
+    if (pageoffset > this.lastScroll || pageoffset == 0) {
       this.fixedNavbar = false;
 
-    }else{
+    } else {
       this.fixedNavbar = true;
 
     }
 
-     this.lastScroll = pageoffset;
+    this.lastScroll = pageoffset;
   }
 }
