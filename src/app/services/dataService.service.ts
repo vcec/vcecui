@@ -4,7 +4,7 @@ import {Config} from "./config.service";
 
 @Injectable()
 export class DataService {
-  
+
   constructor(private httpClient: HttpClient, private config: Config) {
 
   }
@@ -31,7 +31,7 @@ export class DataService {
 
   // delete portfolio
   deletePortFolio(id) {
-    return this.httpClient.get(this.config.serverUrl + 'portfolio/' + id);
+    return this.httpClient.delete(this.config.serverUrl + 'portfolio/' + id);
   }
 
 

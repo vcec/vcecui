@@ -26,6 +26,9 @@ export class PortfoliosComponent implements OnInit {
   featuredProductImage = '';
   portfolios: any[] = [];
   selectedSubSolutions = [];
+  addPortfolioState = false;
+  editPortfolioState = false;
+  portfolioToEdit = {};
 
 
   constructor(private dataService: DataService, private router: Router, private config: Config) {
@@ -168,6 +171,69 @@ export class PortfoliosComponent implements OnInit {
     return true;
   }
 
+  editPortfolio(portfolio) {
+    this.addPortfolioState = false;
+    this.editPortfolioState = true;
+    this.portfolioToEdit = $.extend({}, portfolio);
+    var self = this;
+
+    self.productGroups.forEach(function (v, i) {
+      if (self.portfolioToEdit['productGroups'].indexOf(v.name) != -1) {
+        v.checked = true;
+      }
+    });
+
+    self.solutions.forEach(function (v, i) {
+      if (self.portfolioToEdit['solutions'].indexOf(v.name) != -1) {
+        v.checked = true;
+      }
+    });
+
+    self.subSolutions.forEach(function (v, i) {
+      if (self.portfolioToEdit['subSolutions'].indexOf(v.name) != -1) {
+        self.changeSubCatSelection(v.name);
+      }
+    });
+
+    this.isFeaturedProduct = this.portfolioToEdit['isItFeaturedProduct'];
+  }
+
+  removeImageFromBannerImages(image) {
+    var index = this.portfolioToEdit['images'].indexOf(image);
+    this.portfolioToEdit['images'].splice(index, 1);
+  }
+
+  removeVideoFromVideos(video) {
+    var index = this.portfolioToEdit['videos'].indexOf(video);
+    this.portfolioToEdit['videos'].splice(index, 1);
+  }
+
+  removeCaseStudyFromCaseStudies(name) {
+    var index = this.portfolioToEdit['caseStudies'].indexOf(name);
+    this.portfolioToEdit['caseStudies'].splice(index, 1);
+  }
+
+  removeWhitePaperFromList(name) {
+    var index = this.portfolioToEdit['whitePapers'].indexOf(name);
+    this.portfolioToEdit['whitePapers'].splice(index, 1);
+  }
+
+  removeFeaturedImage() {
+    this.portfolioToEdit['imgIfFeaturedProduct'] = "";
+  }
+
+  onUpdate() {
+
+  }
+
+  deletePortfolio(portfolio) {
+    this.dataService.deletePortFolio(portfolio._id).subscribe((res) => {
+      console.log(res);
+    }, (err) => {
+      console.log(err);
+    })
+  }
+
   onSubmit() {
     let selectedSolutions = [];
     this.solutions.forEach((v, i) => {
@@ -191,19 +257,9 @@ export class PortfoliosComponent implements OnInit {
       whitePapers: this.whitePapers
     });
 
+    //save portfolio data
     this.dataService.savePortFolio(obj).subscribe((result) => {
       console.log(result);
     });
   }
-
-  /* getSubcategoriesOfMainCat(mainCatId) {
-     this.dataService.getSubcategoriesOfMainCat(mainCatId).subscribe((res) => {
-       if (res['count'].length > 0) {
-this.selectedSubSolutions = [];
-       }
-     }, (err) => {
-
-     });
-
-   }*/
 }

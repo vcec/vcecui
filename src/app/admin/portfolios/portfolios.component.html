@@ -1,21 +1,28 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <h3>List Of Portfolios</h3>
+      <h3>List Of Portfolios
+        <button class="btn btn-primary" (click)="addPortfolioState=true;editPortfolioState=false">Add New Portfolio
+        </button>
+      </h3>
       <div class="list-group">
-        <a href="" class="list-group-item list-group-item-action flex-column align-items-start"
-           *ngFor="let portfolio of portfolios">
+        <div class="list-group-item list-group-item-action flex-column align-items-start"
+             *ngFor="let portfolio of portfolios">
+          <div class="">
+            <button class="btn btn-primary" (click)="editPortfolio(portfolio)">Edit</button>
+            <button class="btn btn-primary" (click)="deletePortfolio(portfolio)">Delete</button>
+          </div>
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{portfolio.title}}</h5>
             <small>{{portfolio.created_at | date}}</small>
           </div>
-<!--
-          <p class="mb-1">{{portfolio.desc}}</p>
--->
-        </a>
+          <!--
+                    <p class="mb-1">{{portfolio.desc}}</p>
+          -->
+        </div>
       </div>
     </div>
-    <div class="col-md-9" style="border: 1px solid black;padding: 10px;margin-top: 10px">
+    <div class="col-md-9" style="border: 1px solid black;padding: 10px;margin-top: 10px" *ngIf="addPortfolioState">
       <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div class="row">
           <div class="col-md-6">
@@ -89,6 +96,116 @@
                         (success)="onImageUploadSuccess($event)" id="bannerImage" name="bannerImage"></dropzone>          <!--
                     <input type="file" class="form-control" id="bannerImage" name="bannerImage" ngModel/>
           -->
+            </div>
+            <div class="form-group">
+              <label for="video">Videos</label>
+              <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
+                        (error)="onVideoUploadError($event)"
+                        (success)="onVideoUploadSuccess($event)" id="video" name="video"></dropzone>
+            </div>
+            <div class="form-group">
+              <label for="pdf">Case Studies</label>
+              <dropzone [config]="pdfUploadConfig" [message]="'Click or drag images here to upload'"
+                        (error)="onPdf1UploadError($event)"
+                        (success)="onPdf1UploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+            </div>
+            <div class="form-group">
+              <label for="pdf">White Papers</label>
+              <dropzone [config]="pdfUploadConfig" [message]="'Click or drag images here to upload'"
+                        (error)="onPdf2UploadError($event)"
+                        (success)="onPdf2UploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-9" style="border: 1px solid black;padding: 10px;margin-top: 10px" *ngIf="editPortfolioState">
+      <form (ngSubmit)="onUpdate()" #f="ngForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" name="title" [(ngModel)]="portfolioToEdit.title"/>
+            </div>
+            <div class="form-group">
+              <label for="subtitle">Subtitle</label>
+              <input type="text" class="form-control" name="subtitle" [(ngModel)]="portfolioToEdit.subtitle"/>
+            </div>
+            <label>Select Group for product</label>
+            <div class="controls-inline">
+              <form class="form-inline">
+                <label class="control checkbox" *ngFor="let group of productGroups">
+                  <input type="checkbox" (change)="group.checked = !group.checked"
+                         [checked]="group.checked">
+                  <span class="control-indicator"></span>{{group.name}}
+                </label>
+              </form>
+            </div>
+            <label>Select category and subCategory for product</label>
+            <div class="controls-stacked">
+              <label class="control checkbox" *ngFor="let solution of solutions">
+                <input type="checkbox" [checked]="solution.checked"
+                       (change)="solution.checked = !solution.checked && (solution.name=='Featured Solutions'? isFeaturedProduct =solution.checked:'')">
+                <span class="control-indicator"></span>{{solution.name}}
+                <br>
+                <div class="controls-stacked">
+                  <div *ngFor="let subSolution of subSolutions">
+                    <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
+                      <input [name]="solution.name" type="radio" [value]="subSolution.name"
+                             [checked]="checkIsItSelected(subSolution.name)"
+                             (change)="changeSubCatSelection(subSolution.name)">
+                      <span class="control-indicator"></span>
+                      {{subSolution.name}}
+                    </label>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div *ngIf="isFeaturedProduct" class="form-group">
+              <label>Featured product Image</label>
+              <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                        (error)="onFeatureImageUploadError($event)" (removedFile)="onRemoved($event)"
+                        (success)="onFeatureImageUploadSuccess($event)" id="featureImage"
+                        name="featureImage" *ngIf="!portfolioToEdit.imgIfFeaturedProduct"></dropzone>
+              <div style="position: relative;border: 1px solid black;" *ngIf="portfolioToEdit.imgIfFeaturedProduct">
+                <img [src]="portfolioToEdit.imgIfFeaturedProduct"/>
+                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                   (click)="removeFeaturedImage()">
+                </i>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="isFeaturedProduct">
+              <label for="detailInfoUrlIfFeaturedProduct">View More Url</label>
+              <input type="text" class="form-control" [(ngModel)]="portfolioToEdit.detailInfoUrlIfFeaturedProduct"
+                     name="portfolioToEdit.detailInfoUrlIfFeaturedProduct"/>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit
+              </button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="desc">Description</label>
+              <input type="text" class="form-control" name="portfolioToEdit.desc" [(ngModel)]="portfolioToEdit.desc"/>
+            </div>
+            <div class="form-group">
+              <label for="demoUrl">External Demo Url</label>
+              <input type="text" class="form-control" name="portfolioToEdit.demoUrl"
+                     [(ngModel)]="portfolioToEdit.demoUrl"/>
+            </div>
+            <div class="form-group">
+              <label for="bannerImage">Banner Image</label>
+              <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                        (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                        (success)="onImageUploadSuccess($event)" id="bannerImage" name="bannerImage"
+              ></dropzone>
+              <div style="position: relative;border: 1px solid black;" *ngFor="let image of portfolioToEdit.images">
+                <img [src]="image"/>
+                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                   (click)="removeImageFromBannerImages(image)">
+                </i>
+              </div>
             </div>
             <div class="form-group">
               <label for="video">Videos</label>
