@@ -153,7 +153,7 @@ export class PortfoliosComponent implements OnInit {
   }
 
   onPdf2UploadSuccess(event) {
-    if (event[1].status === 200) {
+    if (event[1].data.urlPath) {
       this.whitePapers.push(this.config.serverUrl + event[1].data.urlPath + event[0].name);
     }
   }
@@ -174,7 +174,9 @@ export class PortfoliosComponent implements OnInit {
   editPortfolio(portfolio) {
     this.addPortfolioState = false;
     this.editPortfolioState = true;
-    this.portfolioToEdit = $.extend({}, portfolio);
+
+    this.portfolioToEdit = Object.assign({}, portfolio);
+
     var self = this;
 
     self.productGroups.forEach(function (v, i) {
@@ -196,34 +198,77 @@ export class PortfoliosComponent implements OnInit {
     });
 
     this.isFeaturedProduct = this.portfolioToEdit['isItFeaturedProduct'];
+    this.images = this.portfolioToEdit['images'];
+    this.videos = this.portfolioToEdit['videos'];
+    this.caseStudies = this.portfolioToEdit['caseStudies'];
+    this.whitePapers = this.portfolioToEdit['whitePapers'];
+    this.featuredProductImage = this.portfolioToEdit['imgIfFeaturedProduct'];
+  }
+
+  cleanLocalVariables() {
+    this.isFeaturedProduct = false;
+    this.images = [];
+    this.videos = [];
+    this.caseStudies = [];
+    this.whitePapers = [];
+    this.featuredProductImage = "";
+
   }
 
   removeImageFromBannerImages(image) {
-    var index = this.portfolioToEdit['images'].indexOf(image);
-    this.portfolioToEdit['images'].splice(index, 1);
+    var index = this.images.indexOf(image);
+    this.images.splice(index, 1);
   }
 
   removeVideoFromVideos(video) {
-    var index = this.portfolioToEdit['videos'].indexOf(video);
-    this.portfolioToEdit['videos'].splice(index, 1);
+    var index = this.videos.indexOf(video);
+    this.videos.splice(index, 1);
   }
 
   removeCaseStudyFromCaseStudies(name) {
-    var index = this.portfolioToEdit['caseStudies'].indexOf(name);
-    this.portfolioToEdit['caseStudies'].splice(index, 1);
+    var index = this.caseStudies.indexOf(name);
+    this.caseStudies.splice(index, 1);
   }
 
   removeWhitePaperFromList(name) {
-    var index = this.portfolioToEdit['whitePapers'].indexOf(name);
-    this.portfolioToEdit['whitePapers'].splice(index, 1);
+    var index = this.whitePapers.indexOf(name);
+    this.whitePapers.splice(index, 1);
   }
 
   removeFeaturedImage() {
-    this.portfolioToEdit['imgIfFeaturedProduct'] = "";
+    this.featuredProductImage = "";
   }
 
   onUpdate() {
+    let selectedSolutions = [];
+    this.solutions.forEach((v, i) => {
+      v.checked ? selectedSolutions.push(v.name) : '';
+    });
 
+    let selectedGroups = [];
+    this.productGroups.forEach((v, i) => {
+      v.checked ? selectedGroups.push(v.name) : '';
+    });
+
+    let obj = $.extend(this.portfolioForm.value, {
+      productGroups: selectedGroups,
+      solutions: selectedSolutions,
+      subSolutions: this.selectedSubSolutions,
+      isItFeaturedProduct: this.isFeaturedProduct,
+      imgIfFeaturedProduct: this.featuredProductImage,
+      images: this.images,
+      videos: this.videos,
+      caseStudies: this.caseStudies,
+      whitePapers: this.whitePapers
+    });
+
+    //update portfolio
+    this.dataService.updatePortFolio(this.portfolioToEdit['_id'], obj).subscribe((result) => {
+      console.log(result);
+      this.cleanLocalVariables();
+    }, (err) => {
+
+    });
   }
 
   deletePortfolio(portfolio) {
@@ -260,6 +305,7 @@ export class PortfoliosComponent implements OnInit {
     //save portfolio data
     this.dataService.savePortFolio(obj).subscribe((result) => {
       console.log(result);
+      this.cleanLocalVariables();
     });
   }
 }

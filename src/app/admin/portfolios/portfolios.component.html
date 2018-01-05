@@ -93,9 +93,7 @@
               <label for="bannerImage">Banner Image</label>
               <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                         (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
-                        (success)="onImageUploadSuccess($event)" id="bannerImage" name="bannerImage"></dropzone>          <!--
-                    <input type="file" class="form-control" id="bannerImage" name="bannerImage" ngModel/>
-          -->
+                        (success)="onImageUploadSuccess($event)" id="bannerImage" name="bannerImage"></dropzone>
             </div>
             <div class="form-group">
               <label for="video">Videos</label>
@@ -119,7 +117,8 @@
         </div>
       </form>
     </div>
-    <div class="col-md-9" style="border: 1px solid black;padding: 10px;margin-top: 10px" *ngIf="editPortfolioState">
+    <div class="col-md-9 editPortfolio" style="border: 1px solid black;padding: 10px;margin-top: 10px"
+         *ngIf="editPortfolioState">
       <form (ngSubmit)="onUpdate()" #f="ngForm">
         <div class="row">
           <div class="col-md-6">
@@ -168,7 +167,7 @@
                         (success)="onFeatureImageUploadSuccess($event)" id="featureImage"
                         name="featureImage" *ngIf="!portfolioToEdit.imgIfFeaturedProduct"></dropzone>
               <div style="position: relative;border: 1px solid black;" *ngIf="portfolioToEdit.imgIfFeaturedProduct">
-                <img [src]="portfolioToEdit.imgIfFeaturedProduct"/>
+                <img [src]="portfolioToEdit.imgIfFeaturedProduct" width="50%" height="50%"/>
                 <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                    (click)="removeFeaturedImage()">
                 </i>
@@ -200,8 +199,9 @@
                         (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                         (success)="onImageUploadSuccess($event)" id="bannerImage" name="bannerImage"
               ></dropzone>
-              <div style="position: relative;border: 1px solid black;" *ngFor="let image of portfolioToEdit.images">
-                <img [src]="image"/>
+              <div style="position: relative;text-align: center;margin-top: 10px"
+                   *ngFor="let image of images">
+                <img [src]="image" width="50%" height="50%"/>
                 <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                    (click)="removeImageFromBannerImages(image)">
                 </i>
@@ -209,21 +209,42 @@
             </div>
             <div class="form-group">
               <label for="video">Videos</label>
-              <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
+              <dropzone [config]="videoUploadConfig" [message]="'Click or drag videos here to upload'"
                         (error)="onVideoUploadError($event)"
                         (success)="onVideoUploadSuccess($event)" id="video" name="video"></dropzone>
+              <div style="position: relative;text-align: center;margin-top: 10px"
+                   *ngFor="let video of videos">
+                <label>{{video}}</label>
+                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                   (click)="removeVideoFromVideos(video)">
+                </i>
+              </div>
             </div>
             <div class="form-group">
               <label for="pdf">Case Studies</label>
-              <dropzone [config]="pdfUploadConfig" [message]="'Click or drag images here to upload'"
+              <dropzone [config]="pdfUploadConfig" [message]="'Click or drag case studies here to upload'"
                         (error)="onPdf1UploadError($event)"
                         (success)="onPdf1UploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+              <div style="position: relative;text-align: center;margin-top: 10px"
+                   *ngFor="let caseStudy of caseStudies">
+                <label>{{caseStudy}}</label>
+                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                   (click)="removeCaseStudyFromCaseStudies(caseStudy)">
+                </i>
+              </div>
             </div>
             <div class="form-group">
               <label for="pdf">White Papers</label>
-              <dropzone [config]="pdfUploadConfig" [message]="'Click or drag images here to upload'"
+              <dropzone [config]="pdfUploadConfig" [message]="'Click or drag white papers here to upload'"
                         (error)="onPdf2UploadError($event)"
-                        (success)="onPdf2UploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                        (success)="onPdf2UploadSuccess($event)" id="pdf2" name="pdf2"></dropzone>
+              <div style="position: relative;text-align: center;margin-top: 10px"
+                   *ngFor="let whitePaper of whitePapers">
+                <label>{{whitePaper}}</label>
+                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                   (click)="removeWhitePaperFromList(whitePaper)">
+                </i>
+              </div>
             </div>
           </div>
         </div>
