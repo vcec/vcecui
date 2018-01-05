@@ -19,12 +19,8 @@ a.return-to-top{
 }
 a.return-to-top:hover {
     color: #fff;
-    background: #9b9b9b;
+    background: rgba(155,155,155,0.6);
     border-color: #9b9b9b;
-}
-a.return-to-top:hover i{
-    animation: slideUpArrow 1s infinite;
-    
 }
 .navbar{
 	transition: 1s all;
@@ -141,6 +137,11 @@ section#products{
     		padding-bottom: 15px;
     		transition: 0.5s all;
     		border-radius:4px;
+    		width: 20%;
+    		flex-shrink: 0;
+			flex-grow: 0;
+			flex-basis:auto;
+			margin-top:20px;
 			.icon{
 				width:80px;
 				margin: 15px auto;
@@ -192,6 +193,7 @@ section#solutions{
 	}
 	.solBox{
 		text-align:center;
+	    margin: 25px 0;
 		.icon{
 		    width: 100px;
     		margin: 0 auto;
@@ -224,6 +226,7 @@ section#upcomingFeatures{
 		margin-top:50px;
 	}
 	.featureBox{
+		margin-bottom:40px;
 		.icon{
 			width: 100px;
     		margin: 0 auto;
@@ -260,11 +263,19 @@ section#testimonials{
 	}
 	
 	.testimonial-card{
-		.icon{
+		.userImage{
 			width:150px;
+			height:150px;
+			border-radius:100%;
+			overflow:hidden;
 			margin: 0 auto;
+		}
+		.icon{
+			width:100%;
+				height:100%;
 			img{
 				width:100%;
+				height:100%;
 			}
 		}
 		h4{
@@ -324,19 +335,4 @@ footer{
     		}
     	}
 	}
-}
-
-@keyframes slideUpArrow{
-  0% {
-    transform: translateY(5px);
-    opacity:0;
-  }
-  50% {
-    transform: translateY(-5px);
-    opacity:1;
-  }
-  100% {
-    transform: translateY(5px);
-    opacity:0;
-  }
 }

@@ -11,7 +11,7 @@
 	    </nav>
 	    <div class="container">
 	    	<div class="videoWrapper">
-	    		<iframe src="https://www.youtube.com/embed/BDhvHrqrdww?autoplay=1">
+	    		<iframe src="https://www.youtube.com/embed/gytTj_2TAx8?autoplay=0">
 	    		</iframe>
 	    	</div>
 	    	
@@ -70,7 +70,7 @@
 								*ngFor="let k of [1,2,3];let i = index"
 								[ngStyle]="getAnimationDelay(i,3)"
 								animateOnScroll animationName="animated fadeInUp">
-								<div class="videoBox well-hover">
+								<div class="videoBox well-hover" (click)="openVideo(videoModal)">
 									<img src="{{'assets/images/profile/videoCover'+ (i+1) + '.png'}}" alt="">
 									<div class="video-overlay">
 										<div class="icon">
@@ -213,3 +213,19 @@
 	    </div>
 	  </footer>
 </div>
+
+<!-- Modal templates -->
+
+<ng-template #videoModal let-c="close" let-d="dismiss">
+	<div class="container">
+		<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+	      <span aria-hidden="true">&times;</span>
+	    </button>
+		<div class="modal-body">
+	    	<div class="videoWrapper">
+	    		<iframe src="https://www.youtube.com/embed/TnD74iHNlUI?autoplay=1">
+	    		</iframe>
+	    	</div>
+	  	</div>
+  	</div>
+</ng-template>

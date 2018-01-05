@@ -2,7 +2,7 @@ header{
 	background:#000;
     min-height:500px;
     position:relative;
-    padding-bottom:200px;
+    padding-bottom:150px;
     z-index:0;
 	.pb-logo{
 		width:180px;
@@ -27,6 +27,7 @@ header{
     	border: 1px solid rgba(256,256,256,0.2);
 	}
 }
+
 section#profileInfo{
 	
 	.profile-title{
@@ -48,7 +49,6 @@ section#profileInfo{
 	    text-align: center;
 	    color: #0072b8;
 	    font-size: 18px;
-	    font-weight: 600;
 	}
 }
 .circle-icon {
@@ -263,4 +263,52 @@ footer{
     		}
     	}
 	}
+}
+.modal-fullscreen{
+	display:flex !important;
+	justify-content:center;
+	align-items:center;
+	.modal-dialog{
+		max-width: 100%;
+	    background: transparent;
+	    width:100%;
+
+	    .modal-content{
+	    	background: transparent;
+	    	border: 0;
+	    	padding: 0;
+	    	.container{
+	    		position: relative;
+	    		padding:0;
+	    		.close{
+    			    position: absolute;
+				    right: -25px;
+				    top: -25px;
+				    color: #fff;
+				    opacity: 1;
+				    font-size: 25px;
+				    cursor:pointer;
+	    		}
+	    		.videoWrapper {
+					position: relative;
+				    padding-bottom: 56.25%;
+				    padding-top: 0px;
+				    height: 0;
+				 }
+				.videoWrapper iframe {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					outline: none;
+			    	border: 1px solid rgba(256,256,256,0.2);
+				}
+	    	}
+	    }
+	}
+}
+.modal-backdrop.show{
+    background: rgba(0,0,0,0.9) !important;
+    opacity: 1 !important;
 }
