@@ -11,7 +11,7 @@
 	    </nav>
 	    <div class="container">
 	    	<div class="videoWrapper">
-	    		<iframe src="https://www.youtube.com/embed/gytTj_2TAx8?autoplay=0">
+	    		<iframe src="https://www.youtube.com/embed/gytTj_2TAx8?autoplay=1">
 	    		</iframe>
 	    	</div>
 	    	
@@ -67,11 +67,11 @@
 						
 						<div class="row videos-container">
 							<div class="col-md-4 hide-on-init" 
-								*ngFor="let k of [1,2,3];let i = index"
+								*ngFor="let video of videos;let i = index"
 								[ngStyle]="getAnimationDelay(i,3)"
 								animateOnScroll animationName="animated fadeInUp">
-								<div class="videoBox well-hover" (click)="openVideo(videoModal)">
-									<img src="{{'assets/images/profile/videoCover'+ (i+1) + '.png'}}" alt="">
+								<div class="videoBox well-hover" (click)="openVideo(videoModal,video.videoUrl)">
+									<img src="{{'assets/images/profile/'+ video.cover}}" alt="">
 									<div class="video-overlay">
 										<div class="icon">
 											<i class="nc-icon-mini arrows-1_triangle-right-17"></i>
@@ -223,7 +223,7 @@
 	    </button>
 		<div class="modal-body">
 	    	<div class="videoWrapper">
-	    		<iframe src="https://www.youtube.com/embed/TnD74iHNlUI?autoplay=1">
+	    		<iframe [src]="playVideo">
 	    		</iframe>
 	    	</div>
 	  	</div>
