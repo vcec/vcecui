@@ -7,9 +7,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {OwlModule} from 'ngx-owl-carousel';
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AnimateOnScrollModule} from 'ng2-animate-on-scroll';
+import {BootstrapModalModule} from 'ng2-bootstrap-modal';
 
 import {LandingComponent} from './components/landing/landing.component';
 import {HomepageComponent} from './components/homepage/homepage.component';
@@ -26,6 +28,11 @@ import {DROPZONE_CONFIG} from 'ngx-dropzone-wrapper';
 import {DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
 import {ProfileComponent} from './components/profile/profile.component';
 import {EditPortfolioComponent} from "./admin/portfolios/editPortfolio/editPortfolio.component";
+import {ConfirmComponent} from "./admin/confirmComponent/confirm.component";
+import { CreateOrUpdateCategoryComponent } from './admin/categories/create-or-update-category/create-or-update-category.component';
+import { CreateOrUpdateGroupComponent } from './admin/groups/create-or-update-group/create-or-update-group.component';
+import { CreateOrUpdatTestimonialComponent } from './admin/testimonials/create-or-updat-testimonial/create-or-updat-testimonial.component';
+import { CreateOrUpdatPortfolioComponent } from './admin/portfolios/create-or-updat-portfolio/create-or-updat-portfolio.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:3001/uploadImage',
@@ -45,7 +52,12 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     PortfoliosComponent,
     TestimonialsComponent,
     ProfileComponent,
-    EditPortfolioComponent
+    EditPortfolioComponent,
+    ConfirmComponent,
+    CreateOrUpdateCategoryComponent,
+    CreateOrUpdateGroupComponent,
+    CreateOrUpdatTestimonialComponent,
+    CreateOrUpdatPortfolioComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -57,7 +69,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     HttpClientModule,
     BrowserAnimationsModule,
     DropzoneModule,
-    AnimateOnScrollModule.forRoot()
+    AnimateOnScrollModule.forRoot(),
+    ToastModule.forRoot(),
+    BootstrapModalModule.forRoot({container: document.body})
   ],
   providers: [HttpClientModule,
     DataService, Config,
@@ -65,6 +79,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
       provide: DROPZONE_CONFIG,
       useValue: DEFAULT_DROPZONE_CONFIG
     }],
+  entryComponents: [
+    ConfirmComponent
+  ],
   bootstrap: [AppComponent]
 })
 
