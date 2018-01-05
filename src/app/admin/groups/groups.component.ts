@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../../services/dataService.service';
 import {NgForm} from "@angular/forms";
 import {Config} from "../../services/config.service";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 declare var $: any;
 

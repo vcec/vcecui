@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-6">
       <h3>List of product groups
@@ -76,4 +76,49 @@
       </div>
     </div>
   </div>
+</div> -->
+<div class="container">
+<h1 class="mainHeading">Product Groups</h1>
+<div class="row">
+    <div class="col-md-12">
+<button class="btn btn-primary float-right" type="submit">Add New Group</button>
+</div></div>
+
+
+<div class="row">
+  <div class="col-md-12">
+
+  <div class="card card-table">
+    
+    <table class="table table-open">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product Name</th>
+          <th>Product Icon</th>
+          <th>Sort Order</th>
+          <th>Date added</th>
+          <th>Added by</th>
+          <th></th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let group of groups">
+          <td>1</td>
+          <td>{{group.group_name}}</td>
+          <td> <img  [src]="this.config.serverUrl+group.img" 
+            style="width: 25%; height: 25%;"></td>
+          <td>1</td>
+          <td>21/12/2017</td>
+          <td>Admin</td>
+          <td> <button class="btn btn-sm btn-primary" (click)="editGroup(group)">Edit</button>
+            <button class="btn btn-sm btn-primary" (click)="deleteGroup(group)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+</div>
+</div>
+
