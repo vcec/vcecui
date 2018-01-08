@@ -17,15 +17,15 @@ header{
 	    padding-top: 0px;
 	    height: 0;
 	    margin-top: 50px;
-	}
-	.videoWrapper iframe {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		outline: none;
-    	border: 1px solid rgba(256,256,256,0.2);
+	    video,iframe{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			outline: none;
+	    	border: 1px solid rgba(256,256,256,0.2);
+		}
 	}
 	.navbar-expand-lg .navbar-nav .nav-link {
 	    padding: 5px 15px;
@@ -310,16 +310,27 @@ footer{
 				    padding-bottom: 56.25%;
 				    padding-top: 0px;
 				    height: 0;
+				    #myVideo{
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						outline: none;
+				    	border: 1px solid rgba(256,256,256,0.2);
+					}
+					iframe {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						outline: none;
+				    	border: 1px solid rgba(256,256,256,0.2);
+					}
 				 }
-				.videoWrapper iframe {
-					position: absolute;
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: 100%;
-					outline: none;
-			    	border: 1px solid rgba(256,256,256,0.2);
-				}
+				
+
 	    	}
 	    }
 	}
@@ -328,12 +339,3 @@ footer{
     background: rgba(0,0,0,0.9) !important;
     opacity: 1 !important;
 }
-div.ytp-gradient-bottom
-  {
-    opacity: 0 !important;
-  }
-
-div.ytp-gradient-top
-  {
-      opacity: 0 !important;
-  }
