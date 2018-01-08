@@ -34,6 +34,8 @@ import { CreateOrUpdateGroupComponent } from './admin/groups/create-or-update-gr
 import { CreateOrUpdatTestimonialComponent } from './admin/testimonials/create-or-updat-testimonial/create-or-updat-testimonial.component';
 import { CreateOrUpdatPortfolioComponent } from './admin/portfolios/create-or-updat-portfolio/create-or-updat-portfolio.component';
 import { CategoryComponent } from './components/category/category.component';
+import { SubCategoryComponent } from './admin/sub-category/sub-category.component';
+import { CreateOrUpdateSubCatComponent } from './admin/sub-category/create-or-update-sub-cat/create-or-update-sub-cat.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:3001/uploadImage',
@@ -59,7 +61,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     CreateOrUpdateGroupComponent,
     CreateOrUpdatTestimonialComponent,
     CreateOrUpdatPortfolioComponent,
-     CategoryComponent
+     CategoryComponent,
+     SubCategoryComponent,
+     CreateOrUpdateSubCatComponent
   ],
   imports: [
     NgbModule.forRoot(),

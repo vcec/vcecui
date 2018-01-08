@@ -15,6 +15,8 @@ import {CreateOrUpdatPortfolioComponent} from "../admin/portfolios/create-or-upd
 import {CreateOrUpdateCategoryComponent} from "../admin/categories/create-or-update-category/create-or-update-category.component";
 import {CreateOrUpdateGroupComponent} from "../admin/groups/create-or-update-group/create-or-update-group.component";
 import {CreateOrUpdatTestimonialComponent} from "../admin/testimonials/create-or-updat-testimonial/create-or-updat-testimonial.component";
+import {SubCategoryComponent} from "../admin/sub-category/sub-category.component";
+import {CreateOrUpdateSubCatComponent} from "../admin/sub-category/create-or-update-sub-cat/create-or-update-sub-cat.component";
 
 const routes: Routes = [
   {
@@ -49,6 +51,9 @@ const routes: Routes = [
       {path: 'testimonials/create', component: CreateOrUpdatTestimonialComponent},
       {path: 'testimonials/update/:id', component: CreateOrUpdatTestimonialComponent},
       {path: 'testimonials', component: TestimonialsComponent},
+      {path: 'subCategory', component: SubCategoryComponent},
+      {path: 'subCategory/create', component: CreateOrUpdateSubCatComponent},
+      {path: 'subCategory/update/:id', component: CreateOrUpdateSubCatComponent},
     ]
   }
 ];

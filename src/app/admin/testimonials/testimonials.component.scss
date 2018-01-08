@@ -1,0 +1,14 @@
+.noUserImage {
+  width: 130px;
+  background: #e1e1e1;
+  margin: 0 auto;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 100%;
+  i {
+    font-size: 80px;
+  }
+}

@@ -1,7 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {DataService} from "../../services/dataService.service";
 import {NgForm} from "@angular/forms";
 import {Config} from "../../services/config.service";
+import {Router, ActivatedRoute, Route} from "@angular/router";
+import {DialogService} from "ng2-bootstrap-modal";
+import {ToastsManager} from "ng2-toastr";
+import {ConfirmComponent} from "../confirmComponent/confirm.component";
 
 declare var $: any;
 
@@ -14,92 +18,56 @@ declare var $: any;
 export class CategoriesComponent implements OnInit {
   categories: any[] = [];
   @ViewChild('f') groupForm: NgForm;
-  addCatState = false;
-  editCatState = false;
-  catToEdit = {};
-  newCat = {};
-  image: "";
 
 
-  imageUploadConfig = {
-    url: this.config.serverUrl + 'upload/uploadImage',
-    acceptedFiles: 'image/*'
-  };
-
-  constructor(private dataService: DataService, private config: Config) {
-
+  constructor(private dataService: DataService, private config: Config, private router: Router,
+              private route: ActivatedRoute, public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService) {
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
+    this.getAllCategories();
+  }
+
+  getAllCategories() {
     this.dataService.getAllCategories().subscribe((res) => {
       if (res['count'] > 0) {
         this.categories = res['data'];
-        console.log(this.categories);
       }
     }, (err) => {
       if (err.status === 0) {
-        console.log('*****Server is down*****');
+        this.toastr.error("Server is Down.")
       } else {
-        console.log(err);
+        this.toastr.error(err.message);
       }
     })
   }
 
-  onRemoved(event) {
-    console.log(event);
+  createCat() {
+    this.router.navigate(['create'], {relativeTo: this.route});
   }
 
-  onImageUploadSuccess(event) {
-    if (event[1].data.urlPath) {
-      this.image = event[1].data.urlPath;
-    }
+  editCat(category) {
+    this.router.navigate(['update/', category._id], {relativeTo: this.route});
   }
 
-  onImageUploadError(event) {
-    console.log(event);
-  }
-
-  onUpdate() {
-    let data = $.extend(this.groupForm.value, {img: this.image});
-    this.dataService.updateSolutions(this.catToEdit['_id'], data).subscribe((res) => {
-      console.log(res);
-      this.image = "";
-      this.catToEdit = {};
-      this.editCatState = false;
-    }, (err) => {
-      console.log(err);
+  deleteCat(category) {
+    let disposable = this.dialogService.addDialog(ConfirmComponent, {
+      title: '',
+      message: 'Are you sure to delete this category?'
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        this.dataService.deleteSolution(category['_id']).subscribe((res) => {
+          this.getAllCategories();
+          this.toastr.success("Category deleted successfully.", null, {toastLife: 3000});
+        }, (err) => {
+          if (err.status === 0) {
+            this.toastr.error("Server is Down.")
+          } else {
+            this.toastr.error(err.message);
+          }
+        });
+      }
     });
   }
-
-  editCat(group) {
-    this.addCatState = false;
-    this.catToEdit = this.categories.filter(function (v, i) {
-      return v.categoryId === group.categoryId ? true : false;
-    });
-    this.catToEdit = $.extend(this.catToEdit[0]);
-    this.image = this.catToEdit['img'];
-    this.editCatState = true;
-  }
-
-  onCreate() {
-    let data = $.extend(this.groupForm.value, {img: this.image});
-    this.dataService.saveSolution(data).subscribe((res) => {
-      console.log(res);
-      this.image = "";
-      this.newCat = {};
-      this.addCatState = false;
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  deleteCat(group) {
-    console.log(group['_id']);
-    this.dataService.deleteSolution(group['_id']).subscribe((res) => {
-      console.log(res);
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
 }
