@@ -1,9 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {Config} from "../../services/config.service";
 import {DataService} from "../../services/dataService.service";
-
-declare var $: any;
+import {DialogService} from "ng2-bootstrap-modal";
+import {ToastsManager} from "ng2-toastr";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ConfirmComponent} from "../confirmComponent/confirm.component";
 
 @Component({
   selector: 'app-testimonials',
@@ -11,23 +13,18 @@ declare var $: any;
   styleUrls: ['./testimonials.component.scss']
 })
 export class TestimonialsComponent implements OnInit {
-  @ViewChild('f') groupForm: NgForm;
-  addTestimonialState = false;
-  editTestimonialState = false;
-  testimonialToEdit = {};
   testimonials: any[] = [];
-  image: "";
 
-  imageUploadConfig = {
-    url: this.config.serverUrl + 'upload/uploadImage',
-    acceptedFiles: 'image/*'
-  };
-
-  constructor(private dataService: DataService, private config: Config) {
+  constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
+              public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService) {
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
-
   ngOnInit() {
+    this.getAllTestimonials();
+  }
+
+  getAllTestimonials() {
     this.dataService.getAllTestimonials().subscribe((response) => {
       if (response['count'] > 0) {
         this.testimonials = response['data'];
@@ -39,77 +36,31 @@ export class TestimonialsComponent implements OnInit {
     });
   }
 
-  onHoverImageUploadError(event) {
+  addTestimonial() {
+    this.router.navigate(['create'], {relativeTo: this.route})
   }
 
-  onImageUploadError(event) {
-    console.log(event);
+  editTestimonial(testimonial) {
+    this.router.navigate(['update/', testimonial._id], {relativeTo: this.route})
   }
 
-  onRemoved(event) {
-    console.log(event);
-  }
-
-  onImageUploadSuccess(event) {
-    if (event[1].data.urlPath) {
-      this.image = event[1].data.urlPath;
-    }
-  }
-
-  onUpdate() {
-    console.log(this.groupForm);
-    let testimonial = {
-      userInfo: {
-        userName: this.groupForm.controls['testimonialToEdit.userInfo.userName'].value,
-        userCompany: this.groupForm.controls['testimonialToEdit.userInfo.userCompany'].value,
-        userImg: this.image
-      },
-      mainText: this.groupForm.controls['testimonialToEdit.mainText'].value
-    }
-    this.dataService.updateTestimonial(this.testimonialToEdit['_id'], testimonial).subscribe((res) => {
-      console.log(res);
-      this.image = "";
-      this.testimonialToEdit = "";
-      this.editTestimonialState = false;
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  editTestimonial(group) {
-    this.addTestimonialState = false;
-    this.testimonialToEdit = this.testimonials.filter(function (v, i) {
-      return v.testimonialId === group.testimonialId ? true : false;
-    });
-    this.testimonialToEdit = $.extend(this.testimonialToEdit[0]);
-    this.image = this.testimonialToEdit['img'];
-    console.log(this.testimonialToEdit);
-    this.editTestimonialState = true;
-  }
-
-  onCreate() {
-    let testimonial = {
-      userInfo: {
-        userName: this.groupForm.value.userName,
-        userCompany: this.groupForm.value.userCompany,
-        userImg: this.image
-      },
-      mainText: this.groupForm.value.mainText
-    };
-    this.dataService.saveTestimonial(testimonial).subscribe((res) => {
-      console.log(res);
-      this.image = "";
-      this.addTestimonialState = false;
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  deleteTestimonial(group) {
-    this.dataService.deleteTestimonial(group['_id']).subscribe((res) => {
-      console.log(res);
-    }, (err) => {
-      console.log(err);
+  deleteTestimonial(testimonial) {
+    let disposable = this.dialogService.addDialog(ConfirmComponent, {
+      title: '',
+      message: 'Are you sure to delete this testimonial?'
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        this.dataService.deleteTestimonial(testimonial['_id']).subscribe((res) => {
+          this.toastr.success("Testimonial deleted successfully.", null, {toastLife: 3000});
+          this.getAllTestimonials();
+        }, (err) => {
+          if (err.status === 0) {
+            this.toastr.error("Server is Down.")
+          } else {
+            this.toastr.error(err.message);
+          }
+        });
+      }
     });
   }
 }

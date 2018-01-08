@@ -1,90 +1,55 @@
 <div class="container">
+  <h1 class="mainHeading">Testimonials</h1>
   <div class="row">
-    <div class="col-md-6">
-      <h3>List of Testimonials
-        <button class="btn btn-primary" (click)="addTestimonialState=true;editTestimonialState=false">Add New
-          Testimonial
-        </button>
-      </h3>
-      <div class="list-group" *ngFor="let testimonial of testimonials">
-        <div class="card" style="width: 20rem;text-align: center">
-          <div style="position: absolute;right: 0;top: 5px;">
-            <button class="btn btn-sm btn-primary" (click)="editTestimonial(testimonial)">Edit</button>
-            <button class="btn btn-sm btn-primary" (click)="deleteTestimonial(testimonial)">Delete</button>
-          </div>
-          <img class="card-img-top"
-               [src]="testimonial.userInfo ? this.config.serverUrl+testimonial.userInfo.userImg: ''"
-               alt="Card image cap"
-               style="width: 25%; height: 25%;margin: auto">
-          <div class="card-body">
-            <p class="card-header">{{testimonial.userInfo.userName}}</p>
-            <p class="card-text">{{testimonial.mainText}}</p>
-          </div>
-        </div>
-      </div>
+    <div class="col-md-12">
+      <button class="btn btn-primary float-right" type="submit" (click)="addTestimonial()">Add New Testimonial</button>
     </div>
-    <div class="col-md-6">
-      <div *ngIf="editTestimonialState">
-        <h3>Edit Testimonial:</h3>
-        <form (ngSubmit)="onUpdate()" #f="ngForm">
-          <div class="form-group">
-            <label>User Name</label>
-            <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.userInfo.userName"
-                   name="testimonialToEdit.userInfo.userName">
-          </div>
-          <div class="form-group">
-            <label>User Company Name</label>
-            <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.userInfo.userCompany"
-                   name="testimonialToEdit.userInfo.userCompany">
-          </div>
-          <div class="form-group">
-            <label>User Image</label>
-            <img [src]="testimonialToEdit.userInfo ? this.config.serverUrl + testimonialToEdit.userInfo.userImg: ''">
-          </div>
-          <div class="form-group">
-            <label>Replace Group Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                      (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
-                      (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
-          </div>
-          <div class="form-group">
-            <label>Main Text</label>
-            <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.mainText"
-                   name="testimonialToEdit.mainText">
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary" type="submit">Update Testimonial</button>
-          </div>
-        </form>
-      </div>
-      <div *ngIf="addTestimonialState">
-        <form (ngSubmit)="onCreate()" #f="ngForm">
-          <div class="form-group">
-            <label>User Name</label>
-            <input type="text" class="form-control"
-                   name="userName" ngModel>
-          </div>
-          <div class="form-group">
-            <label>User Company Name</label>
-            <input type="text" class="form-control" ngModel
-                   name="userCompany">
-          </div>
-          <div class="form-group">
-            <label>User Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                      (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
-                      (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
-          </div>
-          <div class="form-group">
-            <label>Main Text</label>
-            <input type="text" class="form-control" ngModel
-                   name="mainText">
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary" type="submit">Add New Testimonial</button>
-          </div>
-        </form>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-table">
+        <table class="table table-open">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>User Image</th>
+            <th>User Name</th>
+            <th>User Company</th>
+            <th>Content</th>
+            <th>Date added</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let testimonial of testimonials;let i = index">
+            <td>{{i+1}}</td>
+            <td>
+              <div class="noUserImage" *ngIf="!testimonial.userInfo.userImg">
+                <i class="nc-icon-mini users_single-01"></i>
+              </div>
+              <div class="userImage">
+                <div class="icon" *ngIf="testimonial.userInfo.userImg">
+                  <img [src]="config.serverUrl+testimonial.userInfo.userImg" alt=""/>
+                </div>
+              </div>
+            </td>
+            <td>{{testimonial.userInfo.userName}}</td>
+            <td>{{testimonial.userInfo.userCompany}}</td>
+            <td style=" white-space: nowrap;overflow: hidden;
+  text-overflow: ellipsis;max-width: 200px;">{{testimonial.mainText}}
+            </td>
+            <td>{{testimonial.created_at | date}}</td>
+            <td>Admin</td>
+            <td>
+              <button class="btn btn-sm btn-primary" (click)="editTestimonial(testimonial)">Edit</button>
+              <button class="btn btn-sm btn-primary" (click)="deleteTestimonial(testimonial)">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
+
+

@@ -27,7 +27,7 @@
             <td><img [src]="this.config.serverUrl+group.img"
                      style="width: 25%; height: 25%;"></td>
             <td>1</td>
-            <td>21/12/2017</td>
+            <td>{{group.created_at | date}}</td>
             <td>Admin</td>
             <td>
               <button class="btn btn-sm btn-primary" (click)="editGroup(group)">Edit</button>
