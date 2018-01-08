@@ -1,3 +1,44 @@
-<p>
-  sub-category works!
-</p>
+<div class="container">
+  <h1 class="mainHeading">Product Groups</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary float-right" type="submit" (click)="createSubCategory()">Add New SubCategory
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-table">
+        <table class="table table-open">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>SubCategory Name</th>
+            <th>SubCategory Icon</th>
+            <th>Main Category</th>
+            <th>Date added</th>
+            <th>Added by</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let subCategory of subCategories;let i = index">
+            <td>{{i+1}}</td>
+            <td>{{subCategory.name}}</td>
+            <td><img [src]="config.serverUrl+subCategory.img" *ngIf="subCategory.img"
+                     style="width: 25%; height: 25%;"></td>
+            <td>{{getMainCategory(subCategory.mainCategory)}}</td>
+            <td>{{subCategory.created_at | date}}</td>
+            <td>Admin</td>
+            <td>
+              <button class="btn btn-sm btn-primary" (click)="editSubcategory(subCategory)">Edit</button>
+              <button class="btn btn-sm btn-primary" (click)="deleteSubcategory(subCategory)">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

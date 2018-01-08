@@ -112,4 +112,21 @@ export class DataService {
   getAllSubcategories() {
     return this.httpClient.get(this.config.serverUrl + 'subCategory');
   }
+
+  getSubCategoryById(id) {
+    return this.httpClient.get(this.config.serverUrl + 'subCategory/' + id);
+  }
+
+  saveSubCategory(data) {
+    return this.httpClient.post(this.config.serverUrl + 'subCategory', data);
+  }
+
+  updateSubCategory(id, data) {
+    return this.httpClient.patch(this.config.serverUrl + 'subCategory/' + id, data);
+  }
+
+  deleteSubCategory(id) {
+    return this.httpClient.delete(this.config.serverUrl + 'subCategory/' + id);
+  }
+
 }

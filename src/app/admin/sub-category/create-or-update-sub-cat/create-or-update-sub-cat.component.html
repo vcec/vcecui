@@ -1,3 +1,62 @@
-<p>
-  create-or-update-sub-cat works!
-</p>
+<div *ngIf="editState">
+  <h3>Edit Sub Category:</h3>
+  <form (ngSubmit)="onUpdate()" #f="ngForm">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" [(ngModel)]="subCatToEdit.name"
+             name="subCatToEdit.name">
+    </div>
+    <div class="form-group">
+      <label>Main Category</label>
+      <label class="control checkbox" *ngFor="let cat of categories">
+        <input type="radio" [(ngModel)]="subCatToEdit.mainCategory"
+               name="subCatToEdit.mainCategory"
+               [value]="cat._id"
+               [checked]="subCatToEdit.mainCategory == cat._id">
+        <span class="control-indicator"></span>{{cat.category_name}}
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Image</label>
+      <img *ngIf="subCatToEdit.img" [src]="config.serverUrl + subCatToEdit.img">
+    </div>
+    <div class="form-group">
+      <label>Replace Group Image</label>
+      <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Update Testimonial</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="addState">
+  <form (ngSubmit)="onCreate()" #f="ngForm">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control"
+             name="name" ngModel>
+    </div>
+    <div class="form-group">
+      <label>Main Category</label>
+      <div *ngFor="let cat of categories">
+        <label class="control radio">
+          <input type="radio" ngModel [value]="cat._id"
+                 name="mainCategory"
+                 [checked]="subCatToEdit.mainCategory == cat._id">
+          <span class="control-indicator"></span>{{cat.category_name}}
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Image</label>
+      <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Add New Testimonial</button>
+    </div>
+  </form>
+</div>
