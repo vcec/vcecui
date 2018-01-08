@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LandingComponent} from './../components/landing/landing.component';
 import {HomepageComponent} from './../components/homepage/homepage.component';
 import {ProfileComponent} from './../components/profile/profile.component';
+import {CategoryComponent} from './../components/category/category.component';
 import {AdminComponent} from '../admin/admin.component';
 import {GroupsComponent} from '../admin/groups/groups.component';
 import {PortfoliosComponent} from '../admin/portfolios/portfolios.component';
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+  },
+  {
+    path: 'category',
+    component: CategoryComponent,
   },
   {
     path: 'admin',
