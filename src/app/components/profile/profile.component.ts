@@ -1,12 +1,13 @@
-import { Component, OnInit ,ViewEncapsulation } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation, AfterViewInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-
+import {fadeInAnimation} from '../../_animations/index';
 import { DomSanitizer,SafeResourceUrl} from '@angular/platform-browser';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [fadeInAnimation]
 })
 export class ProfileComponent implements OnInit {
 	videos = [
@@ -22,6 +23,10 @@ export class ProfileComponent implements OnInit {
 
   getAnimationDelay(i,col){
   	return {'animation-delay': ((i+1)%(col+1))*2/10 + 's'};
+  }
+
+  ngAfterViewInit() {
+     window.scrollTo(0, 0);
   }
 
   openVideo(content,vid){

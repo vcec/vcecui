@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {fadeInAnimation} from '../../_animations/index';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['./category.component.scss'],
+  animations: [fadeInAnimation]
 })
 export class CategoryComponent implements OnInit {
 	products = [
@@ -38,6 +40,9 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+	   window.scrollTo(0, 0);
+	}
    getAnimationDelay(i,col){
   	return {'animation-delay': ((i+1)%(col+1))*2/10 + 's'};
   	}
