@@ -10,7 +10,6 @@ import {GroupsComponent} from '../admin/groups/groups.component';
 import {PortfoliosComponent} from '../admin/portfolios/portfolios.component';
 import {CategoriesComponent} from '../admin/categories/categories.component';
 import {TestimonialsComponent} from '../admin/testimonials/testimonials.component';
-import {EditPortfolioComponent} from "../admin/portfolios/editPortfolio/editPortfolio.component";
 import {CreateOrUpdatPortfolioComponent} from "../admin/portfolios/create-or-updat-portfolio/create-or-updat-portfolio.component";
 import {CreateOrUpdateCategoryComponent} from "../admin/categories/create-or-update-category/create-or-update-category.component";
 import {CreateOrUpdateGroupComponent} from "../admin/groups/create-or-update-group/create-or-update-group.component";

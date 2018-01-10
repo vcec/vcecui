@@ -27,15 +27,14 @@ import {DropzoneModule} from 'ngx-dropzone-wrapper';
 import {DROPZONE_CONFIG} from 'ngx-dropzone-wrapper';
 import {DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
 import {ProfileComponent} from './components/profile/profile.component';
-import {EditPortfolioComponent} from "./admin/portfolios/editPortfolio/editPortfolio.component";
 import {ConfirmComponent} from "./admin/confirmComponent/confirm.component";
-import { CreateOrUpdateCategoryComponent } from './admin/categories/create-or-update-category/create-or-update-category.component';
-import { CreateOrUpdateGroupComponent } from './admin/groups/create-or-update-group/create-or-update-group.component';
-import { CreateOrUpdatTestimonialComponent } from './admin/testimonials/create-or-updat-testimonial/create-or-updat-testimonial.component';
-import { CreateOrUpdatPortfolioComponent } from './admin/portfolios/create-or-updat-portfolio/create-or-updat-portfolio.component';
-import { CategoryComponent } from './components/category/category.component';
-import { SubCategoryComponent } from './admin/sub-category/sub-category.component';
-import { CreateOrUpdateSubCatComponent } from './admin/sub-category/create-or-update-sub-cat/create-or-update-sub-cat.component';
+import {CreateOrUpdateCategoryComponent} from './admin/categories/create-or-update-category/create-or-update-category.component';
+import {CreateOrUpdateGroupComponent} from './admin/groups/create-or-update-group/create-or-update-group.component';
+import {CreateOrUpdatTestimonialComponent} from './admin/testimonials/create-or-updat-testimonial/create-or-updat-testimonial.component';
+import {CreateOrUpdatPortfolioComponent} from './admin/portfolios/create-or-updat-portfolio/create-or-updat-portfolio.component';
+import {CategoryComponent} from './components/category/category.component';
+import {SubCategoryComponent} from './admin/sub-category/sub-category.component';
+import {CreateOrUpdateSubCatComponent} from './admin/sub-category/create-or-update-sub-cat/create-or-update-sub-cat.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:3001/uploadImage',
@@ -55,15 +54,14 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     PortfoliosComponent,
     TestimonialsComponent,
     ProfileComponent,
-    EditPortfolioComponent,
     ConfirmComponent,
     CreateOrUpdateCategoryComponent,
     CreateOrUpdateGroupComponent,
     CreateOrUpdatTestimonialComponent,
     CreateOrUpdatPortfolioComponent,
-     CategoryComponent,
-     SubCategoryComponent,
-     CreateOrUpdateSubCatComponent
+    CategoryComponent,
+    SubCategoryComponent,
+    CreateOrUpdateSubCatComponent
   ],
   imports: [
     NgbModule.forRoot(),

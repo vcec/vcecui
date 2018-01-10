@@ -1,3 +1,630 @@
-<p>
-  create-or-updat-portfolio works!
-</p>
+<div class="container">
+  <h1 class="mainHeading">Add/Edit Portfolio</h1>
+  <div class="row">
+    <div class="col-md-12" *ngIf="addPortfolioState">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="title" name="title" ngModel/>
+            </div>
+            <div class="form-group">
+              <label for="subtitle">Sub Title</label>
+              <input type="text" class="form-control" id="subtitle" name="subtitle" ngModel/>
+            </div>
+            <div class="form-group">
+              <label>Is it a featured product:</label>
+              <input type="checkbox" name="isFeaturedProduct" [(ngModel)]="isFeaturedProduct"
+                     [checked]="isFeaturedProduct"/>
+            </div>
+            <div class="card" *ngIf="isFeaturedProduct">
+              <div class="form-group">
+                <label>Featured Product Image</label>
+                <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                          (error)="onFeatureImageUploadError($event)" (removedFile)="onRemoved($event)"
+                          (success)="onFeatureImageUploadSuccess($event)" id="featureImage"
+                          name="featureImage"></dropzone>
+              </div>
+              <div class="form-group">
+                <label for="detailInfoUrlIfFeaturedProduct">View More Url</label>
+                <input type="text" class="form-control"
+                       name="detailInfoUrlIfFeaturedProduct" ngModel/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Cover Image <span (click)="show('showCoverImageForm')" *ngIf="!coverImage">+</span></label>
+              <div *ngIf="uploadForms.showCoverImageForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                            (error)="onUploadError($event)" (removedFile)="onRemoved($event)"
+                            (success)="onUploadSuccess($event)" id="coverImg" name="coverImg"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('coverImage')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="coverImage" style="position: relative;">
+                <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
+                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                   (click)="coverImage=null">
+                </i>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Main Video <span (click)="show('showMainVideoForm')" *ngIf="!mainVideo">+</span></label>
+              <div *ngIf="uploadForms.showMainVideoForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="video" name="video"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('mainVideo')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="mainVideo">
+                <label *ngFor="let video of videos">
+                  {{mainVideo.title}} <span class="float-right"
+                                            (click)="mainVideo =null">X</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Other Related Videos<span (click)="show('showOtherVideoForm')">+</span></label>
+              <div class="card" *ngIf="videos && videos.length > 0">
+                <label *ngFor="let video of videos">
+                  {{video.title}} <span class="float-right"
+                                        (click)="removeVideoFromVideos(video.title)">X</span>
+                </label>
+              </div>
+              <div *ngIf="uploadForms.showOtherVideoForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="video" name="video"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('subVideo')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Case Studies<span (click)="show('caseStudy')">+</span></label>
+              <div class="card" *ngIf="caseStudies.length > 0">
+                <label *ngFor="let caseStudy of caseStudies">
+                  {{caseStudy.title}} <span class="float-right"
+                                            (click)="removeCaseStudyFromCaseStudies(caseStudy.title)">X</span>
+                </label>
+              </div>
+              <div *ngIf="uploadForms.caseStudy" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="pdfUploadConfig" [message]="'Click or drag pdf here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf2" name="pdf2"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('caseStudy')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>White Papers<span (click)="show('whitePaperForm')">+</span></label>
+              <div class="card" *ngIf="whitePapers.length > 0" style="margin: 10px">
+                <label *ngFor="let whitePaper of whitePapers">
+                  {{whitePaper.title}} <span class="float-right"
+                                             (click)="removeWhitePaperFromList(whitePaper.title)">X</span>
+                </label>
+              </div>
+              <div *ngIf="uploadForms.whitePaperForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="pdfUploadConfig" [message]="'Click or drag pdf here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('whitePaper')">Add</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Articles<span (click)="showDataForm('articleForm')">+</span></label>
+              <div class="card" *ngIf="articles.length > 0" style="margin: 10px">
+                <label *ngFor="let article of articles">
+                  {{article.heading}} <span class="float-right"
+                                            (click)="removeArticleFromList(article.heading)">X</span>
+                </label>
+              </div>
+              <div *ngIf="setDataForm.articleForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>heading</label>
+                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
+                </div>
+                <div class="form-group">
+                  <label>More Detail Url</label>
+                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="form-group">
+                  <input class="btn btn-sm btn-primary" type="button" value="Add"
+                         (click)="handleDataUpload('article')" [disabled]="!setDataFormHeading"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Others<span (click)="showDataForm('otherForm')">+</span></label>
+              <div class="card" *ngIf="other.length > 0" style="margin: 10px">
+                <label *ngFor="let oth of other">
+                  {{oth.heading}} <span class="float-right"
+                                        (click)="removeOtherFromList(oth.heading)">X</span>
+                </label>
+              </div>
+              <div *ngIf="setDataForm.otherForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>heading</label>
+                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
+                </div>
+                <div class="form-group">
+                  <label>More Detail Url</label>
+                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="form-group">
+                  <input class="btn btn-sm btn-primary" type="button" value="Add"
+                         (click)="handleDataUpload('other')" [disabled]="!setDataFormHeading"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Demos<span (click)="showDataForm('demoForm')">+</span></label>
+              <div class="card" *ngIf="demos.length > 0" style="margin: 10px">
+                <label *ngFor="let demo of demos">
+                  {{demo.heading}} <span class="float-right"
+                                         (click)="removeDemoFromList(demo.heading)">X</span>
+                </label>
+              </div>
+              <div *ngIf="setDataForm.demoForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>heading</label>
+                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
+                </div>
+                <div class="form-group">
+                  <label>More Detail Url</label>
+                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="form-group">
+                  <input class="btn btn-sm btn-primary" type="button" value="Add"
+                         (click)="handleDataUpload('demo')" [disabled]="!setDataFormHeading"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="desc">Description</label>
+              <input type="text" class="form-control" id="desc" name="desc" ngModel/>
+            </div>
+            <div class="form-group">
+              <label for="demoUrl">External Demo Url</label>
+              <input type="text" class="form-control" id="demoUrl" name="demoUrl" ngModel/>
+            </div>
+            <div class="card">
+              <div class="card-header ">Select Group</div>
+              <div class="card-body">
+                <div class="controls-stacked">
+                  <form>
+                    <label class="control checkbox" *ngFor="let group of productGroups">
+                      <input type="checkbox" [(ngModel)]="group.checked" name="prdGrp">
+                      <span class="control-indicator"></span>{{group.name}}
+                    </label>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Select Category and Sub Category</div>
+              <div class="card-body">
+                <div class="controls-stacked">
+                  <label class="control checkbox" *ngFor="let solution of solutions">
+                    <input type="checkbox" [(ngModel)]="solution.checked" name="soltn"
+                           (change)="solution.name=='Featured Solutions'? isFeaturedProduct =solution.checked:''">
+                    <span class="control-indicator"></span>{{solution.name}}
+                    <br>
+                    <div class="controls-stacked">
+                      <div *ngFor="let subSolution of subSolutions">
+                        <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
+                          <input [name]="solution.name" type="radio" [value]="subSolution.name"
+                                 [checked]="checkIsItSelected(subSolution.name)"
+                                 (change)="changeSubCatSelection(subSolution.name)">
+                          <span class="control-indicator"></span>
+                          {{subSolution.name}}
+                        </label>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="reset" class="btn btn-default" routerLink="/admin/portfolios">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-12 editPortfolio"
+         *ngIf="editPortfolioState">
+      <form (ngSubmit)="onUpdate()" #f="ngForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" name="title" [(ngModel)]="portfolioToEdit.title"/>
+            </div>
+            <div class="form-group">
+              <label for="subtitle">Sub Title</label>
+              <input type="text" class="form-control" name="subtitle" [(ngModel)]="portfolioToEdit.subtitle"/>
+            </div>
+            <div class="form-group">
+              <label>Is it a featured product:</label>
+              <input type="checkbox" name="isFeaturedProduct" [(ngModel)]="isFeaturedProduct"
+                     [checked]="isFeaturedProduct"/>
+            </div>
+            <div class="card" *ngIf="isFeaturedProduct">
+              <div class="form-group">
+                <label>Featured Product Image</label>
+                <div *ngIf="featuredProductImage" style="position: relative;">
+                  <img [src]="config.serverUrl + featuredProductImage" width="50%" height="50%"/>
+                  <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                     (click)="featuredProductImage=''">
+                  </i>
+                </div>
+                <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                          (error)="onFeatureImageUploadError($event)" (removedFile)="onRemoved($event)"
+                          (success)="onFeatureImageUploadSuccess($event)" id="featureImage"
+                          name="featureImage"></dropzone>
+              </div>
+              <div class="form-group">
+                <label>View More Url</label>
+                <input type="text" class="form-control" name="portfolioToEdit.detailInfoUrlIfFeaturedProduct"
+                       [(ngModel)]="portfolioToEdit.detailInfoUrlIfFeaturedProduct"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Cover Image <span (click)="show('showCoverImageForm')" *ngIf="!coverImage">+</span></label>
+              <div *ngIf="uploadForms.showCoverImageForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                            (error)="onUploadError($event)" (removedFile)="onRemoved($event)"
+                            (success)="onUploadSuccess($event)" id="coverImg" name="coverImg"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('coverImage')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="coverImage" style="position: relative;">
+                <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
+                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                   (click)="coverImage=''">
+                </i>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Main Video <span (click)="show('showMainVideoForm')" *ngIf="!mainVideo">+</span></label>
+              <div *ngIf="uploadForms.showMainVideoForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="video" name="video"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('mainVideo')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="mainVideo">
+                <label *ngFor="let video of videos">
+                  {{mainVideo.title}} <span class="float-right"
+                                            (click)="mainVideo =null">X</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Other Related Videos<span (click)="show('showOtherVideoForm')">+</span></label>
+              <div class="card" *ngIf="videos && videos.length > 0">
+                <label *ngFor="let video of videos">
+                  {{video.title}} <span class="float-right"
+                                        (click)="removeVideoFromVideos(video.title)">X</span>
+                </label>
+              </div>
+              <div *ngIf="uploadForms.showOtherVideoForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="video" name="video"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('subVideo')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Case Studies<span (click)="show('caseStudy')">+</span></label>
+              <div class="card" *ngIf="caseStudies && caseStudies.length > 0">
+                <label *ngFor="let caseStudy of caseStudies">
+                  {{caseStudy.title}} <span class="float-right"
+                                            (click)="removeCaseStudyFromCaseStudies(caseStudy.title)">X</span>
+                </label>
+              </div>
+              <div *ngIf="uploadForms.caseStudy" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="pdfUploadConfig" [message]="'Click or drag pdf here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf2" name="pdf2"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('caseStudy')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>White Papers<span (click)="show('whitePaperForm')">+</span></label>
+              <div class="card" *ngIf="whitePapers && whitePapers.length > 0" style="margin: 10px">
+                <label *ngFor="let whitePaper of whitePapers">
+                  {{whitePaper.title}} <span class="float-right"
+                                             (click)="removeWhitePaperFromList(whitePaper.title)">X</span>
+                </label>
+              </div>
+              <div *ngIf="uploadForms.whitePaperForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="pdfUploadConfig" [message]="'Click or drag pdf here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('whitePaper')">Add</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Articles<span (click)="showDataForm('articleForm')">+</span></label>
+              <div class="card" *ngIf="articles && articles.length > 0" style="margin: 10px">
+                <label *ngFor="let article of articles">
+                  {{article.heading}} <span class="float-right"
+                                            (click)="removeArticleFromList(article.heading)">X</span>
+                </label>
+              </div>
+              <div *ngIf="setDataForm.articleForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>heading</label>
+                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
+                </div>
+                <div class="form-group">
+                  <label>More Detail Url</label>
+                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="form-group">
+                  <input class="btn btn-sm btn-primary" type="button" value="Add"
+                         (click)="handleDataUpload('article')" [disabled]="!setDataFormHeading"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Others<span (click)="showDataForm('otherForm')">+</span></label>
+              <div class="card" *ngIf="other && other.length > 0" style="margin: 10px">
+                <label *ngFor="let oth of other">
+                  {{oth.heading}} <span class="float-right"
+                                        (click)="removeOtherFromList(oth.heading)">X</span>
+                </label>
+              </div>
+              <div *ngIf="setDataForm.otherForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>heading</label>
+                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
+                </div>
+                <div class="form-group">
+                  <label>More Detail Url</label>
+                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="form-group">
+                  <input class="btn btn-sm btn-primary" type="button" value="Add"
+                         (click)="handleDataUpload('other')" [disabled]="!setDataFormHeading"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Demos<span (click)="showDataForm('demoForm')">+</span></label>
+              <div class="card" *ngIf="demos && demos.length > 0" style="margin: 10px">
+                <label *ngFor="let demo of demos">
+                  {{demo.heading}} <span class="float-right"
+                                         (click)="removeDemoFromList(demo.heading)">X</span>
+                </label>
+              </div>
+              <div *ngIf="setDataForm.demoForm" class="card" style="padding: 20px">
+                <div class="form-group">
+                  <label>heading</label>
+                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
+                </div>
+                <div class="form-group">
+                  <label>More Detail Url</label>
+                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
+                            (error)="onUploadError($event)"
+                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="form-group">
+                  <input class="btn btn-sm btn-primary" type="button" value="Add"
+                         (click)="handleDataUpload('demo')" [disabled]="!setDataFormHeading"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="desc">Description</label>
+              <input type="text" class="form-control" name="portfolioToEdit.desc" [(ngModel)]="portfolioToEdit.desc"/>
+            </div>
+            <div class="form-group">
+              <label for="demoUrl">External Demo Url</label>
+              <input type="text" class="form-control" name="portfolioToEdit.demoUrl"
+                     [(ngModel)]="portfolioToEdit.demoUrl"/>
+            </div>
+            <div class="card">
+              <div class="card-header ">Select Group</div>
+              <div class="card-body">
+
+                <div class="controls-stacked">
+                  <form>
+                    <label class="control checkbox" *ngFor="let group of productGroups">
+                      <input type="checkbox" (change)="group.checked = !group.checked"
+                             [checked]="group.checked">
+                      <span class="control-indicator"></span>{{group.name}}
+                    </label>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Select Category and Sub Category</div>
+              <div class="card-body">
+                <div class="controls-stacked">
+                  <label class="control checkbox" *ngFor="let solution of solutions">
+                    <input type="checkbox" [checked]="solution.checked"
+                           (change)="solution.checked = !solution.checked">
+                    <span class="control-indicator"></span>{{solution.name}}
+                    <br>
+                    <div class="controls-stacked">
+                      <div *ngFor="let subSolution of subSolutions">
+                        <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
+                          <input [name]="solution.name" type="radio" [value]="subSolution.name"
+                                 [checked]="checkIsItSelected(subSolution.name)"
+                                 (change)="changeSubCatSelection(subSolution.name)">
+                          <span class="control-indicator"></span>
+                          {{subSolution.name}}
+                        </label>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="reset" class="btn btn-default" routerLink="/admin/portfolios">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

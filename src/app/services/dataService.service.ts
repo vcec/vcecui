@@ -5,8 +5,19 @@ import {Config} from "./config.service";
 @Injectable()
 export class DataService {
 
+  uploaderObj = {};
+
+
   constructor(private httpClient: HttpClient, private config: Config) {
 
+  }
+
+  setUploaderObj(val) {
+    this.uploaderObj = val;
+  }
+
+  getUploderObj() {
+    return this.uploaderObj;
   }
 
   // create portfolio
