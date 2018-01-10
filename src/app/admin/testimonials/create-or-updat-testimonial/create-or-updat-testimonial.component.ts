@@ -41,6 +41,7 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
       this.editTestimonialState = true;
       this.dataService.getTestimonialById(this.Id).subscribe((res) => {
         this.testimonialToEdit = res['data'];
+        this.image = this.testimonialToEdit.userInfo['userImg'];
       }, (err) => {
       })
     } else {
@@ -54,7 +55,9 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
   }
 
   onRemoved(event) {
-    console.log(event);
+    if (!event) {
+      this.image = "";
+    }
   }
 
   onImageUploadSuccess(event) {

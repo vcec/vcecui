@@ -1,62 +1,99 @@
-<div *ngIf="editState">
-  <h3>Edit Sub Category:</h3>
-  <form (ngSubmit)="onUpdate()" #f="ngForm">
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" class="form-control" [(ngModel)]="subCatToEdit.name"
-             name="subCatToEdit.name">
-    </div>
-    <div class="form-group">
-      <label>Main Category</label>
-      <label class="control checkbox" *ngFor="let cat of categories">
-        <input type="radio" [(ngModel)]="subCatToEdit.mainCategory"
-               name="subCatToEdit.mainCategory"
-               [value]="cat._id"
-               [checked]="subCatToEdit.mainCategory == cat._id">
-        <span class="control-indicator"></span>{{cat.category_name}}
-      </label>
-    </div>
-    <div class="form-group">
-      <label>Image</label>
-      <img *ngIf="subCatToEdit.img" [src]="config.serverUrl + subCatToEdit.img">
-    </div>
-    <div class="form-group">
-      <label>Replace Group Image</label>
-      <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
-                (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">Update Testimonial</button>
-    </div>
-  </form>
-</div>
-<div *ngIf="addState">
-  <form (ngSubmit)="onCreate()" #f="ngForm">
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" class="form-control"
-             name="name" ngModel>
-    </div>
-    <div class="form-group">
-      <label>Main Category</label>
-      <div *ngFor="let cat of categories">
-        <label class="control radio">
-          <input type="radio" ngModel [value]="cat._id"
-                 name="mainCategory"
-                 [checked]="subCatToEdit.mainCategory == cat._id">
-          <span class="control-indicator"></span>{{cat.category_name}}
-        </label>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div *ngIf="editState">
+        <h3>Edit Sub Category:</h3>
+        <form (ngSubmit)="onUpdate()" #f="ngForm">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" [(ngModel)]="subCatToEdit.name" required
+                   name="subCatToEdit.name">
+            <div class="help-text" *ngIf="!f.controls['subCatToEdit.name'] || !f.controls['subCatToEdit.name'].value">
+              Please enter name!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Main Category</label>
+            <label class="control checkbox" *ngFor="let cat of categories">
+              <input type="radio" [(ngModel)]="subCatToEdit.mainCategory"
+                     name="subCatToEdit.mainCategory"
+                     [value]="cat._id"
+                     [checked]="subCatToEdit.mainCategory == cat._id">
+              <span class="control-indicator"></span>{{cat.category_name}}
+            </label>
+            <div class="help-text"
+                 *ngIf="!f.controls['subCatToEdit.mainCategory'] || !f.controls['subCatToEdit.mainCategory'].value">
+              Please enter name!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Group Image</label>
+            <div *ngIf="!image">
+              <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                        (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                        (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+            </div>
+            <div style="position: relative;border: 1px solid black;" *ngIf="image">
+              <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit"
+                    [disabled]="!f.controls['subCatToEdit.mainCategory'] ||
+                     !f.controls['subCatToEdit.name'] || !f.controls['subCatToEdit.name'].value || !f.controls['subCatToEdit.mainCategory'].value">
+              Update
+              Testimonial
+            </button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="addState">
+        <form (ngSubmit)="onCreate()" #f="ngForm">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" #name="ngModel"
+                   name="name" ngModel>
+            <div class="help-text" *ngIf="!name.valid">Please enter name!</div>
+          </div>
+          <div class="form-group">
+            <label>Main Category</label>
+            <div *ngFor="let cat of categories">
+              <label class="control radio">
+                <input type="radio" ngModel [value]="cat._id"
+                       name="mainCategory" required
+                       [checked]="subCatToEdit.mainCategory == cat._id">
+                <span class="control-indicator"></span>{{cat.category_name}}
+              </label>
+            </div>
+            <div class="help-text" *ngIf="f.controls['mainCategory'] && !f.controls['mainCategory'].value">Please select
+              category!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Image</label>
+            <div *ngIf="!image">
+              <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                        (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                        (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+            </div>
+            <div style="position: relative;border: 1px solid black;" *ngIf="image">
+              <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="!f.controls['mainCategory'] || !f.valid">Add New
+              Testimonial
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="form-group">
-      <label>Image</label>
-      <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
-                (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">Add New Testimonial</button>
-    </div>
-  </form>
+  </div>
 </div>
+

@@ -17,20 +17,16 @@
             <th>User Company</th>
             <th>Content</th>
             <th>Date added</th>
-            <th></th>
+            <th>Created By</th>
+            <th>Action</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let testimonial of testimonials;let i = index">
             <td>{{i+1}}</td>
-            <td>
-              <div class="noUserImage" *ngIf="!testimonial.userInfo.userImg">
-                <i class="nc-icon-mini users_single-01"></i>
-              </div>
-              <div class="userImage">
-                <div class="icon" *ngIf="testimonial.userInfo.userImg">
-                  <img [src]="config.serverUrl+testimonial.userInfo.userImg" alt=""/>
-                </div>
+            <td style="width: 20%;">
+              <div class="icon" *ngIf="testimonial.userInfo.userImg">
+                <img [src]="config.serverUrl+testimonial.userInfo.userImg" alt="" width="30%" height="30%"/>
               </div>
             </td>
             <td>{{testimonial.userInfo.userName}}</td>

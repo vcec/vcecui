@@ -55,7 +55,9 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
   }
 
   onRemoved(event) {
-    console.log(event);
+    if (!event) {
+      this.image = "";
+    }
   }
 
   onImageUploadSuccess(event) {

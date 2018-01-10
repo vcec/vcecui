@@ -1,61 +1,83 @@
-<div *ngIf="editTestimonialState">
-  <h3>Edit Testimonial:</h3>
-  <form (ngSubmit)="onUpdate()" #f="ngForm">
-    <div class="form-group">
-      <label>User Name</label>
-      <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.userInfo.userName"
-             name="testimonialToEdit.userInfo.userName">
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 align-self-center">
+      <div *ngIf="editTestimonialState">
+        <h3>Edit Testimonial:</h3>
+        <form (ngSubmit)="onUpdate()" #f="ngForm">
+          <div class="form-group">
+            <label>User Name</label>
+            <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.userInfo.userName" required
+                   name="testimonialToEdit.userInfo.userName" #editUserName="ngModel">
+            <div class="help-text" *ngIf="!editUserName.valid">Please enter user name</div>
+          </div>
+          <div class="form-group">
+            <label>User Company Name</label>
+            <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.userInfo.userCompany" required
+                   name="testimonialToEdit.userInfo.userCompany" #editUserCompany="ngModel">
+            <div class="help-text" *ngIf="!editUserCompany.valid">Please enter user company name!</div>
+          </div>
+          <div class="form-group">
+            <label>User Image</label>
+            <div style="position: relative;border: 1px solid black;" *ngIf="image">
+              <img [src]="image ?this.config.serverUrl + image: ''" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onRemoved()">
+              </i>
+            </div>
+            <div *ngIf="!image">
+              <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                        (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                        (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Main Text</label>
+            <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.mainText" required
+                   name="testimonialToEdit.mainText" #editMainText="ngModel">
+            <div class="help-text" *ngIf="!editMainText.valid">Please enter main text!</div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Update Testimonial</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="addTestimonialState">
+        <form (ngSubmit)="onCreate()" #f="ngForm">
+          <div class="form-group">
+            <label>User Name</label>
+            <input type="text" class="form-control" required #userName="ngModel"
+                   name="userName" ngModel>
+            <div class="help-text" *ngIf="!userName.valid">Please Enter Valid User Name!</div>
+          </div>
+          <div class="form-group">
+            <label>User Company Name</label>
+            <input type="text" class="form-control" ngModel required #userCompany="ngModel"
+                   name="userCompany">
+            <div class="help-text" *ngIf="!userCompany.valid">Please Enter Valid User Company!</div>
+          </div>
+          <div class="form-group">
+            <label>User Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                      (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+            <div style="position: relative;border: 1px solid black;" *ngIf="image">
+              <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Main Text</label>
+            <input type="text" class="form-control" ngModel required #mainText="ngModel"
+                   name="mainText">
+            <div class="help-text" *ngIf="!mainText.valid">Please Enter text!</div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Add New Testimonial</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="form-group">
-      <label>User Company Name</label>
-      <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.userInfo.userCompany"
-             name="testimonialToEdit.userInfo.userCompany">
-    </div>
-    <div class="form-group">
-      <label>User Image</label>
-      <img [src]="testimonialToEdit.userInfo ? this.config.serverUrl + testimonialToEdit.userInfo.userImg: ''">
-    </div>
-    <div class="form-group">
-      <label>Replace Group Image</label>
-      <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
-                (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
-    </div>
-    <div class="form-group">
-      <label>Main Text</label>
-      <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.mainText"
-             name="testimonialToEdit.mainText">
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">Update Testimonial</button>
-    </div>
-  </form>
-</div>
-<div *ngIf="addTestimonialState">
-  <form (ngSubmit)="onCreate()" #f="ngForm">
-    <div class="form-group">
-      <label>User Name</label>
-      <input type="text" class="form-control"
-             name="userName" ngModel>
-    </div>
-    <div class="form-group">
-      <label>User Company Name</label>
-      <input type="text" class="form-control" ngModel
-             name="userCompany">
-    </div>
-    <div class="form-group">
-      <label>User Image</label>
-      <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
-                (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
-    </div>
-    <div class="form-group">
-      <label>Main Text</label>
-      <input type="text" class="form-control" ngModel
-             name="mainText">
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">Add New Testimonial</button>
-    </div>
-  </form>
+  </div>
 </div>
