@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-create-or-update-category',
   templateUrl: './create-or-update-category.component.html',
   styles: [`
-    .editGroup .dz-preview {
+    .dz-preview {
       display: none !important;
     }
   `],
@@ -24,6 +24,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   editCatState = false;
   catToEdit = {};
   image: "";
+  coverImage = "";
 
   imageUploadConfig = {
     url: this.config.serverUrl + 'upload/uploadImage',
@@ -44,6 +45,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
       this.dataService.getCategoryById(this.Id).subscribe((res) => {
         this.catToEdit = res['data'];
         this.image = this.catToEdit['img'];
+        this.coverImage = this.catToEdit['coverImage'];
       }, (err) => {
 
       });
@@ -60,14 +62,30 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
     this.image = "";
   }
 
+  onCoverImageRemoved() {
+    this.coverImage = "";
+  }
+
   onImageUploadSuccess(event) {
     if (event[1].data.urlPath) {
       this.image = event[1].data.urlPath;
     }
   }
 
+  onCoverImageUploadSuccess(event) {
+    if (event[1].data.urlPath) {
+      this.coverImage = event[1].data.urlPath;
+    }
+  }
+
+  onCoverImageUploadError(event) {
+    console.log(event);
+  }
+
   onCreate() {
-    let data = $.extend(this.groupForm.value, {img: this.image});
+    let data = $.extend(this.groupForm.value, {
+      img: this.image, coverImage: this.coverImage
+    });
     this.dataService.saveSolution(data).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route})
     }, (err) => {
@@ -82,7 +100,9 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   onUpdate() {
     let data = {
       category_name: this.groupForm.controls['catToEdit.category_name'].value,
-      img: this.image
+      desc: this.groupForm.controls['catToEdit.desc'].value,
+      img: this.image,
+      coverImage: this.coverImage
     };
 
     this.dataService.updateSolutions(this.catToEdit['_id'], data).subscribe((res) => {
@@ -95,5 +115,4 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
       }
     });
   }
-
 }

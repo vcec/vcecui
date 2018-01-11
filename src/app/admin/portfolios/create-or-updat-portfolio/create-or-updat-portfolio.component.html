@@ -85,10 +85,16 @@
             <div class="form-group">
               <label>Other Related Videos<span (click)="show('showOtherVideoForm')">+</span></label>
               <div class="card" *ngIf="videos && videos.length > 0">
-                <label *ngFor="let video of videos">
-                  {{video.title}} <span class="float-right"
-                                        (click)="removeVideoFromVideos(video.title)">X</span>
-                </label>
+                <div class="card" *ngFor="let video of videos">
+                  <div class="card-header">
+                    {{video.title}}
+                    <span class="float-right"
+                          (click)="removeVideoFromVideos(video.title)">X</span>
+                  </div>
+                  <div class="card-body">
+                    <img [src]="config.serverUrl + video.coverImage" width="50%" height="50%"/>
+                  </div>
+                </div>
               </div>
               <div *ngIf="uploadForms.showOtherVideoForm" class="card" style="padding: 20px">
                 <div class="form-group">
@@ -96,13 +102,19 @@
                   <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
                 </div>
                 <div class="form-group">
-                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
+                  <label>Cover Image for Video</label>
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                            (error)="onImageUploadError($event)"
+                            (success)="onImageUploadSuccess($event)"></dropzone>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag video here to upload'"
                             (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)" id="video" name="video"></dropzone>
+                            (success)="onUploadSuccess($event)"></dropzone>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-sm btn-primary" (click)="handleUpload('subVideo')"
-                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                          [disabled]="!uploadFormTitle || !lastUpload || !videoCoverImage">Add
                   </button>
                 </div>
               </div>
@@ -399,10 +411,16 @@
             <div class="form-group">
               <label>Other Related Videos<span (click)="show('showOtherVideoForm')">+</span></label>
               <div class="card" *ngIf="videos && videos.length > 0">
-                <label *ngFor="let video of videos">
-                  {{video.title}} <span class="float-right"
-                                        (click)="removeVideoFromVideos(video.title)">X</span>
-                </label>
+                <div class="card" *ngFor="let video of videos">
+                  <div class="card-header">
+                    {{video.title}}
+                    <span class="float-right"
+                          (click)="removeVideoFromVideos(video.title)">X</span>
+                  </div>
+                  <div class="card-body">
+                    <img [src]="config.serverUrl + video.coverImage" width="50%" height="50%"/>
+                  </div>
+                </div>
               </div>
               <div *ngIf="uploadForms.showOtherVideoForm" class="card" style="padding: 20px">
                 <div class="form-group">
@@ -410,9 +428,15 @@
                   <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
                 </div>
                 <div class="form-group">
-                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
+                  <label>Cover Image for Video</label>
+                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                            (error)="onImageUploadError($event)"
+                            (success)="onImageUploadSuccess($event)"></dropzone>
+                </div>
+                <div class="form-group">
+                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag video here to upload'"
                             (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)" id="video" name="video"></dropzone>
+                            (success)="onUploadSuccess($event)"></dropzone>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-sm btn-primary" (click)="handleUpload('subVideo')"

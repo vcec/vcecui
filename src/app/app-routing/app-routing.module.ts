@@ -27,11 +27,11 @@ const routes: Routes = [
     component: HomepageComponent,
   },
   {
-    path: 'profile',
+    path: 'profile/:productId',
     component: ProfileComponent,
   },
   {
-    path: 'category',
+    path: 'category/:groupName',
     component: CategoryComponent,
   },
   {

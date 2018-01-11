@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-create-or-update-group',
   templateUrl: './create-or-update-group.component.html',
   styles: [`
-    .editGroup .dz-preview {
+    .dz-preview {
       display: none !important;
     }
   `],
@@ -25,6 +25,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   addGroupState = false;
   groupToEdit = {};
   image: string = '';
+  coverImage: string = '';
   imageUploadConfig = {
     url: this.config.serverUrl + 'upload/uploadImage',
     acceptedFiles: 'image/*'
@@ -44,6 +45,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
       this.dataService.getGroupById(this.Id).subscribe((res) => {
         this.groupToEdit = res['data'];
         this.image = this.groupToEdit['img'];
+        this.coverImage = this.groupToEdit['coverImage'];
       }, (err) => {
 
       });
@@ -61,14 +63,28 @@ export class CreateOrUpdateGroupComponent implements OnInit {
     this.image = "";
   }
 
+  onCoverImageRemoved() {
+    this.coverImage = "";
+  }
+
   onImageUploadSuccess(event) {
     if (event[1].data.urlPath) {
       this.image = event[1].data.urlPath;
     }
   }
 
+  onCoverImageUploadError() {
+    this.coverImage = "";
+  }
+
+  onCoverImageUploadSuccess(event) {
+    if (event[1].data.urlPath) {
+      this.coverImage = event[1].data.urlPath;
+    }
+  }
+
   onCreate() {
-    let data = $.extend(this.groupForm.value, {img: this.image});
+    let data = $.extend(this.groupForm.value, {img: this.image, coverImage: this.coverImage});
     this.dataService.saveGroup(data).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route})
     }, (err) => {
@@ -83,7 +99,9 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   onUpdate() {
     let data = {
       group_name: this.groupForm.controls['groupToEdit.group_name'].value,
-      img: this.image
+      desc: this.groupForm.controls['groupToEdit.desc'].value,
+      img: this.image,
+      coverImage: this.coverImage
     };
 
     this.dataService.updateGroup(this.groupToEdit['_id'], data).subscribe((res) => {

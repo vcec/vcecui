@@ -12,7 +12,13 @@
             <div class="help-text" *ngIf="!groupEditName.valid">Please Enter Valid Group Name!</div>
           </div>
           <div class="form-group">
-            <label>Group Image</label>
+            <label>Group Description</label>
+            <input type="text" class="form-control" [(ngModel)]="groupToEdit.desc" name="groupToEdit.desc" required
+                   #groupEditDesc="ngModel">
+            <div class="help-text" *ngIf="!groupEditDesc.valid">Please Enter Valid Group Description!</div>
+          </div>
+          <div class="form-group">
+            <label>Group Icon Image</label>
             <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onImageUploadError($event)" (success)="onImageUploadSuccess($event)" id="featureImage"
                       name="featureImage"></dropzone>
@@ -25,7 +31,22 @@
             </div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!f.valid || !image">Update Group</button>
+            <label>Group Cover Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
+                      id="featureImage"
+                      name="featureImage"></dropzone>
+            <div class="help-text" *ngIf="!image">Please Upload Cover Image!</div>
+            <div style="position: relative;border: 1px solid black;" *ngIf="coverImage">
+              <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onCoverImageRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="!f.valid || !image || !coverImage">Update Group
+            </button>
           </div>
         </form>
       </div>
@@ -36,6 +57,12 @@
             <input type="text" class="form-control" ngModel name="group_name" required
                    #groupName="ngModel">
             <div class="help-text" *ngIf="!groupName.valid">Please Enter Valid Group Name!</div>
+          </div>
+          <div class="form-group">
+            <label>Group Description</label>
+            <input type="text" class="form-control" ngModel name="desc" required
+                   #groupDesc="ngModel">
+            <div class="help-text" *ngIf="!groupDesc.valid">Please Enter Valid Group Description!</div>
           </div>
           <div class="form-group">
             <label>Group Image</label>
@@ -51,7 +78,23 @@
             </div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!f.valid || !image">Add New Group</button>
+            <label>Group Cover Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
+                      id="featureImage"
+                      name="featureImage"></dropzone>
+
+            <div class="help-text" *ngIf="!image">Please Upload Cover Image!</div>
+            <div style="position: relative;border: 1px solid black;" *ngIf="coverImage">
+              <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onCoverImageRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="!f.valid || !image || !coverImage">Add New Group
+            </button>
           </div>
         </form>
       </div>

@@ -6,7 +6,7 @@
         <form (ngSubmit)="onUpdate()" #f="ngForm">
           <div class="form-group">
             <label>Category Name</label>
-            <input type="text" class="form-control" [(ngModel)]="catToEdit.category_name"
+            <input type="text" class="form-control" [(ngModel)]="catToEdit.category_name" required
                    name="catToEdit.category_name">
             <div class="help-text"
                  *ngIf="!f.controls['catToEdit.category_name'] || !f.controls['catToEdit.category_name'].value">
@@ -14,12 +14,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Category Image</label>
-            <div *ngIf="!image">
-              <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                        (error)="onImageUploadError($event)" (success)="onImageUploadSuccess($event)" id="featureImage"
-                        name="featureImage"></dropzone>
+            <label>Category Description</label>
+            <input type="text" class="form-control" [(ngModel)]="catToEdit.desc"
+                   name="catToEdit.desc">
+            <div class="help-text"
+                 *ngIf="!f.controls['catToEdit.desc'] || !f.controls['catToEdit.desc'].value">
+              Please enter category description!
             </div>
+          </div>
+          <div class="form-group">
+            <label>Category Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onImageUploadError($event)" (success)="onImageUploadSuccess($event)" id="featureImage"
+                      name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!image">Please Upload Image!</div>
             <div style="position: relative;border: 1px solid black;" *ngIf="image">
               <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
@@ -29,8 +36,22 @@
             </div>
           </div>
           <div class="form-group">
+            <label>Category Cover Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
+                      id="featureImage"
+                      name="featureImage"></dropzone>
+            <div class="help-text" *ngIf="!image">Please Upload Cover Image!</div>
+            <div style="position: relative;border: 1px solid black;" *ngIf="coverImage">
+              <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onCoverImageRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
             <button class="btn btn-primary" type="submit"
-                    [disabled]="!image || !f.controls['catToEdit.category_name'] || !f.controls['catToEdit.category_name'].value">
+                    [disabled]="!image || !f.controls['catToEdit.category_name'] || !f.controls['catToEdit.category_name'].value || !coverImage">
               Update Category
             </button>
           </div>
@@ -46,21 +67,46 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Category Image</label>
+            <label>Category Description</label>
+            <input type="text" class="form-control" ngModel #desc="ngModel" required
+                   name="desc">
+            <div class="help-text"
+                 *ngIf="!f.controls['desc'] || !f.controls['desc'].value">
+              Please enter category description!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Category Icon Image</label>
             <div style="position: relative;border: 1px solid black;" *ngIf="image">
               <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                  (click)="onRemoved()">
               </i>
             </div>
-            <div *ngIf="!image">
-              <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                        (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
-                        (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
+                      (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
+            <div class="help-text" *ngIf="!image">Please upload icon image</div>
+          </div>
+          <div class="form-group">
+            <label>Category Cover Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
+                      id="featureImage"
+                      name="featureImage"></dropzone>
+            <div class="help-text" *ngIf="!coverImage">Please Upload Cover Image!</div>
+            <div style="position: relative;border: 1px solid black;" *ngIf="coverImage">
+              <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onCoverImageRemoved()">
+              </i>
             </div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit">Add New Category</button>
+            <button class="btn btn-primary" type="submit"
+                    [disabled]="!f.controls['category_name'] || !f.controls['category_name'].value|| !image || !coverImage">
+              Add New Category
+            </button>
           </div>
         </form>
       </div>

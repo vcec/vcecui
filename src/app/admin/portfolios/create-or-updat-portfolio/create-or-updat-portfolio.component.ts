@@ -20,6 +20,12 @@ class CommonObjForData {
   type?: string;
 }
 
+class VideoObj {
+  title?: string;
+  url?: string;
+  coverImage?: string
+}
+
 @Component({
   selector: 'app-create-or-updat-portfolio',
   templateUrl: './create-or-updat-portfolio.component.html',
@@ -29,7 +35,8 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   coverImage: CommonObjForUploader;
   mainVideo: CommonObjForUploader;
   lastUpload: string;
-  videos: CommonObjForUploader[] = [];
+  videos: VideoObj[] = [];
+  videoCoverImage: string;
   caseStudies: CommonObjForUploader[] = [];
   whitePapers: CommonObjForUploader[] = [];
   demoUrls: CommonObjForUploader[] = [];
@@ -194,6 +201,20 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     }
   }
 
+  onImageUploadError(event) {
+    this.videoCoverImage = "";
+  }
+
+  onImageUploadSuccess(event) {
+    if (event[1].data.urlPath) {
+      this.videoCoverImage = event[1].data.urlPath;
+    }
+  }
+
+  onVideoCoverImageRemoved() {
+    this.videoCoverImage = "";
+  }
+
   onRemoved(event) {
     this.lastUpload = "";
   }
@@ -217,7 +238,8 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
         this.mainVideo = obj;
         break;
       case 'subVideo':
-        this.videos.push(obj);
+        var video: VideoObj = {title: this.uploadFormTitle, url: this.lastUpload, coverImage: this.videoCoverImage};
+        this.videos.push(video);
         break;
       case 'caseStudy':
         this.caseStudies.push(obj);

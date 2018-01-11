@@ -1,13 +1,13 @@
 <div class="profile" [@fadeInAnimation]>
-	<header>
-		<nav class="navbar navbar-expand-lg">
-	      <div class="container">
-	        <a class="navbar-brand" href="#">
-	          <div class="pb-logo">
-	            <img src="assets/images/pb_logo.png" alt="">
-	          </div>
-	        </a>
-	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <div class="pb-logo">
+            <img src="assets/images/pb_logo.png" alt="">
+          </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,240 +19,233 @@
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/category']">Back</a>
             </li>
-            
+
           </ul>
         </div>
-	      </div>
-	    </nav>
-	    <div class="container">
-	    	<div class="videoWrapper">
-	    		<iframe src="https://www.youtube.com/embed/gytTj_2TAx8?autoplay=1&rel=0"  allowFullScreen='allowFullScreen'>
-	    		</iframe>
-	    		
-	    		<!-- <video controls autoplay>
-	    						  <source src="assets/videos/Locate Opportunity with Pitney Bowes Software Solutions.mp4" type="video/mp4">
-	    						  
-	    						  Your browser does not support the video tag.
-	    						</video> -->
-	    	</div>
-	    	
-	    </div>
-	</header>
-	<section id="profileInfo">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="profile-title">
-						<h1 class="hide-on-init" animateOnScroll animationName="animated fadeInRight">Location Intelligence APIs</h1>
-						<p class="hide-on-init" animateOnScroll animationName="animated fadeInLeft">Transform location and business data into powerful insight</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					
-					<div>
-						<div class="circle-icon">
-							<div class="icon">
-								<img src="assets/images/profile/li_prod_icon.png" alt="">
-							</div>
-						</div>
-					</div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="videoWrapper">
+        <!--  <iframe [src]="sanitizeUrl(productDetails.mainVideo.url)" *ngIf="productDetails.mainVideo"
+                  allowFullScreen='allowFullScreen'>
+          </iframe>-->
 
-					<div class="profileDesc hide-on-init" animateOnScroll animationName="animated fadeInUp">
-						<p>
-							The Location Intelligence APIs offer the simplest location-based information & communications services designed to enrich your applications, services, business processes and workflows.
-						</p>
-						<p>
-							The application areas include Mobile Marketing Automation, Automotive Automation, Mobile Workforce Automation & Home, Industrial and Infrastructure Automation.   
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section id="videos">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					
-						<div class="circle-icon">
-							<div class="icon">
-								<img src="assets/images/profile/videoIcon.png" alt="">
-							</div>
-						</div>
+        <video controls autoplay>
+          <source [src]="sanitizeUrl(productDetails.mainVideo.url)" *ngIf="productDetails.mainVideo" type="video/mp4">
 
-						<h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Videos</h1>
-						
-						<div class="row videos-container">
-							<div class="col-md-4 hide-on-init" 
-								*ngFor="let video of videos;let i = index"
-								[ngStyle]="getAnimationDelay(i,3)"
-								animateOnScroll animationName="animated fadeInUp">
-								<div class="videoBox well-hover" (click)="openVideo(videoModal,video.videoUrl)">
-									<img src="{{'assets/images/profile/'+ video.cover}}" alt="">
-									<div class="video-overlay">
-										<div class="icon">
-											<i class="nc-icon-mini arrows-1_triangle-right-17"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section id="liveDemos">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					
-						<div class="circle-icon">
-							<div class="icon">
-								<img src="assets/images/profile/demo.png" alt="">
-							</div>
-						</div>
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
-						<h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Live Demos</h1>
-						
-						<div class="row demos-container">
-							<div class="col-md-4 hide-on-init" 
-								*ngFor="let k of [1,2,3,4,5,6];let i = index" 
-								animateOnScroll animationName="animated fadeInUp"
-								[ngStyle]="getAnimationDelay(i,3)">
-								<div class="demo-card well-hover "
-									>
-									<div class="icon">
-										<img src="assets/images/profile/location_grayIcon.png" alt="">
-									</div>
-									<h2>Geo Search</h2>
-									<p>
-										Pitney Bowes Geo Search API helps to find user location based on latitude and longitude.
-									</p>
-								</div>
-							</div>
-							
-						</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    </div>
+  </header>
+  <section id="profileInfo">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="profile-title">
+            <h1 class="hide-on-init" animateOnScroll animationName="animated fadeInRight">{{productDetails.title}}</h1>
+            <p class="hide-on-init" animateOnScroll animationName="animated fadeInLeft">{{productDetails.subtitle}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
 
-	<section id="caseStudies">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					
-						<div class="circle-icon">
-							<div class="icon">
-								<img src="assets/images/profile/pdfIcon.png" alt="">
-							</div>
-						</div>
+          <div>
+            <div class="circle-icon">
+              <div class="icon">
+                <img src="assets/images/profile/li_prod_icon.png" alt="">
+              </div>
+            </div>
+          </div>
 
-						<h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Case Studies & White Papers</h1>
-						
-						<div class="row cs-container">
-							<div class="col-md-6 hide-on-init" 
-								*ngFor="let k of [1,2,3,4];let i = index"
-								[ngStyle]="getAnimationDelay(i,2)"
-								animateOnScroll animationName="animated fadeInUp">
-								<div class="csBox well-hover">
-									<a href="" class="cs-link">
-										<div class="icon">
-											<img src="assets/images/profile/pdfIcon.png" alt="">
-										</div>
-										<label>Precision Matters Geodata APIs are Not All Equal</label>
-									</a>
-								</div>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<section id="articles">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					
-						<div class="circle-icon">
-							<div class="icon">
-								<img src="assets/images/profile/pdfIcon.png" alt="">
-							</div>
-						</div>
+          <div class="profileDesc hide-on-init" animateOnScroll animationName="animated fadeInUp">
+            <p>
+              {{productDetails.desc}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="videos">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
 
-						<h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Articles & Others</h1>
-						
-						<div class="row articles">
-							<div class="col-md-4 hide-on-init" 
-								*ngFor="let k of [1,2,3];let i = index"
-								[ngStyle]="getAnimationDelay(i,3)"
-								animateOnScroll animationName="animated fadeInUp">
-								<div class="articleBox well-hover">
-									<div class="icon">
-										<img src="{{'assets/images/profile/article_img'+ (i+1) + '.png'}}" alt="">
-									</div>
-									<div class="article-body">
-										<h3>Precision Matters: Geodata APIs are Not All Equal</h3>
+          <div class="circle-icon">
+            <div class="icon">
+              <img src="assets/images/profile/videoIcon.png" alt="">
+            </div>
+          </div>
 
-										<p>
-											The application areas include Mobile Marketing Automation, Automotive Automation, Mobile Workforce Automation & Home, Industrial and Infrastructure Automation.
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-	</section>
+          <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Videos</h1>
 
-	<footer>
-	    <div class="container">
-	      <div class="row">
-	        <div class="col-md-8">
-	          <div class="pb-icon">
-	            <img src="assets/images/pb_logo.png" alt="">
-	          </div>
-	          <p>&copy; Copyright Pitney Bowes 2018, All rights reserved.</p>
-	        </div>
-	        <div class="col-md-4">
-	          <div class="platforms">
-	            <ul>
-	              <li><a href=""><img src="assets/images/1-FB.png" alt=""></a></li>
-	              <li><a href=""><img src="assets/images/2-gplus.png" alt=""></a></li>
-	              <li><a href=""><img src="assets/images/3-Twitter.png" alt=""></a></li>
-	              <li><a href=""><img src="assets/images/4-Linkdin.png" alt=""></a></li>
-	            </ul>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </footer>
+          <div class="row videos-container">
+            <div class="col-md-4 hide-on-init"
+                 *ngFor="let video of productDetails.videos;let i = index"
+                 [ngStyle]="getAnimationDelay(i,3)"
+                 animateOnScroll animationName="animated fadeInUp">
+              <div class="videoBox well-hover" (click)="openVideo(videoModal,video.url)">
+                <img [src]="config.serverUrl + video.coverImage" alt="">
+                <div class="video-overlay">
+                  <div class="icon">
+                    <i class="nc-icon-mini arrows-1_triangle-right-17"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="liveDemos">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="circle-icon">
+            <div class="icon">
+              <img src="assets/images/profile/demo.png" alt="">
+            </div>
+          </div>
+
+          <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Live Demos</h1>
+
+          <div class="row demos-container">
+            <div class="col-md-4 hide-on-init"
+                 *ngFor="let k of productDetails.demos;let i = index"
+                 animateOnScroll animationName="animated fadeInUp"
+                 [ngStyle]="getAnimationDelay(i,3)">
+              <div class="demo-card well-hover "
+              >
+                <div class="icon">
+                  <img [src]="config.serverUrl + k.img" alt="">
+                </div>
+                <h2>{{k.heading}}</h2>
+                <p>
+                  {{k.desc}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="caseStudies">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="circle-icon">
+            <div class="icon">
+              <img src="assets/images/profile/pdfIcon.png" alt="">
+            </div>
+          </div>
+          <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Case Studies & White
+            Papers</h1>
+          <div class="row cs-container">
+            <div class="col-md-6 hide-on-init"
+                 *ngFor="let k of productDetails.caseStudies.concat( productDetails.whitePapers);let i = index"
+                 [ngStyle]="getAnimationDelay(i,2)"
+                 animateOnScroll animationName="animated fadeInUp">
+              <div class="csBox well-hover">
+                <a href="" class="cs-link">
+                  <div class="icon">
+                    <img [src]="config.serverUrl + k.img" alt="">
+                  </div>
+                  <label>{{k.title}}</label>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="articles">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="circle-icon">
+            <div class="icon">
+              <img src="assets/images/profile/pdfIcon.png" alt="">
+            </div>
+          </div>
+
+          <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Articles & Others</h1>
+
+          <div class="row articles">
+            <div class="col-md-4 hide-on-init"
+                 *ngFor="let k of productDetails.articles.concat(productDetails.others);let i = index"
+                 [ngStyle]="getAnimationDelay(i,3)"
+                 animateOnScroll animationName="animated fadeInUp">
+              <div class="articleBox well-hover">
+                <div class="icon">
+                  <img [src]="config.serverUrl + k.img" alt="">
+                </div>
+                <div class="article-body">
+                  <h3>{{k.heading}}</h3>
+                  <p>
+                    {{k.desc}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="pb-icon">
+            <img src="assets/images/pb_logo.png" alt="">
+          </div>
+          <p>&copy; Copyright Pitney Bowes 2018, All rights reserved.</p>
+        </div>
+        <div class="col-md-4">
+          <div class="platforms">
+            <ul>
+              <li><a href=""><img src="assets/images/1-FB.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/2-gplus.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/3-Twitter.png" alt=""></a></li>
+              <li><a href=""><img src="assets/images/4-Linkdin.png" alt=""></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
 
 <!-- Modal templates -->
 
 <ng-template #videoModal let-c="close" let-d="dismiss">
-	<div class="container">
-		<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-	      <span aria-hidden="true">&times;</span>
-	    </button>
-		<div class="modal-body videoModalShadow">
-	    	<div class="videoWrapper">
-	    		<iframe [src]="videoUrl" allowFullScreen='allowFullScreen'>
-	    		</iframe>
+  <div class="container">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="modal-body videoModalShadow">
+      <div class="videoWrapper">
+        <iframe [src]="videoUrl" allowFullScreen='allowFullScreen'>
+        </iframe>
 
-	    		<!-- <video controls autoplay>
-	    						  <source src="assets/videos/Locate Opportunity with Pitney Bowes Software Solutions.mp4" type="video/mp4">
-	    						  
-	    						  Your browser does not support the video tag.
-	    						</video> -->
-	    	</div>
-	  	</div>
-  	</div>
+        <!-- <video controls autoplay>
+                                <source src="assets/videos/Locate Opportunity with Pitney Bowes Software Solutions.mp4" type="video/mp4">
+
+                                Your browser does not support the video tag.
+                              </video> -->
+      </div>
+    </div>
+  </div>
 </ng-template>

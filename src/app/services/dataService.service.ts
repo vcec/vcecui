@@ -140,4 +140,13 @@ export class DataService {
     return this.httpClient.delete(this.config.serverUrl + 'subCategory/' + id);
   }
 
+  getAllProductsByGroupName(groupName) {
+    return this.httpClient.get(this.config.serverUrl + 'portfolio/group/' + groupName);
+  }
+
+  getProductGroupByGroupName(groupName) {
+    return this.httpClient.get(this.config.serverUrl + "group/groupName/" + groupName);
+  }
+
 }
+

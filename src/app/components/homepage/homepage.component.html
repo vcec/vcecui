@@ -141,7 +141,8 @@
         </div>
       </div>
       <div class="row products">
-        <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index" [routerLink]="['/category']">
+        <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index"
+             [routerLink]="['/category/' + product.group_name]">
           <div class="hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
             <div class="icon">
               <img
@@ -302,9 +303,9 @@
                     <i class="nc-icon-mini users_single-01"></i>
                   </div>
                   <div class="userImage">
-                  <div class="icon" *ngIf="testimonial.userInfo.userImg" >
-                      <img [src]="config.serverUrl + testimonial.userInfo.userImg" alt="" />
-                  </div>
+                    <div class="icon" *ngIf="testimonial.userInfo.userImg">
+                      <img [src]="config.serverUrl + testimonial.userInfo.userImg" alt=""/>
+                    </div>
                   </div>
                   <h4>{{testimonial.userInfo.userName}}</h4>
                   <p>{{testimonial.userInfo.userCompany}}</p>
