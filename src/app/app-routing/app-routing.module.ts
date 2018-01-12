@@ -31,7 +31,11 @@ const routes: Routes = [
     component: ProfileComponent,
   },
   {
-    path: 'category/:groupName',
+    path: 'category/group/:groupName',
+    component: CategoryComponent,
+  },
+  {
+    path: 'category/category/:groupName',
     component: CategoryComponent,
   },
   {

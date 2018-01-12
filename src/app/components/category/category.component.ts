@@ -16,31 +16,49 @@ export class CategoryComponent implements OnInit {
   products: any[] = [];
   groupDetail = {};
   headerImage: SafeUrl = "";
+  isItForGroup = false;
 
-  constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
-    console.log(this.route);
+  constructor(private dataService: DataService, private config: Config,
+              private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
+    if (this.router.url.indexOf('/category/group') != -1) {
+      this.isItForGroup = true;
+    }
     this.route.params.subscribe(params => {
       this.groupName = params['groupName'];
     });
   }
 
   ngOnInit() {
-    this.dataService.getAllProductsByGroupName(this.groupName).subscribe((res) => {
-      this.products = res['data'];
-      console.log(this.products);
-    }, (err) => {
+    if (this.isItForGroup) {
+      this.dataService.getAllProductsByGroupName(this.groupName).subscribe((res) => {
+        this.products = res['data'];
+        console.log(this.products);
+      }, (err) => {
 
-    });
+      });
 
-    this.dataService.getProductGroupByGroupName(this.groupName).subscribe((res) => {
-      this.groupDetail = res['data'];
-      this.headerImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.config.serverUrl}${this.groupDetail['coverImage']})`);
-      console.log(this.headerImage);
-      console.log(this.groupDetail);
-    }, (err) => {
+      this.dataService.getProductGroupByGroupName(this.groupName).subscribe((res) => {
+        this.groupDetail = res['data'];
+        this.headerImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.config.serverUrl}${this.groupDetail['coverImage']})`);
+      }, (err) => {
 
-    });
+      });
+    } else {
+      this.dataService.getAllProductsByCategoryName(this.groupName).subscribe((res) => {
+        this.products = res['data'];
+        console.log(this.products);
+      }, (err) => {
 
+      });
+
+      this.dataService.getCatDetailsByCatName(this.groupName).subscribe((res) => {
+        this.groupDetail = res['data'];
+          console.log(this.groupDetail);
+         this.headerImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.config.serverUrl}${this.groupDetail['coverImage']})`);
+      }, (err) => {
+
+      });
+    }
   }
 
   ngAfterViewInit() {

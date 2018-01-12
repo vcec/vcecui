@@ -142,7 +142,7 @@
       </div>
       <div class="row products">
         <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index"
-             [routerLink]="['/category/' + product.group_name]">
+             [routerLink]="['/category/group' + product.group_name]">
           <div class="hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
             <div class="icon">
               <img
@@ -170,7 +170,8 @@
         </div>
       </div>
       <div class="row solns">
-        <div class="col-md-3" *ngFor="let cat of categories; let i = index">
+        <div class="col-md-3" *ngFor="let cat of categories; let i = index"
+             [routerLink]="['/category/category/' + cat.category_name]">
           <div class="solBox hoverScaleUp hide-on-init animation-delay-{{i+1}}" animateOnScroll
                animationName="animated fadeInUp">
             <div class="icon scaleUpItem">

@@ -148,5 +148,13 @@ export class DataService {
     return this.httpClient.get(this.config.serverUrl + "group/groupName/" + groupName);
   }
 
+  getAllProductsByCategoryName(catName) {
+    return this.httpClient.get(this.config.serverUrl + "portfolio/category/" + catName);
+  }
+
+  getCatDetailsByCatName(catName) {
+    return this.httpClient.get(this.config.serverUrl + "category/categoryName/" + catName);
+  }
+
 }
 
