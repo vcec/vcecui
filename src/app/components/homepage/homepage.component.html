@@ -142,7 +142,7 @@
       </div>
       <div class="row products">
         <div class="col col-xs-12 productBox" *ngFor="let product of products; let i = index"
-             [routerLink]="['/category/group' + product.group_name]">
+             [routerLink]="['/category/group/' + product.group_name]">
           <div class="hide-on-init animation-delay-{{i+1}}" animateOnScroll animationName="animated fadeInUp">
             <div class="icon">
               <img
