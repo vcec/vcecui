@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
   <div class="row">
     <div class="col-md-6">
       <div class="alert-danger alert" *ngIf="loginError">{{loginError}}</div>
@@ -21,4 +21,36 @@
       </form>
     </div>
   </div>
+</div>-->
+<div class="fullscreen signin">
+  <div style="width: 400px;margin: 40px auto;">
+    <a class="signin-pb-logo" href="http://www.pb.com"></a>
+    <div class="signin-box">
+      <h1 class="signin-heading">Virtual Client Experience<sup>&trade;</sup></h1>
+      <div class="alert-danger alert" *ngIf="loginError">{{loginError}}</div>
+      <form autocomplete="off" name="myForm" class="spacer-top-md" novalidate (ngSubmit)="login()" #f="ngForm">
+        <div class="form-group" ng-class="{'has-error': myForm.name.$error.required  && myForm.name.$dirty}">
+          <label for="userId">
+            User Id
+          </label>
+          <input type="text" id="userId" class="form-control" name="userId" ngModel #userId="ngModel" email required
+                 (input)="loginError=''"/>
+          <span class="help-block" *ngIf="f.submitted && userId.invalid">
+          Enter valid user id
+        </span>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="text" class="form-control" name="password" type="password" ngModel #password="ngModel" required
+                 (input)="loginError=''"/>
+          <div class="help-text" *ngIf="f.submitted && password.invalid">Please Enter valid password!</div>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg spacer-top-xs" [disabled]="f.invalid" type="submit">
+          Login
+        </button>
+      </form>
+    </div>
+    <!-- // end white box -->
+  </div>
 </div>
+
