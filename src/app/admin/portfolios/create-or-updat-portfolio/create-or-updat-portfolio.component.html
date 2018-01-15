@@ -60,7 +60,7 @@
                   </button>
                 </div>
               </div>
-              <div *ngIf="coverImage" style="position: relative;">
+              <div *ngIf="coverImage && coverImage.url" style="position: relative;">
                 <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
                 <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                    (click)="coverImage=null">
@@ -348,14 +348,13 @@
           </div>
         </div>
         <div class="form-buttons">
-          <button type="submit" class="btn btn-primary" [disabled]="f.invalid || !coverImage.url || !mainVideo.url ||
-          (isFeaturedProduct && !featuredProductImage)">Save
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid || !(coverImage ?  coverImage.url : '') ||
+          !(mainVideo ?  mainVideo.url : '') || (isFeaturedProduct && !featuredProductImage)">Save
           </button>
           <button type="reset" class="btn btn-default" routerLink="/admin/portfolios">Cancel</button>
         </div>
       </form>
     </div>
-
     <div class="col-md-12 editPortfolio"
          *ngIf="editPortfolioState">
       <form (ngSubmit)="onUpdate()" #f="ngForm">

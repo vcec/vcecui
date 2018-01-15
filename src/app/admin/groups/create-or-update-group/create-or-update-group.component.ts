@@ -4,6 +4,7 @@ import {DataService} from "../../../services/dataService.service";
 import {Config} from "../../../services/config.service";
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {NgForm} from "@angular/forms";
+import {CookieService} from "angular2-cookie/services/cookies.service";
 
 declare var $: any;
 
@@ -26,17 +27,21 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   groupToEdit = {};
   image: string = '';
   coverImage: string = '';
-  imageUploadConfig = {
-    url: this.config.serverUrl + 'upload/uploadImage',
-    acceptedFiles: 'image/*'
-  };
+  imageUploadConfig = {};
+  token = '';
 
   constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService,
-              private config: Config, public toastr: ToastsManager, vcr: ViewContainerRef) {
+              private config: Config, public toastr: ToastsManager, vcr: ViewContainerRef, private cookieService: CookieService) {
+    this.token = this.cookieService.get('accessToken');
     this.route.params.subscribe(params => {
       this.Id = params['id'];
     });
     this.toastr.setRootViewContainerRef(vcr);
+    this.imageUploadConfig = {
+      url: this.config.serverUrl + 'upload/uploadImage',
+      acceptedFiles: 'image/*',
+      headers: {'x-access-token': this.token},
+    };
   }
 
   ngOnInit() {

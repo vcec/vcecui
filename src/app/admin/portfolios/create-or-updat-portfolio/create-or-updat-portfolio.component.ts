@@ -5,6 +5,7 @@ import {ToastsManager} from "ng2-toastr";
 import {DialogService} from "ng2-bootstrap-modal";
 import {Config} from "../../../services/config.service";
 import {NgForm} from "@angular/forms";
+import {CookieService} from "angular2-cookie/services/cookies.service";
 
 declare var $: any;
 
@@ -72,29 +73,40 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   articles: CommonObjForData[] = [];
   other: CommonObjForData[] = [];
   demos: CommonObjForData[] = [];
+  token = '';
 
+  imageUploadConfig = {};
 
-  imageUploadConfig = {
-    url: this.config.serverUrl + 'upload/uploadImage',
-    acceptedFiles: 'image/*'
-  };
+  videoUploadConfig = {};
 
-  videoUploadConfig = {
-    url: this.config.serverUrl + 'upload/uploadVideo',
-    acceptedFiles: 'video/*'
-  };
-
-  pdfUploadConfig = {
-    url: this.config.serverUrl + 'upload/uploadPdf',
-    acceptedFiles: 'application/pdf'
-  };
+  pdfUploadConfig = {};
 
   constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
-              public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService) {
+              public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService, private cookieService: CookieService) {
+    this.token = this.cookieService.get('accessToken');
     this.route.params.subscribe((params) => {
       this.Id = params['id'];
     });
     this.toastr.setRootViewContainerRef(vcr);
+
+    this.imageUploadConfig = {
+      url: this.config.serverUrl + 'upload/uploadImage',
+      acceptedFiles: 'image/*',
+      headers: {'x-access-token': this.token}
+    };
+
+    this.videoUploadConfig = {
+      url: this.config.serverUrl + 'upload/uploadVideo',
+      acceptedFiles: 'video/*',
+      headers: {'x-access-token': this.token}
+    };
+
+    this.pdfUploadConfig = {
+      url: this.config.serverUrl + 'upload/uploadPdf',
+      acceptedFiles: 'application/pdf',
+      headers: {'x-access-token': this.token}
+    };
+
   }
 
   ngOnInit() {
@@ -206,6 +218,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onImageUploadSuccess(event) {
+
     if (event[1].data.urlPath) {
       this.videoCoverImage = event[1].data.urlPath;
     }

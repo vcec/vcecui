@@ -42,16 +42,12 @@ export class DataService {
 
   // get all portfolios
   getAllPortFolios() {
-    return this.httpClient.get(this.config.serverUrl + 'portfolio', {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'portfolio');
   }
 
   // get portfolio by id
   getPortFolio(id) {
-    return this.httpClient.get(this.config.serverUrl + 'portfolio/' + id, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'portfolio/' + id);
   }
 
   // delete portfolio
@@ -61,12 +57,9 @@ export class DataService {
     });
   }
 
-
   // get all groups
   getAllGroups() {
-    return this.httpClient.get(this.config.serverUrl + 'group', {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'group');
   }
 
   // update group
@@ -92,23 +85,16 @@ export class DataService {
 
   //get group by id
   getGroupById(id) {
-    return this.httpClient.get(this.config.serverUrl + 'group/' + id, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'group/' + id);
   }
-
 
   // get all solutions/category
   getAllCategories() {
-    return this.httpClient.get(this.config.serverUrl + 'category', {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'category');
   }
 
   getCategoryById(id) {
-    return this.httpClient.get(this.config.serverUrl + 'category/' + id, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'category/' + id);
   }
 
   // create category(solution)
@@ -133,15 +119,11 @@ export class DataService {
   }
 
   getAllTestimonials() {
-    return this.httpClient.get(this.config.serverUrl + 'testimonial', {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'testimonial');
   }
 
   getTestimonialById(id) {
-    return this.httpClient.get(this.config.serverUrl + 'testimonial/' + id, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'testimonial/' + id);
   }
 
   deleteTestimonial(id) {
@@ -163,21 +145,15 @@ export class DataService {
   }
 
   getSubcategoriesOfMainCat(mainCatId) {
-    return this.httpClient.get(this.config.serverUrl + 'categories/mainCategory/' + mainCatId, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'categories/mainCategory/' + mainCatId);
   }
 
   getAllSubcategories() {
-    return this.httpClient.get(this.config.serverUrl + 'subCategory', {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'subCategory');
   }
 
   getSubCategoryById(id) {
-    return this.httpClient.get(this.config.serverUrl + 'subCategory/' + id, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'subCategory/' + id);
   }
 
   saveSubCategory(data) {
@@ -199,27 +175,19 @@ export class DataService {
   }
 
   getAllProductsByGroupName(groupName) {
-    return this.httpClient.get(this.config.serverUrl + 'portfolio/group/' + groupName, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + 'portfolio/group/' + groupName);
   }
 
   getProductGroupByGroupName(groupName) {
-    return this.httpClient.get(this.config.serverUrl + "group/groupName/" + groupName, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + "group/groupName/" + groupName);
   }
 
   getAllProductsByCategoryName(catName) {
-    return this.httpClient.get(this.config.serverUrl + "portfolio/category/" + catName, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + "portfolio/category/" + catName);
   }
 
   getCatDetailsByCatName(catName) {
-    return this.httpClient.get(this.config.serverUrl + "category/categoryName/" + catName, {
-      headers: {'x-access-token': this.accessToken}
-    });
+    return this.httpClient.get(this.config.serverUrl + "category/categoryName/" + catName);
   }
 }
 

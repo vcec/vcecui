@@ -5,6 +5,7 @@ import {Config} from "../../../services/config.service";
 import {ToastsManager} from "ng2-toastr";
 import {DataService} from "../../../services/dataService.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
 
 declare var $: any;
 
@@ -22,18 +23,22 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
   };
   Id: string;
   image: "";
-
-  imageUploadConfig = {
-    url: this.config.serverUrl + 'upload/uploadImage',
-    acceptedFiles: 'image/*'
-  };
+  token = "";
+  imageUploadConfig = {};
 
   constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
-              public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService) {
+              public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService, private cookieService: CookieService) {
+    this.token = this.cookieService.get('accessToken');
     this.route.params.subscribe((params) => {
       this.Id = params['id'];
     });
     this.toastr.setRootViewContainerRef(vcr);
+
+    this.imageUploadConfig = {
+      url: this.config.serverUrl + 'upload/uploadImage',
+      acceptedFiles: 'image/*',
+      headers: {'x-access-token': this.token}
+    };
   }
 
   ngOnInit() {

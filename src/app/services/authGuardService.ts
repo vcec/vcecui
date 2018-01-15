@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     if (this._cookieService.get('accessToken')) {
       return true;
     }
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
     return false;
   }
 

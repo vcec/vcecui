@@ -4,6 +4,7 @@ import {NgForm} from "@angular/forms";
 import {Config} from "../../../services/config.service";
 import {ToastsManager} from "ng2-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/services/cookies.service";
 
 declare var $: any;
 
@@ -25,18 +26,21 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   catToEdit = {};
   image: "";
   coverImage = "";
-
-  imageUploadConfig = {
-    url: this.config.serverUrl + 'upload/uploadImage',
-    acceptedFiles: 'image/*'
-  };
+  token = "";
+  imageUploadConfig: {};
 
   constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService,
-              private config: Config, public toastr: ToastsManager, vcr: ViewContainerRef) {
+              private config: Config, public toastr: ToastsManager, vcr: ViewContainerRef, private cookieService: CookieService) {
+    this.token = this.cookieService.get('accessToken');
     this.route.params.subscribe(params => {
       this.Id = params['id'];
     });
     this.toastr.setRootViewContainerRef(vcr);
+    this.imageUploadConfig = {
+      url: this.config.serverUrl + 'upload/uploadImage',
+      acceptedFiles: 'image/*',
+      headers: {'x-access-token': this.token},
+    };
   }
 
   ngOnInit() {
