@@ -7,11 +7,21 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" name="title" ngModel/>
+              <input type="text" class="form-control" id="title" name="title" ngModel required/>
+              <div class="help-text"
+                   *ngIf="f.submitted && (!f.form.controls['name'] || !f.form.controls['name'].value)">
+                Please enter title for portfolio.
+              </div>
             </div>
             <div class="form-group">
               <label for="subtitle">Sub Title</label>
               <input type="text" class="form-control" id="subtitle" name="subtitle" ngModel/>
+              <div class="help-text"
+                   *ngIf="f.submitted && (!f.form.controls['subtitle'] || !f.form.controls['subtitle'].value)">
+                Please
+                enter
+                subtitle for portfolio.
+              </div>
             </div>
             <div class="form-group">
               <label>Is it a featured product:</label>
@@ -56,6 +66,7 @@
                    (click)="coverImage=null">
                 </i>
               </div>
+              <div class="help-text" *ngIf="!coverImage && f.submitted">Cover Image is required.</div>
             </div>
             <div class="form-group">
               <label>Main Video <span (click)="show('showMainVideoForm')" *ngIf="!mainVideo">+</span></label>
@@ -81,6 +92,7 @@
                                             (click)="mainVideo =null">X</span>
                 </label>
               </div>
+              <div class="help-text" *ngIf="!mainVideo && f.submitted">Main video is required.</div>
             </div>
             <div class="form-group">
               <label>Other Related Videos<span (click)="show('showOtherVideoForm')">+</span></label>
@@ -163,7 +175,9 @@
                             (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-sm btn-primary" (click)="handleUpload('whitePaper')">Add</button>
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('whitePaper')"
+                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                  </button>
                 </div>
               </div>
             </div>
@@ -268,31 +282,44 @@
             <div class="form-group">
               <label for="desc">Description</label>
               <input type="text" class="form-control" id="desc" name="desc" ngModel/>
+              <div class="help-text"
+                   *ngIf="f.submitted && (!f.form.controls['desc'] || !f.form.controls['desc'].value)">Description is
+                required.
+              </div>
             </div>
             <div class="form-group">
               <label for="demoUrl">External Demo Url</label>
               <input type="text" class="form-control" id="demoUrl" name="demoUrl" ngModel/>
+              <div class="help-text"
+                   *ngIf="f.submitted && (!f.form.controls['demoUrl'] || !f.form.controls['demoUrl'].value)">External
+                demo urls
+                required.
+              </div>
             </div>
             <div class="card">
               <div class="card-header ">Select Group</div>
               <div class="card-body">
                 <div class="controls-stacked">
-                  <form>
-                    <label class="control checkbox" *ngFor="let group of productGroups">
-                      <input type="checkbox" [(ngModel)]="group.checked" name="prdGrp">
-                      <span class="control-indicator"></span>{{group.name}}
-                    </label>
-                  </form>
+                  <label class="control checkbox" *ngFor="let group of productGroups">
+                    <input type="checkbox" [(ngModel)]="group.checked" name="prdGrp" required>
+                    <span class="control-indicator"></span>{{group.name}}
+                  </label>
                 </div>
               </div>
+            </div>
+            <div class="help-text"
+                 *ngIf="f.form.controls['prdGrp'] && f.form.controls['prdGrp'].status == 'INVALID'">Please
+              select product
+              group
             </div>
             <div class="card">
               <div class="card-header">Select Category and Sub Category</div>
               <div class="card-body">
                 <div class="controls-stacked">
                   <label class="control checkbox" *ngFor="let solution of solutions">
-                    <input type="checkbox" [(ngModel)]="solution.checked" name="soltn"
-                           (change)="solution.name=='Featured Solutions'? isFeaturedProduct =solution.checked:''">
+                    <input type="checkbox" ngModel (change)="solution.checked = !solution.checked"
+                           [checked]="solution.checked" name="soltn"
+                           required>
                     <span class="control-indicator"></span>{{solution.name}}
                     <br>
                     <div class="controls-stacked">
@@ -300,7 +327,7 @@
                         <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
                           <input [name]="solution.name" type="radio" [value]="subSolution.name"
                                  [checked]="checkIsItSelected(subSolution.name)"
-                                 (change)="changeSubCatSelection(subSolution.name)">
+                                 (change)="solution.checked=true;changeSubCatSelection(subSolution.name)">
                           <span class="control-indicator"></span>
                           {{subSolution.name}}
                         </label>
@@ -308,13 +335,22 @@
                     </div>
                   </label>
                 </div>
-
               </div>
+            </div>
+            <div class="help-text"
+                 *ngIf="f.form.controls['soltn'] && f.form.controls['soltn'].status == 'INVALID'">Please
+              select category.
+            </div>
+            <div class="help-text"
+                 *ngIf="f.form.controls['subSoltn'] && f.form.controls['subSoltn'].status == 'INVALID'">Please
+              select sub category.
             </div>
           </div>
         </div>
         <div class="form-buttons">
-          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid || !coverImage.url || !mainVideo.url ||
+          (isFeaturedProduct && !featuredProductImage)">Save
+          </button>
           <button type="reset" class="btn btn-default" routerLink="/admin/portfolios">Cancel</button>
         </div>
       </form>
@@ -489,7 +525,9 @@
                             (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-sm btn-primary" (click)="handleUpload('whitePaper')">Add</button>
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('whitePaper')"
+                          [disabled]="!lastUpload || !uploadFormTitle">Add
+                  </button>
                 </div>
               </div>
             </div>
@@ -605,22 +643,25 @@
               <div class="card-body">
 
                 <div class="controls-stacked">
-                  <form>
-                    <label class="control checkbox" *ngFor="let group of productGroups">
-                      <input type="checkbox" (change)="group.checked = !group.checked"
-                             [checked]="group.checked">
-                      <span class="control-indicator"></span>{{group.name}}
-                    </label>
-                  </form>
+                  <label class="control checkbox" *ngFor="let group of productGroups">
+                    <input type="checkbox" (change)="group.checked = !group.checked" required ngModel
+                           [checked]="group.checked" name="editPrdGrp">
+                    <span class="control-indicator"></span>{{group.name}}
+                  </label>
                 </div>
               </div>
+            </div>
+            <div class="help-text"
+                 *ngIf="f.form.controls['editPrdGrp'] && f.form.controls['editPrdGrp'].status == 'INVALID'">Please
+              select product
+              group
             </div>
             <div class="card">
               <div class="card-header">Select Category and Sub Category</div>
               <div class="card-body">
                 <div class="controls-stacked">
                   <label class="control checkbox" *ngFor="let solution of solutions">
-                    <input type="checkbox" [checked]="solution.checked"
+                    <input type="checkbox" [checked]="solution.checked" name="editSolution" ngModel required
                            (change)="solution.checked = !solution.checked">
                     <span class="control-indicator"></span>{{solution.name}}
                     <br>
@@ -629,7 +670,7 @@
                         <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
                           <input [name]="solution.name" type="radio" [value]="subSolution.name"
                                  [checked]="checkIsItSelected(subSolution.name)"
-                                 (change)="changeSubCatSelection(subSolution.name)">
+                                 (change)="solution.checked =true;changeSubCatSelection(subSolution.name)">
                           <span class="control-indicator"></span>
                           {{subSolution.name}}
                         </label>
@@ -639,12 +680,18 @@
                 </div>
               </div>
             </div>
+            <div class="help-text"
+                 *ngIf="f.form.controls['editSolution'] && f.form.controls['editSolution'].status == 'INVALID'">Please
+              select category.
+            </div>
           </div>
         </div>
 
 
         <div class="form-buttons">
-          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid || !coverImage.url || !mainVideo.url ||
+          (isFeaturedProduct && !featuredProductImage)">Save
+          </button>
           <button type="reset" class="btn btn-default" routerLink="/admin/portfolios">Cancel</button>
         </div>
       </form>

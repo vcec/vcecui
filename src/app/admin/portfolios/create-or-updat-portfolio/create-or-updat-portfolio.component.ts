@@ -293,6 +293,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     }
   }
 
+
   checkIsItSelected(name) {
     if (this.selectedSubSolutions.indexOf(name) == -1) {
       return false;
@@ -401,6 +402,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.portfolioForm);
     let selectedSolutions = [];
     this.solutions.forEach((v, i) => {
       v.checked ? selectedSolutions.push(v.name) : '';

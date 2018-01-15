@@ -11,7 +11,8 @@ declare var $: any;
 
 @Component({
   selector: 'app-groups',
-  templateUrl: './groups.component.html'
+  templateUrl: './groups.component.html',
+  styleUrls: ['./groups.component.scss']
 })
 
 export class GroupsComponent implements OnInit {
