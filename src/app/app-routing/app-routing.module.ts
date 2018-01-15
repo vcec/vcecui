@@ -16,6 +16,8 @@ import {CreateOrUpdateGroupComponent} from "../admin/groups/create-or-update-gro
 import {CreateOrUpdatTestimonialComponent} from "../admin/testimonials/create-or-updat-testimonial/create-or-updat-testimonial.component";
 import {SubCategoryComponent} from "../admin/sub-category/sub-category.component";
 import {CreateOrUpdateSubCatComponent} from "../admin/sub-category/create-or-update-sub-cat/create-or-update-sub-cat.component";
+import {LoginComponent} from "../admin/login/login.component";
+import {AuthGuardService} from "../services/authGuardService";
 
 const routes: Routes = [
   {
@@ -39,24 +41,29 @@ const routes: Routes = [
     component: CategoryComponent,
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuardService],
     children: [
-      {path: 'groups/create', component: CreateOrUpdateGroupComponent},
-      {path: 'groups/update/:id', component: CreateOrUpdateGroupComponent},
-      {path: 'groups', component: GroupsComponent},
-      {path: 'categories/create', component: CreateOrUpdateCategoryComponent},
-      {path: 'categories/update/:id', component: CreateOrUpdateCategoryComponent},
-      {path: 'categories', component: CategoriesComponent},
-      {path: 'portfolios/create', component: CreateOrUpdatPortfolioComponent},
-      {path: 'portfolios/update/:id', component: CreateOrUpdatPortfolioComponent},
-      {path: 'portfolios', component: PortfoliosComponent},
-      {path: 'testimonials/create', component: CreateOrUpdatTestimonialComponent},
-      {path: 'testimonials/update/:id', component: CreateOrUpdatTestimonialComponent},
-      {path: 'testimonials', component: TestimonialsComponent},
-      {path: 'subCategory', component: SubCategoryComponent},
-      {path: 'subCategory/create', component: CreateOrUpdateSubCatComponent},
-      {path: 'subCategory/update/:id', component: CreateOrUpdateSubCatComponent},
+      {path: 'groups/create', component: CreateOrUpdateGroupComponent, canActivate: [AuthGuardService]},
+      {path: 'groups/update/:id', component: CreateOrUpdateGroupComponent, canActivate: [AuthGuardService]},
+      {path: 'groups', component: GroupsComponent, canActivate: [AuthGuardService]},
+      {path: 'categories/create', component: CreateOrUpdateCategoryComponent, canActivate: [AuthGuardService]},
+      {path: 'categories/update/:id', component: CreateOrUpdateCategoryComponent, canActivate: [AuthGuardService]},
+      {path: 'categories', component: CategoriesComponent, canActivate: [AuthGuardService]},
+      {path: 'portfolios/create', component: CreateOrUpdatPortfolioComponent, canActivate: [AuthGuardService]},
+      {path: 'portfolios/update/:id', component: CreateOrUpdatPortfolioComponent, canActivate: [AuthGuardService]},
+      {path: 'portfolios', component: PortfoliosComponent, canActivate: [AuthGuardService]},
+      {path: 'testimonials/create', component: CreateOrUpdatTestimonialComponent, canActivate: [AuthGuardService]},
+      {path: 'testimonials/update/:id', component: CreateOrUpdatTestimonialComponent, canActivate: [AuthGuardService]},
+      {path: 'testimonials', component: TestimonialsComponent, canActivate: [AuthGuardService]},
+      {path: 'subCategory', component: SubCategoryComponent, canActivate: [AuthGuardService]},
+      {path: 'subCategory/create', component: CreateOrUpdateSubCatComponent, canActivate: [AuthGuardService]},
+      {path: 'subCategory/update/:id', component: CreateOrUpdateSubCatComponent, canActivate: [AuthGuardService]},
     ]
   }
 ];

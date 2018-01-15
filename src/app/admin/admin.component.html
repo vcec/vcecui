@@ -70,21 +70,21 @@
              aria-expanded="false">
 
             <div class="d-none d-lg-block header-user-lockup">
-              <div class="header-username">Melanie Daniels</div>
+              <div class="header-username">{{currentUserId}}</div>
 
             </div>
 
             <span class="d-lg-none"
                   id="username-offscreen">
-            <i class="nc-icon-mini users_circle-10"></i>&nbsp;Melanie Daniels
+            <i class="nc-icon-mini users_circle-10"></i>&nbsp;{{currentUserId}}
           </span>
           </a>
 
           <div class="dropdown-menu"
                role="menu">
-            <a class="dropdown-item"
-               href="">Change Password</a>
-            <a class="dropdown-item"
+            <!--   <a class="dropdown-item"
+                  href="">Change Password</a>-->
+            <a class="dropdown-item" (click)="signOut()"
                href="">Sign Out</a>
           </div>
         </li>

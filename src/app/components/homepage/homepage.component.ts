@@ -3,6 +3,8 @@ import {OwlCarousel} from 'ngx-owl-carousel';
 import {fadeInAnimation} from '../../_animations/index';
 import {DataService} from '../../services/dataService.service';
 import {Config} from "../../services/config.service";
+import {CookieService} from 'angular2-cookie/core';
+
 
 declare var $: any;
 
@@ -22,9 +24,12 @@ export class HomepageComponent implements OnInit {
   testimonials: any[] = [];
   categories: any[] = [];
   portfolios: any[] = [];
+  isAdminUser: boolean = false;
 
-  constructor(private dataService: DataService, private config: Config) {
-
+  constructor(private dataService: DataService, private config: Config, private _cookieService: CookieService) {
+    if (this._cookieService.get('accessToken')) {
+      this.isAdminUser = true;
+    }
   }
 
   ngOnInit() {
@@ -72,7 +77,6 @@ export class HomepageComponent implements OnInit {
       }
     });
   }
-
 
   goNext() {
     this.owlInfo.next();

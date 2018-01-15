@@ -35,6 +35,9 @@ import {CreateOrUpdatPortfolioComponent} from './admin/portfolios/create-or-upda
 import {CategoryComponent} from './components/category/category.component';
 import {SubCategoryComponent} from './admin/sub-category/sub-category.component';
 import {CreateOrUpdateSubCatComponent} from './admin/sub-category/create-or-update-sub-cat/create-or-update-sub-cat.component';
+import {CookieService} from 'angular2-cookie/services/cookies.service';
+import {LoginComponent} from './admin/login/login.component';
+import {AuthGuardService} from './services/authGuardService';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:3001/uploadImage',
@@ -61,7 +64,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     CreateOrUpdatPortfolioComponent,
     CategoryComponent,
     SubCategoryComponent,
-    CreateOrUpdateSubCatComponent
+    CreateOrUpdateSubCatComponent,
+    LoginComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -78,6 +82,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     BootstrapModalModule.forRoot({container: document.body})
   ],
   providers: [HttpClientModule,
+    CookieService,
+    AuthGuardService,
     DataService, Config,
     {
       provide: DROPZONE_CONFIG,

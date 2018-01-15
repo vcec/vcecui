@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {CookieService} from 'angular2-cookie/core';
+
 
 @Component({
   selector: 'app-admin',
@@ -7,11 +9,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() {
+  currentUserId = '';
 
+  constructor(private _cookieService: CookieService) {
+    this.currentUserId = this._cookieService.get('userId');
   }
 
   ngOnInit() {
+  }
+
+  signOut() {
+    this._cookieService.removeAll();
   }
 
 }

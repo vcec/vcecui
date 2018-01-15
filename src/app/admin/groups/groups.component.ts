@@ -4,8 +4,9 @@ import {Config} from "../../services/config.service";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {DialogService} from "ng2-bootstrap-modal";
-import {Router, Route, ActivatedRoute} from "@angular/router";
+import {Router, Route, ActivatedRoute, CanActivate} from "@angular/router";
 import {ConfirmComponent} from "../confirmComponent/confirm.component";
+import {AuthGuardService} from "../../services/authGuardService";
 
 declare var $: any;
 
