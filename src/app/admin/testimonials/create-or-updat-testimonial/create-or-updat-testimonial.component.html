@@ -8,13 +8,13 @@
             <label>User Name</label>
             <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.userInfo.userName" required
                    name="testimonialToEdit.userInfo.userName" #editUserName="ngModel">
-            <div class="help-text" *ngIf="!editUserName.valid">Please enter user name</div>
+            <div class="help-text" *ngIf="!editUserName.valid && f.submitted">Please enter user name</div>
           </div>
           <div class="form-group">
             <label>User Company Name</label>
             <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.userInfo.userCompany" required
                    name="testimonialToEdit.userInfo.userCompany" #editUserCompany="ngModel">
-            <div class="help-text" *ngIf="!editUserCompany.valid">Please enter user company name!</div>
+            <div class="help-text" *ngIf="!editUserCompany.valid && f.submitted">Please enter user company name!</div>
           </div>
           <div class="form-group">
             <label>User Image</label>
@@ -35,10 +35,10 @@
             <label>Main Text</label>
             <input type="text" class="form-control" [(ngModel)]="testimonialToEdit.mainText" required
                    name="testimonialToEdit.mainText" #editMainText="ngModel">
-            <div class="help-text" *ngIf="!editMainText.valid">Please enter main text!</div>
+            <div class="help-text" *ngIf="!editMainText.valid && f.submitted">Please enter main text!</div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Update Testimonial</button>
+            <button class="btn btn-primary" type="submit">Update Testimonial</button>
           </div>
         </form>
       </div>
@@ -48,13 +48,13 @@
             <label>User Name</label>
             <input type="text" class="form-control" required #userName="ngModel"
                    name="userName" ngModel>
-            <div class="help-text" *ngIf="!userName.valid">Please Enter Valid User Name!</div>
+            <div class="help-text" *ngIf="!userName.valid && f.submitted">Please Enter Valid User Name!</div>
           </div>
           <div class="form-group">
             <label>User Company Name</label>
             <input type="text" class="form-control" ngModel required #userCompany="ngModel"
                    name="userCompany">
-            <div class="help-text" *ngIf="!userCompany.valid">Please Enter Valid User Company!</div>
+            <div class="help-text" *ngIf="!userCompany.valid && f.submitted">Please Enter Valid User Company!</div>
           </div>
           <div class="form-group">
             <label>User Image</label>
@@ -73,10 +73,10 @@
             <label>Main Text</label>
             <input type="text" class="form-control" ngModel required #mainText="ngModel"
                    name="mainText">
-            <div class="help-text" *ngIf="!mainText.valid">Please Enter text!</div>
+            <div class="help-text" *ngIf="!mainText.valid && f.submitted">Please Enter text!</div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Add New Testimonial</button>
+            <button class="btn btn-primary" type="submit">Add New Testimonial</button>
           </div>
         </form>
       </div>

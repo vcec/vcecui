@@ -382,6 +382,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onUpdate() {
+    debugger;
     if (this.portfolioForm.invalid || !this.coverImage || !this.mainVideo ||
       (this.isFeaturedProduct && !this.featuredProductImage) || !this.checkIfAnyGroupSelected() || !this.checkIfAnySolutionSelected()) {
       return;

@@ -74,6 +74,9 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
   }
 
   onUpdate() {
+    if (this.groupForm.invalid) {
+      return false;
+    }
     let testimonial = {
       userInfo: {
         userName: this.groupForm.controls['testimonialToEdit.userInfo.userName'].value,
@@ -91,6 +94,9 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
   }
 
   onCreate() {
+    if (this.groupForm.invalid) {
+      return false;
+    }
     let testimonial = {
       userInfo: {
         userName: this.groupForm.value.userName,

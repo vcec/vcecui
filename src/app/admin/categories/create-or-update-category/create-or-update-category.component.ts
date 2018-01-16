@@ -11,11 +11,7 @@ declare var $: any;
 @Component({
   selector: 'app-create-or-update-category',
   templateUrl: './create-or-update-category.component.html',
-  styles: [`
-    .dz-preview {
-      display: none !important;
-    }
-  `],
+  styleUrls: ['./create-or-update-category.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class CreateOrUpdateCategoryComponent implements OnInit {
@@ -89,6 +85,10 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onCreate() {
+    if (this.groupForm.invalid || !this.image || !this.coverImage) {
+      return false;
+    }
+
     let data = $.extend(this.groupForm.value, {
       img: this.image, coverImage: this.coverImage, addedBy: this.currentUser
     });
@@ -104,6 +104,9 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onUpdate() {
+    if (this.groupForm.invalid || !this.image || !this.coverImage) {
+      return false;
+    }
     let data = {
       category_name: this.groupForm.controls['catToEdit.category_name'].value,
       desc: this.groupForm.controls['catToEdit.desc'].value,

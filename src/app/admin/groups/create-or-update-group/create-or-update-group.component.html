@@ -1,77 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <div *ngIf="editGroupState" class="editGroup">
-        <h3>Edit Group:</h3>
-        <form (ngSubmit)="onUpdate()" #f="ngForm">
-          <div class="form-group">
-            <label>Group Name</label>
-            <input type="text" class="form-control" [(ngModel)]="groupToEdit.group_name" name="groupToEdit.group_name"
-                   required
-                   #groupEditName="ngModel">
-            <div class="help-text" *ngIf="!groupEditName.valid">Please Enter Valid Group Name!</div>
-          </div>
-          <div class="form-group">
-            <label>Group Description</label>
-            <input type="text" class="form-control" [(ngModel)]="groupToEdit.desc" name="groupToEdit.desc" required
-                   #groupEditDesc="ngModel">
-            <div class="help-text" *ngIf="!groupEditDesc.valid">Please Enter Valid Group Description!</div>
-          </div>
-          <div class="form-group">
-            <label>Group Icon Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                      (error)="onImageUploadError($event)" (success)="onImageUploadSuccess($event)" id="featureImage"
-                      name="featureImage"></dropzone>
-            <div class="help-text" *ngIf="!image">Please Upload Image!</div>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
-                 *ngIf="image">
-              <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
-              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
-                 (click)="onRemoved()">
-              </i>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Group Cover Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                      (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
-                      id="featureImage"
-                      name="featureImage"></dropzone>
-            <div class="help-text" *ngIf="!image">Please Upload Cover Image!</div>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
-                 *ngIf="coverImage">
-              <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
-              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
-                 (click)="onCoverImageRemoved()">
-              </i>
-            </div>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!f.valid || !image || !coverImage">Update Group
-            </button>
-          </div>
-        </form>
-      </div>
+    <div class="col-md-8 align-self-center">
       <div *ngIf="addGroupState">
+        <h1 class="mainHeading">Add New Group</h1>
         <form (ngSubmit)="onCreate()" #f="ngForm">
           <div class="form-group">
             <label>Group Name</label>
             <input type="text" class="form-control" ngModel name="group_name" required
                    #groupName="ngModel">
-            <div class="help-text" *ngIf="!groupName.valid">Please Enter Valid Group Name!</div>
+            <div class="help-text" *ngIf="!groupName.valid && f.submitted">Please Enter Valid Group Name</div>
           </div>
           <div class="form-group">
             <label>Group Description</label>
             <input type="text" class="form-control" ngModel name="desc" required
                    #groupDesc="ngModel">
-            <div class="help-text" *ngIf="!groupDesc.valid">Please Enter Valid Group Description!</div>
+            <div class="help-text" *ngIf="!groupDesc.valid  && f.submitted">Please Enter Valid Group Description!</div>
           </div>
           <div class="form-group">
             <label>Group Image</label>
             <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                       (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
-            <div class="help-text" *ngIf="!image">Please Upload Image!</div>
+            <div class="help-text" *ngIf="!image && f.submitted">Please Upload Image!</div>
             <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
                  *ngIf="image">
               <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
@@ -87,7 +37,7 @@
                       id="featureImage"
                       name="featureImage"></dropzone>
 
-            <div class="help-text" *ngIf="!image">Please Upload Cover Image!</div>
+            <div class="help-text" *ngIf="!coverImage && f.submitted">Please Upload Cover Image!</div>
             <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
                  *ngIf="coverImage">
               <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
@@ -97,7 +47,59 @@
             </div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!f.valid || !image || !coverImage">Add New Group
+            <button class="btn btn-primary" type="submit">Add New Group
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="editGroupState" class="editGroup">
+        <h1 class="mainHeading">Edit Group</h1>
+        <form (ngSubmit)="onUpdate()" #f="ngForm">
+          <div class="form-group">
+            <label>Group Name</label>
+            <input type="text" class="form-control" [(ngModel)]="groupToEdit.group_name" name="groupToEdit.group_name"
+                   required #groupEditName="ngModel">
+            <div class="help-text" *ngIf="!groupEditName.valid && f.submitted">Please Enter Valid Group Name!</div>
+          </div>
+          <div class="form-group">
+            <label>Group Description</label>
+            <input type="text" class="form-control" [(ngModel)]="groupToEdit.desc" name="groupToEdit.desc" required
+                   #groupEditDesc="ngModel">
+            <div class="help-text" *ngIf="!groupEditDesc.valid && f.submitted">Please Enter Valid Group Description!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Group Icon Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onImageUploadError($event)" (success)="onImageUploadSuccess($event)" id="featureImage"
+                      name="featureImage"></dropzone>
+            <div class="help-text" *ngIf="!image && f.submitted">Please Upload Image!</div>
+            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+                 *ngIf="image">
+              <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Group Cover Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
+                      id="featureImage"
+                      name="featureImage"></dropzone>
+            <div class="help-text" *ngIf="!coverImage && f.submitted">Please Upload Cover Image!</div>
+            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+                 *ngIf="coverImage">
+              <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onCoverImageRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Update Group
             </button>
           </div>
         </form>

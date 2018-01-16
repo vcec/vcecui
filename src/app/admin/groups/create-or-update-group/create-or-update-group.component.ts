@@ -11,14 +11,9 @@ declare var $: any;
 @Component({
   selector: 'app-create-or-update-group',
   templateUrl: './create-or-update-group.component.html',
-  styles: [`
-    .dz-preview {
-      display: none !important;
-    }
-  `],
+  styleUrls: ['./create-or-update-group.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-
 export class CreateOrUpdateGroupComponent implements OnInit {
   @ViewChild('f') groupForm: NgForm;
   private Id: string;
@@ -92,6 +87,9 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   }
 
   onCreate() {
+    if (this.groupForm.invalid || !this.image || !this.coverImage) {
+      return false;
+    }
     let data = $.extend(this.groupForm.value, {
       img: this.image,
       coverImage: this.coverImage,
@@ -109,6 +107,9 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   }
 
   onUpdate() {
+    if (this.groupForm.invalid || !this.image || !this.coverImage) {
+      return false;
+    }
     let data = {
       group_name: this.groupForm.controls['groupToEdit.group_name'].value,
       desc: this.groupForm.controls['groupToEdit.desc'].value,

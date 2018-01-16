@@ -74,6 +74,9 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
   }
 
   onCreate() {
+    if (this.groupForm.invalid) {
+      return;
+    }
     let subCat = {
       img: this.image,
       name: this.groupForm.controls['name'].value,
@@ -89,11 +92,14 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
   }
 
   onUpdate() {
+    if (this.groupForm.invalid) {
+      return;
+    }
     let subCat = {
       img: this.image,
       name: this.groupForm.controls['subCatToEdit.name'].value,
       mainCategory: this.groupForm.controls['subCatToEdit.mainCategory'].value,
-      addedBy:this.currentUser
+      addedBy: this.currentUser
     };
 
     this.dataService.updateSubCategory(this.subCatToEdit['_id'], subCat).subscribe((res) => {

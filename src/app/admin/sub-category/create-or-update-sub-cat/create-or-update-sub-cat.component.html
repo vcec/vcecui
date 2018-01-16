@@ -6,9 +6,9 @@
         <form (ngSubmit)="onUpdate()" #f="ngForm">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" [(ngModel)]="subCatToEdit.name" required
+            <input type="text" class="form-control" [(ngModel)]="subCatToEdit.name" required #subCatName="ngModel"
                    name="subCatToEdit.name">
-            <div class="help-text" *ngIf="!f.controls['subCatToEdit.name'] || !f.controls['subCatToEdit.name'].value">
+            <div class="help-text" *ngIf="subCatName.invalid && f.submitted">
               Please enter name!
             </div>
           </div>
@@ -18,7 +18,7 @@
               <div class="card-body controls-stacked">
                 <label class="control checkbox" *ngFor="let cat of categories">
                   <input type="radio" [(ngModel)]="subCatToEdit.mainCategory"
-                         name="subCatToEdit.mainCategory"
+                         name="subCatToEdit.mainCategory" required
                          [value]="cat._id"
                          [checked]="subCatToEdit.mainCategory == cat._id">
                   <span class="control-indicator"></span>{{cat.category_name}}
@@ -26,7 +26,7 @@
               </div>
             </div>
             <div class="help-text"
-                 *ngIf="!f.controls['subCatToEdit.mainCategory'] || !f.controls['subCatToEdit.mainCategory'].value">
+                 *ngIf="(!f.controls['subCatToEdit.mainCategory'] || !f.controls['subCatToEdit.mainCategory'].value) && f.submitted">
               Please enter name!
             </div>
           </div>
@@ -46,9 +46,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit"
-                    [disabled]="!f.controls['subCatToEdit.mainCategory'] ||
-                     !f.controls['subCatToEdit.name'] || !f.controls['subCatToEdit.name'].value || !f.controls['subCatToEdit.mainCategory'].value">
+            <button class="btn btn-primary" type="submit">
               Update
               SubCategory
             </button>
@@ -61,7 +59,7 @@
             <label>Name</label>
             <input type="text" class="form-control" #catName="ngModel" required
                    name="name" ngModel>
-            <div class="help-text" *ngIf="!catName.valid">Please enter name!</div>
+            <div class="help-text" *ngIf="!catName.valid && f.submitted">Please enter name!</div>
           </div>
           <div class="form-group">
             <div class="card">
@@ -77,7 +75,8 @@
                 </div>
               </div>
             </div>
-            <div class="help-text" *ngIf="f.controls['mainCategory'] && !f.controls['mainCategory'].value">Please select
+            <div class="help-text"
+                 *ngIf="f.submitted && f.controls['mainCategory'] && !f.controls['mainCategory'].value">Please select
               category!
             </div>
           </div>
@@ -97,7 +96,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!f.controls['mainCategory'] || !f.valid">Add New
+            <button class="btn btn-primary" type="submit">Add New
               SubCategory
             </button>
           </div>
