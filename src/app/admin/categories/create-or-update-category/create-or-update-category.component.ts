@@ -28,10 +28,12 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   coverImage = "";
   token = "";
   imageUploadConfig: {};
+  currentUser = "";
 
   constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService,
               private config: Config, public toastr: ToastsManager, vcr: ViewContainerRef, private cookieService: CookieService) {
     this.token = this.cookieService.get('accessToken');
+    this.currentUser = this.cookieService.get('userId');
     this.route.params.subscribe(params => {
       this.Id = params['id'];
     });
@@ -88,7 +90,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
 
   onCreate() {
     let data = $.extend(this.groupForm.value, {
-      img: this.image, coverImage: this.coverImage
+      img: this.image, coverImage: this.coverImage, addedBy: this.currentUser
     });
     this.dataService.saveSolution(data).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route})
@@ -106,7 +108,8 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
       category_name: this.groupForm.controls['catToEdit.category_name'].value,
       desc: this.groupForm.controls['catToEdit.desc'].value,
       img: this.image,
-      coverImage: this.coverImage
+      coverImage: this.coverImage,
+      addedBy: this.currentUser
     };
 
     this.dataService.updateSolutions(this.catToEdit['_id'], data).subscribe((res) => {

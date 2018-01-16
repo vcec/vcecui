@@ -29,10 +29,13 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   coverImage: string = '';
   imageUploadConfig = {};
   token = '';
+  currentUser = '';
+
 
   constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService,
               private config: Config, public toastr: ToastsManager, vcr: ViewContainerRef, private cookieService: CookieService) {
     this.token = this.cookieService.get('accessToken');
+    this.currentUser = this.cookieService.get('userId');
     this.route.params.subscribe(params => {
       this.Id = params['id'];
     });
@@ -89,7 +92,11 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   }
 
   onCreate() {
-    let data = $.extend(this.groupForm.value, {img: this.image, coverImage: this.coverImage});
+    let data = $.extend(this.groupForm.value, {
+      img: this.image,
+      coverImage: this.coverImage,
+      addedBy: this.currentUser
+    });
     this.dataService.saveGroup(data).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route})
     }, (err) => {
@@ -106,6 +113,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
       group_name: this.groupForm.controls['groupToEdit.group_name'].value,
       desc: this.groupForm.controls['groupToEdit.desc'].value,
       img: this.image,
+      addedBy: this.currentUser,
       coverImage: this.coverImage
     };
 

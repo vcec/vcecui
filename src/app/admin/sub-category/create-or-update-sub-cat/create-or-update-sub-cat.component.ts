@@ -19,12 +19,14 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
   editState = false;
   addState = false;
   image: "";
+  currentUser = "";
   token = '';
   imageUploadConfig = {};
 
   constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService,
               private config: Config, public toastr: ToastsManager, vcr: ViewContainerRef, private cookieService: CookieService) {
 
+    this.currentUser = this.cookieService.get('userId');
     this.token = this.cookieService.get('accessToken');
     this.route.params.subscribe(params => {
       this.Id = params['id'];
@@ -75,7 +77,8 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
     let subCat = {
       img: this.image,
       name: this.groupForm.controls['name'].value,
-      mainCategory: this.groupForm.controls['mainCategory'].value
+      mainCategory: this.groupForm.controls['mainCategory'].value,
+      addedBy: this.currentUser
     };
 
     this.dataService.saveSubCategory(subCat).subscribe((res) => {
@@ -89,7 +92,8 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
     let subCat = {
       img: this.image,
       name: this.groupForm.controls['subCatToEdit.name'].value,
-      mainCategory: this.groupForm.controls['subCatToEdit.mainCategory'].value
+      mainCategory: this.groupForm.controls['subCatToEdit.mainCategory'].value,
+      addedBy:this.currentUser
     };
 
     this.dataService.updateSubCategory(this.subCatToEdit['_id'], subCat).subscribe((res) => {

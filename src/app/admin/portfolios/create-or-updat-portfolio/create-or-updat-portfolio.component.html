@@ -1,372 +1,22 @@
 <div class="container">
   <h1 class="mainHeading">Add/Edit Portfolio</h1>
   <div class="row">
-    <div class="col-md-12" *ngIf="addPortfolioState">
-      <form (ngSubmit)="onSubmit()" #f="ngForm">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" name="title" ngModel required/>
-              <div class="help-text"
-                   *ngIf="f.submitted && (!f.form.controls['name'] || !f.form.controls['name'].value)">
-                Please enter title for portfolio.
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="subtitle">Sub Title</label>
-              <input type="text" class="form-control" id="subtitle" name="subtitle" ngModel/>
-              <div class="help-text"
-                   *ngIf="f.submitted && (!f.form.controls['subtitle'] || !f.form.controls['subtitle'].value)">
-                Please
-                enter
-                subtitle for portfolio.
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Is it a featured product:</label>
-              <input type="checkbox" name="isFeaturedProduct" [(ngModel)]="isFeaturedProduct"
-                     [checked]="isFeaturedProduct"/>
-            </div>
-            <div class="card" *ngIf="isFeaturedProduct">
-              <div class="form-group">
-                <label>Featured Product Image</label>
-                <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                          (error)="onFeatureImageUploadError($event)" (removedFile)="onRemoved($event)"
-                          (success)="onFeatureImageUploadSuccess($event)" id="featureImage"
-                          name="featureImage"></dropzone>
-              </div>
-              <div class="form-group">
-                <label for="detailInfoUrlIfFeaturedProduct">Url Link</label>
-                <input type="text" class="form-control"
-                       name="detailInfoUrlIfFeaturedProduct" ngModel/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Cover Image <span (click)="show('showCoverImageForm')" *ngIf="!coverImage">+</span></label>
-              <div *ngIf="uploadForms.showCoverImageForm" class="card" style="padding: 20px">
-                <div class="form-group">
-                  <label>Title</label>
-                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
-                </div>
-                <div class="form-group">
-                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                            (error)="onUploadError($event)" (removedFile)="onRemoved($event)"
-                            (success)="onUploadSuccess($event)" id="coverImg" name="coverImg"></dropzone>
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-sm btn-primary" (click)="handleUpload('coverImage')"
-                          [disabled]="!uploadFormTitle || !lastUpload">Add
-                  </button>
-                </div>
-              </div>
-              <div *ngIf="coverImage && coverImage.url" style="position: relative;">
-                <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
-                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
-                   (click)="coverImage=null">
-                </i>
-              </div>
-              <div class="help-text" *ngIf="!coverImage && f.submitted">Cover Image is required.</div>
-            </div>
-            <div class="form-group">
-              <label>Main Video <span (click)="show('showMainVideoForm')" *ngIf="!mainVideo">+</span></label>
-              <div *ngIf="uploadForms.showMainVideoForm" class="card" style="padding: 20px">
-                <div class="form-group">
-                  <label>Title</label>
-                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
-                </div>
-                <div class="form-group">
-                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag images here to upload'"
-                            (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)" id="video" name="video"></dropzone>
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-sm btn-primary" (click)="handleUpload('mainVideo')"
-                          [disabled]="!uploadFormTitle || !lastUpload">Add
-                  </button>
-                </div>
-              </div>
-              <div *ngIf="mainVideo">
-                <label *ngFor="let video of videos">
-                  {{mainVideo.title}} <span class="float-right"
-                                            (click)="mainVideo =null">X</span>
-                </label>
-              </div>
-              <div class="help-text" *ngIf="!mainVideo && f.submitted">Main video is required.</div>
-            </div>
-            <div class="form-group">
-              <label>Other Related Videos<span (click)="show('showOtherVideoForm')">+</span></label>
-              <div class="card" *ngIf="videos && videos.length > 0">
-                <div class="card" *ngFor="let video of videos">
-                  <div class="card-header">
-                    {{video.title}}
-                    <span class="float-right"
-                          (click)="removeVideoFromVideos(video.title)">X</span>
-                  </div>
-                  <div class="card-body">
-                    <img [src]="config.serverUrl + video.coverImage" width="50%" height="50%"/>
-                  </div>
-                </div>
-              </div>
-              <div *ngIf="uploadForms.showOtherVideoForm" class="card" style="padding: 20px">
-                <div class="form-group">
-                  <label>Title</label>
-                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
-                </div>
-                <div class="form-group">
-                  <label>Cover Image for Video</label>
-                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
-                            (error)="onImageUploadError($event)"
-                            (success)="onImageUploadSuccess($event)"></dropzone>
-                </div>
-                <div class="form-group">
-                  <dropzone [config]="videoUploadConfig" [message]="'Click or drag video here to upload'"
-                            (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)"></dropzone>
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-sm btn-primary" (click)="handleUpload('subVideo')"
-                          [disabled]="!uploadFormTitle || !lastUpload || !videoCoverImage">Add
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Case Studies<span (click)="show('caseStudy')">+</span></label>
-              <div class="card" *ngIf="caseStudies.length > 0">
-                <label *ngFor="let caseStudy of caseStudies">
-                  {{caseStudy.title}} <span class="float-right"
-                                            (click)="removeCaseStudyFromCaseStudies(caseStudy.title)">X</span>
-                </label>
-              </div>
-              <div *ngIf="uploadForms.caseStudy" class="card" style="padding: 20px">
-                <div class="form-group">
-                  <label>Title</label>
-                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
-                </div>
-                <div class="form-group">
-                  <dropzone [config]="pdfUploadConfig" [message]="'Click or drag pdf here to upload'"
-                            (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)" id="pdf2" name="pdf2"></dropzone>
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-sm btn-primary" (click)="handleUpload('caseStudy')"
-                          [disabled]="!uploadFormTitle || !lastUpload">Add
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>White Papers<span (click)="show('whitePaperForm')">+</span></label>
-              <div class="card" *ngIf="whitePapers.length > 0" style="margin: 10px">
-                <label *ngFor="let whitePaper of whitePapers">
-                  {{whitePaper.title}} <span class="float-right"
-                                             (click)="removeWhitePaperFromList(whitePaper.title)">X</span>
-                </label>
-              </div>
-              <div *ngIf="uploadForms.whitePaperForm" class="card" style="padding: 20px">
-                <div class="form-group">
-                  <label>Title</label>
-                  <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
-                </div>
-                <div class="form-group">
-                  <dropzone [config]="pdfUploadConfig" [message]="'Click or drag pdf here to upload'"
-                            (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-sm btn-primary" (click)="handleUpload('whitePaper')"
-                          [disabled]="!uploadFormTitle || !lastUpload">Add
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Articles<span (click)="showDataForm('articleForm')">+</span></label>
-              <div class="card" *ngIf="articles.length > 0" style="margin: 10px">
-                <label *ngFor="let article of articles">
-                  {{article.heading}} <span class="float-right"
-                                            (click)="removeArticleFromList(article.heading)">X</span>
-                </label>
-              </div>
-              <div *ngIf="setDataForm.articleForm" class="card" style="padding: 20px">
-                <div class="form-group">
-                  <label>heading</label>
-                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
-                </div>
-                <div class="form-group">
-                  <label>Description</label>
-                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
-                </div>
-                <div class="form-group">
-                  <label>More Detail Url</label>
-                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
-                </div>
-                <div class="form-group">
-                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
-                            (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
-                </div>
-                <div class="form-group">
-                  <input class="btn btn-sm btn-primary" type="button" value="Add"
-                         (click)="handleDataUpload('article')" [disabled]="!setDataFormHeading"/>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Others<span (click)="showDataForm('otherForm')">+</span></label>
-              <div class="card" *ngIf="other.length > 0" style="margin: 10px">
-                <label *ngFor="let oth of other">
-                  {{oth.heading}} <span class="float-right"
-                                        (click)="removeOtherFromList(oth.heading)">X</span>
-                </label>
-              </div>
-              <div *ngIf="setDataForm.otherForm" class="card" style="padding: 20px">
-                <div class="form-group">
-                  <label>heading</label>
-                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
-                </div>
-                <div class="form-group">
-                  <label>Description</label>
-                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
-                </div>
-                <div class="form-group">
-                  <label>More Detail Url</label>
-                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
-                </div>
-                <div class="form-group">
-                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
-                            (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
-                </div>
-                <div class="form-group">
-                  <input class="btn btn-sm btn-primary" type="button" value="Add"
-                         (click)="handleDataUpload('other')" [disabled]="!setDataFormHeading"/>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Demos<span (click)="showDataForm('demoForm')">+</span></label>
-              <div class="card" *ngIf="demos.length > 0" style="margin: 10px">
-                <label *ngFor="let demo of demos">
-                  {{demo.heading}} <span class="float-right"
-                                         (click)="removeDemoFromList(demo.heading)">X</span>
-                </label>
-              </div>
-              <div *ngIf="setDataForm.demoForm" class="card" style="padding: 20px">
-                <div class="form-group">
-                  <label>heading</label>
-                  <input type="text" class="form-control" name="setDataFormHeading" [(ngModel)]="setDataFormHeading"/>
-                </div>
-                <div class="form-group">
-                  <label>Description</label>
-                  <input type="text" class="form-control" name="setDataFormDesc" [(ngModel)]="setDataFormDesc"/>
-                </div>
-                <div class="form-group">
-                  <label>More Detail Url</label>
-                  <input type="text" class="form-control" name="setDataSeeMoreLink" [(ngModel)]="setDataSeeMoreLink"/>
-                </div>
-                <div class="form-group">
-                  <dropzone [config]="imageUploadConfig" [message]="'Click or drag image here to upload'"
-                            (error)="onUploadError($event)"
-                            (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
-                </div>
-                <div class="form-group">
-                  <input class="btn btn-sm btn-primary" type="button" value="Add"
-                         (click)="handleDataUpload('demo')" [disabled]="!setDataFormHeading"/>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="desc">Description</label>
-              <input type="text" class="form-control" id="desc" name="desc" ngModel/>
-              <div class="help-text"
-                   *ngIf="f.submitted && (!f.form.controls['desc'] || !f.form.controls['desc'].value)">Description is
-                required.
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="demoUrl">External Demo Url</label>
-              <input type="text" class="form-control" id="demoUrl" name="demoUrl" ngModel/>
-              <div class="help-text"
-                   *ngIf="f.submitted && (!f.form.controls['demoUrl'] || !f.form.controls['demoUrl'].value)">External
-                demo urls
-                required.
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header ">Select Group</div>
-              <div class="card-body">
-                <div class="controls-stacked">
-                  <label class="control checkbox" *ngFor="let group of productGroups">
-                    <input type="checkbox" [(ngModel)]="group.checked" name="prdGrp" required>
-                    <span class="control-indicator"></span>{{group.name}}
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="help-text"
-                 *ngIf="f.form.controls['prdGrp'] && f.form.controls['prdGrp'].status == 'INVALID'">Please
-              select product
-              group
-            </div>
-            <div class="card">
-              <div class="card-header">Select Category and Sub Category</div>
-              <div class="card-body">
-                <div class="controls-stacked">
-                  <label class="control checkbox" *ngFor="let solution of solutions">
-                    <input type="checkbox" ngModel (change)="solution.checked = !solution.checked"
-                           [checked]="solution.checked" name="soltn"
-                           required>
-                    <span class="control-indicator"></span>{{solution.name}}
-                    <br>
-                    <div class="controls-stacked">
-                      <div *ngFor="let subSolution of subSolutions">
-                        <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
-                          <input [name]="solution.name" type="radio" [value]="subSolution.name"
-                                 [checked]="checkIsItSelected(subSolution.name)"
-                                 (change)="solution.checked=true;changeSubCatSelection(subSolution.name)">
-                          <span class="control-indicator"></span>
-                          {{subSolution.name}}
-                        </label>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="help-text"
-                 *ngIf="f.form.controls['soltn'] && f.form.controls['soltn'].status == 'INVALID'">Please
-              select category.
-            </div>
-            <div class="help-text"
-                 *ngIf="f.form.controls['subSoltn'] && f.form.controls['subSoltn'].status == 'INVALID'">Please
-              select sub category.
-            </div>
-          </div>
-        </div>
-        <div class="form-buttons">
-          <button type="submit" class="btn btn-primary" [disabled]="f.invalid || !(coverImage ?  coverImage.url : '') ||
-          !(mainVideo ?  mainVideo.url : '') || (isFeaturedProduct && !featuredProductImage)">Save
-          </button>
-          <button type="reset" class="btn btn-default" routerLink="/admin/portfolios">Cancel</button>
-        </div>
-      </form>
-    </div>
     <div class="col-md-12 editPortfolio"
          *ngIf="editPortfolioState">
       <form (ngSubmit)="onUpdate()" #f="ngForm">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" class="form-control" name="title" [(ngModel)]="portfolioToEdit.title"/>
+              <label>Title</label>
+              <input type="text" class="form-control" name="title" [ngModel]="portfolioToEdit.title" #eTitle="ngModel"
+                     required/>
+              <div class="help-text" *ngIf="f.submitted && eTitle.invalid">Title is required!</div>
             </div>
             <div class="form-group">
-              <label for="subtitle">Sub Title</label>
-              <input type="text" class="form-control" name="subtitle" [(ngModel)]="portfolioToEdit.subtitle"/>
+              <label>Sub Title</label>
+              <input type="text" class="form-control" name="subtitle" [ngModel]="portfolioToEdit.subtitle"
+                     required #eSubtitle="ngModel"/>
+              <div class="help-text" *ngIf="f.submitted && eSubtitle.invalid">SubTitle is required!</div>
             </div>
             <div class="form-group">
               <label>Is it a featured product:</label>
@@ -386,11 +36,20 @@
                           (error)="onFeatureImageUploadError($event)" (removedFile)="onRemoved($event)"
                           (success)="onFeatureImageUploadSuccess($event)" id="featureImage"
                           name="featureImage"></dropzone>
+                <div class="help-text"
+                     *ngIf="isFeaturedProduct && !featuredProductImage && f.submitted">
+                  Please provide featured product details!
+                </div>
               </div>
               <div class="form-group">
                 <label>Url Link</label>
                 <input type="text" class="form-control" name="portfolioToEdit.detailInfoUrlIfFeaturedProduct"
+                       #detailInfoUrl="ngModel" [required]="isFeaturedProduct"
                        [(ngModel)]="portfolioToEdit.detailInfoUrlIfFeaturedProduct"/>
+              </div>
+              <div class="help-text"
+                   *ngIf="isFeaturedProduct && detailInfoUrl.invalid && f.submitted">
+                Please provide url link!
               </div>
             </div>
             <div class="form-group">
@@ -417,6 +76,7 @@
                    (click)="coverImage=''">
                 </i>
               </div>
+              <div class="help-text" *ngIf="f.submitted && !coverImage">Cover Image is required.</div>
             </div>
             <div class="form-group">
               <label>Main Video <span (click)="show('showMainVideoForm')" *ngIf="!mainVideo">+</span></label>
@@ -437,11 +97,12 @@
                 </div>
               </div>
               <div *ngIf="mainVideo">
-                <label *ngFor="let video of videos">
+                <label class="contentElement">
                   {{mainVideo.title}} <span class="float-right"
                                             (click)="mainVideo =null">X</span>
                 </label>
               </div>
+              <div class="help-text" *ngIf="f.submitted && !mainVideo">Main Video is required.</div>
             </div>
             <div class="form-group">
               <label>Other Related Videos<span (click)="show('showOtherVideoForm')">+</span></label>
@@ -483,7 +144,7 @@
             <div class="form-group">
               <label>Case Studies<span (click)="show('caseStudy')">+</span></label>
               <div class="card" *ngIf="caseStudies && caseStudies.length > 0">
-                <label *ngFor="let caseStudy of caseStudies">
+                <label *ngFor="let caseStudy of caseStudies" class="contentElement">
                   {{caseStudy.title}} <span class="float-right"
                                             (click)="removeCaseStudyFromCaseStudies(caseStudy.title)">X</span>
                 </label>
@@ -508,7 +169,7 @@
             <div class="form-group">
               <label>White Papers<span (click)="show('whitePaperForm')">+</span></label>
               <div class="card" *ngIf="whitePapers && whitePapers.length > 0" style="margin: 10px">
-                <label *ngFor="let whitePaper of whitePapers">
+                <label *ngFor="let whitePaper of whitePapers" class="contentElement">
                   {{whitePaper.title}} <span class="float-right"
                                              (click)="removeWhitePaperFromList(whitePaper.title)">X</span>
                 </label>
@@ -533,7 +194,7 @@
             <div class="form-group">
               <label>Articles<span (click)="showDataForm('articleForm')">+</span></label>
               <div class="card" *ngIf="articles && articles.length > 0" style="margin: 10px">
-                <label *ngFor="let article of articles">
+                <label *ngFor="let article of articles" class="contentElement">
                   {{article.heading}} <span class="float-right"
                                             (click)="removeArticleFromList(article.heading)">X</span>
                 </label>
@@ -565,7 +226,7 @@
             <div class="form-group">
               <label>Others<span (click)="showDataForm('otherForm')">+</span></label>
               <div class="card" *ngIf="other && other.length > 0" style="margin: 10px">
-                <label *ngFor="let oth of other">
+                <label *ngFor="let oth of other" class="contentElement">
                   {{oth.heading}} <span class="float-right"
                                         (click)="removeOtherFromList(oth.heading)">X</span>
                 </label>
@@ -597,7 +258,7 @@
             <div class="form-group">
               <label>Demos<span (click)="showDataForm('demoForm')">+</span></label>
               <div class="card" *ngIf="demos && demos.length > 0" style="margin: 10px">
-                <label *ngFor="let demo of demos">
+                <label *ngFor="let demo of demos" class="contentElement">
                   {{demo.heading}} <span class="float-right"
                                          (click)="removeDemoFromList(demo.heading)">X</span>
                 </label>
@@ -629,13 +290,17 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="desc">Description</label>
-              <input type="text" class="form-control" name="portfolioToEdit.desc" [(ngModel)]="portfolioToEdit.desc"/>
+              <label>Description</label>
+              <input type="text" class="form-control" name="portfolioToEdit.desc" [ngModel]="portfolioToEdit.desc"
+                     #eDesc="ngModel"
+                     required/>
+              <div class="help-text" *ngIf="f.submitted && eDesc.invalid">Please enter description!</div>
             </div>
             <div class="form-group">
-              <label for="demoUrl">External Demo Url</label>
-              <input type="text" class="form-control" name="portfolioToEdit.demoUrl"
-                     [(ngModel)]="portfolioToEdit.demoUrl"/>
+              <label>External Demo Url</label>
+              <input type="text" class="form-control" name="portfolioToEdit.demoUrl" required #eDemoLink="ngModel"
+                     [ngModel]="portfolioToEdit.demoUrl"/>
+              <div class="help-text" *ngIf="f.submitted && eDemoLink.invalid">Please enter demo link!</div>
             </div>
             <div class="card">
               <div class="card-header ">Select Group</div>
@@ -643,7 +308,8 @@
 
                 <div class="controls-stacked">
                   <label class="control checkbox" *ngFor="let group of productGroups">
-                    <input type="checkbox" (change)="group.checked = !group.checked" required ngModel
+                    <input type="checkbox" (change)="group.checked = !group.checked"
+                           required ngModel
                            [checked]="group.checked" name="editPrdGrp">
                     <span class="control-indicator"></span>{{group.name}}
                   </label>
@@ -651,7 +317,7 @@
               </div>
             </div>
             <div class="help-text"
-                 *ngIf="f.form.controls['editPrdGrp'] && f.form.controls['editPrdGrp'].status == 'INVALID'">Please
+                 *ngIf="f.submitted && !checkIfAnyGroupSelected()">Please
               select product
               group
             </div>
@@ -680,16 +346,13 @@
               </div>
             </div>
             <div class="help-text"
-                 *ngIf="f.form.controls['editSolution'] && f.form.controls['editSolution'].status == 'INVALID'">Please
+                 *ngIf="f.submitted && !checkIfAnySolutionSelected()">Please
               select category.
             </div>
           </div>
         </div>
-
-
         <div class="form-buttons">
-          <button type="submit" class="btn btn-primary" [disabled]="f.invalid || !coverImage.url || !mainVideo.url ||
-          (isFeaturedProduct && !featuredProductImage)">Save
+          <button type="submit" class="btn btn-primary">Save
           </button>
           <button type="reset" class="btn btn-default" routerLink="/admin/portfolios">Cancel</button>
         </div>

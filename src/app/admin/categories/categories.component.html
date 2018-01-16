@@ -26,7 +26,7 @@
             <td><img [src]="this.config.serverUrl+category.img"
                      style="width: 25%; height: 25%;"></td>
             <td>{{category.created_at | date}}</td>
-            <td>Admin</td>
+            <td>{{category.addedBy}}</td>
             <td>
               <button class="btn btn-sm btn-primary" (click)="editCat(category)">Edit</button>
               <button class="btn btn-sm btn-primary" (click)="deleteCat(category)">Delete</button>

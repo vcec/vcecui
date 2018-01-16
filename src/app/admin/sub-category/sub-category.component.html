@@ -29,7 +29,7 @@
                      style="width: 25%; height: 25%;"></td>
             <td>{{getMainCategory(subCategory.mainCategory)}}</td>
             <td>{{subCategory.created_at | date}}</td>
-            <td>Admin</td>
+            <td>{{subCategory.addedBy}}</td>
             <td>
               <button class="btn btn-sm btn-primary" (click)="editSubcategory(subCategory)">Edit</button>
               <button class="btn btn-sm btn-primary" (click)="deleteSubcategory(subCategory)">Delete</button>

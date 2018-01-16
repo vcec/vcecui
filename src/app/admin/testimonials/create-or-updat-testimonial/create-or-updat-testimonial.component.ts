@@ -25,10 +25,12 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
   image: "";
   token = "";
   imageUploadConfig = {};
+  currentUser = "";
 
   constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
               public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService, private cookieService: CookieService) {
     this.token = this.cookieService.get('accessToken');
+    this.currentUser = this.cookieService.get('userId');
     this.route.params.subscribe((params) => {
       this.Id = params['id'];
     });
@@ -78,7 +80,8 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
         userCompany: this.groupForm.controls['testimonialToEdit.userInfo.userCompany'].value,
         userImg: this.image
       },
-      mainText: this.groupForm.controls['testimonialToEdit.mainText'].value
+      mainText: this.groupForm.controls['testimonialToEdit.mainText'].value,
+      addedBy: this.currentUser
     }
     this.dataService.updateTestimonial(this.testimonialToEdit['_id'], testimonial).subscribe((res) => {
       this.router.navigate(['../../'], {relativeTo: this.route});
@@ -92,9 +95,11 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
       userInfo: {
         userName: this.groupForm.value.userName,
         userCompany: this.groupForm.value.userCompany,
-        userImg: this.image
+        userImg: this.image,
+        addedBy: this.currentUser
       },
-      mainText: this.groupForm.value.mainText
+      mainText: this.groupForm.value.mainText,
+      addedBy: this.currentUser
     };
     this.dataService.saveTestimonial(testimonial).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route});

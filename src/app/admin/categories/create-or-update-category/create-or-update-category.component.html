@@ -42,7 +42,8 @@
                       id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!image">Please Upload Cover Image!</div>
-            <div style="position: relative;border: 1px solid black;" *ngIf="coverImage">
+            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+                 *ngIf="coverImage">
               <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                  (click)="onCoverImageRemoved()">
@@ -77,7 +78,8 @@
           </div>
           <div class="form-group">
             <label>Category Icon Image</label>
-            <div style="position: relative;border: 1px solid black;" *ngIf="image">
+            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+                 *ngIf="image">
               <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                  (click)="onRemoved()">
@@ -95,7 +97,8 @@
                       id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!coverImage">Please Upload Cover Image!</div>
-            <div style="position: relative;border: 1px solid black;" *ngIf="coverImage">
+            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+                 *ngIf="coverImage">
               <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                  (click)="onCoverImageRemoved()">

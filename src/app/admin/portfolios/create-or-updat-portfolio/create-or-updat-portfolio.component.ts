@@ -74,6 +74,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   other: CommonObjForData[] = [];
   demos: CommonObjForData[] = [];
   token = '';
+  currentUser = '';
 
   imageUploadConfig = {};
 
@@ -84,6 +85,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
               public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService, private cookieService: CookieService) {
     this.token = this.cookieService.get('accessToken');
+    this.currentUser = this.cookieService.get('userId');
     this.route.params.subscribe((params) => {
       this.Id = params['id'];
     });
@@ -380,6 +382,10 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onUpdate() {
+    if (this.portfolioForm.invalid || !this.coverImage || !this.mainVideo ||
+      (this.isFeaturedProduct && !this.featuredProductImage) || !this.checkIfAnyGroupSelected() || !this.checkIfAnySolutionSelected()) {
+      return;
+    }
     let selectedSolutions = [];
     this.solutions.forEach((v, i) => {
       v.checked ? selectedSolutions.push(v.name) : '';
@@ -403,7 +409,8 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
       whitePapers: this.whitePapers,
       articles: this.articles,
       others: this.other,
-      demos: this.demos
+      demos: this.demos,
+      addedBy: this.currentUser
     });
 
     this.dataService.updatePortFolio(this.portfolioToEdit['_id'], obj).subscribe((result) => {
@@ -414,8 +421,31 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     });
   }
 
+  checkIfAnyGroupSelected() {
+    let f = this.productGroups.filter((v, i) => {
+      return v.checked == true ? true : false;
+    })
+    if (f.length == 0) {
+      return false;
+    }
+    return true;
+  }
+
+  checkIfAnySolutionSelected() {
+    let f = this.solutions.filter((v, i) => {
+      return v.checked == true ? true : false;
+    })
+    if (f.length == 0) {
+      return false;
+    }
+    return true;
+  }
+
   onSubmit() {
-    console.log(this.portfolioForm);
+    if (this.portfolioForm.invalid || !this.coverImage || !this.mainVideo ||
+      (this.isFeaturedProduct && !this.featuredProductImage) || !this.checkIfAnyGroupSelected() || !this.checkIfAnySolutionSelected()) {
+      return;
+    }
     let selectedSolutions = [];
     this.solutions.forEach((v, i) => {
       v.checked ? selectedSolutions.push(v.name) : '';
@@ -439,7 +469,8 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
       whitePapers: this.whitePapers,
       articles: this.articles,
       others: this.other,
-      demos: this.demos
+      demos: this.demos,
+      addedBy: this.currentUser
     });
 
     //console.log(obj);
