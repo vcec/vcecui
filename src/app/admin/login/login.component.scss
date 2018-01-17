@@ -1,3 +1,59 @@
 .help-text {
   color: red;
 }
+
+.site-body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+.signin {
+  background-color: #3e53a4;
+  background-image: -webkit-linear-gradient(315deg, #3e53a4 0%, #cf0989 100%);
+  background-image: linear-gradient(135deg, #3e53a4 0%, #cf0989 100%);
+}
+.signin .signin-wrapper {
+  height: 100vh;
+  margin: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.signin-box {
+  background-color: #fff;
+  padding: 30px 40px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.floating-unit {
+  width: 400px;
+  margin: 40px auto;
+}
+.signin-pb-logo {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  display: block;
+  height: 56px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../../../assets/images/pbloginlogo.png');
+}
+.signin-box .signin-heading {
+  color: #717171;
+  margin: 0;
+  text-align: center;
+}
+.spacer-top-md {
+  margin-top: 32px;
+}
+.spacer-top-xs {
+  margin-top: 12px;
+}
+.spacer-bottom-md {
+  margin-bottom: 32px;
+}
