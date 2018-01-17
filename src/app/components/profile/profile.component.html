@@ -151,11 +151,11 @@
             Papers</h1>
           <div class="row cs-container">
             <div class="col-md-6 hide-on-init"
-                 *ngFor="let k of productDetails.caseStudies.concat( productDetails.whitePapers);let i = index"
+                 *ngFor="let k of caseStudyAndWhitePaper;let i = index"
                  [ngStyle]="getAnimationDelay(i,2)"
                  animateOnScroll animationName="animated fadeInUp">
               <div class="csBox well-hover">
-                <a href="" class="cs-link">
+                <a [href]="config.serverUrl + k.url" target="_blank" class="cs-link">
                   <div class="icon">
                     <img [src]="config.serverUrl + k.img" alt="">
                   </div>
@@ -168,22 +168,20 @@
       </div>
     </div>
   </section>
+
   <section id="articles">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-
           <div class="circle-icon">
             <div class="icon">
               <img src="assets/images/profile/pdfIcon.png" alt="">
             </div>
           </div>
-
           <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Articles & Others</h1>
-
           <div class="row articles">
             <div class="col-md-4 hide-on-init"
-                 *ngFor="let k of productDetails.articles.concat(productDetails.others);let i = index"
+                 *ngFor="let k of articlesAndOthers;let i = index"
                  [ngStyle]="getAnimationDelay(i,3)"
                  animateOnScroll animationName="animated fadeInUp">
               <div class="articleBox well-hover">
@@ -203,7 +201,6 @@
       </div>
     </div>
   </section>
-
   <footer>
     <div class="container">
       <div class="row">

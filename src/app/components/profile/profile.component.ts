@@ -16,7 +16,8 @@ import {Config} from "../../services/config.service";
 export class ProfileComponent implements OnInit {
   productId: string;
   productDetails = {};
-
+  articlesAndOthers = [];
+  caseStudyAndWhitePaper = [];
   videoUrl: SafeResourceUrl;
 
   constructor(private modalService: NgbModal, public sanitizer: DomSanitizer, private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,) {
@@ -32,6 +33,12 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.dataService.getPortFolio(this.productId).subscribe((res) => {
       this.productDetails = res['data'];
+      setTimeout(() => {
+        this.articlesAndOthers = this.productDetails['articles'].concat(this.productDetails['others']);
+        console.log(this.articlesAndOthers);
+        this.caseStudyAndWhitePaper = this.productDetails['caseStudies'].concat(this.productDetails['whitePapers'])
+        console.log(this.caseStudyAndWhitePaper);
+      });
       console.log(this.productDetails);
     }, (err) => {
       console.log(err);
