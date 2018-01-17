@@ -13,6 +13,10 @@ export class DataService {
     this.accessToken = this.cookieService.get('accessToken');
   }
 
+  setAccessToekn(token) {
+    this.accessToken = token;
+  }
+
   setUploaderObj(val) {
     this.uploaderObj = val;
   }

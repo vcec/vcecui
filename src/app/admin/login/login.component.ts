@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm: NgForm;
   loginError = "";
 
-  constructor(private _cookieService: CookieService, private dataService: DataService, private router: Router, private route: ActivatedRoute) {
+  constructor(private _cookieService: CookieService, private dataService: DataService,
+              private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
     this.dataService.login(this.loginForm.value).subscribe((res) => {
       this._cookieService.put("accessToken", res['token']);
       this._cookieService.put("userId", userId);
+      this.dataService.setAccessToekn(res['token']);
       this.router.navigate(['/admin/groups'], {relativeTo: this.route});
     }, (err) => {
       if (err.status == 401) {
