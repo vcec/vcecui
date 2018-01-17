@@ -26,8 +26,12 @@
           <tr *ngFor="let group of groups;let i = index">
             <td>{{i+1}}</td>
             <td>{{group.group_name}}</td>
-            <td><img [src]="this.config.serverUrl+group.img"
-                     style="width: 25%; height: 25%;"></td>
+            <td>
+              <div class="groupImgIcon">
+                  <img [src]="this.config.serverUrl+group.img" />
+              </div>
+              
+            </td>
 <!--
             <td>1</td>
 -->
@@ -44,4 +48,3 @@
     </div>
   </div>
 </div>
-
