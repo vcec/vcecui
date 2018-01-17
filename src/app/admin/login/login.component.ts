@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    if (this.loginForm.invalid) {
+      return false;
+    }
     let userId = this.loginForm.value.userId;
     this.dataService.login(this.loginForm.value).subscribe((res) => {
       this._cookieService.put("accessToken", res['token']);

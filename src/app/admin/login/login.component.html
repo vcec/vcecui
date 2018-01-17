@@ -35,7 +35,7 @@
           </label>
           <input type="text" id="userId" class="form-control" name="userId" ngModel #userId="ngModel" email required
                  (input)="loginError=''"/>
-          <span class="help-block" *ngIf="f.submitted && userId.invalid">
+          <span class="help-text" *ngIf="f.submitted && userId.invalid">
           Enter valid user id
         </span>
         </div>
@@ -45,7 +45,7 @@
                  (input)="loginError=''"/>
           <div class="help-text" *ngIf="f.submitted && password.invalid">Please Enter valid password!</div>
         </div>
-        <button class="btn btn-primary btn-block btn-lg spacer-top-xs" [disabled]="f.invalid" type="submit">
+        <button class="btn btn-primary btn-block btn-lg spacer-top-xs" type="submit">
           Login
         </button>
       </form>
