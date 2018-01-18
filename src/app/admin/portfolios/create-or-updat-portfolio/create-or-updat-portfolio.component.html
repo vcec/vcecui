@@ -387,7 +387,8 @@
               <div class="card-body">
                 <div class="controls-stacked">
                   <label class="control checkbox" *ngFor="let solution of solutions">
-                    <input type="checkbox" ngModel (change)="solution.checked = !solution.checked"
+                    <input type="checkbox" ngModel
+                           (change)="solution.checked = !solution.checked;changeStatusOfAllSubCat(solution._id)"
                            [checked]="solution.checked" name="soltn"
                            required>
                     <span class="control-indicator"></span>{{solution.name}}
@@ -785,7 +786,7 @@
                 <div class="controls-stacked">
                   <label class="control checkbox" *ngFor="let solution of solutions">
                     <input type="checkbox" [checked]="solution.checked" name="editSolution" ngModel
-                           (change)="solution.checked = !solution.checked">
+                           (change)="solution.checked = !solution.checked;changeStatusOfAllSubCat(solution._id)">
                     <span class="control-indicator"></span>{{solution.name}}
                     <br>
                     <div class="controls-stacked">

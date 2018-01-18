@@ -27,10 +27,12 @@ export class ProfileComponent implements OnInit {
   }
 
   sanitizeUrl(url, type?) {
-    if (type) {
+    if (type == 'youtube') {
       let video_id = url.split('v=')[1].split('&')[0];
       let newUrl = "https://www.youtube.com/embed/" + video_id;
       return this.sanitizer.bypassSecurityTrustResourceUrl(`${newUrl}`);
+    } else if (type == 'demoUrl') {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`${url}`);
     } else {
       return this.sanitizer.bypassSecurityTrustResourceUrl(`${this.config.serverUrl}${url}`);
     }

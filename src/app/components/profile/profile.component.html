@@ -30,7 +30,7 @@
                 *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.indexOf('youtube')!=-1"
                 allowFullScreen='allowFullScreen'>
         </iframe>
-        <video controls autoplay
+        <video controls [poster]="config.serverUrl + productDetails.mainVideo.coverImage"
                *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.indexOf('youtube')==-1">
           <source [src]="sanitizeUrl(productDetails.mainVideo.url)" type="video/mp4">
           Your browser does not support the video tag.
@@ -120,12 +120,12 @@
                  *ngFor="let k of productDetails.demos;let i = index"
                  animateOnScroll animationName="animated fadeInUp"
                  [ngStyle]="getAnimationDelay(i,3)">
-              <div class="demo-card well-hover "
-              >
+              <div class="demo-card well-hover">
                 <div class="icon">
                   <img [src]="config.serverUrl + k.img" alt="">
                 </div>
-                <h2>{{k.heading}}</h2>
+                <h2><a [href]="sanitizeUrl(k.seeMoreLink, 'demoUrl')" target="_blank" class="cs-link">{{k.heading}}</a>
+                </h2>
                 <p>
                   {{k.desc}}
                 </p>
@@ -167,7 +167,6 @@
       </div>
     </div>
   </section>
-
   <section id="articles">
     <div class="container">
       <div class="row">
@@ -188,7 +187,8 @@
                   <img [src]="config.serverUrl + k.img" alt="">
                 </div>
                 <div class="article-body">
-                  <h3>{{k.heading}}</h3>
+                  <h3><a [href]="k.seeMoreLink" target="_blank" class="cs-link">{{k.heading}}</a>
+                  </h3>
                   <p>
                     {{k.desc}}
                   </p>

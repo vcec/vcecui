@@ -330,6 +330,14 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     }
   }
 
+  changeStatusOfAllSubCat(id) {
+    this.subSolutions.forEach((v, i) => {
+      if (this.selectedSubSolutions.indexOf(v.name) != -1 && v.mainCategory == id) {
+        this.selectedSubSolutions.splice(this.selectedSubSolutions.indexOf(v.name), 1);
+      }
+    });
+  }
+
 
   checkIsItSelected(name) {
     if (this.selectedSubSolutions.indexOf(name) == -1) {
