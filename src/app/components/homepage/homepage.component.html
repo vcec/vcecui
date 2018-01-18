@@ -3,6 +3,14 @@
     <i class="nc-icon-mini arrows-3_small-up"></i>
   </a>
   <header>
+    <ul class="navbar-nav adminBtn">
+      <li class="nav-item" *ngIf="isAdminUser">
+      <a class="nav-link" href="#" routerLink="../admin/groups">Admin</a>
+    </li>
+    <li class="nav-item" *ngIf="!isAdminUser">
+      <a class="nav-link" href="#" routerLink="../login">Admin</a>
+    </li>
+  </ul>
     <nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-navbar':fixedNavbar}">
       <div class="container">
         <a class="navbar-brand" href="#">
@@ -33,14 +41,7 @@
             </li>
             
           </ul>
-          <ul class="navbar-nav adminBtn">
-              <li class="nav-item" *ngIf="isAdminUser">
-              <a class="nav-link" href="#" routerLink="../admin/groups">Admin</a>
-            </li>
-            <li class="nav-item" *ngIf="!isAdminUser">
-              <a class="nav-link" href="#" routerLink="../login">Admin</a>
-            </li>
-          </ul>
+         
         </div>
       </div>
     </nav>
