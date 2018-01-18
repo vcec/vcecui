@@ -38,6 +38,8 @@ import {CreateOrUpdateSubCatComponent} from './admin/sub-category/create-or-upda
 import {CookieService} from 'angular2-cookie/services/cookies.service';
 import {LoginComponent} from './admin/login/login.component';
 import {AuthGuardService} from './services/authGuardService';
+import {CustomFormsModule} from 'ng2-validation'
+
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:3001/uploadImage',
@@ -79,7 +81,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     DropzoneModule,
     AnimateOnScrollModule.forRoot(),
     ToastModule.forRoot(),
-    BootstrapModalModule.forRoot({container: document.body})
+    BootstrapModalModule.forRoot({container: document.body}),
+    CustomFormsModule
   ],
   providers: [HttpClientModule,
     CookieService,

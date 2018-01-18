@@ -32,6 +32,7 @@
     "ng2-bootstrap-modal": "^1.0.1",
     "ng2-page-scroll": "^4.0.0-beta.12",
     "ng2-toastr": "^4.1.2",
+    "ng2-validation": "^4.2.0",
     "ngx-owl-carousel": "^2.0.4",
     "pb-design-system": "^5.0.0-beta.2",
     "popper.js": "^1.11.0",

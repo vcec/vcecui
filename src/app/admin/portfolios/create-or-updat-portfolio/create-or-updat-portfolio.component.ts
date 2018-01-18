@@ -34,10 +34,13 @@ class VideoObj {
 })
 export class CreateOrUpdatPortfolioComponent implements OnInit {
   coverImage: CommonObjForUploader;
-  mainVideo: CommonObjForUploader;
+  mainVideo: VideoObj;
+  patternForYouTubeUrl = "(?:youtube\\.com\\/(?:[^\\/]+\\/.+\\/|(?:v|e(?:mbed)?)\\/|.*[?&]v=)|youtu\\.be\\/)([^\"&?\\/ ]{11}.*)";
   lastUpload: string;
+  youTubeVideoUrl: string;
   videos: VideoObj[] = [];
   videoCoverImage: string;
+  videoType = '';
   caseStudies: CommonObjForUploader[] = [];
   whitePapers: CommonObjForUploader[] = [];
   demoUrls: CommonObjForUploader[] = [];
@@ -195,6 +198,13 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     });
   }
 
+  invalidVideo() {
+    if (this.youTubeVideoUrl && this.youTubeVideoUrl.match(this.patternForYouTubeUrl) == null) {
+      return true;
+    }
+    return false;
+  }
+
   onUploadSuccess(event) {
     if (event[1].data.urlPath) {
       this.lastUpload = event[1].data.urlPath;
@@ -220,7 +230,6 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onImageUploadSuccess(event) {
-
     if (event[1].data.urlPath) {
       this.videoCoverImage = event[1].data.urlPath;
     }
@@ -237,6 +246,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   show(formName ?) {
     this.uploadFormTitle = "";
     this.lastUpload = "";
+    this.youTubeVideoUrl = "";
     for (let key in this.uploadForms) {
       this.uploadForms[key] = false;
     }
@@ -250,10 +260,21 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
         this.coverImage = obj;
         break;
       case 'mainVideo':
-        this.mainVideo = obj;
+        var video: VideoObj = {
+          title: this.uploadFormTitle,
+          url: this.lastUpload || this.youTubeVideoUrl,
+          coverImage: this.videoCoverImage
+        };
+        console.log('*******');
+        console.log(video)
+        this.mainVideo = video;
         break;
       case 'subVideo':
-        var video: VideoObj = {title: this.uploadFormTitle, url: this.lastUpload, coverImage: this.videoCoverImage};
+        var video: VideoObj = {
+          title: this.uploadFormTitle,
+          url: this.lastUpload || this.youTubeVideoUrl,
+          coverImage: this.videoCoverImage
+        };
         this.videos.push(video);
         break;
       case 'caseStudy':
@@ -295,6 +316,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     this.setDataFormDesc = "";
     this.setDataFormHeading = "";
     this.lastUpload = "";
+    this.youTubeVideoUrl = "";
 
     for (var key in this.setDataForm) {
       this.setDataForm[key] = false;
@@ -382,7 +404,6 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onUpdate() {
-    debugger;
     if (this.portfolioForm.invalid || !this.coverImage || !this.mainVideo ||
       (this.isFeaturedProduct && !this.featuredProductImage) || !this.checkIfAnyGroupSelected() || !this.checkIfAnySolutionSelected()) {
       return;
@@ -397,6 +418,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
       v.checked ? selectedGroups.push(v.name) : '';
     });
 
+    console.log(this.portfolioForm.value);
     let obj = $.extend(this.portfolioForm.value, {
       productGroups: selectedGroups,
       solutions: selectedSolutions,
