@@ -31,7 +31,10 @@
             <li class="nav-item">
               <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#upcomingFeatures">Upcoming Features</a>
             </li>
-            <li class="nav-item" *ngIf="isAdminUser">
+            
+          </ul>
+          <ul class="navbar-nav adminBtn">
+              <li class="nav-item" *ngIf="isAdminUser">
               <a class="nav-link" href="#" routerLink="../admin/groups">Admin</a>
             </li>
             <li class="nav-item" *ngIf="!isAdminUser">
