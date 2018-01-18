@@ -22,21 +22,23 @@
     </div>
   </div>
 </div>-->
-<div class="fullscreen signin">
-  <div style="width: 400px;margin: 40px auto;">
+<div class="signin site-body">
+<div class="signin-wrapper">
+<div class="floating-unit">
+ 
     <a class="signin-pb-logo" href="http://www.pb.com"></a>
     <div class="signin-box">
-      <h1 class="signin-heading">Virtual Client Experience<sup>&trade;</sup></h1>
+      <h1 class="signin-heading">VCEC<sup>&trade;</sup></h1>
       <div class="alert-danger alert" *ngIf="loginError">{{loginError}}</div>
-      <form autocomplete="off" name="myForm" class="spacer-top-md" novalidate (ngSubmit)="login()" #f="ngForm">
+      <form autocomplete="off" name="myForm" class="spacer-top-md spacer-bottom-md" novalidate (ngSubmit)="login()" #f="ngForm">
         <div class="form-group" ng-class="{'has-error': myForm.name.$error.required  && myForm.name.$dirty}">
           <label for="userId">
-            User Id
+            Username
           </label>
           <input type="text" id="userId" class="form-control" name="userId" ngModel #userId="ngModel" email required
                  (input)="loginError=''"/>
           <span class="help-text" *ngIf="f.submitted && userId.invalid">
-          Enter valid user id
+          Enter valid username
         </span>
         </div>
         <div class="form-group">
@@ -53,4 +55,4 @@
     <!-- // end white box -->
   </div>
 </div>
-
+</div>

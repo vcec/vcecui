@@ -747,10 +747,12 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Description</label>
-              <input type="text" class="form-control" name="desc" [ngModel]="portfolioToEdit.desc"
-                     #eDesc="ngModel"
-                     required/>
-              <div class="help-text" *ngIf="f.submitted && eDesc.invalid">Please enter description!</div>
+              <input type="text" class="form-control" name="desc"
+                     [ngModel]="portfolioToEdit.desc" #eDesc="ngModel" required/>
+                     
+              <div class="help-text" *ngIf="f.submitted && eDesc.invalid">
+                Please enter description!
+              </div>
             </div>
             <!--   <div class="form-group">
                  <label>External Demo Url</label>
