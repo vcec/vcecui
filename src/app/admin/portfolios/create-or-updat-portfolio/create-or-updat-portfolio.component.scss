@@ -11,3 +11,25 @@
 .card{
 	margin-top:15px;
 }
+
+.addMedia{
+	.card{
+		.card-header{
+			border-bottom:0;
+
+			label{
+				margin:0;
+			}
+		}
+	}	
+}
+.controls-inline{
+	margin:0;
+}
+
+.card-header{
+	color:#4e4e4e;
+}
+.form-buttons{
+	margin-top:50px;
+}
