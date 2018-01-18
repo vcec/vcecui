@@ -22,6 +22,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   groupToEdit = {};
   image: string = '';
   coverImage: string = '';
+  alternativeImage: string = '';
   imageUploadConfig = {};
   token = '';
   currentUser = '';
@@ -49,6 +50,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
         this.groupToEdit = res['data'];
         this.image = this.groupToEdit['img'];
         this.coverImage = this.groupToEdit['coverImage'];
+        this.alternativeImage = this.groupToEdit['alternativeImage'];
       }, (err) => {
 
       });
@@ -68,6 +70,20 @@ export class CreateOrUpdateGroupComponent implements OnInit {
 
   onCoverImageRemoved() {
     this.coverImage = "";
+  }
+
+  onAlternativeImageRemoved() {
+    this.alternativeImage = "";
+  }
+
+  onAlterImageUploadSuccess(event) {
+    if (event[1].data.urlPath) {
+      this.alternativeImage = event[1].data.urlPath;
+    }
+  }
+
+  onAlterImageUploadError() {
+    this.alternativeImage = "";
   }
 
   onImageUploadSuccess(event) {
@@ -93,7 +109,8 @@ export class CreateOrUpdateGroupComponent implements OnInit {
     let data = $.extend(this.groupForm.value, {
       img: this.image,
       coverImage: this.coverImage,
-      addedBy: this.currentUser
+      addedBy: this.currentUser,
+      alternativeImage: this.alternativeImage
     });
     this.dataService.saveGroup(data).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route})
@@ -115,7 +132,8 @@ export class CreateOrUpdateGroupComponent implements OnInit {
       desc: this.groupForm.controls['groupToEdit.desc'].value,
       img: this.image,
       addedBy: this.currentUser,
-      coverImage: this.coverImage
+      coverImage: this.coverImage,
+      alternativeImage: this.alternativeImage
     };
 
     this.dataService.updateGroup(this.groupToEdit['_id'], data).subscribe((res) => {

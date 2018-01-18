@@ -31,12 +31,25 @@
             </div>
           </div>
           <div class="form-group">
+            <label>Alternative Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onAlterImageUploadError($event)"
+                      (success)="onAlterImageUploadSuccess($event)"></dropzone>
+            <div class="help-text" *ngIf="!alternativeImage && f.submitted">Please Upload Alternative Image!</div>
+            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+                 *ngIf="alternativeImage">
+              <img [src]="this.config.serverUrl + alternativeImage" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onAlternativeImageRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
             <label>Group Cover Image</label>
             <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
                       id="featureImage"
                       name="featureImage"></dropzone>
-
             <div class="help-text" *ngIf="!coverImage && f.submitted">Please Upload Cover Image!</div>
             <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
                  *ngIf="coverImage">
@@ -80,6 +93,21 @@
               <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                  (click)="onRemoved()">
+              </i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Alternative Image</label>
+            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                      (error)="onAlterImageUploadError($event)" (success)="onAlterImageUploadSuccess($event)"
+                      id="featureImage"
+                      name="featureImage"></dropzone>
+            <div class="help-text" *ngIf="!alternativeImage && f.submitted">Please Upload Alternative Image!</div>
+            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+                 *ngIf="alternativeImage">
+              <img [src]="this.config.serverUrl + alternativeImage" width="50%" height="50%"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onAlternativeImageRemoved()">
               </i>
             </div>
           </div>

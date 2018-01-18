@@ -26,8 +26,14 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  sanitizeUrl(url) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`${this.config.serverUrl}${url}`);
+  sanitizeUrl(url, type?) {
+    if (type) {
+      let video_id = url.split('v=')[1].split('&')[0];
+      let newUrl = "https://www.youtube.com/embed/" + video_id;
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`${newUrl}`);
+    } else {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`${this.config.serverUrl}${url}`);
+    }
   }
 
   ngOnInit() {

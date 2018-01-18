@@ -61,7 +61,8 @@
                               [carouselClasses]="['owl-theme', 'row', 'sliding']"
                               [items]="portfolios"
                               *ngIf="portfolios.length > 0">
-                  <div class="item" *ngFor="let portfolio of portfolios">
+                  <div class="item"
+                       *ngFor="let portfolio of portfolios | featuredProductFilterPipe: {isItFeaturedProduct: true}">
                     <div class="product-info">
                       <h1>{{portfolio.title}}</h1>
                       <p>{{portfolio.desc}}</p>
@@ -309,10 +310,10 @@
                   <div class="noUserImage" *ngIf="!testimonial.userInfo.userImg">
                     <i class="nc-icon-mini users_single-01"></i>
                   </div>
-                  <div class="userImage" *ngIf="testimonial.userInfo.userImg" >
-                  <div class="icon" >
-                      <img [src]="config.serverUrl + testimonial.userInfo.userImg" alt="" />
-                  </div>
+                  <div class="userImage" *ngIf="testimonial.userInfo.userImg">
+                    <div class="icon">
+                      <img [src]="config.serverUrl + testimonial.userInfo.userImg" alt=""/>
+                    </div>
                   </div>
                   <h4>{{testimonial.userInfo.userName}}</h4>
                   <p>{{testimonial.userInfo.userCompany}}</p>

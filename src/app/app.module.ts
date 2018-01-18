@@ -39,6 +39,7 @@ import {CookieService} from 'angular2-cookie/services/cookies.service';
 import {LoginComponent} from './admin/login/login.component';
 import {AuthGuardService} from './services/authGuardService';
 import {CustomFormsModule} from 'ng2-validation'
+import {FeaturedProductFilterPipe} from "./filters/featuredProductFilter";
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -67,7 +68,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     CategoryComponent,
     SubCategoryComponent,
     CreateOrUpdateSubCatComponent,
-    LoginComponent
+    LoginComponent,
+    FeaturedProductFilterPipe
   ],
   imports: [
     NgbModule.forRoot(),

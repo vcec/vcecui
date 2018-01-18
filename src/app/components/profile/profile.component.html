@@ -26,17 +26,16 @@
     </nav>
     <div class="container">
       <div class="videoWrapper">
-        <!--  <iframe [src]="sanitizeUrl(productDetails.mainVideo.url)" *ngIf="productDetails.mainVideo"
-                  allowFullScreen='allowFullScreen'>
-          </iframe>-->
-
-        <video controls autoplay>
-          <source [src]="sanitizeUrl(productDetails.mainVideo.url)" *ngIf="productDetails.mainVideo" type="video/mp4">
-
+        <iframe [src]="sanitizeUrl(productDetails.mainVideo.url, 'youtube')"
+                *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.indexOf('youtube')!=-1"
+                allowFullScreen='allowFullScreen'>
+        </iframe>
+        <video controls autoplay
+               *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.indexOf('youtube')==-1">
+          <source [src]="sanitizeUrl(productDetails.mainVideo.url)" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
-
     </div>
   </header>
   <section id="profileInfo">
