@@ -25,6 +25,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   token = "";
   imageUploadConfig: {};
   currentUser = "";
+  alternativeImage = "";
 
   constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService,
               private config: Config, public toastr: ToastsManager, vcr: ViewContainerRef, private cookieService: CookieService) {
@@ -48,6 +49,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
         this.catToEdit = res['data'];
         this.image = this.catToEdit['img'];
         this.coverImage = this.catToEdit['coverImage'];
+        this.alternativeImage = this.catToEdit['alternativeImage'];
       }, (err) => {
 
       });
@@ -68,6 +70,20 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
     this.coverImage = "";
   }
 
+  onAltrImageUploadError() {
+    this.alternativeImage = "";
+  }
+
+  onAltrImageUploadSuccess(event) {
+    if (event[1].data.urlPath) {
+      this.alternativeImage = event[1].data.urlPath;
+    }
+  }
+
+  onAltrImageRemoved() {
+    this.alternativeImage = "";
+  }
+
   onImageUploadSuccess(event) {
     if (event[1].data.urlPath) {
       this.image = event[1].data.urlPath;
@@ -85,13 +101,17 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onCreate() {
-    if (this.groupForm.invalid || !this.image || !this.coverImage) {
+    if (this.groupForm.invalid || !this.image || !this.coverImage || !this.alternativeImage) {
       return false;
     }
 
     let data = $.extend(this.groupForm.value, {
-      img: this.image, coverImage: this.coverImage, addedBy: this.currentUser
+      img: this.image,
+      coverImage: this.coverImage,
+      addedBy: this.currentUser,
+      alternativeImage: this.alternativeImage
     });
+
     this.dataService.saveSolution(data).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route})
     }, (err) => {
@@ -104,7 +124,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onUpdate() {
-    if (this.groupForm.invalid || !this.image || !this.coverImage) {
+    if (this.groupForm.invalid || !this.image || !this.coverImage || !this.alternativeImage) {
       return false;
     }
     let data = {
@@ -112,7 +132,8 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
       desc: this.groupForm.controls['catToEdit.desc'].value,
       img: this.image,
       coverImage: this.coverImage,
-      addedBy: this.currentUser
+      addedBy: this.currentUser,
+      alternativeImage: this.alternativeImage
     };
 
     this.dataService.updateSolutions(this.catToEdit['_id'], data).subscribe((res) => {

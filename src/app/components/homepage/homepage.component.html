@@ -5,12 +5,12 @@
   <header>
     <ul class="navbar-nav adminBtn">
       <li class="nav-item" *ngIf="isAdminUser">
-      <a class="nav-link" href="#" routerLink="../admin/groups">Admin</a>
-    </li>
-    <li class="nav-item" *ngIf="!isAdminUser">
-      <a class="nav-link" href="#" routerLink="../login">Admin</a>
-    </li>
-  </ul>
+        <a class="nav-link" href="#" routerLink="../admin/groups">Admin</a>
+      </li>
+      <li class="nav-item" *ngIf="!isAdminUser">
+        <a class="nav-link" href="#" routerLink="../login">Admin</a>
+      </li>
+    </ul>
     <nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-navbar':fixedNavbar}">
       <div class="container">
         <a class="navbar-brand" href="#">
@@ -39,9 +39,9 @@
             <li class="nav-item">
               <a class="nav-link" pageScroll pageScrollSpeed="3000" href="#upcomingFeatures">Upcoming Features</a>
             </li>
-            
+
           </ul>
-         
+
         </div>
       </div>
     </nav>
@@ -279,7 +279,7 @@
         <div class="col-md-12">
           <div class="d-flex justify-content-between align-items-center">
             <h4>View our recently launched hackathons for SMB</h4>
-            <a href="" class="white-btn">Watch Video</a>
+            <a href="http://smbstartuppack.com" class="white-btn" target="_blank">Watch Video</a>
           </div>
         </div>
       </div>

@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="col-md-9 hide-on-init" animateOnScroll animationName="animated fadeInUp">
-            <h1>{{groupDetail.group_name}}</h1>
+            <h1>{{groupDetail.group_name || groupDetail.category_name}}</h1>
             <p>
               {{groupDetail.desc}}
             </p>
@@ -45,7 +45,7 @@
     <div class="container">
       <div class="row heading hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="col-md-12">
-          <h1>{{groupDetail.group_name}} Products</h1>
+          <h1>{{groupDetail.group_name  || groupDetail.category_name}} Products</h1>
           <p>
             {{groupDetail.desc}} </p>
         </div>
