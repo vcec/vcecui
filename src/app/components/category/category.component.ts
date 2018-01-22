@@ -1,9 +1,9 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {fadeInAnimation} from '../../_animations/index';
-import {DataService} from "../../services/dataService.service";
-import {Config} from "../../services/config.service";
+import {DataService} from '../../services/dataService.service';
+import {Config} from '../../services/config.service';
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -15,8 +15,10 @@ export class CategoryComponent implements OnInit {
   groupName: string;
   products: any[] = [];
   groupDetail = {};
-  headerImage: SafeUrl = "";
+  headerImage: SafeUrl = '';
   isItForGroup = false;
+  subCategories = [];
+  selectedSubCategories = [];
 
   constructor(private dataService: DataService, private config: Config,
               private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
@@ -53,8 +55,13 @@ export class CategoryComponent implements OnInit {
 
       this.dataService.getCatDetailsByCatName(this.groupName).subscribe((res) => {
         this.groupDetail = res['data'];
-          console.log(this.groupDetail);
-         this.headerImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.config.serverUrl}${this.groupDetail['coverImage']})`);
+        // get all subcategories
+        this.dataService.getSubcategoriesOfMainCat(this.groupDetail['_id']).subscribe((result) => {
+          this.subCategories = result['data'];
+        }, (err) => {
+
+        });
+        this.headerImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.config.serverUrl}${this.groupDetail['coverImage']})`);
       }, (err) => {
 
       });

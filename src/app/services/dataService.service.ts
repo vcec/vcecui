@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Config} from "./config.service";
-import {CookieService} from "angular2-cookie/core";
+import {Config} from './config.service';
+import {CookieService} from 'angular2-cookie/core';
 
 @Injectable()
 export class DataService {
@@ -149,7 +149,7 @@ export class DataService {
   }
 
   getSubcategoriesOfMainCat(mainCatId) {
-    return this.httpClient.get(this.config.serverUrl + 'categories/mainCategory/' + mainCatId);
+    return this.httpClient.get(this.config.serverUrl + 'subCategory/mainCategory/' + mainCatId);
   }
 
   getAllSubcategories() {
@@ -183,15 +183,15 @@ export class DataService {
   }
 
   getProductGroupByGroupName(groupName) {
-    return this.httpClient.get(this.config.serverUrl + "group/groupName/" + groupName);
+    return this.httpClient.get(this.config.serverUrl + 'group/groupName/' + groupName);
   }
 
   getAllProductsByCategoryName(catName) {
-    return this.httpClient.get(this.config.serverUrl + "portfolio/category/" + catName);
+    return this.httpClient.get(this.config.serverUrl + 'portfolio/category/' + catName);
   }
 
   getCatDetailsByCatName(catName) {
-    return this.httpClient.get(this.config.serverUrl + "category/categoryName/" + catName);
+    return this.httpClient.get(this.config.serverUrl + 'category/categoryName/' + catName);
   }
 }
 

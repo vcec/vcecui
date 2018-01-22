@@ -27,7 +27,7 @@ import {DropzoneModule} from 'ngx-dropzone-wrapper';
 import {DROPZONE_CONFIG} from 'ngx-dropzone-wrapper';
 import {DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
 import {ProfileComponent} from './components/profile/profile.component';
-import {ConfirmComponent} from "./admin/confirmComponent/confirm.component";
+import {ConfirmComponent} from './admin/confirmComponent/confirm.component';
 import {CreateOrUpdateCategoryComponent} from './admin/categories/create-or-update-category/create-or-update-category.component';
 import {CreateOrUpdateGroupComponent} from './admin/groups/create-or-update-group/create-or-update-group.component';
 import {CreateOrUpdatTestimonialComponent} from './admin/testimonials/create-or-updat-testimonial/create-or-updat-testimonial.component';
@@ -38,8 +38,9 @@ import {CreateOrUpdateSubCatComponent} from './admin/sub-category/create-or-upda
 import {CookieService} from 'angular2-cookie/services/cookies.service';
 import {LoginComponent} from './admin/login/login.component';
 import {AuthGuardService} from './services/authGuardService';
-import {CustomFormsModule} from 'ng2-validation'
-import {FeaturedProductFilterPipe} from "./filters/featuredProductFilter";
+import {CustomFormsModule} from 'ng2-validation';
+import {FeaturedProductFilterPipe} from './filters/featuredProductFilter';
+import {subCategoryFilter} from './filters/subCategoryFilter';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -69,7 +70,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     SubCategoryComponent,
     CreateOrUpdateSubCatComponent,
     LoginComponent,
-    FeaturedProductFilterPipe
+    FeaturedProductFilterPipe,
+    subCategoryFilter
   ],
   imports: [
     NgbModule.forRoot(),

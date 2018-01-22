@@ -45,14 +45,14 @@
     <div class="container">
       <div class="row heading hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="col-md-12">
-          <h1>{{groupDetail.group_name  || groupDetail.category_name}} Products</h1>
+          <h1>{{groupDetail.group_name || groupDetail.category_name}} Products</h1>
           <p>
             {{groupDetail.desc}} </p>
         </div>
       </div>
       <div class="row products">
         <div class="col-md-4 hide-on-init"
-             *ngFor="let product of products;let i = index"
+             *ngFor="let product of products | subCategoryFilter: selectedSubCategories;let i = index"
              [ngStyle]="getAnimationDelay(i,3)"
              animateOnScroll animationName="animated fadeInUp">
           <div class="productBox hvr-float-shadow" [routerLink]="['/profile/'+ product._id]">
