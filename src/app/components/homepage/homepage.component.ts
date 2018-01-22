@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, HostListener} from '@angular/core';
 import {OwlCarousel} from 'ngx-owl-carousel';
 import {fadeInAnimation} from '../../_animations/index';
 import {DataService} from '../../services/dataService.service';
-import {Config} from "../../services/config.service";
+import {Config} from '../../services/config.service';
 import {CookieService} from 'angular2-cookie/core';
 
 
@@ -88,7 +88,7 @@ export class HomepageComponent implements OnInit {
     this.owlMobile.previous();
   }
 
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     let pageoffset = window.pageYOffset;
     if (pageoffset >= 150) {

@@ -36,21 +36,21 @@ export class CategoryComponent implements OnInit {
         this.products = res['data'];
         console.log(this.products);
       }, (err) => {
-
+        console.log(err);
       });
 
       this.dataService.getProductGroupByGroupName(this.groupName).subscribe((res) => {
         this.groupDetail = res['data'];
         this.headerImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.config.serverUrl}${this.groupDetail['coverImage']})`);
       }, (err) => {
-
+        console.log(err);
       });
     } else {
       this.dataService.getAllProductsByCategoryName(this.groupName).subscribe((res) => {
         this.products = res['data'];
         console.log(this.products);
       }, (err) => {
-
+        console.log(err);
       });
 
       this.dataService.getCatDetailsByCatName(this.groupName).subscribe((res) => {
@@ -60,11 +60,11 @@ export class CategoryComponent implements OnInit {
           this.subCategories = result['data'];
           this.subCategories.unshift({name: 'All'});
         }, (err) => {
-
+          console.log(err);
         });
         this.headerImage = this.sanitizer.bypassSecurityTrustStyle(`url(${this.config.serverUrl}${this.groupDetail['coverImage']})`);
       }, (err) => {
-
+        console.log(err);
       });
     }
   }

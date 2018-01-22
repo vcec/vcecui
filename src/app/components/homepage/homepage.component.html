@@ -112,15 +112,11 @@
                       touchDrag: false,
                       center: true,
                       items: 1}"
-                                [carouselClasses]="['owl-theme', 'row', 'sliding']">
-                    <div class="item">
-                      <img src="assets/images/homepage/engageone_video_screenshot.png" alt="">
-                    </div>
-                    <div class="item">
-                      <img src="assets/images/homepage/li4m_screenshot.png" alt="">
-                    </div>
-                    <div class="item">
-                      <img src="assets/images/homepage/smbappsbg.png" alt="">
+                                [carouselClasses]="['owl-theme', 'row', 'sliding']" [items]="portfolios"
+                                *ngIf="portfolios.length > 0">
+                    <div class="item"
+                         *ngFor="let prtflo of portfolios | featuredProductFilterPipe: {isItFeaturedProduct: true}">
+                      <img [src]="config.serverUrl + prtflo.imgIfFeaturedProduct" alt="">
                     </div>
                   </owl-carousel>
                 </div>
@@ -129,7 +125,6 @@
                 <i class="nc-icon-outline arrows-1_minimal-left" (click)="goPrev()"></i>
                 <span>/</span>
                 <i class="nc-icon-outline arrows-1_minimal-right" (click)="goNext()"></i>
-
               </div>
             </div>
           </div>
