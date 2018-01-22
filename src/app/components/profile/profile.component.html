@@ -233,12 +233,12 @@
     </button>
     <div class="modal-body videoModalShadow">
       <div class="videoWrapper">
-        <!-- <iframe [src]="videoUrl" allowFullScreen='allowFullScreen'>
-        </iframe> -->
-
-        <video controls autoplay>
-            <source [src]="videoUrl" type="video/mp4">
-            Your browser does not support the video tag.
+        <iframe [src]="sanitizeUrl(videoUrl,'youtube')" allowFullScreen='allowFullScreen'
+                *ngIf="videoUrl && videoUrl.indexOf('youtube')!=-1">
+        </iframe>
+        <video controls autoplay *ngIf="videoUrl && videoUrl.indexOf('youtube')==-1">
+          <source [src]="sanitizeUrl(videoUrl)" type="video/mp4">
+          Your browser does not support the video tag.
         </video>
       </div>
     </div>

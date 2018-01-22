@@ -2,9 +2,9 @@ import {Component, OnInit, ViewEncapsulation, AfterViewInit} from '@angular/core
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {fadeInAnimation} from '../../_animations/index';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from "@angular/router";
-import {DataService} from "../../services/dataService.service";
-import {Config} from "../../services/config.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {DataService} from '../../services/dataService.service';
+import {Config} from '../../services/config.service';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   sanitizeUrl(url, type?) {
     if (type == 'youtube') {
       let video_id = url.split('v=')[1].split('&')[0];
-      let newUrl = "https://www.youtube.com/embed/" + video_id;
+      let newUrl = 'https://www.youtube.com/embed/' + video_id;
       return this.sanitizer.bypassSecurityTrustResourceUrl(`${newUrl}`);
     } else if (type == 'demoUrl') {
       return this.sanitizer.bypassSecurityTrustResourceUrl(`${url}`);
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
       setTimeout(() => {
         this.articlesAndOthers = this.productDetails['articles'].concat(this.productDetails['others']);
         console.log(this.articlesAndOthers);
-        this.caseStudyAndWhitePaper = this.productDetails['caseStudies'].concat(this.productDetails['whitePapers'])
+        this.caseStudyAndWhitePaper = this.productDetails['caseStudies'].concat(this.productDetails['whitePapers']);
         console.log(this.caseStudyAndWhitePaper);
       });
       console.log(this.productDetails);
@@ -62,8 +62,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openVideo(content, vid) {
-    let url = this.config.serverUrl + vid;
-    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    this.videoUrl = vid;
     this.modalService.open(content, {windowClass: 'video-modal modal-fullscreen'});
   }
 
