@@ -43,6 +43,30 @@
   </header>
   <section id="products">
     <div class="container">
+      <div class="subCategories" style="margin-bottom: 50px;">
+        <ngb-tabset type="pills">
+          <ngb-tab title="Transportation">
+            <ng-template ngbTabContent>
+              
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Retail">
+            <ng-template ngbTabContent>
+              
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Healthcare">
+            <ng-template ngbTabContent>
+              
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Insurance">
+            <ng-template ngbTabContent>
+              
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
       <div class="row heading hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="col-md-12">
           <h1>{{groupDetail.group_name  || groupDetail.category_name}} Products</h1>
