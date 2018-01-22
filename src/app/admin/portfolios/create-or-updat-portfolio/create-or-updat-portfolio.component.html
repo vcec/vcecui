@@ -717,7 +717,7 @@
                          placeholder="Enter url of youtube video"/>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-sm btn-primary" (click)="handleUpload('mainVideo')"
+                  <button class="btn btn-sm btn-primary" (click)="handleUpload('subVideo')"
                           [disabled]="!uploadFormTitle || (!lastUpload && !youTubeVideoUrl) || !videoCoverImage ||
                            (youTubeVideoUrl && invalidVideo())">Add
                   </button>
