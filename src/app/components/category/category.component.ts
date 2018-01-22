@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit,ViewEncapsulation} from '@angular/core';
 import {fadeInAnimation} from '../../_animations/index';
 import {DataService} from '../../services/dataService.service';
 import {Config} from '../../services/config.service';
@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [fadeInAnimation]
 })
 export class CategoryComponent implements OnInit {
