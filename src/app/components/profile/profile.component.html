@@ -30,7 +30,7 @@
                 *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.indexOf('youtube')!=-1"
                 allowFullScreen='allowFullScreen'>
         </iframe>
-        <video controls [poster]="config.serverUrl + productDetails.mainVideo.coverImage"
+        <video controls autoplay [poster]="config.serverUrl + productDetails.mainVideo.coverImage"
                *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.indexOf('youtube')==-1">
           <source [src]="sanitizeUrl(productDetails.mainVideo.url)" type="video/mp4">
           Your browser does not support the video tag.
@@ -233,14 +233,13 @@
     </button>
     <div class="modal-body videoModalShadow">
       <div class="videoWrapper">
-        <iframe [src]="videoUrl" allowFullScreen='allowFullScreen'>
-        </iframe>
+        <!-- <iframe [src]="videoUrl" allowFullScreen='allowFullScreen'>
+        </iframe> -->
 
-        <!-- <video controls autoplay>
-                                <source src="assets/videos/Locate Opportunity with Pitney Bowes Software Solutions.mp4" type="video/mp4">
-
-                                Your browser does not support the video tag.
-                              </video> -->
+        <video controls autoplay>
+            <source [src]="videoUrl" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   </div>

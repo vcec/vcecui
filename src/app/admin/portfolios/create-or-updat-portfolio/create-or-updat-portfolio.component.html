@@ -86,10 +86,12 @@
                   </div>
                 </div>
                 <div *ngIf="coverImage && coverImage.url" style="position: relative;">
-                  <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
-                  <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
-                     (click)="coverImage=null">
-                  </i>
+                    <div class="imgPreview">
+                        <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
+                        <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                           (click)="coverImage=null">
+                        </i>
+                    </div>
                 </div>
               </div>
             </div>
@@ -577,10 +579,12 @@
                 </div>
               </div>
               <div *ngIf="coverImage" class="card-body" style="position: relative;">
-                <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
-                <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
-                   (click)="coverImage=''">
-                </i>
+                <div class="imgPreview">
+                  <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
+                  <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
+                     (click)="coverImage=''">
+                  </i>
+                </div>
               </div>
             </div>
             <div class="help-text" *ngIf="f.submitted && !coverImage">Cover Image is required.</div>
