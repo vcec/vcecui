@@ -58,6 +58,7 @@ export class CategoryComponent implements OnInit {
         // get all subcategories
         this.dataService.getSubcategoriesOfMainCat(this.groupDetail['_id']).subscribe((result) => {
           this.subCategories = result['data'];
+          this.subCategories.unshift({name: 'All'});
         }, (err) => {
 
         });
@@ -66,6 +67,13 @@ export class CategoryComponent implements OnInit {
 
       });
     }
+  }
+
+  changeProducts(cat) {
+    if (this.selectedSubCategories.indexOf(cat.activeId) !== -1) {
+      this.selectedSubCategories.splice(this.subCategories.indexOf(cat.activeId), 1);
+    }
+    this.selectedSubCategories.push(cat.nextId);
   }
 
   ngAfterViewInit() {

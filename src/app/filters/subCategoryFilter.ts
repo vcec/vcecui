@@ -10,7 +10,7 @@ export class subCategoryFilter implements PipeTransform {
       return items;
     }
 
-    if (filter.length === 0) {
+    if (filter.length === 0 || filter.indexOf('All') !== -1) {
       return items;
     }
 
