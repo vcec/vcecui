@@ -63,10 +63,10 @@
             <div class="card">
               <div class="card-header">
                 <label>Cover Image <!-- <span *ngIf="!coverImage">+</span> --></label>
-                <div class="addItem" 
-                    *ngIf="!coverImage" 
-                    (click)="show('showCoverImageForm')">
-                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                <div class="addItem"
+                     *ngIf="!coverImage"
+                     (click)="show('showCoverImageForm')">
+                  <i class="nc-icon-mini ui-1_simple-add"></i>
                 </div>
               </div>
               <div class="card-body" *ngIf="uploadForms.showCoverImageForm||(coverImage && coverImage.url)">
@@ -465,16 +465,15 @@
               <div class="card-body">
                 <div class="controls-stacked">
                   <label class="control checkbox" *ngFor="let solution of solutions">
-                    <input type="checkbox" ngModel
+                    <input type="checkbox"
                            (change)="solution.checked = !solution.checked;changeStatusOfAllSubCat(solution._id)"
-                           [checked]="solution.checked" name="soltn"
-                           required>
+                           [checked]="solution.checked" name="soltn">
                     <span class="control-indicator"></span>{{solution.name}}
                     <br>
                     <div class="controls-stacked">
                       <div *ngFor="let subSolution of subSolutions">
-                        <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
-                          <input [name]="solution.name" type="radio" [value]="subSolution.name"
+                        <label class="control checkbox" *ngIf="subSolution.mainCategory == solution._id">
+                          <input [name]="solution.name" type="checkbox" [value]="subSolution.name"
                                  [checked]="checkIsItSelected(subSolution.name)"
                                  (change)="solution.checked=true;changeSubCatSelection(subSolution.name)">
                           <span class="control-indicator"></span>
@@ -953,14 +952,14 @@
               <div class="card-body">
                 <div class="controls-stacked">
                   <label class="control checkbox" *ngFor="let solution of solutions">
-                    <input type="checkbox" [checked]="solution.checked" name="editSolution" ngModel
+                    <input type="checkbox" [checked]="solution.checked" name="editSolution"
                            (change)="solution.checked = !solution.checked;changeStatusOfAllSubCat(solution._id)">
                     <span class="control-indicator"></span>{{solution.name}}
                     <br>
                     <div class="controls-stacked">
                       <div *ngFor="let subSolution of subSolutions">
-                        <label class="control radio" *ngIf="subSolution.mainCategory == solution._id">
-                          <input [name]="solution.name" type="radio" [value]="subSolution.name"
+                        <label class="control checkbox" *ngIf="subSolution.mainCategory == solution._id">
+                          <input [name]="solution.name" type="checkbox" [value]="subSolution.name"
                                  [checked]="checkIsItSelected(subSolution.name)"
                                  (change)="solution.checked =true;changeSubCatSelection(subSolution.name)">
                           <span class="control-indicator"></span>
