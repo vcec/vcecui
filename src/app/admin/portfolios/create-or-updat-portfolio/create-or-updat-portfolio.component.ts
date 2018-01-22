@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {DataService} from "../../../services/dataService.service";
-import {ToastsManager} from "ng2-toastr";
-import {DialogService} from "ng2-bootstrap-modal";
-import {Config} from "../../../services/config.service";
-import {NgForm} from "@angular/forms";
-import {CookieService} from "angular2-cookie/services/cookies.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {DataService} from '../../../services/dataService.service';
+import {ToastsManager} from 'ng2-toastr';
+import {DialogService} from 'ng2-bootstrap-modal';
+import {Config} from '../../../services/config.service';
+import {NgForm} from '@angular/forms';
+import {CookieService} from 'angular2-cookie/services/cookies.service';
 
 declare var $: any;
 
@@ -24,7 +24,7 @@ class CommonObjForData {
 class VideoObj {
   title?: string;
   url?: string;
-  coverImage?: string
+  coverImage?: string;
 }
 
 @Component({
@@ -35,7 +35,7 @@ class VideoObj {
 export class CreateOrUpdatPortfolioComponent implements OnInit {
   coverImage: CommonObjForUploader;
   mainVideo: VideoObj;
-  patternForYouTubeUrl = "(?:youtube\\.com\\/(?:[^\\/]+\\/.+\\/|(?:v|e(?:mbed)?)\\/|.*[?&]v=)|youtu\\.be\\/)([^\"&?\\/ ]{11}.*)";
+  patternForYouTubeUrl = '(?:youtube\\.com\\/(?:[^\\/]+\\/.+\\/|(?:v|e(?:mbed)?)\\/|.*[?&]v=)|youtu\\.be\\/)([^"&?\\/ ]{11}.*)';
   lastUpload: string;
   youTubeVideoUrl: string;
   videos: VideoObj[] = [];
@@ -57,7 +57,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     demoForm: false
   };
 
-  uploadFormTitle = "";
+  uploadFormTitle = '';
   @ViewChild('f')
   portfolioForm: NgForm;
   productGroups: any[] = [];
@@ -70,9 +70,9 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   editPortfolioState = false;
   portfolioToEdit = {};
   Id: string;
-  setDataFormHeading = "";
-  setDataFormDesc = "";
-  setDataSeeMoreLink = "";
+  setDataFormHeading = '';
+  setDataFormDesc = '';
+  setDataSeeMoreLink = '';
   articles: CommonObjForData[] = [];
   other: CommonObjForData[] = [];
   demos: CommonObjForData[] = [];
@@ -212,11 +212,11 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onUploadError(event) {
-    this.lastUpload = "";
+    this.lastUpload = '';
   }
 
   onFeatureImageUploadError(event) {
-    this.featuredProductImage = "";
+    this.featuredProductImage = '';
   }
 
   onFeatureImageUploadSuccess(event) {
@@ -226,7 +226,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onImageUploadError(event) {
-    this.videoCoverImage = "";
+    this.videoCoverImage = '';
   }
 
   onImageUploadSuccess(event) {
@@ -236,17 +236,17 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onVideoCoverImageRemoved() {
-    this.videoCoverImage = "";
+    this.videoCoverImage = '';
   }
 
   onRemoved(event) {
-    this.lastUpload = "";
+    this.lastUpload = '';
   }
 
   show(formName ?) {
-    this.uploadFormTitle = "";
-    this.lastUpload = "";
-    this.youTubeVideoUrl = "";
+    this.uploadFormTitle = '';
+    this.lastUpload = '';
+    this.youTubeVideoUrl = '';
     for (let key in this.uploadForms) {
       this.uploadForms[key] = false;
     }
@@ -266,7 +266,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
           coverImage: this.videoCoverImage
         };
         console.log('*******');
-        console.log(video)
+        console.log(video);
         this.mainVideo = video;
         break;
       case 'subVideo':
@@ -312,16 +312,16 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
 
 
   showDataForm(name?) {
-    this.setDataSeeMoreLink = "";
-    this.setDataFormDesc = "";
-    this.setDataFormHeading = "";
-    this.lastUpload = "";
-    this.youTubeVideoUrl = "";
+    this.setDataSeeMoreLink = '';
+    this.setDataFormDesc = '';
+    this.setDataFormHeading = '';
+    this.lastUpload = '';
+    this.youTubeVideoUrl = '';
 
     for (var key in this.setDataForm) {
       this.setDataForm[key] = false;
     }
-    name ? this.setDataForm[name] = true : ''
+    name ? this.setDataForm[name] = true : '';
   }
 
   changeSubCatSelection(name) {
@@ -408,7 +408,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   removeFeaturedImage() {
-    this.featuredProductImage = "";
+    this.featuredProductImage = '';
   }
 
   onUpdate() {
@@ -455,7 +455,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   checkIfAnyGroupSelected() {
     let f = this.productGroups.filter((v, i) => {
       return v.checked == true ? true : false;
-    })
+    });
     if (f.length == 0) {
       return false;
     }
@@ -465,7 +465,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   checkIfAnySolutionSelected() {
     let f = this.solutions.filter((v, i) => {
       return v.checked == true ? true : false;
-    })
+    });
     if (f.length == 0) {
       return false;
     }

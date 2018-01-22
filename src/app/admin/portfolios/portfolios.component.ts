@@ -2,11 +2,11 @@ import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {DataService} from '../../services/dataService.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Config} from "../../services/config.service";
-import {main} from "@angular/compiler-cli/src/main";
-import {ToastsManager} from "ng2-toastr";
-import {DialogService} from "ng2-bootstrap-modal";
-import {ConfirmComponent} from "../confirmComponent/confirm.component";
+import {Config} from '../../services/config.service';
+import {main} from '@angular/compiler-cli/src/main';
+import {ToastsManager} from 'ng2-toastr';
+import {DialogService} from 'ng2-bootstrap-modal';
+import {ConfirmComponent} from '../confirmComponent/confirm.component';
 
 declare var $: any;
 
@@ -42,11 +42,11 @@ export class PortfoliosComponent implements OnInit {
   }
 
   editPortfolio(portfolio) {
-    this.router.navigate(["update/" + portfolio._id], {relativeTo: this.route});
+    this.router.navigate(['update/' + portfolio._id], {relativeTo: this.route});
   }
 
   createPortfolio(portfolio) {
-    this.router.navigate(["create"], {relativeTo: this.route});
+    this.router.navigate(['create'], {relativeTo: this.route});
   }
 
   deletePortfolio(portfolio) {
@@ -56,11 +56,11 @@ export class PortfoliosComponent implements OnInit {
     }).subscribe((isConfirmed) => {
       if (isConfirmed) {
         this.dataService.deletePortFolio(portfolio._id).subscribe((res) => {
-          this.toastr.success("Portfolio deleted successfully.", null, {toastLife: 3000});
+          this.toastr.success('Portfolio deleted successfully.', null, {toastLife: 3000});
           this.getAllPortfolios();
         }, (err) => {
           if (err.status === 0) {
-            this.toastr.error("Server is Down.")
+            this.toastr.error('Server is Down.');
           } else {
             this.toastr.error(err.message);
           }
