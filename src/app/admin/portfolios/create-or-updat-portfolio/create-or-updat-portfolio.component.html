@@ -62,7 +62,12 @@
 
             <div class="card">
               <div class="card-header">
-                <label>Cover Image <span (click)="show('showCoverImageForm')" *ngIf="!coverImage">+</span></label>
+                <label>Cover Image <!-- <span *ngIf="!coverImage">+</span> --></label>
+                <div class="addItem" 
+                    *ngIf="!coverImage" 
+                    (click)="show('showCoverImageForm')">
+                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                </div>
               </div>
               <div class="card-body" *ngIf="uploadForms.showCoverImageForm||(coverImage && coverImage.url)">
                 <div *ngIf="uploadForms.showCoverImageForm" class="card" style="padding: 20px">
@@ -88,7 +93,7 @@
                 <div *ngIf="coverImage && coverImage.url" style="position: relative;">
                   <div class="imgPreview">
                     <img [src]="config.serverUrl + coverImage.url" width="50%" height="50%"/>
-                    <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                    <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                        (click)="coverImage=null">
                     </i>
                   </div>

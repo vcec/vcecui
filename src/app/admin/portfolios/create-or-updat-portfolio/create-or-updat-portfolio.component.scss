@@ -17,7 +17,7 @@
   .card {
     .card-header {
       border-bottom: 0;
-      cursor: pointer;
+      position:relative;
       label {
         margin: 0;
         cursor: pointer;
@@ -56,3 +56,17 @@
   }
 }
 
+.addItem{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+      
+    i{
+	    float: right;
+    	margin-top: 15px;
+    	margin-right: 10px;
+    }
+}
