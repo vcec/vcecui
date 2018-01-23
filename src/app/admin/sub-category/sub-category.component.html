@@ -14,7 +14,6 @@
           <tr>
             <th>#</th>
             <th>SubCategory Name</th>
-            <th>SubCategory Icon</th>
             <th>Main Category</th>
             <th>Date added</th>
             <th>Added by</th>
@@ -25,8 +24,6 @@
           <tr *ngFor="let subCategory of subCategories;let i = index">
             <td>{{i+1}}</td>
             <td>{{subCategory.name}}</td>
-            <td><img [src]="config.serverUrl+subCategory.img" *ngIf="subCategory.img"
-                     style="width: 25%; height: 25%;"></td>
             <td>{{getMainCategory(subCategory.mainCategory)}}</td>
             <td>{{subCategory.created_at | date}}</td>
             <td>{{subCategory.addedBy}}</td>

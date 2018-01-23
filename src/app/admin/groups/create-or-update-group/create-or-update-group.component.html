@@ -11,16 +11,16 @@
             <div class="help-text" *ngIf="!groupName.valid && f.submitted">Please Enter Valid Group Name</div>
           </div>
           <div class="form-group">
-            <label>Heading</label>
-            <input type="text" class="form-control" ngModel name="heading" required
-                   #heading="ngModel">
-            <div class="help-text" *ngIf="!heading.valid  && f.submitted">Please Enter Valid heading!</div>
-          </div>
-          <div class="form-group">
             <label>Short Description</label>
             <input type="text" class="form-control" ngModel name="shortDesc" required
                    #shortDesc="ngModel">
             <div class="help-text" *ngIf="!shortDesc.valid  && f.submitted">Please Enter Valid short Description!</div>
+          </div>
+          <div class="form-group">
+            <label>Heading</label>
+            <input type="text" class="form-control" ngModel name="heading" required
+                   #heading="ngModel">
+            <div class="help-text" *ngIf="!heading.valid  && f.submitted">Please Enter Valid heading!</div>
           </div>
           <div class="form-group">
             <label>Group Description</label>
@@ -34,7 +34,7 @@
                       (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                       (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!image && f.submitted">Please Upload Image!</div>
-            
+
             <div class="imgPreview" *ngIf="image" style="height: 80px;margin-top: 20px;">
               <img [src]="this.config.serverUrl + image"  />
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
@@ -86,19 +86,19 @@
             <div class="help-text" *ngIf="!groupEditName.valid && f.submitted">Please Enter Valid Group Name!</div>
           </div>
           <div class="form-group">
-            <label>Heading</label>
-            <input type="text" class="form-control" [(ngModel)]="groupToEdit.heading" name="heading"
-                   required
-                   #editHeading="ngModel">
-            <div class="help-text" *ngIf="!editHeading.valid  && f.submitted">Please Enter Valid heading!</div>
-          </div>
-          <div class="form-group">
             <label>Short Description</label>
             <input type="text" class="form-control" [(ngModel)]="groupToEdit.shortDesc" name="shortDesc"
                    required
                    #editShortDesc="ngModel">
             <div class="help-text" *ngIf="!editShortDesc.valid  && f.submitted">Please Enter Valid short Description!
             </div>
+          </div>
+          <div class="form-group">
+            <label>Heading</label>
+            <input type="text" class="form-control" [(ngModel)]="groupToEdit.heading" name="heading"
+                   required
+                   #editHeading="ngModel">
+            <div class="help-text" *ngIf="!editHeading.valid  && f.submitted">Please Enter Valid heading!</div>
           </div>
           <div class="form-group">
             <label>Description</label>
@@ -113,7 +113,7 @@
                       (error)="onImageUploadError($event)" (success)="onImageUploadSuccess($event)" id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!image && f.submitted">Please Upload Image!</div>
-            
+
             <div class="imgPreview" *ngIf="image" style="height: 80px;margin-top: 20px;">
                 <img [src]="this.config.serverUrl + image"  />
                 <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
@@ -128,7 +128,7 @@
                       id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!alternativeImage && f.submitted">Please Upload Alternative Image!</div>
-            
+
             <div class="imgPreview" style="height: 80px;margin-top: 20px;background: silver" *ngIf="alternativeImage">
                 <img [src]="this.config.serverUrl + alternativeImage"  />
                 <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
@@ -143,7 +143,7 @@
                       id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!coverImage && f.submitted">Please Upload Cover Image!</div>
-            
+
             <div *ngIf="coverImage" class="imgPreview" style="margin-top: 20px;">
                 <img [src]="this.config.serverUrl + coverImage"/>
                 <i class="delIcon nc-icon-mini ui-1_circle-remove lg"

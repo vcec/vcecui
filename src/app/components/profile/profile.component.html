@@ -60,7 +60,6 @@
               </div>
             </div>
           </div>
-
           <div class="profileDesc hide-on-init" animateOnScroll animationName="animated fadeInUp">
             <p>
               {{productDetails.desc}}
@@ -127,7 +126,7 @@
                 <h2><a [href]="sanitizeUrl(k.seeMoreLink, 'demoUrl')" target="_blank" class="cs-link">{{k.heading}}</a>
                 </h2>
                 <p>
-                  {{k.desc}}
+                  {{k.desc.length > 75 ? k.desc.substring(0,75) + '....' : k.desc}}
                 </p>
               </div>
             </div>
@@ -190,7 +189,7 @@
                   <h3><a [href]="k.seeMoreLink" target="_blank" class="cs-link">{{k.heading}}</a>
                   </h3>
                   <p>
-                    {{k.desc}}
+                    {{k.desc.length > 75 ? k.desc.substring(0,75) + '....' : k.desc}}
                   </p>
                 </div>
               </div>

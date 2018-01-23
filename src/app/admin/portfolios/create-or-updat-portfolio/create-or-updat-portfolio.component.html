@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="subtitle">Sub Title</label>
+              <label for="subtitle">Short Description</label>
               <input type="text" class="form-control" id="subtitle" name="subtitle" ngModel #subTitle="ngModel"
                      required/>
               <div class="help-text"
@@ -105,10 +105,10 @@
             <div class="card">
               <div class="card-header">
                 <label>Main Video</label>
-                <div class="addItem" 
-                    *ngIf="!mainVideo"
-                    (click)="show('showMainVideoForm')">
-                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                <div class="addItem"
+                     *ngIf="!mainVideo"
+                     (click)="show('showMainVideoForm')">
+                  <i class="nc-icon-mini ui-1_simple-add"></i>
                 </div>
               </div>
               <div *ngIf="uploadForms.showMainVideoForm" class="card-body" style="padding: 20px">
@@ -169,7 +169,7 @@
                   <div class="card">
                     <div class="card-header">
                       {{mainVideo.title}}
-                      
+
                     </div>
                     <div class="card-body">
                       <div class="imgPreview">
@@ -178,7 +178,7 @@
                            (click)="mainVideo =null">
                         </i>
                       </div>
-                      
+
                     </div>
                   </div>
                 </label>
@@ -190,25 +190,25 @@
             <div class="card">
               <div class="card-header">
                 <label>Other Related Videos</label>
-                <div class="addItem" 
-                    (click)="show('showOtherVideoForm')">
-                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                <div class="addItem"
+                     (click)="show('showOtherVideoForm')">
+                  <i class="nc-icon-mini ui-1_simple-add"></i>
                 </div>
               </div>
               <div class="card-body" *ngIf="videos && videos.length > 0">
                 <div class="card" *ngFor="let video of videos">
                   <div class="card-header">
                     {{video.title}}
-                    
+
                   </div>
                   <div class="card-body">
                     <div class="imgPreview">
-                    <img [src]="config.serverUrl + video.coverImage"/>
-                    <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
-                       (click)="removeVideoFromVideos(video.title)">
-                    </i>
-                  </div>
-                    
+                      <img [src]="config.serverUrl + video.coverImage"/>
+                      <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
+                         (click)="removeVideoFromVideos(video.title)">
+                      </i>
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -269,18 +269,18 @@
             <div class="card">
               <div class="card-header">
                 <label>Case Studies</label>
-                <div class="addItem" 
-                    (click)="show('caseStudy')">
-                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                <div class="addItem"
+                     (click)="show('caseStudy')">
+                  <i class="nc-icon-mini ui-1_simple-add"></i>
                 </div>
               </div>
 
               <div class="card-body" *ngIf="caseStudies.length > 0">
                 <label *ngFor="let caseStudy of caseStudies" class="contentElement">
-                  {{caseStudy.title}} 
+                  {{caseStudy.title}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                      (click)="removeCaseStudyFromCaseStudies(caseStudy.title)"
-                    ></i>
+                     (click)="removeCaseStudyFromCaseStudies(caseStudy.title)"
+                  ></i>
 
                 </label>
               </div>
@@ -309,18 +309,18 @@
             <div class="card">
               <div class="card-header">
                 <label>White Papers</label>
-                <div class="addItem" 
-                    (click)="show('whitePaperForm')">
-                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                <div class="addItem"
+                     (click)="show('whitePaperForm')">
+                  <i class="nc-icon-mini ui-1_simple-add"></i>
                 </div>
               </div>
 
               <div class="card-body" *ngIf="whitePapers.length > 0">
                 <label *ngFor="let whitePaper of whitePapers" class="contentElement">
-                  {{whitePaper.title}} 
+                  {{whitePaper.title}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                      (click)="removeWhitePaperFromList(whitePaper.title)"
-                    ></i>
+                     (click)="removeWhitePaperFromList(whitePaper.title)"
+                  ></i>
                 </label>
               </div>
               <div *ngIf="uploadForms.whitePaperForm" class="card-body" style="padding: 20px">
@@ -349,18 +349,18 @@
             <div class="card">
               <div class="card-header">
                 <label>Articles</label>
-                <div class="addItem" 
-                    (click)="showDataForm('articleForm')">
-                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                <div class="addItem"
+                     (click)="showDataForm('articleForm')">
+                  <i class="nc-icon-mini ui-1_simple-add"></i>
                 </div>
               </div>
 
               <div class="card-body" *ngIf="articles.length > 0">
                 <label *ngFor="let article of articles" class="contentElement">
-                  {{article.heading}} 
+                  {{article.heading}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                      (click)="removeArticleFromList(article.heading)"
-                    ></i>
+                     (click)="removeArticleFromList(article.heading)"
+                  ></i>
                 </label>
               </div>
               <div *ngIf="setDataForm.articleForm" class="card-body" style="padding: 20px">
@@ -394,18 +394,18 @@
             <div class="card">
               <div class="card-header">
                 <label>Others</label>
-                <div class="addItem" 
-                    (click)="showDataForm('otherForm')">
-                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                <div class="addItem"
+                     (click)="showDataForm('otherForm')">
+                  <i class="nc-icon-mini ui-1_simple-add"></i>
                 </div>
               </div>
 
               <div class="card-body" *ngIf="other.length > 0">
                 <label *ngFor="let oth of other" class="contentElement">
-                  {{oth.heading}} 
+                  {{oth.heading}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                      (click)="removeOtherFromList(oth.heading)"
-                    ></i>
+                     (click)="removeOtherFromList(oth.heading)"
+                  ></i>
                 </label>
               </div>
               <div *ngIf="setDataForm.otherForm" class="card-body" style="padding: 20px">
@@ -437,9 +437,9 @@
             <div class="card">
               <div class="card-header">
                 <label>Demos</label>
-                <div class="addItem" 
-                    (click)="showDataForm('demoForm')">
-                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                <div class="addItem"
+                     (click)="showDataForm('demoForm')">
+                  <i class="nc-icon-mini ui-1_simple-add"></i>
                 </div>
               </div>
 
@@ -447,8 +447,8 @@
                 <label *ngFor="let demo of demos" class="contentElement">
                   {{demo.heading}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                      (click)="removeDemoFromList(demo.heading)"
-                    ></i>
+                     (click)="removeDemoFromList(demo.heading)"
+                  ></i>
                 </label>
               </div>
               <div *ngIf="setDataForm.demoForm" class="card-body" style="padding: 20px">
@@ -560,7 +560,7 @@
               <div class="help-text" *ngIf="f.submitted && eTitle.invalid">Title is required!</div>
             </div>
             <div class="form-group">
-              <label>Sub Title</label>
+              <label>Short Description</label>
               <input type="text" class="form-control" name="subtitle" [ngModel]="portfolioToEdit.subtitle"
                      required #eSubtitle="ngModel"/>
               <div class="help-text" *ngIf="f.submitted && eSubtitle.invalid">SubTitle is required!</div>
@@ -585,7 +585,8 @@
                        (click)="featuredProductImage=''">
                     </i>
                   </div>
-                  <dropzone *ngIf="!featuredProductImage" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+                  <dropzone *ngIf="!featuredProductImage" [config]="imageUploadConfig"
+                            [message]="'Click or drag images here to upload'"
                             (error)="onFeatureImageUploadError($event)" (removedFile)="onRemoved($event)"
                             (success)="onFeatureImageUploadSuccess($event)" id="featureImage"
                             name="featureImage"></dropzone>
@@ -707,16 +708,16 @@
                 <div class="card">
                   <div class="card-header">
                     {{mainVideo.title}}
-                    
+
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                      (click)="mainVideo=null"></i>
+                       (click)="mainVideo=null"></i>
                   </div>
                   <div class="card-body">
                     <div class="imgPreview">
                       <img [src]="config.serverUrl + mainVideo.coverImage"/>
-                      
+
                     </div>
-                    
+
                   </div>
                 </div>
               </div>
@@ -736,14 +737,14 @@
                 <div class="card" *ngFor="let video of videos">
                   <div class="card-header">
                     {{video.title}}
-                    
+
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                    (click)="removeVideoFromVideos(video.title)"></i>
+                       (click)="removeVideoFromVideos(video.title)"></i>
                   </div>
                   <div class="card-body">
                     <div class="imgPreview">
                       <img [src]="config.serverUrl + video.coverImage"/>
-                      
+
                     </div>
                   </div>
                 </div>
@@ -810,9 +811,9 @@
               </div>
               <div class="card-body" *ngIf="caseStudies && caseStudies.length > 0">
                 <label *ngFor="let caseStudy of caseStudies" class="contentElement">
-                  {{caseStudy.title}} 
+                  {{caseStudy.title}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                  (click)="removeCaseStudyFromCaseStudies(caseStudy.title)"></i>
+                     (click)="removeCaseStudyFromCaseStudies(caseStudy.title)"></i>
                 </label>
               </div>
               <div *ngIf="uploadForms.caseStudy" class="card-body" style="padding: 20px">
@@ -850,7 +851,7 @@
                 <label *ngFor="let whitePaper of whitePapers" class="contentElement">
                   {{whitePaper.title}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                  (click)="removeWhitePaperFromList(whitePaper.title)"></i>
+                     (click)="removeWhitePaperFromList(whitePaper.title)"></i>
                 </label>
               </div>
               <div *ngIf="uploadForms.whitePaperForm" class="card-body" style="padding: 20px">
@@ -888,7 +889,7 @@
                 <label *ngFor="let article of articles" class="contentElement">
                   {{article.heading}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                  (click)="removeArticleFromList(article.heading)"></i>
+                     (click)="removeArticleFromList(article.heading)"></i>
                 </label>
               </div>
               <div *ngIf="setDataForm.articleForm" class="card-body" style="padding: 20px">
@@ -923,16 +924,16 @@
               <div class="card-header">
                 <label>Others
                   <div class="addItem"
-                     (click)="showDataForm('otherForm')">
-                  <i class="nc-icon-mini ui-1_simple-add"></i>
-                </div>
+                       (click)="showDataForm('otherForm')">
+                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                  </div>
                 </label>
               </div>
               <div class="card-body" *ngIf="other && other.length > 0">
                 <label *ngFor="let oth of other" class="contentElement">
-                  {{oth.heading}} 
+                  {{oth.heading}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                  (click)="removeOtherFromList(oth.heading)"></i>
+                     (click)="removeOtherFromList(oth.heading)"></i>
                 </label>
               </div>
               <div *ngIf="setDataForm.otherForm" class="card-body" style="padding: 20px">
@@ -966,17 +967,17 @@
             <div class="card">
               <div class="card-header">
                 <label>Demos
-                <div class="addItem"
-                     (click)="showDataForm('demoForm')">
-                  <i class="nc-icon-mini ui-1_simple-add"></i>
-                </div>
+                  <div class="addItem"
+                       (click)="showDataForm('demoForm')">
+                    <i class="nc-icon-mini ui-1_simple-add"></i>
+                  </div>
                 </label>
               </div>
               <div class="card-body" *ngIf="demos && demos.length > 0">
                 <label *ngFor="let demo of demos" class="contentElement">
                   {{demo.heading}}
                   <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                  (click)="removeDemoFromList(demo.heading)"></i>
+                     (click)="removeDemoFromList(demo.heading)"></i>
                 </label>
               </div>
               <div *ngIf="setDataForm.demoForm" class="card-body" style="padding: 20px">
