@@ -11,6 +11,18 @@
             <div class="help-text" *ngIf="!groupName.valid && f.submitted">Please Enter Valid Group Name</div>
           </div>
           <div class="form-group">
+            <label>Heading</label>
+            <input type="text" class="form-control" ngModel name="heading" required
+                   #heading="ngModel">
+            <div class="help-text" *ngIf="!heading.valid  && f.submitted">Please Enter Valid heading!</div>
+          </div>
+          <div class="form-group">
+            <label>Short Description</label>
+            <input type="text" class="form-control" ngModel name="shortDesc" required
+                   #shortDesc="ngModel">
+            <div class="help-text" *ngIf="!shortDesc.valid  && f.submitted">Please Enter Valid short Description!</div>
+          </div>
+          <div class="form-group">
             <label>Group Description</label>
             <input type="text" class="form-control" ngModel name="desc" required
                    #groupDesc="ngModel">
@@ -76,7 +88,22 @@
             <div class="help-text" *ngIf="!groupEditName.valid && f.submitted">Please Enter Valid Group Name!</div>
           </div>
           <div class="form-group">
-            <label>Group Description</label>
+            <label>Heading</label>
+            <input type="text" class="form-control" [(ngModel)]="groupToEdit.heading" name="heading"
+                   required
+                   #editHeading="ngModel">
+            <div class="help-text" *ngIf="!editHeading.valid  && f.submitted">Please Enter Valid heading!</div>
+          </div>
+          <div class="form-group">
+            <label>Short Description</label>
+            <input type="text" class="form-control" [(ngModel)]="groupToEdit.shortDesc" name="shortDesc"
+                   required
+                   #editShortDesc="ngModel">
+            <div class="help-text" *ngIf="!editShortDesc.valid  && f.submitted">Please Enter Valid short Description!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
             <input type="text" class="form-control" [(ngModel)]="groupToEdit.desc" name="groupToEdit.desc" required
                    #groupEditDesc="ngModel">
             <div class="help-text" *ngIf="!groupEditDesc.valid && f.submitted">Please Enter Valid Group Description!

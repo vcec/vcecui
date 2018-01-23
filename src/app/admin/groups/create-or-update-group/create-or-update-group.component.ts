@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
-import {Router, Route, ActivatedRoute} from "@angular/router";
-import {DataService} from "../../../services/dataService.service";
-import {Config} from "../../../services/config.service";
+import {Router, Route, ActivatedRoute} from '@angular/router';
+import {DataService} from '../../../services/dataService.service';
+import {Config} from '../../../services/config.service';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
-import {NgForm} from "@angular/forms";
-import {CookieService} from "angular2-cookie/services/cookies.service";
+import {NgForm} from '@angular/forms';
+import {CookieService} from 'angular2-cookie/services/cookies.service';
 
 declare var $: any;
 
@@ -65,15 +65,15 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   }
 
   onRemoved() {
-    this.image = "";
+    this.image = '';
   }
 
   onCoverImageRemoved() {
-    this.coverImage = "";
+    this.coverImage = '';
   }
 
   onAlternativeImageRemoved() {
-    this.alternativeImage = "";
+    this.alternativeImage = '';
   }
 
   onAlterImageUploadSuccess(event) {
@@ -83,7 +83,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   }
 
   onAlterImageUploadError() {
-    this.alternativeImage = "";
+    this.alternativeImage = '';
   }
 
   onImageUploadSuccess(event) {
@@ -93,7 +93,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   }
 
   onCoverImageUploadError() {
-    this.coverImage = "";
+    this.coverImage = '';
   }
 
   onCoverImageUploadSuccess(event) {
@@ -110,13 +110,13 @@ export class CreateOrUpdateGroupComponent implements OnInit {
       img: this.image,
       coverImage: this.coverImage,
       addedBy: this.currentUser,
-      alternativeImage: this.alternativeImage
+      alternativeImage: this.alternativeImage,
     });
     this.dataService.saveGroup(data).subscribe((res) => {
-      this.router.navigate(['../'], {relativeTo: this.route})
+      this.router.navigate(['../'], {relativeTo: this.route});
     }, (err) => {
       if (err.status === 0) {
-        this.toastr.error("Server is Down.")
+        this.toastr.error('Server is Down.');
       } else {
         this.toastr.error(err.message);
       }
@@ -130,6 +130,8 @@ export class CreateOrUpdateGroupComponent implements OnInit {
     let data = {
       group_name: this.groupForm.controls['groupToEdit.group_name'].value,
       desc: this.groupForm.controls['groupToEdit.desc'].value,
+      shortDesc: this.groupForm.controls['shortDesc'].value,
+      heading: this.groupForm.controls['heading'].value,
       img: this.image,
       addedBy: this.currentUser,
       coverImage: this.coverImage,
@@ -140,7 +142,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
       this.router.navigate(['../../'], {relativeTo: this.route});
     }, (err) => {
       if (err.status === 0) {
-        this.toastr.error("Server is Down.")
+        this.toastr.error('Server is Down.');
       } else {
         this.toastr.error(err.message);
       }
