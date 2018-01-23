@@ -8,6 +8,7 @@ export class DataService {
 
   uploaderObj = {};
   accessToken = '';
+  currentUrl = '';
 
   constructor(private httpClient: HttpClient, private config: Config, private cookieService: CookieService) {
     this.accessToken = this.cookieService.get('accessToken');
@@ -23,6 +24,14 @@ export class DataService {
 
   getUploderObj() {
     return this.uploaderObj;
+  }
+
+  setCurrentUrl(url) {
+    this.currentUrl = url;
+  }
+
+  getLastUrl() {
+    return this.currentUrl;
   }
 
   //login

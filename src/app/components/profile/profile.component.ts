@@ -19,11 +19,13 @@ export class ProfileComponent implements OnInit {
   articlesAndOthers = [];
   caseStudyAndWhitePaper = [];
   videoUrl: SafeResourceUrl;
+  backUrl = '';
 
   constructor(private modalService: NgbModal, public sanitizer: DomSanitizer, private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,) {
     this.route.params.subscribe(params => {
       this.productId = params['productId'];
     });
+    this.backUrl = this.dataService.getLastUrl();
   }
 
   sanitizeUrl(url, type?) {

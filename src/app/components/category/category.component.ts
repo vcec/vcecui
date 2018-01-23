@@ -3,7 +3,8 @@ import {fadeInAnimation} from '../../_animations/index';
 import {DataService} from '../../services/dataService.service';
 import {Config} from '../../services/config.service';
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, NavigationStart} from '@angular/router';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-category',
@@ -28,6 +29,7 @@ export class CategoryComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.groupName = params['groupName'];
     });
+    this.dataService.setCurrentUrl(this.router.url);
   }
 
   ngOnInit() {
