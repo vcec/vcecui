@@ -43,14 +43,7 @@
   </header>
   <section id="products">
     <div class="container">
-      <div class="subCategories" style="margin-bottom: 50px;" *ngIf="subCategories.length > 0">
-        <ngb-tabset type="pills" (tabChange)="changeProducts($event)">
-          <ngb-tab *ngFor="let cat of subCategories" [title]="cat.name" [id]="cat.name">
-            <ng-template ngbTabTitle></ng-template>
-            <ng-template ngbTabContent></ng-template>
-          </ngb-tab>
-        </ngb-tabset>
-      </div>
+
       <div class="row heading hide-on-init" animateOnScroll animationName="animated fadeInUp">
         <div class="col-md-12">
           <h1>{{groupDetail.group_name || groupDetail.category_name}} Products</h1>
@@ -58,6 +51,20 @@
             {{groupDetail.desc}} </p>
         </div>
       </div>
+
+
+      <div class="row">
+      <div class="col-md-12">
+      <div class="subCategories" *ngIf="subCategories.length > 0">
+          <ngb-tabset type="pills" (tabChange)="changeProducts($event)">
+            <ngb-tab *ngFor="let cat of subCategories" [title]="cat.name" [id]="cat.name">
+              <ng-template ngbTabTitle></ng-template>
+              <ng-template ngbTabContent></ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div></div>
+
       <div class="row products">
         <div class="col-md-4 hide-on-init"
              *ngFor="let product of products | subCategoryFilter: selectedSubCategories;let i = index"
