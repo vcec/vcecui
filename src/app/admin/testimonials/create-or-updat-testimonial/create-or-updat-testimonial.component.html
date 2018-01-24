@@ -18,15 +18,21 @@
           </div>
           <div class="form-group">
             <label>User Image</label>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+            <!-- <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
                  *ngIf="image">
               <img [src]="image ?this.config.serverUrl + image: ''" width="50%" height="50%"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
                  (click)="onRemoved()">
               </i>
+            </div> -->
+            <div class="imgPreview" *ngIf="image">
+              <img [src]="image ?this.config.serverUrl + image: ''"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
+                 (click)="onRemoved()">
+              </i>
             </div>
-            <div *ngIf="!image">
-              <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <div>
+              <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                         (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                         (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
             </div>
@@ -58,13 +64,19 @@
           </div>
           <div class="form-group">
             <label>User Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                       (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
+            <!-- <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
                  *ngIf="image">
               <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+                 (click)="onRemoved()">
+              </i>
+            </div> -->
+            <div class="imgPreview" *ngIf="image">
+              <img [src]="this.config.serverUrl + image"/>
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                  (click)="onRemoved()">
               </i>
             </div>
