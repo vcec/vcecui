@@ -35,48 +35,46 @@
           </div>
           <div class="form-group">
             <label>Category Icon Image</label>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
-                 *ngIf="image">
-              <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
-              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
-                 (click)="onRemoved()">
-              </i>
-            </div>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                       (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!image && f.submitted">Please upload icon image</div>
+            <div class="imgPreview" *ngIf="image" style="height: 80px;margin-top: 20px;">
+              <img [src]="this.config.serverUrl + image"  />
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
+                 (click)="onRemoved()">
+              </i>
+            </div>
           </div>
           <div class="form-group">
             <label>Alternative Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!alternativeImage ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onAltrImageUploadError($event)" (success)="onAltrImageUploadSuccess($event)"
             ></dropzone>
             <div class="help-text" *ngIf="!alternativeImage && f.submitted ">Please Upload Alternative Image!</div>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
-                 *ngIf="alternativeImage">
-              <img [src]="this.config.serverUrl + alternativeImage" width="50%" height="50%"/>
-              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+            
+            <div class="imgPreview" *ngIf="alternativeImage" style="height: 80px;margin-top: 20px;">
+              <img [src]="this.config.serverUrl + alternativeImage"  />
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                  (click)="onAltrImageRemoved()">
               </i>
             </div>
           </div>
           <div class="form-group">
             <label>Category Cover Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!coverImage ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
                       id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!coverImage && f.submitted">Please Upload Cover Image!</div>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
-                 *ngIf="coverImage">
-              <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
-              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+            <div class="imgPreview" *ngIf="coverImage" style="margin-top: 20px;">
+              <img [src]="this.config.serverUrl + coverImage"  />
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                  (click)="onCoverImageRemoved()">
               </i>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="margin-top: 50px;">
             <button class="btn btn-primary" type="submit">
               Add New Category
             </button>
@@ -119,48 +117,45 @@
           </div>
           <div class="form-group">
             <label>Category Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onImageUploadError($event)" (success)="onImageUploadSuccess($event)" id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!image &&  f.submitted ">Please Upload Image!</div>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
-                 *ngIf="image">
-              <img [src]="this.config.serverUrl + image" width="50%" height="50%"/>
-              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+            <div class="imgPreview" *ngIf="image" style="height: 80px;margin-top: 20px;">
+              <img [src]="this.config.serverUrl + image"  />
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                  (click)="onRemoved()">
               </i>
             </div>
           </div>
           <div class="form-group">
             <label>Alternative Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!alternativeImage ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onAltrImageUploadError($event)" (success)="onAltrImageUploadSuccess($event)"
             ></dropzone>
             <div class="help-text" *ngIf="!alternativeImage && f.submitted ">Please Upload Alternative Image!</div>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
-                 *ngIf="alternativeImage">
-              <img [src]="this.config.serverUrl + alternativeImage" width="50%" height="50%"/>
-              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+            <div class="imgPreview" *ngIf="alternativeImage" style="height: 80px;margin-top: 20px;background: silver;">
+              <img [src]="this.config.serverUrl + alternativeImage"  />
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                  (click)="onAltrImageRemoved()">
               </i>
             </div>
           </div>
           <div class="form-group">
             <label>Category Cover Image</label>
-            <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!coverImage ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                       (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
                       id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!coverImage && f.submitted ">Please Upload Cover Image!</div>
-            <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
-                 *ngIf="coverImage">
-              <img [src]="this.config.serverUrl + coverImage" width="50%" height="50%"/>
-              <i class="delIcon nc-icon-mini ui-1_circle-remove lg" style="position: absolute;top:0;right:0"
+            <div class="imgPreview" *ngIf="coverImage" style="margin-top: 20px;">
+              <img [src]="this.config.serverUrl + coverImage"  />
+              <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                  (click)="onCoverImageRemoved()">
               </i>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="margin-top: 50px;">
             <button class="btn btn-primary" type="submit">
               Update Category
             </button>
