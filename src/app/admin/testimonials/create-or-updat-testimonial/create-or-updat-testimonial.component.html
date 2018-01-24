@@ -25,7 +25,7 @@
                  (click)="onRemoved()">
               </i>
             </div> -->
-            <div class="imgPreview" *ngIf="image">
+            <div class="imgPreview" *ngIf="image" style="margin-top: 20px;">
               <img [src]="image ?this.config.serverUrl + image: ''"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                  (click)="onRemoved()">
@@ -74,7 +74,7 @@
                  (click)="onRemoved()">
               </i>
             </div> -->
-            <div class="imgPreview" *ngIf="image">
+            <div class="imgPreview" *ngIf="image" style="margin-top: 20px;">
               <img [src]="this.config.serverUrl + image"/>
               <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
                  (click)="onRemoved()">
