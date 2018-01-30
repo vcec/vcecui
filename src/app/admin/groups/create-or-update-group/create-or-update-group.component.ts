@@ -52,7 +52,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
         this.coverImage = this.groupToEdit['coverImage'];
         this.alternativeImage = this.groupToEdit['alternativeImage'];
       }, (err) => {
-
+        this.toastr.error(err.error.message || 'Internal Server Error');
       });
     } else {
       this.addGroupState = true;
@@ -61,7 +61,10 @@ export class CreateOrUpdateGroupComponent implements OnInit {
 
 
   onImageUploadError(event) {
-    console.log(event);
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
+    this.image = '';
   }
 
   onRemoved() {
@@ -82,7 +85,10 @@ export class CreateOrUpdateGroupComponent implements OnInit {
     }
   }
 
-  onAlterImageUploadError() {
+  onAlterImageUploadError(event) {
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
     this.alternativeImage = '';
   }
 
@@ -92,7 +98,10 @@ export class CreateOrUpdateGroupComponent implements OnInit {
     }
   }
 
-  onCoverImageUploadError() {
+  onCoverImageUploadError(event) {
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
     this.coverImage = '';
   }
 
@@ -118,7 +127,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
       if (err.status === 0) {
         this.toastr.error('Server is Down.');
       } else {
-        this.toastr.error(err.message);
+        this.toastr.error(err.error.message || 'Internal Server Error');
       }
     });
   }
@@ -144,7 +153,7 @@ export class CreateOrUpdateGroupComponent implements OnInit {
       if (err.status === 0) {
         this.toastr.error('Server is Down.');
       } else {
-        this.toastr.error(err.message);
+        this.toastr.error(err.error.message || 'Internal Server Error');
       }
     });
   }

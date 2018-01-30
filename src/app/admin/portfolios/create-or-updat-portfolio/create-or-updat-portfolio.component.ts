@@ -152,7 +152,11 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
         this.other = this.portfolioToEdit['others'];
         this.editPortfolioState = true;
       }, (err) => {
-
+        if (err.status === 0) {
+          this.toastr.error('Server is Down.');
+        } else {
+          this.toastr.error(err.error.message || 'Internal Server Error');
+        }
       });
     } else {
       this.addPortfolioState = true;
@@ -165,9 +169,11 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
           return {'name': v.group_name, 'checked': false};
         });
       }
-    }, (error) => {
-      if (error.status === 0) {
-        console.log('*****Server is down*****');
+    }, (err) => {
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
       }
     });
 
@@ -178,9 +184,11 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
           return {'name': v.category_name, 'checked': false, '_id': v._id};
         });
       }
-    }, (error) => {
-      if (error.status === 0) {
-        console.log('*****Server is down*****');
+    }, (err) => {
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
       }
     });
 
@@ -191,9 +199,11 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
           return {'name': v.name, 'checked': false, 'mainCategory': v.mainCategory};
         });
       }
-    }, (error) => {
-      if (error.status === 0) {
-        console.log('*****Server is down*****');
+    }, (err) => {
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
       }
     });
   }
@@ -212,10 +222,16 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onUploadError(event) {
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
     this.lastUpload = '';
   }
 
   onFeatureImageUploadError(event) {
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
     this.featuredProductImage = '';
   }
 
@@ -226,6 +242,9 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onImageUploadError(event) {
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
     this.videoCoverImage = '';
   }
 
@@ -446,7 +465,11 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
       this.toastr.success('Portfolio updated updated.');
       this.router.navigate(['../../'], {relativeTo: this.route});
     }, (err) => {
-      this.toastr.error(err.message);
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
+      }
     });
   }
 
@@ -502,14 +525,18 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
       addedBy: this.currentUser
     });
 
-    //console.log(obj);
+    // console.log(obj);
 
-    //save portfolio data
+    // save portfolio data
     this.dataService.savePortFolio(obj).subscribe((result) => {
       this.toastr.success('Portfolio successfully created.');
       this.router.navigate(['../'], {relativeTo: this.route});
     }, (err) => {
-      this.toastr.error(err.message);
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
+      }
     });
   }
 }

@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {NgForm} from "@angular/forms";
-import {DialogService} from "ng2-bootstrap-modal";
-import {Config} from "../../../services/config.service";
-import {ToastsManager} from "ng2-toastr";
-import {DataService} from "../../../services/dataService.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CookieService} from "angular2-cookie/core";
+import {NgForm} from '@angular/forms';
+import {DialogService} from 'ng2-bootstrap-modal';
+import {Config} from '../../../services/config.service';
+import {ToastsManager} from 'ng2-toastr';
+import {DataService} from '../../../services/dataService.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CookieService} from 'angular2-cookie/core';
 
 declare var $: any;
 
@@ -22,10 +22,10 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
     userInfo: {}
   };
   Id: string;
-  image: "";
-  token = "";
+  image: '';
+  token = '';
   imageUploadConfig = {};
-  currentUser = "";
+  currentUser = '';
 
   constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
               public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService, private cookieService: CookieService) {
@@ -50,7 +50,12 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
         this.testimonialToEdit = res['data'];
         this.image = this.testimonialToEdit.userInfo['userImg'];
       }, (err) => {
-      })
+        if (err.status === 0) {
+          this.toastr.error('Server is Down.');
+        } else {
+          this.toastr.error(err.error.message || 'Internal Server Error');
+        }
+      });
     } else {
       this.addTestimonialState = true;
     }
@@ -58,12 +63,14 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
 
 
   onImageUploadError(event) {
-    console.log(event);
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
   }
 
   onRemoved(event) {
     if (!event) {
-      this.image = "";
+      this.image = '';
     }
   }
 
@@ -85,11 +92,15 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
       },
       mainText: this.groupForm.controls['testimonialToEdit.mainText'].value,
       addedBy: this.currentUser
-    }
+    };
     this.dataService.updateTestimonial(this.testimonialToEdit['_id'], testimonial).subscribe((res) => {
       this.router.navigate(['../../'], {relativeTo: this.route});
     }, (err) => {
-      console.log(err);
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
+      }
     });
   }
 
@@ -110,7 +121,11 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
     this.dataService.saveTestimonial(testimonial).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route});
     }, (err) => {
-      console.log(err);
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
+      }
     });
   }
 }

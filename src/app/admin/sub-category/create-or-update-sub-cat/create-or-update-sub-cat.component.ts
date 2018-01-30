@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {Config} from "../../../services/config.service";
-import {ToastsManager} from "ng2-toastr";
-import {ActivatedRoute, Router} from "@angular/router";
-import {DataService} from "../../../services/dataService.service";
-import {NgForm} from "@angular/forms";
-import {CookieService} from "angular2-cookie/services/cookies.service";
+import {Config} from '../../../services/config.service';
+import {ToastsManager} from 'ng2-toastr';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DataService} from '../../../services/dataService.service';
+import {NgForm} from '@angular/forms';
+import {CookieService} from 'angular2-cookie/services/cookies.service';
 
 @Component({
   selector: 'app-create-or-update-sub-cat',
@@ -18,8 +18,8 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
   subCatToEdit = {};
   editState = false;
   addState = false;
-  image: "";
-  currentUser = "";
+  image: '';
+  currentUser = '';
   token = '';
   imageUploadConfig = {};
 
@@ -43,14 +43,23 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
     this.dataService.getAllCategories().subscribe((res) => {
       this.categories = res['data'];
     }, (err) => {
-
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
+      }
     });
     if (this.Id) {
       this.dataService.getSubCategoryById(this.Id).subscribe((res) => {
         this.subCatToEdit = res['data'];
         this.image = this.subCatToEdit['img'];
       }, (err) => {
-      })
+        if (err.status === 0) {
+          this.toastr.error('Server is Down.');
+        } else {
+          this.toastr.error(err.error.message || 'Internal Server Error');
+        }
+      });
       this.editState = true;
     } else {
       this.addState = true;
@@ -58,12 +67,14 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
   }
 
   onImageUploadError(event) {
-    console.log(event);
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
   }
 
   onRemoved(event) {
     if (!event) {
-      this.image = "";
+      this.image = '';
     }
   }
 
@@ -87,7 +98,11 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
     this.dataService.saveSubCategory(subCat).subscribe((res) => {
       this.router.navigate(['../'], {relativeTo: this.route});
     }, (err) => {
-      console.log(err);
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
+      }
     });
   }
 
@@ -105,7 +120,11 @@ export class CreateOrUpdateSubCatComponent implements OnInit {
     this.dataService.updateSubCategory(this.subCatToEdit['_id'], subCat).subscribe((res) => {
       this.router.navigate(['../../'], {relativeTo: this.route});
     }, (err) => {
-      console.log(err);
+      if (err.status === 0) {
+        this.toastr.error('Server is Down.');
+      } else {
+        this.toastr.error(err.error.message || 'Internal Server Error');
+      }
     });
   }
 }

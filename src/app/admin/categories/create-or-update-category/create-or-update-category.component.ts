@@ -51,7 +51,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
         this.coverImage = this.catToEdit['coverImage'];
         this.alternativeImage = this.catToEdit['alternativeImage'];
       }, (err) => {
-
+        this.toastr.error(err.error.message || err.error.error || 'Internal Server Error');
       });
     } else {
       this.addCatState = true;
@@ -59,7 +59,10 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onImageUploadError(event) {
-    console.log(event);
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
+    this.image = '';
   }
 
   onRemoved() {
@@ -70,7 +73,10 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
     this.coverImage = '';
   }
 
-  onAltrImageUploadError() {
+  onAltrImageUploadError(event) {
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
     this.alternativeImage = '';
   }
 
@@ -97,7 +103,10 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onCoverImageUploadError(event) {
-    console.log(event);
+    if (event[1].error) {
+      this.toastr.error(event[1].error);
+    }
+    this.coverImage = '';
   }
 
   onCreate() {
@@ -118,7 +127,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
       if (err.status === 0) {
         this.toastr.error('Server is Down.');
       } else {
-        this.toastr.error(err.message);
+        this.toastr.error(err.error.message || 'Internal Server Error');
       }
     });
   }
@@ -144,7 +153,7 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
       if (err.status === 0) {
         this.toastr.error('Server is Down.');
       } else {
-        this.toastr.error(err.message);
+        this.toastr.error(err.error.message || 'Internal Server Error');
       }
     });
   }
