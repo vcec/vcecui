@@ -178,7 +178,7 @@
                         <img [src]="config.serverUrl + mainVideo.coverImage"/>
                       </div>
                       <div class="imgPreview" *ngIf="!mainVideo.coverImage">
-                        No cover Image
+                        <img src="assets/images/video_default_cover.png"/>
                       </div>
                     </div>
                   </div>
@@ -186,7 +186,6 @@
               </div>
             </div>
             <div class="help-text" *ngIf="!mainVideo && f.submitted">Main video is required.</div>
-
 
             <div class="card">
               <div class="card-header">
@@ -714,11 +713,12 @@
                        (click)="mainVideo=null"></i>
                   </div>
                   <div class="card-body">
-                    <div class="imgPreview">
+                    <div class="imgPreview" *ngIf="mainVideo.coverImage">
                       <img [src]="config.serverUrl + mainVideo.coverImage"/>
-
                     </div>
-
+                    <div class="imgPreview" *ngIf="!mainVideo.coverImage">
+                      <img src="assets/images/video_default_cover.png"/>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -82,7 +82,7 @@
 
           <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Videos</h1>
 
-          <div class="row videos-container">
+          <div class="row videos-container" *ngIf="productDetails.videos && productDetails.videos.length > 0">
             <div class="col-md-4 hide-on-init"
                  *ngFor="let video of productDetails.videos;let i = index"
                  [ngStyle]="getAnimationDelay(i,3)"
@@ -96,6 +96,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row videos-container" *ngIf="!productDetails.videos || productDetails.videos.length == 0">
+            Coming Soon...
           </div>
         </div>
       </div>
@@ -114,7 +117,7 @@
 
           <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Live Demos</h1>
 
-          <div class="row demos-container">
+          <div class="row demos-container" *ngIf="productDetails.demos && productDetails.demos.length > 0">
             <div class="col-md-4 hide-on-init"
                  *ngFor="let k of productDetails.demos;let i = index"
                  animateOnScroll animationName="animated fadeInUp"
@@ -130,6 +133,9 @@
                 </p>
               </div>
             </div>
+          </div>
+          <div class="row demos-container" *ngIf="!productDetails.demos || productDetails.demos.length == 0">
+            Coming Soon...
           </div>
         </div>
       </div>
@@ -147,7 +153,7 @@
           </div>
           <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Case Studies & White
             Papers</h1>
-          <div class="row cs-container">
+          <div class="row cs-container" *ngIf="caseStudyAndWhitePaper.length > 0">
             <div class="col-md-6 hide-on-init"
                  *ngFor="let k of caseStudyAndWhitePaper;let i = index"
                  [ngStyle]="getAnimationDelay(i,2)"
@@ -161,6 +167,9 @@
                 </a>
               </div>
             </div>
+          </div>
+          <div class="row cs-container" *ngIf="caseStudyAndWhitePaper.length == 0">
+            Coming Soon..
           </div>
         </div>
       </div>
@@ -176,7 +185,7 @@
             </div>
           </div>
           <h1 class="text-center hide-on-init" animateOnScroll animationName="animated fadeInUp">Articles & Others</h1>
-          <div class="row articles">
+          <div class="row articles" *ngIf="articlesAndOthers.length > 0">
             <div class="col-md-4 hide-on-init"
                  *ngFor="let k of articlesAndOthers;let i = index"
                  [ngStyle]="getAnimationDelay(i,3)"
@@ -194,6 +203,8 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row articles" *ngIf="articlesAndOthers.length ==0">
           </div>
         </div>
       </div>
