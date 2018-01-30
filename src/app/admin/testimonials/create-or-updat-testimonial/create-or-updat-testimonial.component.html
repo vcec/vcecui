@@ -32,7 +32,7 @@
               </i>
             </div>
             <div>
-              <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+              <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload <br>( Image size should be 160 x 160 pixels )'"
                         (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                         (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
             </div>
@@ -64,7 +64,7 @@
           </div>
           <div class="form-group">
             <label>User Image</label>
-            <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload <br>( Image size should be 160 x 160 pixels )'"
                       (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                       (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
             <!-- <div style="text-align: center;border-radius: 14px;width: 20%;position: relative;border: 1px solid black;"
