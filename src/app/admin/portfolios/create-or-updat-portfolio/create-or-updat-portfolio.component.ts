@@ -265,8 +265,6 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
           url: this.lastUpload || this.youTubeVideoUrl,
           coverImage: this.videoCoverImage
         };
-        console.log('*******');
-        console.log(video);
         this.mainVideo = video;
         break;
       case 'subVideo':

@@ -72,7 +72,7 @@
               <div class="card-body" *ngIf="uploadForms.showCoverImageForm||(coverImage && coverImage.url)">
                 <div *ngIf="uploadForms.showCoverImageForm" class="card" style="padding: 20px">
                   <div class="form-group">
-                    <label>Title</label>
+                    <label>Title(Optional)</label>
                     <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
                   </div>
                   <div class="form-group">
@@ -82,7 +82,7 @@
                   </div>
                   <div class="form-group">
                     <button class="btn btn-sm btn-primary" (click)="handleUpload('coverImage')"
-                            [disabled]="!uploadFormTitle || !lastUpload">Add
+                            [disabled]="!lastUpload">Add
                     </button>
                     <button class="btn btn-sm btn-primary"
                             (click)="show()">
@@ -117,7 +117,7 @@
                   <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
                 </div>
                 <div class="form-group">
-                  <label>Cover Image for Video</label>
+                  <label>Cover Image for Video(Optional)</label>
                   <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                             (error)="onImageUploadError($event)"
                             (success)="onImageUploadSuccess($event)"></dropzone>
@@ -155,7 +155,7 @@
                   <button class="btn btn-sm btn-primary"
                           (click)="handleUpload('mainVideo')"
                           [disabled]="!uploadFormTitle || (!lastUpload && !youTubeVideoUrl) ||
-                              !videoCoverImage || (youTubeVideoUrl && invalidVideo())">
+                          (youTubeVideoUrl && invalidVideo())">
                     Add
                   </button>
                   <button class="btn btn-sm btn-primary"
@@ -167,18 +167,19 @@
               <div *ngIf="mainVideo" class="card-body">
                 <label class="contentElement">
                   <div class="card">
+                    <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
+                       (click)="mainVideo =null" style="position: absolute;right: 0;">
+                    </i>
                     <div class="card-header">
                       {{mainVideo.title}}
-
                     </div>
                     <div class="card-body">
-                      <div class="imgPreview">
+                      <div class="imgPreview" *ngIf="mainVideo.coverImage">
                         <img [src]="config.serverUrl + mainVideo.coverImage"/>
-                        <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
-                           (click)="mainVideo =null">
-                        </i>
                       </div>
-
+                      <div class="imgPreview" *ngIf="!mainVideo.coverImage">
+                        No cover Image
+                      </div>
                     </div>
                   </div>
                 </label>
@@ -613,7 +614,7 @@
               </div>
               <div *ngIf="uploadForms.showCoverImageForm" class="card-body" style="padding: 20px">
                 <div class="form-group">
-                  <label>Title</label>
+                  <label>Title(Optional)</label>
                   <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
                 </div>
                 <div class="form-group">
@@ -623,7 +624,7 @@
                 </div>
                 <div class="form-group">
                   <button class="btn btn-sm btn-primary" (click)="handleUpload('coverImage')"
-                          [disabled]="!uploadFormTitle || !lastUpload">Add
+                          [disabled]="!lastUpload">Add
                   </button>
                   <button class="btn btn-sm btn-primary"
                           (click)="show()">
@@ -658,7 +659,7 @@
                   <input type="text" class="form-control" name="uploadFormTitle" [(ngModel)]="uploadFormTitle"/>
                 </div>
                 <div class="form-group">
-                  <label>Cover Image for Video</label>
+                  <label>Cover Image for Video(Optional)</label>
                   <dropzone [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
                             (error)="onImageUploadError($event)"
                             (success)="onImageUploadSuccess($event)"></dropzone>
@@ -694,7 +695,7 @@
                 </div>
                 <div class="form-group">
                   <button class="btn btn-sm btn-primary" (click)="handleUpload('mainVideo')"
-                          [disabled]="!uploadFormTitle || (!lastUpload && !youTubeVideoUrl) || !videoCoverImage ||
+                          [disabled]="!uploadFormTitle || (!lastUpload && !youTubeVideoUrl)  ||
                            (youTubeVideoUrl && invalidVideo())">
                     Add
                   </button>

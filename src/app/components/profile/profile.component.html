@@ -27,11 +27,11 @@
     <div class="container">
       <div class="videoWrapper">
         <iframe [src]="sanitizeUrl(productDetails.mainVideo.url, 'youtube')"
-                *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.indexOf('youtube')!=-1"
+                *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.match(patternForYouTubeUrl)!==null "
                 allowFullScreen='allowFullScreen'>
         </iframe>
         <video controls autoplay [poster]="config.serverUrl + productDetails.mainVideo.coverImage"
-               *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.indexOf('youtube')==-1">
+               *ngIf="productDetails.mainVideo && productDetails.mainVideo.url.match(patternForYouTubeUrl)== null ">
           <source [src]="sanitizeUrl(productDetails.mainVideo.url)" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -233,7 +233,7 @@
     <div class="modal-body videoModalShadow">
       <div class="videoWrapper">
         <iframe [src]="sanitizeUrl(videoUrl,'youtube')" allowFullScreen='allowFullScreen'
-                *ngIf="videoUrl && videoUrl.indexOf('youtube')!=-1">
+                *ngIf="videoUrl && videoUrl.match(patternForYouTubeUrl)!== null ">
         </iframe>
         <video controls autoplay *ngIf="videoUrl && videoUrl.indexOf('youtube')==-1">
           <source [src]="sanitizeUrl(videoUrl)" type="video/mp4">

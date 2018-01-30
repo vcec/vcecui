@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   caseStudyAndWhitePaper = [];
   videoUrl: SafeResourceUrl;
   backUrl = '';
+  patternForYouTubeUrl = '(?:youtube\\.com\\/(?:[^\\/]+\\/.+\\/|(?:v|e(?:mbed)?)\\/|.*[?&]v=)|youtu\\.be\\/)([^"&?\\/ ]{11}.*)';
 
   constructor(private modalService: NgbModal, public sanitizer: DomSanitizer, private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,) {
     this.route.params.subscribe(params => {
@@ -29,11 +30,13 @@ export class ProfileComponent implements OnInit {
   }
 
   sanitizeUrl(url, type?) {
-    if (type == 'youtube') {
-      let video_id = url.split('v=')[1].split('&')[0];
-      let newUrl = 'https://www.youtube.com/embed/' + video_id;
+    if (type === 'youtube') {
+      const urlPart = url.split('v=')[1];
+      let video_id = urlPart !== undefined ? urlPart : url.split('youtu.be/')[1];
+      video_id = video_id.split('&')[0];
+      const newUrl = 'https://www.youtube.com/embed/' + video_id;
       return this.sanitizer.bypassSecurityTrustResourceUrl(`${newUrl}`);
-    } else if (type == 'demoUrl') {
+    } else if (type === 'demoUrl') {
       return this.sanitizer.bypassSecurityTrustResourceUrl(`${url}`);
     } else {
       return this.sanitizer.bypassSecurityTrustResourceUrl(`${this.config.serverUrl}${url}`);
