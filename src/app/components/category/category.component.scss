@@ -145,6 +145,7 @@
     -webkit-transition-property: transform;
     transition-property: transform;
     cursor:pointer;
+    outline:none;
     &:before {
 	    pointer-events: none;
 	    position: absolute;
