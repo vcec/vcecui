@@ -115,53 +115,6 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.Id) {
-      this.dataService.getPortFolio(this.Id).subscribe((res) => {
-
-        this.portfolioToEdit = res['data'];
-        //console.log(this.portfolioToEdit);
-
-        setTimeout(() => {
-          this.productGroups.forEach((v, i) => {
-            if (this.portfolioToEdit['productGroups'].indexOf(v.name) != -1) {
-              v.checked = true;
-            }
-          });
-          this.solutions.forEach((v, i) => {
-            if (this.portfolioToEdit['solutions'].indexOf(v.name) != -1) {
-              v.checked = true;
-            }
-          });
-
-          this.subSolutions.forEach((v, i) => {
-            if (this.portfolioToEdit['subSolutions'].indexOf(v.name) != -1) {
-              this.changeSubCatSelection(v.name);
-            }
-          });
-        });
-
-        this.isFeaturedProduct = this.portfolioToEdit['isItFeaturedProduct'];
-        this.featuredProductImage = this.portfolioToEdit['imgIfFeaturedProduct'];
-        this.videos = this.portfolioToEdit['videos'];
-        this.coverImage = this.portfolioToEdit['coverImage'];
-        this.mainVideo = this.portfolioToEdit['mainVideo'];
-        this.caseStudies = this.portfolioToEdit['caseStudies'];
-        this.whitePapers = this.portfolioToEdit['whitePapers'];
-        this.demos = this.portfolioToEdit['demos'];
-        this.articles = this.portfolioToEdit['articles'];
-        this.other = this.portfolioToEdit['others'];
-        this.editPortfolioState = true;
-      }, (err) => {
-        if (err.status === 0) {
-          this.toastr.error('Server is Down.');
-        } else {
-          this.toastr.error(err.error.message || 'Internal Server Error');
-        }
-      });
-    } else {
-      this.addPortfolioState = true;
-    }
-
     // get all product groups
     this.dataService.getAllGroups().subscribe((response) => {
       if (response['count'] > 0) {
@@ -206,6 +159,53 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
         this.toastr.error(err.error.message || 'Internal Server Error');
       }
     });
+
+    if (this.Id) {
+      this.dataService.getPortFolio(this.Id).subscribe((res) => {
+
+        this.portfolioToEdit = res['data'];
+        setTimeout(() => {
+          this.productGroups.forEach((v, i) => {
+            if (this.portfolioToEdit['productGroups'].indexOf(v.name) != -1) {
+              v.checked = true;
+            }
+          });
+
+          this.solutions.forEach((v, i) => {
+            if (this.portfolioToEdit['solutions'].indexOf(v.name) != -1) {
+              v.checked = true;
+            }
+          });
+
+          this.subSolutions.forEach((v, i) => {
+            if (this.portfolioToEdit['subSolutions'].indexOf(v.name) != -1) {
+              this.changeSubCatSelection(v.name);
+            }
+          });
+
+        }, 200);
+
+        this.isFeaturedProduct = this.portfolioToEdit['isItFeaturedProduct'];
+        this.featuredProductImage = this.portfolioToEdit['imgIfFeaturedProduct'];
+        this.videos = this.portfolioToEdit['videos'];
+        this.coverImage = this.portfolioToEdit['coverImage'];
+        this.mainVideo = this.portfolioToEdit['mainVideo'];
+        this.caseStudies = this.portfolioToEdit['caseStudies'];
+        this.whitePapers = this.portfolioToEdit['whitePapers'];
+        this.demos = this.portfolioToEdit['demos'];
+        this.articles = this.portfolioToEdit['articles'];
+        this.other = this.portfolioToEdit['others'];
+        this.editPortfolioState = true;
+      }, (err) => {
+        if (err.status === 0) {
+          this.toastr.error('Server is Down.');
+        } else {
+          this.toastr.error(err.error.message || 'Internal Server Error');
+        }
+      });
+    } else {
+      this.addPortfolioState = true;
+    }
   }
 
   invalidVideo() {
@@ -222,15 +222,15 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.lastUpload = '';
   }
 
   onFeatureImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.featuredProductImage = '';
   }
@@ -242,8 +242,8 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   onImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.videoCoverImage = '';
   }
@@ -443,7 +443,6 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
       v.checked ? selectedGroups.push(v.name) : '';
     });
 
-    console.log(this.portfolioForm.value);
     let obj = $.extend(this.portfolioForm.value, {
       productGroups: selectedGroups,
       solutions: selectedSolutions,

@@ -61,8 +61,8 @@ export class CreateOrUpdateGroupComponent implements OnInit {
 
 
   onImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.image = '';
   }
@@ -86,8 +86,8 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   }
 
   onAlterImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.alternativeImage = '';
   }
@@ -99,8 +99,8 @@ export class CreateOrUpdateGroupComponent implements OnInit {
   }
 
   onCoverImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.coverImage = '';
   }

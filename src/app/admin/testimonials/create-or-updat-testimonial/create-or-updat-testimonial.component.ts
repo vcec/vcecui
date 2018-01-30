@@ -63,8 +63,8 @@ export class CreateOrUpdatTestimonialComponent implements OnInit {
 
 
   onImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
   }
 

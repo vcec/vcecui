@@ -59,8 +59,8 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.image = '';
   }
@@ -74,8 +74,8 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onAltrImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.alternativeImage = '';
   }
@@ -103,8 +103,8 @@ export class CreateOrUpdateCategoryComponent implements OnInit {
   }
 
   onCoverImageUploadError(event) {
-    if (event[1].error) {
-      this.toastr.error(event[1].error);
+    if (event[1].message) {
+      this.toastr.error(event[1].message);
     }
     this.coverImage = '';
   }
