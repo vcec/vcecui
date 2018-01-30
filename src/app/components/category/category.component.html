@@ -28,7 +28,7 @@
         <div class="row">
           <div class="col-md-2">
             <div class="category-icon hide-on-init" animateOnScroll animationName="animated fadeInDown">
-              <img [src]="config.serverUrl + groupDetail.alternativeImage" alt="">
+              <img [src]="config.serverUrl + groupDetail.alternativeImage"  *ngIf="groupDetail.alternativeImage" alt="">
             </div>
           </div>
           <div class="col-md-9 hide-on-init" animateOnScroll animationName="animated fadeInUp">
@@ -71,7 +71,7 @@
              animateOnScroll animationName="animated fadeInUp">
           <div class="productBox hvr-float-shadow" [routerLink]="['/profile/'+ product._id]">
             <div class="icon">
-              <img [src]="config.serverUrl+ product.coverImage.url" alt="">
+              <img [src]="config.serverUrl + product.coverImage.url" *ngIf="product.coverImage.url" alt="">
             </div>
             <div class="product-body">
               <div class="title">

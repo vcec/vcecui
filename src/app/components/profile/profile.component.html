@@ -88,7 +88,7 @@
                  [ngStyle]="getAnimationDelay(i,3)"
                  animateOnScroll animationName="animated fadeInUp">
               <div class="videoBox well-hover" (click)="openVideo(videoModal,video.url)">
-                <img [src]="config.serverUrl + video.coverImage" alt="">
+                <img [src]="config.serverUrl + video.coverImage" alt="" *ngIf="video.coverImage">
                 <div class="video-overlay">
                   <div class="icon">
                     <i class="nc-icon-mini arrows-1_triangle-right-17"></i>
@@ -121,7 +121,7 @@
                  [ngStyle]="getAnimationDelay(i,3)">
               <div class="demo-card well-hover">
                 <div class="icon">
-                  <img [src]="config.serverUrl + k.img" alt="">
+                  <img [src]="config.serverUrl + k.img" alt="" *ngIf="k.img">
                 </div>
                 <h2><a [href]="sanitizeUrl(k.seeMoreLink, 'demoUrl')" target="_blank" class="cs-link">{{k.heading}}</a>
                 </h2>
@@ -155,7 +155,7 @@
               <div class="csBox well-hover">
                 <a [href]="config.serverUrl + k.url" target="_blank" class="cs-link">
                   <div class="icon">
-                    <img [src]="config.serverUrl + k.img" alt="">
+                    <img [src]="config.serverUrl + k.img" alt="" *ngIf="k.img">
                   </div>
                   <label>{{k.title}}</label>
                 </a>
@@ -183,7 +183,7 @@
                  animateOnScroll animationName="animated fadeInUp">
               <div class="articleBox well-hover">
                 <div class="icon">
-                  <img [src]="config.serverUrl + k.img" alt="">
+                  <img [src]="config.serverUrl + k.img" alt="" *ngIf="k.img">
                 </div>
                 <div class="article-body">
                   <h3><a [href]="k.seeMoreLink" target="_blank" class="cs-link">{{k.heading}}</a>
