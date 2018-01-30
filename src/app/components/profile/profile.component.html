@@ -97,8 +97,8 @@
               </div>
             </div>
           </div>
-          <div class="row videos-container" *ngIf="!productDetails.videos || productDetails.videos.length == 0">
-            Coming Soon...
+          <div class="comingSoon" *ngIf="!productDetails.videos || productDetails.videos.length == 0">
+            <p>Coming Soon...</p>
           </div>
         </div>
       </div>
@@ -134,8 +134,8 @@
               </div>
             </div>
           </div>
-          <div class="row demos-container" *ngIf="!productDetails.demos || productDetails.demos.length == 0">
-            Coming Soon...
+          <div class="comingSoon" *ngIf="!productDetails.demos || productDetails.demos.length == 0">
+            <p>Coming Soon...</p>
           </div>
         </div>
       </div>
@@ -168,8 +168,8 @@
               </div>
             </div>
           </div>
-          <div class="row cs-container" *ngIf="caseStudyAndWhitePaper.length == 0">
-            Coming Soon..
+          <div class="comingSoon" *ngIf="caseStudyAndWhitePaper.length == 0">
+            <p>Coming Soon...</p>
           </div>
         </div>
       </div>
@@ -204,7 +204,8 @@
               </div>
             </div>
           </div>
-          <div class="row articles" *ngIf="articlesAndOthers.length ==0">
+          <div class="comingSoon" *ngIf="articlesAndOthers.length ==0">
+            <p>Coming Soon...</p>
           </div>
         </div>
       </div>
