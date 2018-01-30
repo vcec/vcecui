@@ -30,7 +30,7 @@
           </div>
           <div class="form-group">
             <label>Group Icon Image</label>
-            <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!image ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload <br>( Image size should be 120 x 120 pixels )'"
                       (error)="onImageUploadError($event)" (removedFile)="onRemoved($event)"
                       (success)="onImageUploadSuccess($event)" id="featureImage" name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!image && f.submitted">Please Upload Image!</div>
@@ -44,7 +44,7 @@
           </div>
           <div class="form-group">
             <label>Alternative Image</label>
-            <dropzone [style.display]="!alternativeImage ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!alternativeImage ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload <br>( Image size should be 120 x 120 pixels )'"
                       (error)="onAlterImageUploadError($event)"
                       (success)="onAlterImageUploadSuccess($event)"></dropzone>
             <div class="help-text" *ngIf="!alternativeImage && f.submitted">Please Upload Alternative Image!</div>
@@ -57,7 +57,7 @@
           </div>
           <div class="form-group">
             <label>Group Cover Image</label>
-            <dropzone [style.display]="!coverImage ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone [style.display]="!coverImage ? 'block' : 'none'" [config]="imageUploadConfig" [message]="'Click or drag images here to upload <br>( Image size should be 807 x 415 pixels )'"
                       (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
                       id="featureImage"
                       name="featureImage"></dropzone>
@@ -109,7 +109,7 @@
           </div>
           <div class="form-group">
             <label>Group Icon Image</label>
-            <dropzone *ngIf="!image" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone *ngIf="!image" [config]="imageUploadConfig" [message]="'Click or drag images here to upload <br>( Image size should be 120 x 120 pixels )'"
                       (error)="onImageUploadError($event)" (success)="onImageUploadSuccess($event)" id="featureImage"
                       name="featureImage"></dropzone>
             <div class="help-text" *ngIf="!image && f.submitted">Please Upload Image!</div>
@@ -123,7 +123,7 @@
           </div>
           <div class="form-group">
             <label>Alternative Image</label>
-            <dropzone *ngIf="!alternativeImage" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone *ngIf="!alternativeImage" [config]="imageUploadConfig" [message]="'Click or drag images here to upload <br>( Image size should be 120 x 120 pixels )'"
                       (error)="onAlterImageUploadError($event)" (success)="onAlterImageUploadSuccess($event)"
                       id="featureImage"
                       name="featureImage"></dropzone>
@@ -138,7 +138,7 @@
           </div>
           <div class="form-group">
             <label>Group Cover Image</label>
-            <dropzone *ngIf="!coverImage" [config]="imageUploadConfig" [message]="'Click or drag images here to upload'"
+            <dropzone *ngIf="!coverImage" [config]="imageUploadConfig" [message]="'Click or drag images here to upload <br>( Image size should be 807 x 415 pixels )'"
                       (error)="onCoverImageUploadError($event)" (success)="onCoverImageUploadSuccess($event)"
                       id="featureImage"
                       name="featureImage"></dropzone>
