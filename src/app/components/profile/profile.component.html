@@ -97,8 +97,8 @@
               </div>
             </div>
           </div>
-          <div class="row videos-container" *ngIf="!productDetails.videos || productDetails.videos.length == 0">
-            Coming Soon...
+          <div class="comingSoon" *ngIf="!productDetails.videos || productDetails.videos.length == 0">
+            <p>Coming Soon...</p>
           </div>
         </div>
       </div>
@@ -134,8 +134,8 @@
               </div>
             </div>
           </div>
-          <div class="row demos-container" *ngIf="!productDetails.demos || productDetails.demos.length == 0">
-            Coming Soon...
+          <div class="comingSoon" *ngIf="!productDetails.demos || productDetails.demos.length == 0">
+            <p>Coming Soon...</p>
           </div>
         </div>
       </div>
@@ -168,8 +168,8 @@
               </div>
             </div>
           </div>
-          <div class="row cs-container" *ngIf="caseStudyAndWhitePaper.length == 0">
-            Coming Soon..
+          <div class="comingSoon" *ngIf="caseStudyAndWhitePaper.length == 0">
+            <p>Coming Soon...</p>
           </div>
         </div>
       </div>
@@ -204,37 +204,14 @@
               </div>
             </div>
           </div>
-          <div class="row articles" *ngIf="articlesAndOthers.length ==0">
-            <div class="col-md-12" style="text-align: center">
-              Coming Soon..
-            </div>
+          <div class="comingSoon" *ngIf="articlesAndOthers.length ==0">
+            <p>Coming Soon...</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="pb-icon">
-            <img src="assets/images/pb_logo.png" alt="">
-          </div>
-          <p>&copy; Copyright Pitney Bowes 2018, All rights reserved.</p>
-        </div>
-        <div class="col-md-4">
-          <div class="platforms">
-            <ul>
-              <li><a href=""><img src="assets/images/1-FB.png" alt=""></a></li>
-              <li><a href=""><img src="assets/images/2-gplus.png" alt=""></a></li>
-              <li><a href=""><img src="assets/images/3-Twitter.png" alt=""></a></li>
-              <li><a href=""><img src="assets/images/4-Linkdin.png" alt=""></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <app-footer></app-footer>
 </div>
 
 <!-- Modal templates -->

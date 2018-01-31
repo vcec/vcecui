@@ -41,6 +41,7 @@ import {AuthGuardService} from './services/authGuardService';
 import {CustomFormsModule} from 'ng2-validation';
 import {FeaturedProductFilterPipe} from './filters/featuredProductFilter';
 import {subCategoryFilter} from './filters/subCategoryFilter';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -71,7 +72,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     CreateOrUpdateSubCatComponent,
     LoginComponent,
     FeaturedProductFilterPipe,
-    subCategoryFilter
+    subCategoryFilter,
+    FooterComponent
   ],
   imports: [
     NgbModule.forRoot(),
