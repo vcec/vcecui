@@ -7,7 +7,6 @@ import {Config} from '../../../services/config.service';
 import {NgForm} from '@angular/forms';
 import {CookieService} from 'angular2-cookie/services/cookies.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import {type} from 'os';
 
 declare var $: any;
 
