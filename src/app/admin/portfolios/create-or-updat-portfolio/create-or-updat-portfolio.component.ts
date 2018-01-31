@@ -415,57 +415,52 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     return true;
   }
 
-
-  editPortfolio(portfolio) {
-
+  removeVideoFromVideos(index) {
+    if (index > -1) {
+      this.videos.splice(index, 1);
+    }
+    this.show();
+    this.showDataForm();
   }
 
-  removeVideoFromVideos(name) {
-    for (let i = 0; i < this.videos.length; i++) {
-      if (this.videos[i].title == name) {
-        this.videos.splice(i, 1);
-      }
+  removeOtherFromList(index) {
+    if (index > 0) {
+      this.other.splice(index, 1);
     }
+    this.show();
+    this.showDataForm();
   }
 
-  removeOtherFromList(heading) {
-    for (let i = 0; i < this.other.length; i++) {
-      if (this.other[i].heading == heading) {
-        this.other.splice(i, 1);
-      }
+  removeArticleFromList(index) {
+    if (index > 0) {
+      this.articles.splice(index, 1);
     }
+    this.show();
+    this.showDataForm();
   }
 
-  removeArticleFromList(heading) {
-    for (let i = 0; i < this.articles.length; i++) {
-      if (this.articles[i].heading == heading) {
-        this.articles.splice(i, 1);
-      }
+  removeCaseStudyFromCaseStudies(index) {
+    if (index > 0) {
+      this.caseStudies.splice(index, 1);
     }
+    this.show();
+    this.showDataForm();
   }
 
-  removeCaseStudyFromCaseStudies(name) {
-    for (let i = 0; i < this.caseStudies.length; i++) {
-      if (this.caseStudies[i].title == name) {
-        this.caseStudies.splice(i, 1);
-      }
+  removeWhitePaperFromList(index) {
+    if (index > 0) {
+      this.whitePapers.splice(index, 1);
     }
+    this.show();
+    this.showDataForm();
   }
 
-  removeWhitePaperFromList(name) {
-    for (let i = 0; i < this.whitePapers.length; i++) {
-      if (this.whitePapers[i].title == name) {
-        this.whitePapers.splice(i, 1);
-      }
+  removeDemoFromList(index) {
+    if (index > 0) {
+      this.demos.splice(index, 1);
     }
-  }
-
-  removeDemoFromList(name) {
-    for (let i = 0; i < this.demos.length; i++) {
-      if (this.demos[i].heading == name) {
-        this.demos.splice(i, 1);
-      }
-    }
+    this.show();
+    this.showDataForm();
   }
 
   removeCoverImage() {

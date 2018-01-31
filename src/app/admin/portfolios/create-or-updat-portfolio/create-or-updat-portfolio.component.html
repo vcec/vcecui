@@ -132,6 +132,9 @@
                             (error)="onImageUploadError($event)"
                             (success)="onImageUploadSuccess($event)"></dropzone>
                 </div>
+                <div class="imgPreview" *ngIf="videoCoverImage">
+                  <img [src]="config.serverUrl + videoCoverImage"/>
+                </div>
                 <div class="form-group">
                   <label>Type of video</label>
                   <div class="controls-inline">
@@ -161,6 +164,16 @@
                          [(ngModel)]="youTubeVideoUrl"
                          placeholder="Enter url of youtube video"/>
                 </div>
+                <div class="videoWrapper" *ngIf="lastUpload">
+                  <iframe [src]="sanitizeUrl(lastUpload,'youtube')" allowFullScreen='allowFullScreen'
+                          *ngIf="lastUpload && lastUpload.match(patternForYouTubeUrl)!== null ">
+                  </iframe>
+                  <video width="320" height="240" controls
+                         *ngIf="lastUpload && lastUpload.match(patternForYouTubeUrl)== null">
+                    <source [src]="sanitizeUrl(lastUpload)" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
                 <div class="form-group">
                   <button class="btn btn-sm btn-primary"
                           (click)="handleUpload('mainVideo')"
@@ -174,27 +187,30 @@
                   </button>
                 </div>
               </div>
-              <div *ngIf="mainVideo" class="card-body">
-                <label class="contentElement">
-                  <div class="card">
-                    <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
-                       (click)="mainVideo =null" style="position: absolute;right: 0;">
-                    </i>
-                    <div class="card-header">
-                      {{mainVideo.title}}
+              <div *ngIf="mainVideo && !uploadForms.showMainVideoForm" class="card-body">
+                <div class="card">
+                  <div class="card-header">
+                    {{mainVideo.title}}
+                  </div>
+                  <div class="card-body">
+                    <div class="imgPreview" *ngIf="mainVideo.coverImage">
+                      <img [src]="config.serverUrl + mainVideo.coverImage"/>
                     </div>
-                    <div class="card-body">
-                      <div class="imgPreview" *ngIf="mainVideo.coverImage">
-                        <img [src]="config.serverUrl + mainVideo.coverImage"/>
-                      </div>
-                      <div class="imgPreview" *ngIf="!mainVideo.coverImage">
-                        <img src="assets/images/video_default_cover.png"/>
-                      </div>
+                    <div class="imgPreview" *ngIf="!mainVideo.coverImage">
+                      <img src="assets/images/video_default_cover.png"/>
                     </div>
                   </div>
-                </label>
+                </div>
+              </div>
+              <div *ngIf="mainVideo" style="position: absolute;right: 0;top:0">
+                <i class="float-right nc-icon-mini ui-1_circle-remove lg"
+                   (click)="deleteData('mainVideo')"></i>
+                <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
+                   (click)="setDataForEditState('mainVideo','showMainVideoForm')">
+                </i>
               </div>
             </div>
+
             <div class="help-text" *ngIf="!mainVideo && f.submitted">Main video is required.</div>
 
             <div class="card">
@@ -206,19 +222,21 @@
                 </div>
               </div>
               <div class="card-body" *ngIf="videos && videos.length > 0">
-                <div class="card" *ngFor="let video of videos">
+                <div class="card" *ngFor="let video of videos; let i = index;">
                   <div class="card-header">
                     {{video.title}}
-
                   </div>
                   <div class="card-body">
                     <div class="imgPreview">
                       <img [src]="config.serverUrl + video.coverImage"/>
-                      <i class="delIcon nc-icon-mini ui-1_circle-remove lg"
-                         (click)="removeVideoFromVideos(video.title)">
-                      </i>
                     </div>
-
+                  </div>
+                  <div style="position: absolute;right: 0;top:0">
+                    <i class="float-right nc-icon-mini ui-1_circle-remove lg"
+                       (click)="removeVideoFromVideos(i)"></i>
+                    <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
+                       (click)="setDataForEditState('subVideo','showOtherVideoForm', video,i)">
+                    </i>
                   </div>
                 </div>
               </div>
@@ -234,6 +252,9 @@
                             (error)="onImageUploadError($event)"
                             (success)="onImageUploadSuccess($event)"></dropzone>
                 </div>
+                <div class="imgPreview" *ngIf="videoCoverImage">
+                  <img [src]="config.serverUrl + videoCoverImage"/>
+                </div>
                 <div class="form-group">
                   <label>Type of video</label>
                   <div class="controls-inline">
@@ -262,6 +283,16 @@
                          name="youTubeVideoUrlControl"
                          [(ngModel)]="youTubeVideoUrl"
                          placeholder="Enter url of youtube video"/>
+                </div>
+                <div class="videoWrapper" *ngIf="lastUpload">
+                  <iframe [src]="sanitizeUrl(lastUpload,'youtube')" allowFullScreen='allowFullScreen'
+                          *ngIf="lastUpload && lastUpload.match(patternForYouTubeUrl)!== null ">
+                  </iframe>
+                  <video width="320" height="240" controls
+                         *ngIf="lastUpload && lastUpload.match(patternForYouTubeUrl)== null">
+                    <source [src]="sanitizeUrl(lastUpload)" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-sm btn-primary" (click)="handleUpload('subVideo')"
@@ -286,14 +317,17 @@
                 </div>
               </div>
 
-              <div class="card-body" *ngIf="caseStudies.length > 0">
-                <label *ngFor="let caseStudy of caseStudies" class="contentElement">
+              <div class="card-body" *ngIf="caseStudies && caseStudies.length > 0">
+                <div class="card" *ngFor="let caseStudy of caseStudies; let i = index" style="padding: 8px">
                   {{caseStudy.title}}
-                  <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                     (click)="removeCaseStudyFromCaseStudies(caseStudy.title)"
-                  ></i>
-
-                </label>
+                  <div style="position: absolute;right: 0;top:8px">
+                    <i class="float-right nc-icon-mini ui-1_circle-remove lg"
+                       (click)="removeCaseStudyFromCaseStudies(i)"></i>
+                    <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
+                       (click)="setDataForEditState('caseStudy','caseStudy', caseStudy,i)">
+                    </i>
+                  </div>
+                </div>
               </div>
               <div *ngIf="uploadForms.caseStudy" class="card-body" style="padding: 20px">
                 <div class="form-group">
@@ -304,6 +338,9 @@
                   <dropzone [config]="pdfUploadConfig" [message]="'Click or drag pdf here to upload'"
                             (error)="onUploadError($event)"
                             (success)="onUploadSuccess($event)" id="pdf2" name="pdf2"></dropzone>
+                </div>
+                <div class="imgPreview" *ngIf="lastUpload">
+                  <a [href]="config.serverUrl + lastUpload"><img src="assets/images/pdf_image.png"/></a>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-sm btn-primary" (click)="handleUpload('caseStudy')"
@@ -326,13 +363,17 @@
                 </div>
               </div>
 
-              <div class="card-body" *ngIf="whitePapers.length > 0">
-                <label *ngFor="let whitePaper of whitePapers" class="contentElement">
+              <div class="card-body" *ngIf="whitePapers && whitePapers.length > 0">
+                <div class="card" *ngFor="let whitePaper of whitePapers;let i = index;" style="padding: 8px">
                   {{whitePaper.title}}
-                  <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                     (click)="removeWhitePaperFromList(whitePaper.title)"
-                  ></i>
-                </label>
+                  <div style="position: absolute;right: 0;top:8px">
+                    <i class="float-right nc-icon-mini ui-1_circle-remove lg"
+                       (click)="removeWhitePaperFromList(i)"></i>
+                    <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
+                       (click)="setDataForEditState('whitePaper','whitePaperForm', whitePaper,i)">
+                    </i>
+                  </div>
+                </div>
               </div>
               <div *ngIf="uploadForms.whitePaperForm" class="card-body" style="padding: 20px">
                 <div class="form-group">
@@ -343,6 +384,9 @@
                   <dropzone [config]="pdfUploadConfig" [message]="'Click or drag pdf here to upload'"
                             (error)="onUploadError($event)"
                             (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="imgPreview" *ngIf="lastUpload">
+                  <a [href]="config.serverUrl + lastUpload"><img src="assets/images/pdf_image.png"/></a>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-sm btn-primary" (click)="handleUpload('whitePaper')"
@@ -366,13 +410,17 @@
                 </div>
               </div>
 
-              <div class="card-body" *ngIf="articles.length > 0">
-                <label *ngFor="let article of articles" class="contentElement">
+              <div class="card-body" *ngIf="articles && articles.length > 0">
+                <div class="card" *ngFor="let article of articles;let i = index;" style="padding: 8px">
                   {{article.heading}}
-                  <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                     (click)="removeArticleFromList(article.heading)"
-                  ></i>
-                </label>
+                  <div style="position: absolute;right: 0;top:8px">
+                    <i class="float-right nc-icon-mini ui-1_circle-remove lg"
+                       (click)="removeArticleFromList(i)"></i>
+                    <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
+                       (click)="setDataForEditState('article','articleForm', article,i)">
+                    </i>
+                  </div>
+                </div>
               </div>
               <div *ngIf="setDataForm.articleForm" class="card-body" style="padding: 20px">
                 <div class="form-group">
@@ -393,6 +441,9 @@
                             (error)="onUploadError($event)"
                             (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
                 </div>
+                <div class="imgPreview" *ngIf="lastUpload">
+                  <img [src]="config.serverUrl + lastUpload" width="50%" height="50%"/>
+                </div>
                 <div class="form-group">
                   <input class="btn btn-sm btn-primary" type="button" value="Add"
                          (click)="handleDataUpload('article')" [disabled]="!setDataFormHeading"/>
@@ -412,13 +463,17 @@
                 </div>
               </div>
 
-              <div class="card-body" *ngIf="other.length > 0">
-                <label *ngFor="let oth of other" class="contentElement">
+              <div class="card-body" *ngIf="other && other.length > 0">
+                <div class="card" *ngFor="let oth of other;let i =index;" style="padding:8px">
                   {{oth.heading}}
-                  <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                     (click)="removeOtherFromList(oth.heading)"
-                  ></i>
-                </label>
+                  <div style="position: absolute;right: 0;top:8px">
+                    <i class="float-right nc-icon-mini ui-1_circle-remove lg"
+                       (click)="removeOtherFromList(i)"></i>
+                    <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
+                       (click)="setDataForEditState('other','otherForm',oth,i)">
+                    </i>
+                  </div>
+                </div>
               </div>
               <div *ngIf="setDataForm.otherForm" class="card-body" style="padding: 20px">
                 <div class="form-group">
@@ -439,6 +494,9 @@
                             (error)="onUploadError($event)"
                             (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
                 </div>
+                <div class="imgPreview" *ngIf="lastUpload">
+                  <img [src]="config.serverUrl + lastUpload" width="50%" height="50%"/>
+                </div>
                 <div class="form-group">
                   <input class="btn btn-sm btn-primary" type="button" value="Add"
                          (click)="handleDataUpload('other')" [disabled]="!setDataFormHeading"/>
@@ -456,13 +514,17 @@
                 </div>
               </div>
 
-              <div class="card-body" *ngIf="demos.length > 0">
-                <label *ngFor="let demo of demos" class="contentElement">
+              <div class="card-body" *ngIf="demos && demos.length > 0">
+                <div class="card" style="padding:8px" *ngFor="let demo of demos;let i = index;">
                   {{demo.heading}}
-                  <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                     (click)="removeDemoFromList(demo.heading)"
-                  ></i>
-                </label>
+                  <div style="position: absolute;right: 0;top:8px">
+                    <i class="float-right nc-icon-mini ui-1_circle-remove lg"
+                       (click)="removeDemoFromList(i)"></i>
+                    <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
+                       (click)="setDataForEditState('demo','demoForm', demo,i)">
+                    </i>
+                  </div>
+                </div>
               </div>
               <div *ngIf="setDataForm.demoForm" class="card-body" style="padding: 20px">
                 <div class="form-group">
@@ -482,6 +544,9 @@
                             [message]="'Click or drag image here to upload <br>( Image size should be 350 x 197 pixels )'"
                             (error)="onUploadError($event)"
                             (success)="onUploadSuccess($event)" id="pdf" name="pdf"></dropzone>
+                </div>
+                <div class="imgPreview" *ngIf="lastUpload">
+                  <img [src]="config.serverUrl + lastUpload" width="50%" height="50%"/>
                 </div>
                 <div class="form-group">
                   <input class="btn btn-sm btn-primary" type="button" value="Add"
@@ -792,7 +857,7 @@
                   </div>
                   <div style="position: absolute;right: 0;top:0">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                       (click)="removeVideoFromVideos(video.title)"></i>
+                       (click)="removeVideoFromVideos(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
                        (click)="setDataForEditState('subVideo','showOtherVideoForm', video,i)">
                     </i>
@@ -880,7 +945,7 @@
                   {{caseStudy.title}}
                   <div style="position: absolute;right: 0;top:8px">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                       (click)="removeCaseStudyFromCaseStudies(caseStudy.title)"></i>
+                       (click)="removeCaseStudyFromCaseStudies(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
                        (click)="setDataForEditState('caseStudy','caseStudy', caseStudy,i)">
                     </i>
@@ -926,7 +991,7 @@
                   {{whitePaper.title}}
                   <div style="position: absolute;right: 0;top:8px">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                       (click)="removeWhitePaperFromList(whitePaper.title)"></i>
+                       (click)="removeWhitePaperFromList(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
                        (click)="setDataForEditState('whitePaper','whitePaperForm', whitePaper,i)">
                     </i>
@@ -958,7 +1023,6 @@
               </div>
             </div>
 
-
             <div class="card">
               <div class="card-header">
                 <label>Articles</label>
@@ -972,7 +1036,7 @@
                   {{article.heading}}
                   <div style="position: absolute;right: 0;top:8px">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                       (click)="removeArticleFromList(article.heading)"></i>
+                       (click)="removeArticleFromList(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
                        (click)="setDataForEditState('article','articleForm', article,i)">
                     </i>
@@ -1025,7 +1089,7 @@
                   {{oth.heading}}
                   <div style="position: absolute;right: 0;top:8px">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                       (click)="removeOtherFromList(oth.heading)"></i>
+                       (click)="removeOtherFromList(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
                        (click)="setDataForEditState('other','otherForm',oth,i)">
                     </i>
@@ -1078,7 +1142,7 @@
                   {{demo.heading}}
                   <div style="position: absolute;right: 0;top:8px">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
-                       (click)="removeDemoFromList(demo.heading)"></i>
+                       (click)="removeDemoFromList(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
                        (click)="setDataForEditState('demo','demoForm', demo,i)">
                     </i>
