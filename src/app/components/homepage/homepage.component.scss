@@ -205,11 +205,14 @@ section#solutions{
 	}
 	.solns{
 		margin:50px 0;
+		&>div{
+			outline:none;
+		}
 	}
 	.solBox{
 		text-align:center;
 	    margin: 25px 0;
-		.icon{
+	    .icon{
 		    width: 100px;
     		margin: 0 auto;
     		img{
