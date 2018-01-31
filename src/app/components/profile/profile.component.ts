@@ -22,7 +22,8 @@ export class ProfileComponent implements OnInit {
   backUrl = '';
   patternForYouTubeUrl = '(?:youtube\\.com\\/(?:[^\\/]+\\/.+\\/|(?:v|e(?:mbed)?)\\/|.*[?&]v=)|youtu\\.be\\/)([^"&?\\/ ]{11}.*)';
 
-  constructor(private modalService: NgbModal, public sanitizer: DomSanitizer, private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,) {
+  constructor(private modalService: NgbModal, public sanitizer: DomSanitizer, private dataService: DataService, private config: Config,
+              private router: Router, private route: ActivatedRoute,) {
     this.route.params.subscribe(params => {
       this.productId = params['productId'];
     });

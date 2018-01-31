@@ -205,6 +205,9 @@
             </div>
           </div>
           <div class="row articles" *ngIf="articlesAndOthers.length ==0">
+            <div class="col-md-12" style="text-align: center">
+              Coming Soon..
+            </div>
           </div>
         </div>
       </div>
@@ -246,7 +249,7 @@
         <iframe [src]="sanitizeUrl(videoUrl,'youtube')" allowFullScreen='allowFullScreen'
                 *ngIf="videoUrl && videoUrl.match(patternForYouTubeUrl)!== null ">
         </iframe>
-        <video controls autoplay *ngIf="videoUrl && videoUrl.indexOf('youtube')==-1">
+        <video controls autoplay *ngIf="videoUrl && videoUrl.match(patternForYouTubeUrl)== null">
           <source [src]="sanitizeUrl(videoUrl)" type="video/mp4">
           Your browser does not support the video tag.
         </video>

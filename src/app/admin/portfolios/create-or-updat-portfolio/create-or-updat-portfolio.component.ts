@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../../../services/dataService.service';
 import {ToastsManager} from 'ng2-toastr';
@@ -6,6 +6,8 @@ import {DialogService} from 'ng2-bootstrap-modal';
 import {Config} from '../../../services/config.service';
 import {NgForm} from '@angular/forms';
 import {CookieService} from 'angular2-cookie/services/cookies.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {type} from 'os';
 
 declare var $: any;
 
@@ -30,11 +32,13 @@ class VideoObj {
 @Component({
   selector: 'app-create-or-updat-portfolio',
   templateUrl: './create-or-updat-portfolio.component.html',
-  styleUrls: ['./create-or-updat-portfolio.component.scss']
+  styleUrls: ['./create-or-updat-portfolio.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CreateOrUpdatPortfolioComponent implements OnInit {
   coverImage: CommonObjForUploader;
   mainVideo: VideoObj;
+  editStateId: number = -1;
   patternForYouTubeUrl = '(?:youtube\\.com\\/(?:[^\\/]+\\/.+\\/|(?:v|e(?:mbed)?)\\/|.*[?&]v=)|youtu\\.be\\/)([^"&?\\/ ]{11}.*)';
   lastUpload: string;
   youTubeVideoUrl: string;
@@ -85,7 +89,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
 
   pdfUploadConfig = {};
 
-  constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
+  constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute, public sanitizer: DomSanitizer,
               public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService, private cookieService: CookieService) {
     this.token = this.cookieService.get('accessToken');
     this.currentUser = this.cookieService.get('userId');
@@ -130,7 +134,7 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
       }
     });
 
-    //get all categories
+    // get all categories
     this.dataService.getAllCategories().subscribe((response) => {
       if (response['count'] > 0) {
         this.solutions = response['data'].map((v, i) => {
@@ -215,6 +219,21 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     return false;
   }
 
+
+  sanitizeUrl(url, type?) {
+    if (type === 'youtube') {
+      const urlPart = url.split('v=')[1];
+      let video_id = urlPart !== undefined ? urlPart : url.split('youtu.be/')[1];
+      video_id = video_id.split('&')[0];
+      const newUrl = 'http://www.youtube.com/embed/' + video_id;
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`${newUrl}`);
+    } else if (type === 'demoUrl') {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`${url}`);
+    } else {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`${this.config.serverUrl}${url}`);
+    }
+  }
+
   onUploadSuccess(event) {
     if (event[1].data.urlPath) {
       this.lastUpload = event[1].data.urlPath;
@@ -266,6 +285,8 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
     this.uploadFormTitle = '';
     this.lastUpload = '';
     this.youTubeVideoUrl = '';
+    this.videoType = '';
+    this.videoCoverImage = '';
     for (let key in this.uploadForms) {
       this.uploadForms[key] = false;
     }
@@ -273,13 +294,13 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
   }
 
   handleUpload(name) {
-    var obj = {title: this.uploadFormTitle, url: this.lastUpload};
+    const obj = {title: this.uploadFormTitle, url: this.lastUpload};
     switch (name) {
       case 'coverImage':
         this.coverImage = obj;
         break;
       case 'mainVideo':
-        var video: VideoObj = {
+        const video: VideoObj = {
           title: this.uploadFormTitle,
           url: this.lastUpload || this.youTubeVideoUrl,
           coverImage: this.videoCoverImage
@@ -287,39 +308,71 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
         this.mainVideo = video;
         break;
       case 'subVideo':
-        var video: VideoObj = {
+        const subVideo: VideoObj = {
           title: this.uploadFormTitle,
           url: this.lastUpload || this.youTubeVideoUrl,
           coverImage: this.videoCoverImage
         };
-        this.videos.push(video);
+        if (this.editStateId > -1) {
+          this.videos.splice(1, this.editStateId);
+          this.videos[this.editStateId] = subVideo;
+        } else {
+          this.videos.push(subVideo);
+        }
         break;
       case 'caseStudy':
-        this.caseStudies.push(obj);
+        if (this.editStateId > -1) {
+          this.caseStudies.splice(1, this.editStateId);
+          this.caseStudies[this.editStateId] = obj;
+        } else {
+          this.caseStudies.push(obj);
+        }
         break;
       case 'whitePaper':
-        this.whitePapers.push(obj);
+        if (this.editStateId > -1) {
+          this.whitePapers.splice(1, this.editStateId);
+          this.whitePapers[this.editStateId] = obj;
+        } else {
+          this.whitePapers.push(obj);
+        }
         break;
     }
+    this.editStateId = -1;
     this.show();
   }
 
   handleDataUpload(sType) {
-    var obj = {
+    const obj = {
       heading: this.setDataFormHeading, img: this.lastUpload, type: sType,
       desc: this.setDataFormDesc, seeMoreLink: this.setDataSeeMoreLink
     };
     switch (sType) {
       case 'article':
-        this.articles.push(obj);
+        if (this.editStateId > -1) {
+          this.articles.splice(1, this.editStateId);
+          this.articles[this.editStateId] = obj;
+        } else {
+          this.articles.push(obj);
+        }
         break;
       case 'other':
-        this.other.push(obj);
+        if (this.editStateId > -1) {
+          this.other.splice(1, this.editStateId);
+          this.other[this.editStateId] = obj;
+        } else {
+          this.other.push(obj);
+        }
         break;
       case 'demo':
-        this.demos.push(obj);
+        if (this.editStateId > -1) {
+          this.demos.splice(1, this.editStateId);
+          this.demos[this.editStateId] = obj;
+        } else {
+          this.demos.push(obj);
+        }
         break;
     }
+    this.editStateId = -1;
     this.showDataForm();
   }
 
@@ -490,6 +543,66 @@ export class CreateOrUpdatPortfolioComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  deleteData(name) {
+    this.show();
+    switch (name) {
+      case 'coverImage':
+        this.coverImage = null;
+        break;
+      case 'mainVideo':
+        this.mainVideo = null;
+        break;
+    }
+  }
+
+  setDataForEditState(name, formName, extraData?, id?) {
+    this.editStateId = id > -1 ? id : -1;
+    this.show(formName);
+    this.showDataForm(formName);
+    switch (name) {
+      case 'coverImage':
+        this.uploadFormTitle = this.coverImage.title;
+        this.lastUpload = this.coverImage.url;
+        break;
+      case 'mainVideo':
+        this.uploadFormTitle = this.mainVideo.title;
+        this.lastUpload = this.mainVideo.url;
+        this.videoCoverImage = this.mainVideo.coverImage;
+        break;
+      case 'subVideo':
+        this.uploadFormTitle = extraData.title;
+        this.lastUpload = extraData.url;
+        this.videoCoverImage = extraData.coverImage;
+        break;
+      case 'caseStudy':
+        this.uploadFormTitle = extraData.title;
+        this.lastUpload = extraData.url;
+        break;
+      case 'whitePaper':
+        this.uploadFormTitle = extraData.title;
+        this.lastUpload = extraData.url;
+        break;
+      case 'demo':
+        this.setDataFormHeading = extraData.heading;
+        this.lastUpload = extraData.img;
+        this.setDataFormDesc = extraData.desc;
+        this.setDataSeeMoreLink = extraData.seeMoreLink;
+        break;
+      case 'article' :
+        this.setDataFormHeading = extraData.heading;
+        this.lastUpload = extraData.img;
+        this.setDataFormDesc = extraData.desc;
+        this.setDataSeeMoreLink = extraData.seeMoreLink;
+        break;
+      case 'other'  :
+        this.setDataFormHeading = extraData.heading;
+        this.lastUpload = extraData.img;
+        this.setDataFormDesc = extraData.desc;
+        this.setDataSeeMoreLink = extraData.seeMoreLink;
+        break;
+    }
   }
 
   onSubmit() {
