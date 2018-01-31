@@ -75,3 +75,17 @@
 .nc-icon-mini.ui-1_circle-remove {
   color: silver;
 }
+
+.updateBtns{
+  position:absolute;
+  top:0;
+  right:0;
+  padding:10px;
+  i {
+    margin-left: 7px;
+    font-size: 15px !important;
+  }
+  i.ui-1_circle-remove{
+    margin-top:5px;
+  }
+}
