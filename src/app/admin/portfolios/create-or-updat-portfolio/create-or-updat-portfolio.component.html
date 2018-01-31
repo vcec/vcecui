@@ -202,7 +202,7 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="mainVideo" style="position: absolute;right: 0;top:0">
+              <div *ngIf="mainVideo" class="updateBtns">
                 <i class="float-right nc-icon-mini ui-1_circle-remove lg"
                    (click)="deleteData('mainVideo')"></i>
                 <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
@@ -231,7 +231,7 @@
                       <img [src]="config.serverUrl + video.coverImage"/>
                     </div>
                   </div>
-                  <div style="position: absolute;right: 0;top:0">
+                  <div class="updateBtns">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
                        (click)="removeVideoFromVideos(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
@@ -320,7 +320,7 @@
               <div class="card-body" *ngIf="caseStudies && caseStudies.length > 0">
                 <div class="card" *ngFor="let caseStudy of caseStudies; let i = index" style="padding: 8px">
                   {{caseStudy.title}}
-                  <div style="position: absolute;right: 0;top:8px">
+                  <div class="updateBtns">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
                        (click)="removeCaseStudyFromCaseStudies(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
@@ -366,7 +366,7 @@
               <div class="card-body" *ngIf="whitePapers && whitePapers.length > 0">
                 <div class="card" *ngFor="let whitePaper of whitePapers;let i = index;" style="padding: 8px">
                   {{whitePaper.title}}
-                  <div style="position: absolute;right: 0;top:8px">
+                  <div class="updateBtns">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
                        (click)="removeWhitePaperFromList(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
@@ -413,7 +413,7 @@
               <div class="card-body" *ngIf="articles && articles.length > 0">
                 <div class="card" *ngFor="let article of articles;let i = index;" style="padding: 8px">
                   {{article.heading}}
-                  <div style="position: absolute;right: 0;top:8px">
+                  <div class="updateBtns">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
                        (click)="removeArticleFromList(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
@@ -466,7 +466,7 @@
               <div class="card-body" *ngIf="other && other.length > 0">
                 <div class="card" *ngFor="let oth of other;let i =index;" style="padding:8px">
                   {{oth.heading}}
-                  <div style="position: absolute;right: 0;top:8px">
+                  <div class="updateBtns">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
                        (click)="removeOtherFromList(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
@@ -517,7 +517,7 @@
               <div class="card-body" *ngIf="demos && demos.length > 0">
                 <div class="card" style="padding:8px" *ngFor="let demo of demos;let i = index;">
                   {{demo.heading}}
-                  <div style="position: absolute;right: 0;top:8px">
+                  <div class="updateBtns">
                     <i class="float-right nc-icon-mini ui-1_circle-remove lg"
                        (click)="removeDemoFromList(i)"></i>
                     <i class="ui-1_edit-71 nc-icon-mini ui-1_circle-remove lg"
