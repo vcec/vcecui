@@ -52,7 +52,7 @@ export class PortfoliosComponent implements OnInit {
   }
 
   editPortfolio(portfolio) {
-    this.router.navigate(['update/' + portfolio._id], {relativeTo: this.route});
+    this.router.navigate(['/admin/portfolios/update/' + portfolio._id]);
   }
 
   createPortfolio(portfolio) {
