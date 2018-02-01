@@ -821,7 +821,7 @@
                       <img [src]="config.serverUrl + mainVideo.coverImage"/>
                     </div>
                     <div class="imgPreview" *ngIf="!mainVideo.coverImage">
-                      <img src="assets/images/video_default_cover.png"/>
+                      <img src="assets/images/videoDefault.png"/>
                     </div>
                   </div>
                 </div>
@@ -852,7 +852,9 @@
                   </div>
                   <div class="card-body">
                     <div class="imgPreview">
-                      <img [src]="config.serverUrl + video.coverImage"/>
+                      <img [src]="config.serverUrl + video.coverImage" *ngIf="video.coverImage"/>
+                      <img src="assets/images/videoDefault.png" 
+                      *ngIf="!video.coverImage"/>
                     </div>
                   </div>
                   <div class="updateBtns">
