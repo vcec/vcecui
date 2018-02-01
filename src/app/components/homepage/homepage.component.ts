@@ -33,7 +33,6 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.dataService.getAllPortFolios().subscribe((response) => {
       if (response['count'] > 0) {
         this.portfolios = response['data'];

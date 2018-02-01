@@ -58,6 +58,7 @@ const routes: Routes = [
       {path: 'portfolios/create', component: CreateOrUpdatPortfolioComponent, canActivate: [AuthGuardService]},
       {path: 'portfolios/update/:id', component: CreateOrUpdatPortfolioComponent, canActivate: [AuthGuardService]},
       {path: 'portfolios', component: PortfoliosComponent, canActivate: [AuthGuardService]},
+      {path: 'portfolios/:page', component: PortfoliosComponent, canActivate: [AuthGuardService]},
       {path: 'testimonials/create', component: CreateOrUpdatTestimonialComponent, canActivate: [AuthGuardService]},
       {path: 'testimonials/update/:id', component: CreateOrUpdatTestimonialComponent, canActivate: [AuthGuardService]},
       {path: 'testimonials', component: TestimonialsComponent, canActivate: [AuthGuardService]},

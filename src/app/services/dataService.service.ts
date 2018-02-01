@@ -54,8 +54,11 @@ export class DataService {
   }
 
   // get all portfolios
-  getAllPortFolios() {
-    return this.httpClient.get(this.config.serverUrl + 'portfolio');
+  getAllPortFolios(pageNumber?) {
+    if (!pageNumber) {
+      pageNumber = 0;
+    }
+    return this.httpClient.get(this.config.serverUrl + 'portfolio?page=' + pageNumber);
   }
 
   // get portfolio by id

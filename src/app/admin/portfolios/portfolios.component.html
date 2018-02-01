@@ -34,6 +34,19 @@
           </tbody>
         </table>
       </div>
+      <div class="paginationDiv">
+        <label style="padding-right: 30px">
+          Total Record: {{totalPortfolios}}
+        </label>
+        <a href="#" routerLinkActive="active"
+           [routerLink]="['/admin/portfolios',(currentPageIndex -1)]"
+           *ngIf="currentPageIndex && currentPageIndex > 0">Prev
+        </a>
+        <a href="#" routerLinkActive="active"
+           [routerLink]="['/admin/portfolios', (currentPageIndex +1)]"
+           *ngIf="totalPortfolios > ((currentPageIndex+1)*10) ">Next
+        </a>
+      </div>
     </div>
   </div>
 </div>
