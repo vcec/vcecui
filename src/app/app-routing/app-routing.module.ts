@@ -52,9 +52,11 @@ const routes: Routes = [
       {path: 'groups/create', component: CreateOrUpdateGroupComponent, canActivate: [AuthGuardService]},
       {path: 'groups/update/:id', component: CreateOrUpdateGroupComponent, canActivate: [AuthGuardService]},
       {path: 'groups', component: GroupsComponent, canActivate: [AuthGuardService]},
+      {path: 'groups/:page', component: GroupsComponent, canActivate: [AuthGuardService]},
       {path: 'categories/create', component: CreateOrUpdateCategoryComponent, canActivate: [AuthGuardService]},
       {path: 'categories/update/:id', component: CreateOrUpdateCategoryComponent, canActivate: [AuthGuardService]},
       {path: 'categories', component: CategoriesComponent, canActivate: [AuthGuardService]},
+      {path: 'categories/:page', component: CategoriesComponent, canActivate: [AuthGuardService]},
       {path: 'portfolios/create', component: CreateOrUpdatPortfolioComponent, canActivate: [AuthGuardService]},
       {path: 'portfolios/update/:id', component: CreateOrUpdatPortfolioComponent, canActivate: [AuthGuardService]},
       {path: 'portfolios', component: PortfoliosComponent, canActivate: [AuthGuardService]},
@@ -62,9 +64,11 @@ const routes: Routes = [
       {path: 'testimonials/create', component: CreateOrUpdatTestimonialComponent, canActivate: [AuthGuardService]},
       {path: 'testimonials/update/:id', component: CreateOrUpdatTestimonialComponent, canActivate: [AuthGuardService]},
       {path: 'testimonials', component: TestimonialsComponent, canActivate: [AuthGuardService]},
+      {path: 'testimonials/:page', component: TestimonialsComponent, canActivate: [AuthGuardService]},
       {path: 'subCategory', component: SubCategoryComponent, canActivate: [AuthGuardService]},
       {path: 'subCategory/create', component: CreateOrUpdateSubCatComponent, canActivate: [AuthGuardService]},
       {path: 'subCategory/update/:id', component: CreateOrUpdateSubCatComponent, canActivate: [AuthGuardService]},
+      {path: 'subCategory/:page', component: SubCategoryComponent, canActivate: [AuthGuardService]}
     ]
   }
 ];

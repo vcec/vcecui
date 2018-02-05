@@ -35,6 +35,19 @@
           </tbody>
         </table>
       </div>
+      <div class="paginationDiv">
+        <label style="padding-right: 30px">
+          Total Record: {{totalRecords}}
+        </label>
+        <a href="#" routerLinkActive="active"
+           [routerLink]="['/admin/subCategory',(currentPageIndex -1)]"
+           *ngIf="currentPageIndex && currentPageIndex > 0">Prev
+        </a>
+        <a href="#" routerLinkActive="active"
+           [routerLink]="['/admin/subCategory', (currentPageIndex +1)]"
+           *ngIf="totalRecords > ((currentPageIndex+1)*dataService.recordsPerPage) ">Next
+        </a>
+      </div>
     </div>
   </div>
 </div>

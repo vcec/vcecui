@@ -44,7 +44,7 @@
         </a>
         <a href="#" routerLinkActive="active"
            [routerLink]="['/admin/portfolios', (currentPageIndex +1)]"
-           *ngIf="totalPortfolios > ((currentPageIndex+1)*10) ">Next
+           *ngIf="totalPortfolios > ((currentPageIndex+1)*dataService.recordsPerPage) ">Next
         </a>
       </div>
     </div>

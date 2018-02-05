@@ -25,10 +25,10 @@
             <td>{{category.category_name}}</td>
             <td>
               <div class="catIcon">
-                   <img [src]="this.config.serverUrl+category.img"
-                    >
+                <img [src]="this.config.serverUrl+category.img"
+                >
               </div>
-             
+
             </td>
             <td>{{category.created_at | date}}</td>
             <td>{{category.addedBy}}</td>
@@ -39,6 +39,19 @@
           </tr>
           </tbody>
         </table>
+      </div>
+      <div class="paginationDiv">
+        <label style="padding-right: 30px">
+          Total Record: {{totalRecords}}
+        </label>
+        <a href="#" routerLinkActive="active"
+           [routerLink]="['/admin/categories',(currentPageIndex -1)]"
+           *ngIf="currentPageIndex && currentPageIndex > 0">Prev
+        </a>
+        <a href="#" routerLinkActive="active"
+           [routerLink]="['/admin/categories', (currentPageIndex +1)]"
+           *ngIf="totalRecords > ((currentPageIndex+1)*dataService.recordsPerPage) ">Next
+        </a>
       </div>
     </div>
   </div>

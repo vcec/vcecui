@@ -14,9 +14,9 @@
             <th>#</th>
             <th>Product Name</th>
             <th>Product Icon</th>
-<!--
-            <th>Sort Order</th>
--->
+            <!--
+                        <th>Sort Order</th>
+            -->
             <th>Date added</th>
             <th>Added by</th>
             <th></th>
@@ -28,13 +28,13 @@
             <td>{{group.group_name}}</td>
             <td>
               <div class="groupImgIcon">
-                  <img [src]="this.config.serverUrl+group.img" />
+                <img [src]="this.config.serverUrl+group.img"/>
               </div>
-              
+
             </td>
-<!--
-            <td>1</td>
--->
+            <!--
+                        <td>1</td>
+            -->
             <td>{{group.created_at | date}}</td>
             <td>{{group.addedBy}}</td>
             <td>
@@ -44,6 +44,19 @@
           </tr>
           </tbody>
         </table>
+      </div>
+      <div class="paginationDiv">
+        <label style="padding-right: 30px">
+          Total Record: {{totalRecords}}
+        </label>
+        <a href="#" routerLinkActive="active"
+           [routerLink]="['/admin/groups',(currentPageIndex -1)]"
+           *ngIf="currentPageIndex && currentPageIndex > 0">Prev
+        </a>
+        <a href="#" routerLinkActive="active"
+           [routerLink]="['/admin/groups', (currentPageIndex +1)]"
+           *ngIf="totalRecords > ((currentPageIndex+1)*dataService.recordsPerPage) ">Next
+        </a>
       </div>
     </div>
   </div>

@@ -9,6 +9,7 @@ export class DataService {
   uploaderObj = {};
   accessToken = '';
   currentUrl = '';
+  recordsPerPage = 2;
 
   constructor(private httpClient: HttpClient, private config: Config, private cookieService: CookieService) {
     this.accessToken = this.cookieService.get('accessToken');
@@ -74,8 +75,11 @@ export class DataService {
   }
 
   // get all groups
-  getAllGroups() {
-    return this.httpClient.get(this.config.serverUrl + 'group');
+  getAllGroups(pageNumber?) {
+    if (!pageNumber) {
+      pageNumber = 0;
+    }
+    return this.httpClient.get(this.config.serverUrl + 'group?page=' + pageNumber);
   }
 
   // update group
@@ -99,14 +103,17 @@ export class DataService {
     });
   }
 
-  //get group by id
+  // get group by id
   getGroupById(id) {
     return this.httpClient.get(this.config.serverUrl + 'group/' + id);
   }
 
   // get all solutions/category
-  getAllCategories() {
-    return this.httpClient.get(this.config.serverUrl + 'category');
+  getAllCategories(pageNumber?) {
+    if (!pageNumber) {
+      pageNumber = 0;
+    }
+    return this.httpClient.get(this.config.serverUrl + 'category?page=' + pageNumber);
   }
 
   getCategoryById(id) {
@@ -134,8 +141,11 @@ export class DataService {
     });
   }
 
-  getAllTestimonials() {
-    return this.httpClient.get(this.config.serverUrl + 'testimonial');
+  getAllTestimonials(pageNumber?) {
+    if (!pageNumber) {
+      pageNumber = 0;
+    }
+    return this.httpClient.get(this.config.serverUrl + 'testimonial?page=' + pageNumber);
   }
 
   getTestimonialById(id) {
@@ -164,8 +174,11 @@ export class DataService {
     return this.httpClient.get(this.config.serverUrl + 'subCategory/mainCategory/' + mainCatId);
   }
 
-  getAllSubcategories() {
-    return this.httpClient.get(this.config.serverUrl + 'subCategory');
+  getAllSubcategories(pageNumber?) {
+    if (!pageNumber) {
+      pageNumber = 0;
+    }
+    return this.httpClient.get(this.config.serverUrl + 'subCategory?page=' + pageNumber);
   }
 
   getSubCategoryById(id) {

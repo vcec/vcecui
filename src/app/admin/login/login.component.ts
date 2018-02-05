@@ -31,7 +31,9 @@ export class LoginComponent implements OnInit {
       this.dataService.setAccessToekn(res['token']);
       this.router.navigate(['/admin/groups'], {relativeTo: this.route});
     }, (err) => {
-      if (err.status == 401) {
+      if (err.status === 0) {
+        this.loginError = "Server is down.";
+      }else if (err.status == 401) {
         this.loginError = "Invalid User";
       } else {
         this.loginError = err.error.error || err;

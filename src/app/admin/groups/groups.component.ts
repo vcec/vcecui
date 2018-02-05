@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {DataService} from '../../services/dataService.service';
-import {Config} from "../../services/config.service";
+import {Config} from '../../services/config.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
-import {DialogService} from "ng2-bootstrap-modal";
-import {Router, Route, ActivatedRoute, CanActivate} from "@angular/router";
-import {ConfirmComponent} from "../confirmComponent/confirm.component";
-import {AuthGuardService} from "../../services/authGuardService";
+import {DialogService} from 'ng2-bootstrap-modal';
+import {Router, Route, ActivatedRoute, CanActivate} from '@angular/router';
+import {ConfirmComponent} from '../confirmComponent/confirm.component';
+import {AuthGuardService} from '../../services/authGuardService';
 
 declare var $: any;
 
@@ -18,9 +18,16 @@ declare var $: any;
 
 export class GroupsComponent implements OnInit {
   groups: any[] = [];
+  totalRecords: number = 0;
+  currentPageIndex: number;
+
 
   constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
               public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService) {
+    this.route.params.subscribe((params) => {
+      this.currentPageIndex = +params['page'];
+      this.getAllGroups();
+    });
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -29,13 +36,18 @@ export class GroupsComponent implements OnInit {
   }
 
   getAllGroups() {
-    this.dataService.getAllGroups().subscribe((response) => {
+    if (!this.currentPageIndex) {
+      this.currentPageIndex = 0;
+    }
+    this.currentPageIndex = +this.currentPageIndex;
+    this.dataService.getAllGroups(this.currentPageIndex).subscribe((response) => {
         if (response['count'] > 0) {
           this.groups = response['data'];
+          this.totalRecords = response['totalRecords'];
         }
       }, (err) => {
         if (err.status === 0) {
-          this.toastr.error("Server is Down.")
+          this.toastr.error('Server is Down.');
         } else {
           this.toastr.error(err.message);
         }
@@ -45,12 +57,12 @@ export class GroupsComponent implements OnInit {
 
 
   addGroup() {
-    this.router.navigate(['./create'], {relativeTo: this.route});
+    this.router.navigate(['/admin/groups/create']);
   }
 
 
   editGroup(group) {
-    this.router.navigate(['./update', group._id], {relativeTo: this.route});
+    this.router.navigate(['/admin/groups/update/', group._id]);
   }
 
   deleteGroup(group) {
@@ -60,11 +72,11 @@ export class GroupsComponent implements OnInit {
     }).subscribe((isConfirmed) => {
       if (isConfirmed) {
         this.dataService.deleteGroup(group['_id']).subscribe((res) => {
-          this.toastr.success("Group deleted successfully.", null, {toastLife: 3000});
+          this.toastr.success('Group deleted successfully.', null, {toastLife: 3000});
           this.getAllGroups();
         }, (err) => {
           if (err.status === 0) {
-            this.toastr.error("Server is Down.")
+            this.toastr.error('Server is Down.');
           } else {
             this.toastr.error(err.message);
           }

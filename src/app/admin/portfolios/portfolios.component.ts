@@ -21,12 +21,14 @@ export class PortfoliosComponent implements OnInit {
   totalPortfolios: number = 0;
   currentPageIndex: number;
 
+
   constructor(private dataService: DataService, private config: Config, private router: Router, private route: ActivatedRoute,
               public toastr: ToastsManager, vcr: ViewContainerRef, private dialogService: DialogService) {
     this.route.params.subscribe((params) => {
       this.currentPageIndex = +params['page'];
       this.getAllPortfolios();
     });
+
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -56,7 +58,7 @@ export class PortfoliosComponent implements OnInit {
   }
 
   createPortfolio(portfolio) {
-    this.router.navigate(['create'], {relativeTo: this.route});
+    this.router.navigate(['/admin/portfolios/create']);
   }
 
   deletePortfolio(portfolio) {
