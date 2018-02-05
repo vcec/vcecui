@@ -9,7 +9,7 @@ export class DataService {
   uploaderObj = {};
   accessToken = '';
   currentUrl = '';
-  recordsPerPage = 2;
+  recordsPerPage = 10;
 
   constructor(private httpClient: HttpClient, private config: Config, private cookieService: CookieService) {
     this.accessToken = this.cookieService.get('accessToken');
